@@ -16,9 +16,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: List files
-        run: ls
-
       - name: Build site
         run: npm run build
 
