@@ -7,13 +7,15 @@ import Date from '../components/date'
 import { GetStaticProps } from 'next'
 
 export default function Home({
-  allPostsData
+  allPostsData,
+  baseUrl
 }: {
   allPostsData: {
     date: string
     title: string
     id: string
-  }[]
+  }[],
+  baseUrl: string
 }) {
   return (
     <Layout home>
@@ -32,7 +34,7 @@ export default function Home({
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              <Link href="/posts/[id]" as={`/posts/${id}`}>
+              <Link href="/posts/[id]" as={`${baseUrl}/posts/${id}`}>
                 <a>{title}</a>
               </Link>
               <br />
@@ -51,7 +53,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
   return {
     props: {
-      allPostsData
+      allPostsData,
+      baseUrl: process.env.BACKEND_URL
     }
   }
 }
