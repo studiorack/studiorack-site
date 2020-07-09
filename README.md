@@ -1,2 +1,38 @@
 # apm-registry
-Audio plugin registry containing plugin metadata, which is searchable and filterable
+
+Audio plugin registry containing plugin metadata, which is searchable and filterable, using:
+
+* NodeJS 14.4.x
+* NextJS 9.3.x
+* React 16.13.x
+
+
+## Installation
+
+Install dependencies using:
+
+    npm install
+
+
+## Usage
+
+Run the development server using:
+
+    npm run dev
+
+
+## Deployment
+
+Release an updated version on GitHub by simply creating a version tag:
+
+    git tag v0.0.1
+    git push origin --tags
+
+This will run an automated build and deploy process on GitHub Actions:
+
+    .github/workflows/workflow.yml
+
+
+## Contact
+
+For more information please contact kmturley

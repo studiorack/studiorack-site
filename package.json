@@ -1,0 +1,43 @@
+{
+  "name": "apm-registry",
+  "version": "0.0.1",
+  "description": "Audio plugin registry with searchable plugin metadata",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/audio-project-manager/apm-registry.git"
+  },
+  "keywords": [
+    "audio",
+    "plugin",
+    "registry",
+    "vst",
+    "daw",
+    "metadata",
+    "search"
+  ],
+  "author": "kmturley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/audio-project-manager/apm-registry/issues"
+  },
+  "homepage": "https://github.com/audio-project-manager/apm-registry#readme",
+  "dependencies": {
+    "date-fns": "^2.11.1",
+    "gray-matter": "^4.0.2",
+    "next": "9.3.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "remark": "^12.0.0",
+    "remark-html": "^11.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "@types/react": "^16.9.32",
+    "typescript": "^3.8.3"
+  }
+}
