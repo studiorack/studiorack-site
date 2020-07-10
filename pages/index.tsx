@@ -25,21 +25,20 @@ export default function Home({
         <ul className={utilStyles.list}>
           {plugins.map(({ author, description, homepage, id, name, tags, version}) => (
             <li className={utilStyles.listItem} key={name}>
-              <h3>{name}</h3>
+              <h3>{name} <small className={utilStyles.lightText}>v{version}</small></h3>
               <p>{name}</p>
-              <small className={utilStyles.lightText}>
-                v{version}
-              </small>
               <hr />
-              <div>
-                <p className={utilStyles.codeLabel}>Installation:</p>
-                <pre className={utilStyles.codeBox}>apm install {id}</pre>
-              </div>
-              <div>
-                <p className={utilStyles.codeLabel}>Download:</p>
-                <button className={utilStyles.downloadButton}>Linux</button>
-                <button className={utilStyles.downloadButton}>MacOS</button>
-                <button className={utilStyles.downloadButton}>Windows</button>
+              <div className={utilStyles.row}>
+                <div className={utilStyles.cell}>
+                  <p className={utilStyles.codeLabel}>Download:</p>
+                  <a className={utilStyles.downloadButton} href={`https://github.com/${id}/releases/latest/download/plugin-linux.zip`}>Linux</a>
+                  <a className={utilStyles.downloadButton} href={`https://github.com/${id}/releases/latest/download/plugin-mac.zip`}>MacOS</a>
+                  <a className={utilStyles.downloadButton} href={`https://github.com/${id}/releases/latest/download/plugin-win.zip`}>Windows</a>
+                </div>
+                <div className={utilStyles.cell}>
+                  <p className={utilStyles.codeLabel}>Install command:</p>
+                  <pre className={utilStyles.codeBox}>apm install {id}</pre>
+                </div>
               </div>
             </li>
           ))}

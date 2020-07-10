@@ -16,7 +16,7 @@ export async function getPlugins() {
     const res = await fetch(url)
     console.log(repo, url)
     return res.json().then((plugin) => {
-      plugin.id = repo.split('/')[1]
+      plugin.id = repo
       return plugin
     })
   }))

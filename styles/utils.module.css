@@ -49,6 +49,14 @@
   padding: 0 1rem 1rem;
 }
 
+.row {
+  display: flex;
+}
+
+.cell {
+  margin-right: 1rem;
+}
+
 .lightText {
   color: #666;
 }
@@ -59,4 +67,18 @@
 
 .codeBox {
   font-size: 12px;
+}
+
+.downloadButton {
+  background-color: #000;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  margin: 0 .5rem .5rem 0;
+  padding: .5rem .75rem;
+}
+
+.downloadButton:hover {
+  background-color: #333;
 }
