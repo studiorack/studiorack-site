@@ -20,6 +20,14 @@ Run the development server using:
 
     npm run dev
 
+View the site at:
+
+    http://localhost:3000
+
+Get the api at:
+
+    http://localhost:3000/api/plugins
+
 
 ## Deployment
 

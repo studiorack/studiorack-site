@@ -5,15 +5,12 @@ import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
 import { GetStaticProps } from 'next'
+import { getPlugins, Plugin } from '../lib/plugins'
 
 export default function Home({
-  allPostsData
+  plugins
 }: {
-  allPostsData: {
-    date: string
-    title: string
-    id: string
-  }[]
+  plugins: Plugin[]
 }) {
   return (
     <Layout home>
@@ -24,17 +21,26 @@ export default function Home({
         <p>Audio plugin registry containing plugin metadata, which is searchable and filterable</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>News</h2>
+        <h2 className={utilStyles.headingLg}>Plugins</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href="/posts/[id]" as={`/posts/${id}`}>
-                <a>{title}</a>
-              </Link>
-              <br />
+          {plugins.map(({ author, description, homepage, id, name, tags, version}) => (
+            <li className={utilStyles.listItem} key={name}>
+              <h3>{name}</h3>
+              <p>{name}</p>
               <small className={utilStyles.lightText}>
-                <Date dateString={date} />
+                v{version}
               </small>
+              <hr />
+              <div>
+                <p className={utilStyles.codeLabel}>Installation:</p>
+                <pre className={utilStyles.codeBox}>apm install {id}</pre>
+              </div>
+              <div>
+                <p className={utilStyles.codeLabel}>Download:</p>
+                <button className={utilStyles.downloadButton}>Linux</button>
+                <button className={utilStyles.downloadButton}>MacOS</button>
+                <button className={utilStyles.downloadButton}>Windows</button>
+              </div>
             </li>
           ))}
         </ul>
@@ -44,9 +50,12 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  const plugins = await getPlugins()
   const allPostsData = getSortedPostsData()
+  console.log(plugins);
   return {
     props: {
+      plugins,
       allPostsData
     }
   }
