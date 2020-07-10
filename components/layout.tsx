@@ -3,8 +3,7 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 
-const name = '[Your Name]'
-export const siteTitle = 'Next.js Sample Website'
+export const siteTitle = 'APM Registry';
 
 export default function Layout({
   children,
@@ -34,26 +33,26 @@ export default function Layout({
         {home ? (
           <>
             <img
-              src="/images/profile.jpg"
+              src={`${process.env.BASE_PATH}/images/profile.jpg`}
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-              alt={name}
+              alt={siteTitle}
             />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
+            <h1 className={utilStyles.heading2Xl}>{siteTitle}</h1>
           </>
         ) : (
           <>
             <Link href="/">
               <a>
                 <img
-                  src="/images/profile.jpg"
+                  src={`${process.env.BASE_PATH}/images/profile.jpg`}
                   className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={name}
+                  alt={siteTitle}
                 />
               </a>
             </Link>
             <h2 className={utilStyles.headingLg}>
               <Link href="/">
-                <a className={utilStyles.colorInherit}>{name}</a>
+                <a className={utilStyles.colorInherit}>{siteTitle}</a>
               </Link>
             </h2>
           </>
