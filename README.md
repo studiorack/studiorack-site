@@ -33,7 +33,7 @@ Get the api at:
 
 Release an updated version on GitHub by simply creating a version tag:
 
-    git tag v0.0.1
+    npm version patch
     git push origin --tags
 
 This will run an automated build and deploy process on GitHub Actions:
