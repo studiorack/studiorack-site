@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export const siteTitle = 'APM Registry'
 
@@ -12,10 +13,11 @@ export default function Layout({
   children: React.ReactNode
   home?: boolean
 }) {
+  const {basePath} = useRouter()
   return (
     <div className={styles.container}>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={`${basePath}/favicon.ico`} />
         <meta
           name="description"
           content="Learn how to build a personal website using Next.js"
@@ -33,7 +35,7 @@ export default function Layout({
         {home ? (
           <>
             <img
-              src={`${process.env.BASE_PATH}/images/profile.jpg`}
+              src={`${basePath}/images/profile.jpg`}
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
               alt={siteTitle}
             />
@@ -44,7 +46,7 @@ export default function Layout({
             <Link href="/">
               <a>
                 <img
-                  src={`${process.env.BASE_PATH}/images/profile.jpg`}
+                  src={`${basePath}/images/profile.jpg`}
                   className={`${styles.headerImage} ${utilStyles.borderCircle}`}
                   alt={siteTitle}
                 />

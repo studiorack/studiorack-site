@@ -28,7 +28,7 @@ export default class App extends Component<{
     const filtered = this.props.plugins.filter((plugin) => {
       if (plugin.name.toLowerCase().indexOf(query) != -1 ||
         plugin.description.toLowerCase().indexOf(query) != -1 ||
-        plugin.tags.toLowerCase().includes(query)) {
+        plugin.tags.includes(query)) {
         return plugin;
       }
       return false;
