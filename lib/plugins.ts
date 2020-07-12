@@ -12,7 +12,7 @@ export interface Plugin {
 
 export async function getPlugins() {
   return await Promise.all(repos.map(async (repo) => {
-    const url = `https://github.com/${repo}/releases/latest/download/plugin.json`;
+    const url = `https://github.com/${repo}/releases/latest/download/plugin.json`
     const res = await fetch(url)
     console.log(repo, url)
     return res.json().then((plugin) => {

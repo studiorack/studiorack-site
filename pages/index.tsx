@@ -21,7 +21,10 @@ export default function Home({
         <p>Audio plugin registry containing plugin metadata, which is searchable and filterable</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Plugins</h2>
+        <div className={utilStyles.header}>
+          <h2 className={[utilStyles.headingLg, utilStyles.headerCell].join(' ')}>Plugins</h2>
+          <input className={utilStyles.headerSearch} placeholder="Search" />
+        </div>
         <ul className={utilStyles.list}>
           {plugins.map(({ author, description, homepage, id, name, tags, version}) => (
             <li className={utilStyles.listItem} key={name}>
@@ -51,7 +54,7 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async () => {
   const plugins = await getPlugins()
   const allPostsData = getSortedPostsData()
-  console.log(plugins);
+  console.log(plugins)
   return {
     props: {
       plugins,

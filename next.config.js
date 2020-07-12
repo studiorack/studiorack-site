@@ -1,4 +1,4 @@
-const basePath = (process.env.NODE_ENV === 'production') ? '/apm-registry' : '';
+const basePath = (process.env.NODE_ENV === 'production') ? '/apm-registry' : ''
 
 module.exports = {
   basePath: basePath,
