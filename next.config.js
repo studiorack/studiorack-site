@@ -1,8 +1,8 @@
-const basePath = (process.env.NODE_ENV === 'production') ? '/apm-registry' : ''
+const package = require('./package.json')
 
 module.exports = {
-  basePath: basePath,
-  env: {
-    BASE_PATH: basePath,
+  basePath: (process.env.NODE_ENV === 'production') ? '/apm-registry' : '',
+  generateBuildId: async () => {
+    return package.version
   },
 }
