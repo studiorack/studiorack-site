@@ -61,11 +61,11 @@ export default class App extends Component<{
                     <a className="hover:underline">{name} <small className={utilStyles.lightText}>v{version}</small></a>
                   </Link>
                 </h3>
-                {/* <ul>
+                <ul className={utilStyles.tags}>
                   {tags.map((tag) => (
-                    <li>{tag}</li>
+                    <li className={utilStyles.tag} key={tag}>{tag}</li>
                   ))}
-                </ul> */}
+                </ul>
               </li>
             ))}
           </ul>
