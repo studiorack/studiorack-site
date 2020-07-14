@@ -2,7 +2,6 @@ import { Component } from 'react'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
 import { GetStaticProps } from 'next'
@@ -29,15 +28,15 @@ export default class App extends Component<{
       if (plugin.name.toLowerCase().indexOf(query) != -1 ||
         plugin.description.toLowerCase().indexOf(query) != -1 ||
         plugin.tags.includes(query)) {
-        return plugin;
+        return plugin
       }
-      return false;
+      return false
     })
     this.setState({
       pluginsFiltered: filtered,
       query: query
     })
-    console.log(query, filtered);
+    console.log(query, filtered)
   }
 
   render() {
@@ -55,23 +54,14 @@ export default class App extends Component<{
             <input className={utilStyles.headerSearch} placeholder="Search" value={this.state.query} onChange={this.handleChange} />
           </div>
           <ul className={utilStyles.list}>
-            {this.state.pluginsFiltered.map(({ author, description, homepage, id, name, tags, version}) => (
+            {this.state.pluginsFiltered.map(({ slug, description, name, tags, version}) => (
               <li className={utilStyles.listItem} key={name}>
-                <h3>{name} <small className={utilStyles.lightText}>v{version}</small></h3>
-                <p>{name}</p>
-                <hr />
-                <div className={utilStyles.row}>
-                  <div className={utilStyles.cell}>
-                    <p className={utilStyles.codeLabel}>Download:</p>
-                    <a className={utilStyles.downloadButton} href={`https://github.com/${id}/releases/latest/download/plugin-linux.zip`}>Linux</a>
-                    <a className={utilStyles.downloadButton} href={`https://github.com/${id}/releases/latest/download/plugin-mac.zip`}>MacOS</a>
-                    <a className={utilStyles.downloadButton} href={`https://github.com/${id}/releases/latest/download/plugin-win.zip`}>Windows</a>
-                  </div>
-                  <div className={utilStyles.cell}>
-                    <p className={utilStyles.codeLabel}>Install command:</p>
-                    <pre className={utilStyles.codeBox}>apm install {id}</pre>
-                  </div>
-                </div>
+                <h3>
+                  <Link href="/plugins/[slug]" as={`/plugins/${slug}`}>
+                    <a className="hover:underline">{name} <small className={utilStyles.lightText}>v{version}</small></a>
+                  </Link>
+                </h3>
+                <p>{description}</p>
               </li>
             ))}
           </ul>
@@ -83,12 +73,10 @@ export default class App extends Component<{
 
 export const getStaticProps: GetStaticProps = async () => {
   const plugins = await getPlugins()
-  const allPostsData = getSortedPostsData()
   console.log(plugins)
   return {
     props: {
-      plugins,
-      allPostsData
+      plugins
     }
   }
 }
