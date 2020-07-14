@@ -1,6 +1,6 @@
 {
   "name": "apm-registry",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Audio plugin registry with searchable plugin metadata",
   "scripts": {
     "dev": "next dev",
