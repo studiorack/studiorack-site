@@ -16,8 +16,10 @@ export default function Post({
         <title>{plugin.name}</title>
       </Head>
       <article>
-        <h1 className={utilStyles.headingXl}>{plugin.name}</h1>
+        <h1 className={utilStyles.headingXl}>{plugin.name} <small className={utilStyles.lightText}>v{plugin.version}</small></h1>
+        <h4>By <a href={plugin.homepage} target="_blank">{plugin.author}</a></h4>
         <p>{plugin.description}</p>
+        <hr />
         <div className={utilStyles.row}>
           <div className={utilStyles.cell}>
             <p className={utilStyles.codeLabel}>Download:</p>

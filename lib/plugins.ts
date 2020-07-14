@@ -7,7 +7,7 @@ export interface Plugin {
   id: string,
   name: string,
   slug: string,
-  tags: string,
+  tags: Array<string>,
   version: string
 }
 

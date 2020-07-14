@@ -63,7 +63,7 @@
 .listItem {
   border: 1px solid #333;
   margin: 0 0 1.25rem;
-  padding: 0 1rem 1rem;
+  padding: 0 1rem;
 }
 
 @media (min-width: 769px) {
