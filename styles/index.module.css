@@ -1,0 +1,18 @@
+.creators {
+  background-image: url(../public/images/creators.jpg);
+  background-size: cover;
+  padding: 15rem 1.5rem;
+}
+
+.creatorsContainer {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.creatorsInner {
+  max-width: 360px;
+}
+
+.creators h2 {
+  font-size: 48px;
+}

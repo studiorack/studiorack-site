@@ -22,7 +22,7 @@ export default function Layout({
         <meta property="og:image" content="{`${basePath}/images/creators.jpg`}" />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"></link>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&amp;display=swap" rel="stylesheet"></link>
       </Head>
       <header className={styles.header}>
         <a href="#" className={styles.headerLink}>

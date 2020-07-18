@@ -2,6 +2,7 @@ body {
   background-color: #000;
   color: #fff;
   font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   margin: 0;
 }
 
@@ -11,9 +12,37 @@ h3,
 h4,
 h5,
 p {
-  margin: 0 0 1em 0;
+  font-weight: 300;
+  line-height: 1.15em;
+  margin: 0 0 1.25rem 0;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5em;
 }
 
 a {
   color: #fff;
 }
+
+button,
+.button {
+  background-color: #0D51FF;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  transition: background-color .25s ease-out;
+}
+
+button:hover,
+.button:hover {
+  background-color: #477BFF;
+}
+
+

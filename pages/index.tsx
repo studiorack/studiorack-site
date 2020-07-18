@@ -1,9 +1,9 @@
 import { Component } from 'react'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
+import styles from '../styles/index.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
-import Date from '../components/date'
 import { GetStaticProps } from 'next'
 import { getPlugins, Plugin } from '../lib/plugins'
 
@@ -45,6 +45,15 @@ export default class App extends Component<{
         <Head>
           <title>{siteTitle}</title>
         </Head>
+        <section className={styles.creators}>
+          <div className={styles.creatorsContainer}>
+            <div className={styles.creatorsInner}>
+              <h2>Automate your plugin publishing workflow</h2>
+              <p>Our plugin starter template uses GitHub Actions to build your plugin with the Steinberg VST3 SDK, publishing a new version straight to Github Releases.</p>
+              <a className="button" href="https://github.com/audio-project-manager/apm-plugin" target="_blank">Use the plugin template</a>
+            </div>
+          </div>
+        </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <div className={utilStyles.header}>
             <h2 className={[utilStyles.headingLg, utilStyles.headerCell].join(' ')}>Plugins</h2>

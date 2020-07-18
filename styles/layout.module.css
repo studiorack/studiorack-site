@@ -4,6 +4,7 @@
 
 .header {
   align-items: center;
+  background-color: #000;
   display: flex;
   justify-content: space-between;
   position: fixed;
@@ -18,13 +19,12 @@
 }
 
 .logoText {
-  font-weight: normal;
   margin: 0 0 0 1rem;
   text-transform: uppercase;
 }
 
 .logoTextBold {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .navigation {
@@ -35,7 +35,7 @@
 }
 
 .navigation a {
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid transparent;
   color: #fff;
   display: block;
   padding: 1.5rem;
