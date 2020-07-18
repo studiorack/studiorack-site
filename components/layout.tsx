@@ -27,7 +27,7 @@ export default function Layout({
       <header className={styles.header}>
         <a href="#" className={styles.headerLink}>
           <img className={styles.logoImage} src={`${basePath}/images/studio-rack-logo.svg`} alt={siteTitle} />
-          <h1 className={styles.logoText}>Studio<span className={styles.logoTextBold}>Rack</span></h1>
+          <span className={styles.logoText}>Studio<span className={styles.logoTextBold}>Rack</span></span>
         </a>
         <ul className={styles.navigation}>
           <li><a href="#template">Plugin template</a></li>

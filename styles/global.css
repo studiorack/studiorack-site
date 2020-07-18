@@ -28,6 +28,14 @@ p {
   line-height: 1.5em;
 }
 
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
 a {
   color: #fff;
 }
@@ -51,4 +59,11 @@ button:hover,
   background-color: #477BFF;
 }
 
-
+@media (min-width: 48rem) {
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 48px;
+  }  
+}

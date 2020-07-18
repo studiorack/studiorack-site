@@ -1,15 +1,12 @@
 .section {
   background-size: cover;
-  padding: 15rem 1.5rem;
+  padding: 1.5rem;
   scroll-snap-align: start;
 }
 
-.sectionCreators {
-  background-image: url(../public/images/creators.jpg);
-}
-
-.sectionProducers {
-  background-image: url(../public/images/producers.jpg);
+.sectionImage {
+  margin-bottom: 1rem;
+  max-width: 100%;
 }
 
 .container {
@@ -25,6 +22,21 @@
   margin: 0 0 0 auto;
 }
 
-.title {
-  font-size: 48px;
+@media (min-width: 48rem) {
+  .section {
+    padding-bottom: 15rem;
+    padding-top: 15rem;
+  }
+
+  .sectionCreators {
+    background-image: url(../public/images/creators.jpg);
+  }
+
+  .sectionProducers {
+    background-image: url(../public/images/producers.jpg);
+  }
+
+  .sectionImage {
+    display: none;
+  }
 }
