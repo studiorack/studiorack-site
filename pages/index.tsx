@@ -45,9 +45,6 @@ export default class App extends Component<{
         <Head>
           <title>{siteTitle}</title>
         </Head>
-        <section className={utilStyles.headingMd}>
-          <p>Audio plugin registry containing plugin metadata, which is searchable and filterable</p>
-        </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
           <div className={utilStyles.header}>
             <h2 className={[utilStyles.headingLg, utilStyles.headerCell].join(' ')}>Plugins</h2>

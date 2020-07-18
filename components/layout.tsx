@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
+import styles from '../styles/layout.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export const siteTitle = 'APM Registry'
+export const siteTitle = 'StudioRack'
+export const siteDesc = 'Automate your plugin publishing workflow, easy plugin installation and management'
 
 export default function Layout({
   children,
@@ -18,47 +18,22 @@ export default function Layout({
     <div className={styles.container}>
       <Head>
         <link rel="icon" href={`${basePath}/favicon.ico`} />
-        <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
-        />
-        <meta
-          property="og:image"
-          content={`https://og-image.now.sh/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
+        <meta name="description" content={siteDesc} />
+        <meta property="og:image" content="{`${basePath}/images/creators.jpg`}" />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"></link>
       </Head>
       <header className={styles.header}>
-        {home ? (
-          <>
-            <img
-              src={`${basePath}/images/profile.jpg`}
-              className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-              alt={siteTitle}
-            />
-            <h1 className={utilStyles.heading2Xl}>{siteTitle}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <img
-                  src={`${basePath}/images/profile.jpg`}
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={siteTitle}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{siteTitle}</a>
-              </Link>
-            </h2>
-          </>
-        )}
+        <a href="#" className={styles.headerLink}>
+          <img className={styles.logoImage} src={`${basePath}/images/studio-rack-logo.svg`} alt={siteTitle} />
+          <h1 className={styles.logoText}>Studio<span className={styles.logoTextBold}>Rack</span></h1>
+        </a>
+        <ul className={styles.navigation}>
+          <li><a href="#template">Plugin template</a></li>
+          <li><a href="#app">App &amp; tools</a></li>
+          <li><a href="#plugins">Plugins</a></li>
+        </ul>
       </header>
       <main>{children}</main>
       {!home && (
