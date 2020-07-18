@@ -1,3 +1,9 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+  scroll-snap-type: y proximity;
+}
+
 body {
   background-color: #000;
   color: #fff;

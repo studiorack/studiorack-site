@@ -45,16 +45,25 @@ export default class App extends Component<{
         <Head>
           <title>{siteTitle}</title>
         </Head>
-        <section className={styles.creators}>
-          <div className={styles.creatorsContainer}>
-            <div className={styles.creatorsInner}>
-              <h2>Automate your plugin publishing workflow</h2>
+        <section className={`${styles.section} ${styles.sectionCreators}`} id="template">
+          <div className={styles.container}>
+            <div className={styles.inner}>
+              <h2 className={styles.title}>Automate your plugin publishing workflow</h2>
               <p>Our plugin starter template uses GitHub Actions to build your plugin with the Steinberg VST3 SDK, publishing a new version straight to Github Releases.</p>
               <a className="button" href="https://github.com/audio-project-manager/apm-plugin" target="_blank">Use the plugin template</a>
             </div>
           </div>
         </section>
-        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <section className={`${styles.section} ${styles.sectionProducers}`} id="app">
+          <div className={styles.container}>
+            <div className={styles.inner}>
+              <h2 className={styles.title}>Easy plugin installation &amp; management</h2>
+              <p>Our app and command line tools allow you to search our plugin registry for free plugins. You can install and manage plugin versions all from one place.</p>
+              <a className="button" href="https://github.com/audio-project-manager/apm-cli" target="_blank">Install the CLI</a>
+            </div>
+          </div>
+        </section>
+        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`} id="plugins">
           <div className={utilStyles.header}>
             <h2 className={[utilStyles.headingLg, utilStyles.headerCell].join(' ')}>Plugins</h2>
             <input className={utilStyles.headerSearch} placeholder="Search" value={this.state.query} onChange={this.handleChange} />

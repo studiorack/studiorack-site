@@ -1,18 +1,30 @@
-.creators {
-  background-image: url(../public/images/creators.jpg);
+.section {
   background-size: cover;
   padding: 15rem 1.5rem;
+  scroll-snap-align: start;
 }
 
-.creatorsContainer {
+.sectionCreators {
+  background-image: url(../public/images/creators.jpg);
+}
+
+.sectionProducers {
+  background-image: url(../public/images/producers.jpg);
+}
+
+.container {
   margin: 0 auto;
-  max-width: 1280px;
+  max-width: 1024px;
 }
 
-.creatorsInner {
+.inner {
   max-width: 360px;
 }
 
-.creators h2 {
+.sectionProducers .inner {
+  margin: 0 0 0 auto;
+}
+
+.title {
   font-size: 48px;
 }
