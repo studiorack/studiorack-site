@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
+import styles from '../styles/layout.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export const siteTitle = 'APM Registry'
+export const siteTitle = 'StudioRack'
+export const siteDesc = 'Automate your plugin publishing workflow, easy plugin installation and management'
 
 export default function Layout({
   children,
@@ -17,57 +17,28 @@ export default function Layout({
   return (
     <div className={styles.container}>
       <Head>
-        <link rel="icon" href={`${basePath}/favicon.ico`} />
-        <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
-        />
-        <meta
-          property="og:image"
-          content={`https://og-image.now.sh/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
+        <meta name="description" content={siteDesc} />
+        <meta property="og:image" content={`${basePath}/images/creators.jpg`} />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&amp;display=swap" rel="stylesheet"></link>
+        <link rel="apple-touch-icon" sizes="180x180" href={`${basePath}/icons/apple-touch-icon.png`} />
+        <link rel="icon" type="image/png" sizes="32x32" href={`${basePath}/icons/favicon-32x32.png`} />
+        <link rel="icon" type="image/png" sizes="16x16" href={`${basePath}/icons/favicon-16x16.png`} />
+        <link rel="manifest" href={`${basePath}/icons/site.webmanifest`}></link>
       </Head>
       <header className={styles.header}>
-        {home ? (
-          <>
-            <img
-              src={`${basePath}/images/profile.jpg`}
-              className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-              alt={siteTitle}
-            />
-            <h1 className={utilStyles.heading2Xl}>{siteTitle}</h1>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <img
-                  src={`${basePath}/images/profile.jpg`}
-                  className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                  alt={siteTitle}
-                />
-              </a>
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{siteTitle}</a>
-              </Link>
-            </h2>
-          </>
-        )}
+        <a href={`${basePath}/`} className={styles.headerLink}>
+          <img className={styles.logoImage} src={`${basePath}/images/studio-rack-logo.svg`} alt={siteTitle} />
+          <span className={styles.logoText}>Studio<span className={styles.logoTextBold}>Rack</span></span>
+        </a>
+        <ul className={styles.navigation}>
+          <li><a href={`${basePath}/#template`}>Plugin template</a></li>
+          <li><a href={`${basePath}/#app`}>App &amp; tools</a></li>
+          <li><a href={`${basePath}/#plugins`}>Plugins</a></li>
+        </ul>
       </header>
       <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
-        </div>
-      )}
     </div>
   )
 }

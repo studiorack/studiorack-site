@@ -1,27 +1,85 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  line-height: 1.6;
-  font-size: 18px;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+  /* scroll-snap-type: y proximity; */
 }
 
-* {
-  box-sizing: border-box;
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  margin: 0;
+  padding-top: 70px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  font-weight: 300;
+  line-height: 1.15em;
+  margin: 0 0 1.25rem 0;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.5em;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
 }
 
 a {
-  color: #0070f3;
+  color: #fff;
+}
+
+button,
+.button {
+  background-color: #0D51FF;
+  border: 0;
+  border-radius: .25rem;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 1rem 1.5rem;
   text-decoration: none;
+  transition: background-color .25s ease-out;
 }
 
-a:hover {
-  text-decoration: underline;
+button:hover,
+.button:hover {
+  background-color: #477BFF;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+@media (min-width: 48rem) {
+  h1 {
+    font-size: 56px;
+  }
+  h2 {
+    font-size: 48px;
+  }
+  h3 {
+    font-size: 32px;
+  }
+  h4 {
+    font-size: 24px;
+  }
 }
