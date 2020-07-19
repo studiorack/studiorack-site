@@ -1,42 +1,49 @@
 import Layout from '../../components/layout'
 import { getAllPluginPaths, getPluginData, Plugin } from '../../lib/plugins'
 import Head from 'next/head'
-import Date from '../../components/date'
-import utilStyles from '../../styles/utils.module.css'
+import styles from '../../styles/plugin.module.css'
 import { GetStaticProps, GetStaticPaths } from 'next'
+import { useRouter } from 'next/router'
 
 export default function Post({
   plugin
 }: {
   plugin: Plugin
 }) {
+  const {basePath} = useRouter()
   return (
     <Layout>
       <Head>
         <title>{plugin.name}</title>
       </Head>
       <article>
-        <h1 className={utilStyles.headingXl}>{plugin.name} <small className={utilStyles.lightText}>v{plugin.version}</small></h1>
-        <h4>By <a href={plugin.homepage} target="_blank">{plugin.author}</a></h4>
-        <p>{plugin.description}</p>
-        <ul className={utilStyles.tags}>
-          <span>Tags: </span>
-          {plugin.tags.map((tag) => (
-            <li className={utilStyles.tag} key={tag}>{tag}</li>
-          ))}
-        </ul>
-        <div className={utilStyles.getPlugin}>
-          <h3 className={utilStyles.getPluginTitle}>Get the plugin</h3>
-          <div className={utilStyles.row}>
-            <div className={utilStyles.cell}>
-              <p className={utilStyles.codeLabel}>Download .zip file:</p>
-              <a className={utilStyles.downloadButton} href={`https://github.com/${plugin.id}/releases/latest/download/plugin-linux.zip`}>Linux</a>
-              <a className={utilStyles.downloadButton} href={`https://github.com/${plugin.id}/releases/latest/download/plugin-mac.zip`}>MacOS</a>
-              <a className={utilStyles.downloadButton} href={`https://github.com/${plugin.id}/releases/latest/download/plugin-win.zip`}>Windows</a>
+        <div className={styles.header}>
+          <div className={styles.headerInner}>
+            <img className={styles.image} src={`${basePath}/images/plugin.jpg`} alt="{name}" />
+            <div className={styles.details}>
+              <h3 className={styles.title}>{plugin.name} <span className={styles.version}>v{plugin.version}</span></h3>
+              <p className={styles.author}>By <a href={plugin.homepage} target="_blank">{plugin.author}</a></p>
+              <p>{plugin.description}</p>
+              <ul className={styles.tags}>
+                <img className={styles.icon} src={`${basePath}/images/icon-tag.svg`} alt="Tags" />
+                {plugin.tags.map((tag) => (
+                  <li className={styles.tag} key={tag}>{tag},</li>
+                ))}
+              </ul>
             </div>
-            <div className={utilStyles.cell}>
-              <p className={utilStyles.codeLabel}>Install via command line:</p>
-              <pre className={utilStyles.codeBox}>apm install {plugin.id}</pre>
+          </div>
+        </div>
+        <div className={styles.options}>
+          <div className={styles.row}>
+            <div className={`${styles.cell} ${styles.download}`}>
+              <p>Download .zip file:</p>
+              <a className={`button ${styles.button}`} href={`https://github.com/${plugin.id}/releases/latest/download/plugin-linux.zip`}>Linux</a>
+              <a className={`button ${styles.button}`} href={`https://github.com/${plugin.id}/releases/latest/download/plugin-mac.zip`}>MacOS</a>
+              <a className={`button ${styles.button}`} href={`https://github.com/${plugin.id}/releases/latest/download/plugin-win.zip`}>Windows</a>
+            </div>
+            <div className={`${styles.cell} ${styles.install}`}>
+              <p>Install via command line:</p>
+              <pre className={styles.codeBox}>apm install {plugin.id}</pre>
             </div>
           </div>
         </div>

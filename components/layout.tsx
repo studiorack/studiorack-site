@@ -30,19 +30,12 @@ export default function Layout({
           <span className={styles.logoText}>Studio<span className={styles.logoTextBold}>Rack</span></span>
         </a>
         <ul className={styles.navigation}>
-          <li><a href="#template">Plugin template</a></li>
-          <li><a href="#app">App &amp; tools</a></li>
-          <li><a href="#plugins">Plugins</a></li>
+          <li><a href={`${basePath}/#template`}>Plugin template</a></li>
+          <li><a href={`${basePath}/#app`}>App &amp; tools</a></li>
+          <li><a href={`${basePath}/#plugins`}>Plugins</a></li>
         </ul>
       </header>
       <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
-        </div>
-      )}
     </div>
   )
 }
