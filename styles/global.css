@@ -52,6 +52,7 @@ button,
 .button {
   background-color: #0D51FF;
   border: 0;
+  border-radius: .25rem;
   color: #fff;
   cursor: pointer;
   display: inline-block;

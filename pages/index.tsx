@@ -75,20 +75,20 @@ class App extends Component<{
           </div>
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map(({ slug, name, description, tags, version}) => (
-              <div className={styles.plugin} key={name}>
-                <Link href="/plugins/[slug]" as={`/plugins/${slug}`}>
+              <Link href="/plugins/[slug]" as={`/plugins/${slug}`} key={name}>
+                <div className={styles.plugin}>
                   <img className={styles.pluginImage} src={`${this.state.router.basePath}/images/plugin.jpg`} alt="{name}" />
-                </Link>
-                <div className={styles.pluginDetails}>
-                  <h4 className={styles.pluginTitle}>{name} <span className={styles.pluginVersion}>v{version}</span></h4>
-                  <ul className={styles.pluginTags}>
-                    <img className={styles.pluginIcon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
-                    {tags.map((tag) => (
-                      <li className={styles.pluginTag} key={tag}>{tag},</li>
-                    ))}
-                  </ul>
+                  <div className={styles.pluginDetails}>
+                    <h4 className={styles.pluginTitle}>{name} <span className={styles.pluginVersion}>v{version}</span></h4>
+                    <ul className={styles.pluginTags}>
+                      <img className={styles.pluginIcon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
+                      {tags.map((tag) => (
+                        <li className={styles.pluginTag} key={tag}>{tag},</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
