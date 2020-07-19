@@ -1,5 +1,5 @@
 {
-  "name": "apm-registry",
+  "name": "studiorack-registry",
   "version": "0.0.12",
   "description": "Audio plugin registry with searchable plugin metadata",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/audio-project-manager/apm-registry.git"
+    "url": "git+https://github.com/studiorack/studiorack-registry.git"
   },
   "keywords": [
     "audio",
@@ -23,9 +23,9 @@
   "author": "kmturley",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/audio-project-manager/apm-registry/issues"
+    "url": "https://github.com/studiorack/studiorack-registry/issues"
   },
-  "homepage": "https://github.com/audio-project-manager/apm-registry#readme",
+  "homepage": "https://github.com/studiorack/studiorack-registry#readme",
   "dependencies": {
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",

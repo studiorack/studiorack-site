@@ -1,4 +1,4 @@
-# apm-registry
+# studiorack-registry
 
 Audio plugin registry containing plugin metadata, which is searchable and filterable, using:
 

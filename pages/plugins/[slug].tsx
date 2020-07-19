@@ -43,7 +43,7 @@ export default function Post({
             </div>
             <div className={`${styles.cell} ${styles.install}`}>
               <p>Install via command line:</p>
-              <pre className={styles.codeBox}>apm install {plugin.id}</pre>
+              <pre className={styles.codeBox}>studiorack install {plugin.id}</pre>
             </div>
           </div>
         </div>
