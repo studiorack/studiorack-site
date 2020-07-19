@@ -25,7 +25,7 @@ export default function Layout({
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&amp;display=swap" rel="stylesheet"></link>
       </Head>
       <header className={styles.header}>
-        <a href="#" className={styles.headerLink}>
+        <a href={`${basePath}/`} className={styles.headerLink}>
           <img className={styles.logoImage} src={`${basePath}/images/studio-rack-logo.svg`} alt={siteTitle} />
           <span className={styles.logoText}>Studio<span className={styles.logoTextBold}>Rack</span></span>
         </a>

@@ -2,7 +2,6 @@ import { Component } from 'react'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import styles from '../styles/index.module.css'
-import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { getPlugins, Plugin } from '../lib/plugins'
@@ -69,27 +68,29 @@ class App extends Component<{
             </div>
           </div>
         </section>
-        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`} id="plugins">
-          <div className={utilStyles.header}>
-            <h2 className={[utilStyles.headingLg, utilStyles.headerCell].join(' ')}>Plugins</h2>
-            <input className={utilStyles.headerSearch} placeholder="Search" value={this.state.query} onChange={this.handleChange} />
+        <section className={styles.plugins} id="plugins">
+          <div className={styles.pluginsHeader}>
+            <h3 className={styles.pluginsTitle}>Plugins</h3>
+            <input className={styles.pluginsSearch} placeholder="Filter by keyword" value={this.state.query} onChange={this.handleChange} />
           </div>
-          <ul className={utilStyles.list}>
-            {this.state.pluginsFiltered.map(({ slug, description, name, tags, version}) => (
-              <li className={utilStyles.listItem} key={name}>
-                <h3>
-                  <Link href="/plugins/[slug]" as={`/plugins/${slug}`}>
-                    <a className="hover:underline">{name} <small className={utilStyles.lightText}>v{version}</small></a>
-                  </Link>
-                </h3>
-                <ul className={utilStyles.tags}>
-                  {tags.map((tag) => (
-                    <li className={utilStyles.tag} key={tag}>{tag}</li>
-                  ))}
-                </ul>
-              </li>
+          <div className={styles.pluginsList}>
+            {this.state.pluginsFiltered.map(({ slug, name, description, tags, version}) => (
+              <div className={styles.plugin} key={name}>
+                <Link href="/plugins/[slug]" as={`/plugins/${slug}`}>
+                  <img className={styles.pluginImage} src={`${this.state.router.basePath}/images/plugin.jpg`} alt="{name}" />
+                </Link>
+                <div className={styles.pluginDetails}>
+                  <h4 className={styles.pluginTitle}>{name} <span className={styles.pluginVersion}>v{version}</span></h4>
+                  <ul className={styles.pluginTags}>
+                    <img className={styles.pluginIcon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
+                    {tags.map((tag) => (
+                      <li className={styles.pluginTag} key={tag}>{tag},</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
       </Layout>
     )

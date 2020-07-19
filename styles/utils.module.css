@@ -1,20 +1,4 @@
 
-@media (min-width: 769px) {
-  .header {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .headerCell {
-    margin-right: 1rem;
-  }
-}
-
-.headerSearch {
-  padding: .5rem;
-}
-
 .heading2Xl {
   font-size: 2.5rem;
   line-height: 1.2;
@@ -74,10 +58,6 @@
   .cell {
     margin-right: 1rem;
   }
-}
-
-.lightText {
-  color: #666;
 }
 
 .getPlugin {

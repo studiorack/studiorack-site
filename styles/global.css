@@ -1,7 +1,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 70px;
-  scroll-snap-type: y proximity;
+  /* scroll-snap-type: y proximity; */
 }
 
 body {
@@ -29,11 +29,19 @@ p {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 40px;
 }
 
 h2 {
   font-size: 32px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
 }
 
 a {
@@ -61,9 +69,15 @@ button:hover,
 
 @media (min-width: 48rem) {
   h1 {
-    font-size: 30px;
+    font-size: 56px;
   }
   h2 {
     font-size: 48px;
-  }  
+  }
+  h3 {
+    font-size: 32px;
+  }
+  h4 {
+    font-size: 24px;
+  }
 }
