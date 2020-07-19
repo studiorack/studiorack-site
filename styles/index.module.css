@@ -23,7 +23,7 @@
 }
 
 .plugins {
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
 }
 
 .pluginsHeader {
@@ -47,6 +47,7 @@
 
 .plugin {
   background-color: #222;
+  border-radius: .25rem;
   cursor: pointer;
   margin-bottom: 1rem;
   transition: background-color .25s ease-out;
@@ -64,6 +65,7 @@
 
 .pluginDetails {
   background-color: #111;
+  border-radius: 0 0 .25rem .25rem;
   padding: 1rem;
 }
 
@@ -113,7 +115,7 @@
   .pluginsList {
     display: grid;
     grid-auto-rows: minmax(100px, auto);
-    grid-gap: 10px;
+    grid-gap: 1.5rem;
     grid-template-columns: repeat(3, 1fr);
   }
 }

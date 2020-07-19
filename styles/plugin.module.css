@@ -56,20 +56,23 @@
 
 .codeBox {
   background-color: #111;
-  font-size: 14px;
-  padding: 1.1rem 1.5rem;
+  border-radius: .25rem;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  padding: 1rem 1.5rem;
   white-space: normal;
 }
 
 @media (min-width: 48rem) {
   .header {
-    padding-bottom: 10rem;
-    padding-top: 10rem;
+    padding-bottom: 5rem;
+    padding-top: 5rem;
   }
 
   .headerInner {
     align-items: center;
     display: flex;
+    justify-content: center;
     margin: 0 auto;
     max-width: 1024px;
   }
