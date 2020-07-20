@@ -57,5 +57,11 @@ export async function getPluginData(slug: string) {
     plugin.id = repo
     plugin.slug = toSlug(repo)
     return plugin
+  }).catch((err) => {
+    return {
+      id: repo,
+      slug: toSlug(repo),
+      tags: []
+    }
   })
 }
