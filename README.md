@@ -1,4 +1,5 @@
 # studiorack-registry
+![Release](https://github.com/studiorack/studiorack-registry/workflows/Release/badge.svg)
 
 Audio plugin registry containing plugin metadata, which is searchable and filterable, using:
 
