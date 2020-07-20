@@ -28,8 +28,14 @@ export async function getPlugins() {
       plugin.id = repo
       plugin.slug = toSlug(repo)
       return plugin
+    }).catch((err) => {
+      return false
     })
-  }))
+  })).then((results) => {
+    return results.filter((result) => {
+      return result
+    })
+  })
 }
 
 export function getAllPluginPaths() {
