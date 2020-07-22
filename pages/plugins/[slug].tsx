@@ -19,7 +19,7 @@ export default function Post({
       <article>
         <div className={styles.header}>
           <div className={styles.headerInner}>
-            <img className={styles.image} src={`${basePath}/images/plugin.jpg`} alt={plugin.name} />
+            <img className={styles.image} src={`https://github.com/${plugin.id}/releases/latest/download/plugin.png`} alt={plugin.name} />
             <div className={styles.details}>
               <h3 className={styles.title}>{plugin.name} <span className={styles.version}>v{plugin.version}</span></h3>
               <p className={styles.author}>By <a href={plugin.homepage} target="_blank">{plugin.author}</a></p>
