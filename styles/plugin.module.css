@@ -4,6 +4,18 @@
   padding: 1.5rem;
 }
 
+.imageContainer {
+  position: relative;
+}
+
+.imagePlay {
+  cursor: pointer;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .title {
   margin: 0;
 }
