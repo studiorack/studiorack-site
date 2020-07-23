@@ -1,6 +1,6 @@
 {
   "name": "studiorack-registry",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Audio plugin registry with searchable plugin metadata",
   "scripts": {
     "dev": "next dev",
