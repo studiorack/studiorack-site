@@ -6,6 +6,7 @@
 
 .imageContainer {
   position: relative;
+  z-index: 1;
 }
 
 .imagePlay {
@@ -28,6 +29,7 @@
   display: block;
   margin: 0 auto 1rem auto;
   max-height: 300px;
+  max-width: 100%;
 }
 
 .version {
