@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import styles from '../styles/layout.module.css'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 export const siteTitle = 'StudioRack'

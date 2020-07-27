@@ -11,16 +11,15 @@ import html from 'remark-html'
 type Props = {
   allDocs: Doc[]
   doc: Doc
-  preview?: boolean
 }
 
-const DocDetail = ({ allDocs, doc, preview }: Props) => {
+const DocDetail = ({ allDocs, doc }: Props) => {
   const router = useRouter()
   if (!router.isFallback && !doc?.slug) {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <Layout preview={preview}>
+    <Layout>
       <Container docs={allDocs}>
         <h1>{doc.title}</h1>
         <div
@@ -55,7 +54,7 @@ export async function getStaticProps({ params }: Params) {
     'title',
     'slug',
     'content'
-  ])
+  ]) as Doc
   const content = await markdownToHtml(doc.content || '')
 
   return {
@@ -70,7 +69,7 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const docs = getAllDocs(['slug'])
+  const docs = getAllDocs(['slug']) as Doc[]
 
   return {
     paths: docs.map((docs) => {

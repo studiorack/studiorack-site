@@ -1,14 +1,15 @@
-import { ReactNode, FunctionComponent } from 'react'
 import Doc from '../types/doc'
 import styles from '../styles/docs.module.css'
 
-type Props = {
+export default function Container({
+  children,
+  docs
+}: {
+  children: React.ReactNode
   docs: Doc[]
-  children?: ReactNode
-}
-
-const Container: FunctionComponent = ({ docs, children }: Props) => {
-  return <div className={styles.container}>
+}) {
+  return (
+    <div className={styles.container}>
       <div className={styles.sidebar}>
         <h4>Documentation</h4>
         <ul className={styles.menu}>
@@ -20,7 +21,6 @@ const Container: FunctionComponent = ({ docs, children }: Props) => {
       <div className={styles.content}>
         {children}
       </div>
-  </div>
+    </div>
+  )
 }
-
-export default Container
