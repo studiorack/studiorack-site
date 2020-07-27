@@ -10,6 +10,7 @@ type Props = {
 const Container: FunctionComponent = ({ docs, children }: Props) => {
   return <div className={styles.container}>
       <div className={styles.sidebar}>
+        <h4>Documentation</h4>
         <ul className={styles.menu}>
           {docs.map((doc) => (
             <li className={styles.menuItem} key={doc.slug}><a href={`/docs/${doc.slug}`}>{doc.title}</a></li>

@@ -3,18 +3,29 @@
 }
 
 .sidebar {
-  flex: 1;
+  border-bottom: 1px solid #333;
+  margin: 0 0 2rem 0;
+  padding-bottom: 1rem;
 }
 
-.menu {
-  padding: 0;
-  list-style: none;
+.sidebar h4 {
+  margin: 0 0 .5rem;
+}
+
+.sidebar ul {
+  list-style-type: decimal;
   margin: 0;
+  padding: 0 0 0 1.25rem;
 }
 
-.menu-item a {
+.sidebar a {
   display: block;
-  padding: 1rem;
+  padding: .5rem;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
 }
 
 .content {
@@ -37,18 +48,15 @@
   font-size: 16px;
 }
 
-.sidebar a {
-  text-decoration: none;
-}
-
-.sidebar a:hover {
-  text-decoration: underline;
-}
-
 @media (min-width: 48rem) {
   .container {
     display: flex;
     margin: 0 auto;
     max-width: 1024px;
+  }
+
+  .sidebar {
+    border: 0;
+    margin-right: 6rem;
   }
 }
