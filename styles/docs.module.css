@@ -1,0 +1,62 @@
+.container {
+  padding: 1.5rem;
+}
+
+.sidebar {
+  border-bottom: 1px solid #333;
+  margin: 0 0 2rem 0;
+  padding-bottom: 1rem;
+}
+
+.sidebar h4 {
+  margin: 0 0 .5rem;
+}
+
+.sidebar ul {
+  list-style-type: decimal;
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+}
+
+.sidebar a {
+  display: block;
+  padding: .5rem;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  flex: 2;
+}
+
+.content h1 {
+  font-size: 32px;
+}
+
+.content h2 {
+  font-size: 24px;
+}
+
+.content h3 {
+  font-size: 20px;
+}
+
+.content h4 {
+  font-size: 16px;
+}
+
+@media (min-width: 48rem) {
+  .container {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1024px;
+  }
+
+  .sidebar {
+    border: 0;
+    margin-right: 6rem;
+  }
+}

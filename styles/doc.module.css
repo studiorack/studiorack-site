@@ -1,0 +1,7 @@
+.markdown pre {
+  background-color: #111;
+  border-radius: .25rem;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  padding: 1rem 1.5rem;
+}
