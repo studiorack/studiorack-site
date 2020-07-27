@@ -36,6 +36,7 @@ export default function Layout({
           <li><a href={`${basePath}/#template`}>Plugin template</a></li>
           <li><a href={`${basePath}/#app`}>App &amp; tools</a></li>
           <li><a href={`${basePath}/#plugins`}>Plugins</a></li>
+          <li><a href={`${basePath}/docs`}>Docs</a></li>
         </ul>
       </header>
       <main>{children}</main>

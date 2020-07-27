@@ -11,14 +11,15 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import Doc from '../../types/doc'
+import Sidebar from '../../components/sidebar'
 
 type Props = {
+  allDocs: Doc[]
   doc: Doc
-  moreDocs: Doc[]
   preview?: boolean
 }
 
-const DocDetail = ({ doc, moreDocs, preview }: Props) => {
+const DocDetail = ({ allDocs, doc, preview }: Props) => {
   const router = useRouter()
   if (!router.isFallback && !doc?.slug) {
     return <ErrorPage statusCode={404} />
@@ -38,6 +39,7 @@ const DocDetail = ({ doc, moreDocs, preview }: Props) => {
                 </title>
                 <meta property="og:image" content={doc.ogImage.url} />
               </Head>
+              <Sidebar docs={allDocs} />
               <PostHeader
                 title={doc.title}
                 coverImage={doc.coverImage}
@@ -62,6 +64,15 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
+  const allDocs = getAllDocs([
+    'title',
+    'date',
+    'slug',
+    'author',
+    'coverImage',
+    'excerpt',
+  ])
+
   const doc = getDocBySlug(params.slug, [
     'title',
     'date',
@@ -75,6 +86,7 @@ export async function getStaticProps({ params }: Params) {
 
   return {
     props: {
+      allDocs,
       doc: {
         ...doc,
         content,
