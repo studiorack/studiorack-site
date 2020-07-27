@@ -10,9 +10,9 @@ type Props = {
 const Container: FunctionComponent = ({ docs, children }: Props) => {
   return <div className={styles.container}>
       <div className={styles.sidebar}>
-        <ul>
+        <ul className={styles.menu}>
           {docs.map((doc) => (
-            <li key={doc.slug}><a href={`/docs/${doc.slug}`}>{doc.title}</a></li>
+            <li className={styles.menuItem} key={doc.slug}><a href={`/docs/${doc.slug}`}>{doc.title}</a></li>
           ))}
         </ul>
       </div>

@@ -1,13 +1,40 @@
 .container {
-  display: flex;
+  padding: 1.5rem;
 }
 
 .sidebar {
   flex: 1;
 }
 
+.menu {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.menu-item a {
+  display: block;
+  padding: 1rem;
+}
+
 .content {
   flex: 2;
+}
+
+.content h1 {
+  font-size: 32px;
+}
+
+.content h2 {
+  font-size: 24px;
+}
+
+.content h3 {
+  font-size: 20px;
+}
+
+.content h4 {
+  font-size: 16px;
 }
 
 .sidebar a {
@@ -18,4 +45,10 @@
   text-decoration: underline;
 }
 
-
+@media (min-width: 48rem) {
+  .container {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1024px;
+  }
+}

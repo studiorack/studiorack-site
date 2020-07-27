@@ -3,9 +3,10 @@ import ErrorPage from 'next/error'
 import Container from '../../components/container'
 import Layout from '../../components/layout'
 import { getDocBySlug, getAllDocs } from '../../lib/api'
-import markdownToHtml from '../../lib/markdownToHtml'
 import Doc from '../../types/doc'
-import markdownStyles from '../../components/markdown-styles.module.css'
+import markdownStyles from '../../styles/doc.module.css'
+import remark from 'remark'
+import html from 'remark-html'
 
 type Props = {
   allDocs: Doc[]
@@ -39,24 +40,21 @@ type Params = {
   }
 }
 
+async function markdownToHtml(markdown: string) {
+  const result = await remark().use(html).process(markdown)
+  return result.toString()
+}
+
 export async function getStaticProps({ params }: Params) {
   const allDocs = getAllDocs([
     'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
+    'slug'
   ])
 
   const doc = getDocBySlug(params.slug, [
     'title',
-    'date',
     'slug',
-    'author',
-    'content',
-    'ogImage',
-    'coverImage',
+    'content'
   ])
   const content = await markdownToHtml(doc.content || '')
 

@@ -18,6 +18,7 @@ const Index = ({ allDocs }: Props) => {
         <Container docs={allDocs}>
           <h1>Documentation</h1>
           <p>Welcome to the StudioRack official documentation!</p>
+          <p><a href="/docs/01-getting-started">Getting started &gt;</a></p>
         </Container>
       </Layout>
     </>
@@ -29,11 +30,7 @@ export default Index
 export const getStaticProps = async () => {
   const allDocs = getAllDocs([
     'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
+    'slug'
   ])
 
   return {
