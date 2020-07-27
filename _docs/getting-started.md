@@ -1,19 +1,92 @@
 ---
 title: 'Getting started'
 excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.'
-coverImage: '/assets/blog/dynamic-routing/cover.jpg'
+coverImage: '/assets/blog/hello-world/cover.jpg'
 date: '2020-03-16T05:35:07.322Z'
 author:
-  name: JJ Kasper
-  picture: '/assets/blog/authors/jj.jpeg'
+  name: Tim Neutkens
+  picture: '/assets/blog/authors/tim.jpeg'
 ogImage:
-  url: '/assets/blog/dynamic-routing/cover.jpg'
+  url: '/assets/blog/hello-world/cover.jpg'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
+## System Requirements:
+- Linux, MacOS or Windows
+- NodeJS 8+
 
-Venenatis cras sed felis eget velit. Consectetur libero id faucibus nisl tincidunt. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus. Volutpat consequat mauris nunc congue nisi vitae. Id aliquet risus feugiat in ante metus dictum at tempor. Sed blandit libero volutpat sed cras. Sed odio morbi quis commodo odio aenean sed adipiscing. Velit euismod in pellentesque massa placerat. Mi bibendum neque egestas congue quisque egestas diam in arcu. Nisi lacus sed viverra tellus in. Nibh cras pulvinar mattis nunc sed. Luctus accumsan tortor posuere ac ut consequat semper viverra. Fringilla ut morbi tincidunt augue interdum velit euismod.
 
-## Lorem Ipsum
+## Installation
 
-Tristique senectus et netus et malesuada fames ac turpis. Ridiculous mus mauris vitae ultricies leo integer malesuada nunc vel. In mollis nunc sed id semper. Egestas tellus rutrum tellus pellentesque. Phasellus vestibulum lorem sed risus ultricies tristique nulla. Quis blandit turpis cursus in hac habitasse platea dictumst quisque. Eros donec ac odio tempor orci dapibus ultrices. Aliquam sem et tortor consequat id porta nibh. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla. Diam vulputate ut pharetra sit amet. Ut tellus elementum sagittis vitae et leo. Arcu non odio euismod lacinia at quis risus sed vulputate.
+To install the command line tool, run the command:
+
+    npm install @studiorack/studiorack-cli -g
+
+Verify the tool has been installed by running:
+
+    studiorack --version
+
+
+## Usage
+
+Navigate to a music project folder containing a project.json config, install all plugins using:
+
+    studiorack install --global
+
+Then start the project using
+
+    studiorack start
+
+
+## Creating a new project configuration
+
+If music project folder does not contain a project.json, you can create a new one using:
+
+    studiorack init
+
+This will create a project.json with your configuration:
+
+    {
+      "name": "Example audio project",
+      "version": "1.0.0",
+      "description": "Example audio project description",
+      "main": "Test.als",
+      "preview": {
+        "audio": "Test.wav",
+        "image": "Test.png"
+      },
+      "plugins": {
+        "plugin-name": "1.0.0"
+      }
+    }
+
+For a full list of commands use:
+
+    studiorack --help
+
+
+## Finding, adding and removing plugins
+
+Search the plugin registry using:
+
+    studiorack search piano
+
+Add a plugin and update project.json config using:
+
+    studiorack install kmturley/studiorack-plugin --global
+
+Remove a plugin and update project.json config using:
+ 
+    studiorack uninstall kmturley/studiorack-plugin --global
+
+
+## Creating and publishing a plugin
+
+Create a new plugin using the starter template:
+
+    studiorack create myplugin
+
+Follow the instructions at ./myplugin/README.md to install and build your plugin
+
+When ready to release, commit your plugin to Github and then run:
+
+    studiorack publish

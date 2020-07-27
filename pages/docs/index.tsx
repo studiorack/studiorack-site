@@ -1,5 +1,4 @@
 import Container from '../../components/container'
-import Sidebar from '../../components/sidebar'
 import Layout from '../../components/layout'
 import { getAllDocs } from '../../lib/api'
 import Head from 'next/head'
@@ -16,8 +15,9 @@ const Index = ({ allDocs }: Props) => {
         <Head>
           <title>Documentation</title>
         </Head>
-        <Container>
-          <Sidebar docs={allDocs} />
+        <Container docs={allDocs}>
+          <h1>Documentation</h1>
+          <p>Welcome to the StudioRack official documentation!</p>
         </Container>
       </Layout>
     </>

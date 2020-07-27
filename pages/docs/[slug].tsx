@@ -1,17 +1,11 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '../../components/container'
-import PostBody from '../../components/post-body'
-import Header from '../../components/header'
-import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
 import { getDocBySlug, getAllDocs } from '../../lib/api'
-import PostTitle from '../../components/post-title'
-import Head from 'next/head'
-import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import Doc from '../../types/doc'
-import Sidebar from '../../components/sidebar'
+import markdownStyles from '../../components/markdown-styles.module.css'
 
 type Props = {
   allDocs: Doc[]
@@ -26,30 +20,12 @@ const DocDetail = ({ allDocs, doc, preview }: Props) => {
   }
   return (
     <Layout preview={preview}>
-      <Container>
-        <Header />
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <>
-            <article className="mb-32">
-              <Head>
-                <title>
-                  {doc.title} | Next.js Blog Example with {CMS_NAME}
-                </title>
-                <meta property="og:image" content={doc.ogImage.url} />
-              </Head>
-              <Sidebar docs={allDocs} />
-              <PostHeader
-                title={doc.title}
-                coverImage={doc.coverImage}
-                date={doc.date}
-                author={doc.author}
-              />
-              <PostBody content={doc.content} />
-            </article>
-          </>
-        )}
+      <Container docs={allDocs}>
+        <h1>{doc.title}</h1>
+        <div
+          className={markdownStyles['markdown']}
+          dangerouslySetInnerHTML={{ __html: doc.content }}
+        />
       </Container>
     </Layout>
   )
