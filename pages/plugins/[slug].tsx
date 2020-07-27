@@ -6,7 +6,7 @@ import styles from '../../styles/plugin.module.css'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { withRouter, Router } from 'next/router'
 
-class Post extends Component<{
+class PlugDetail extends Component<{
   plugin: Plugin,
   router: Router
 }, {
@@ -102,7 +102,7 @@ class Post extends Component<{
     )
   }
 }
-export default withRouter(Post)
+export default withRouter(PlugDetail)
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPluginPaths()
