@@ -28,13 +28,14 @@ class DocDetail extends Component<{
   }
 
   render() {
+    const content = this.state.doc.content.replace('/docs', `${this.state.router.basePath}/docs`);
     return (
     <Layout>
       <Container docs={this.state.allDocs}>
         <h1>{this.state.doc.title}</h1>
         <div
           className={markdownStyles['markdown']}
-          dangerouslySetInnerHTML={{ __html: this.state.doc.content }}
+          dangerouslySetInnerHTML={{ __html: content }}
         />
       </Container>
     </Layout>
