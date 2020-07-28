@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router'
-import ErrorPage from 'next/error'
+import { Component } from 'react'
 import Container from '../../components/container'
 import Layout from '../../components/layout'
 import { getDocBySlug, getAllDocs } from '../../lib/api'
@@ -7,31 +6,42 @@ import Doc from '../../types/doc'
 import markdownStyles from '../../styles/doc.module.css'
 import remark from 'remark'
 import html from 'remark-html'
+import { withRouter, Router } from 'next/router'
 
-type Props = {
+class DocDetail extends Component<{
+  allDocs,
+  doc,
+  router: Router
+}, {
   allDocs: Doc[]
   doc: Doc
-}
+  router: Router
+}> {
 
-const DocDetail = ({ allDocs, doc }: Props) => {
-  const router = useRouter()
-  if (!router.isFallback && !doc?.slug) {
-    return <ErrorPage statusCode={404} />
+  constructor(props) {
+    super(props)
+    this.state = {
+      allDocs: props.allDocs,
+      doc: props.doc,
+      router: props.router
+    }
   }
-  return (
+
+  render() {
+    return (
     <Layout>
-      <Container docs={allDocs}>
-        <h1>{doc.title}</h1>
+      <Container docs={this.state.allDocs}>
+        <h1>{this.state.doc.title}</h1>
         <div
           className={markdownStyles['markdown']}
-          dangerouslySetInnerHTML={{ __html: doc.content }}
+          dangerouslySetInnerHTML={{ __html: this.state.doc.content }}
         />
       </Container>
     </Layout>
-  )
+    )
+  }
 }
-
-export default DocDetail
+export default withRouter(DocDetail)
 
 type Params = {
   params: {
