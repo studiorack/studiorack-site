@@ -17,7 +17,7 @@ class Container extends Component<{
     super(props)
     this.state = {
       children: props.children,
-      docs: props.docs,
+      docs: props.docs.filter(doc => doc.slug !== '06-command-line'),
       router: props.router
     }
   }
@@ -31,6 +31,10 @@ class Container extends Component<{
           {this.state.docs.map((doc) => (
             <li className={styles.menuItem} key={doc.slug}><a href={`${this.state.router.basePath}/docs/${doc.slug}`}>{doc.title}</a></li>
           ))}
+        </ul>
+        <h4>API Reference</h4>
+        <ul className={styles.menu}>
+          <li className={styles.menuItem} key="06-command-line"><a href={`${this.state.router.basePath}/docs/06-command-line`}>Command line</a></li>
         </ul>
       </div>
       <div className={styles.content}>

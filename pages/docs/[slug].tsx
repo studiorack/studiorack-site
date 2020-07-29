@@ -27,8 +27,16 @@ class DocDetail extends Component<{
     }
   }
 
+  convertToSlug(text) {
+    return text
+        .toLowerCase()
+        .replace(/ /g,'-')
+        .replace(/[^\w-]+/g,'')
+  }
+
   render() {
-    const content = this.state.doc.content.replace('/docs', `${this.state.router.basePath}/docs`);
+    let content = this.state.doc.content.replace('/docs', `${this.state.router.basePath}/docs`);
+    content = content.replace(/<h2>(.*?)<\/h2>/g, (tag, title) => `<span id="${this.convertToSlug(title)}"></span>${tag}`)
     return (
     <Layout>
       <Container docs={this.state.allDocs}>

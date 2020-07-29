@@ -1,7 +1,32 @@
+.markdown h2 {
+  margin-top: 3rem;
+}
+
+.markdown ul {
+  margin: 0 0 1rem;
+  padding: 0 0 0 1.25rem;
+}
+
+.markdown a {
+  display: block;
+  padding: .25rem;
+  text-decoration: none;
+}
+
+.markdown a:hover {
+  text-decoration: underline;
+}
+
+.markdown code,
 .markdown pre {
   background-color: #111;
   border-radius: .25rem;
-  font-size: 1.25rem;
+  font-size: .9rem;
+  padding: .3rem .5rem;
+}
+
+.markdown pre {
   line-height: 1.25rem;
+  overflow: auto;
   padding: 1rem 1.5rem;
 }
