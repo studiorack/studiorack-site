@@ -6,7 +6,7 @@ import Head from 'next/head'
 import Doc from '../../types/doc'
 import { withRouter, Router } from 'next/router'
 
-class Index extends Component<{
+class DocList extends Component<{
   allDocs,
   router: Router
 }, {
@@ -39,7 +39,7 @@ class Index extends Component<{
     )
   }
 }
-export default withRouter(Index)
+export default withRouter(DocList)
 
 export const getStaticProps = async () => {
   const allDocs = getAllDocs([

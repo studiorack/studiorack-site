@@ -2,16 +2,11 @@ import { Component } from 'react'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import styles from '../styles/index.module.css'
-import Link from 'next/link'
-import { GetStaticProps } from 'next'
-import { getPlugins, Plugin } from '../lib/plugins'
 import { withRouter, Router } from 'next/router'
 
-class App extends Component<{
-  plugins: Plugin[],
+class Home extends Component<{
   router: Router
 }, {
-  pluginsFiltered: Plugin[]
   router: Router
   query: string,
 }> {
@@ -19,27 +14,9 @@ class App extends Component<{
   constructor(props) {
     super(props)
     this.state = {
-      pluginsFiltered: props.plugins,
       router: props.router,
       query: ''
     }
-  }
-
-  handleChange = (event) => {
-    const query = event.target.value.toLowerCase()
-    const filtered = this.props.plugins.filter((plugin) => {
-      if (plugin.name.toLowerCase().indexOf(query) != -1 ||
-        plugin.description.toLowerCase().indexOf(query) != -1 ||
-        plugin.tags.includes(query)) {
-        return plugin
-      }
-      return false
-    })
-    this.setState({
-      pluginsFiltered: filtered,
-      query: query
-    })
-    console.log(query, filtered)
   }
 
   render() {
@@ -48,7 +25,7 @@ class App extends Component<{
         <Head>
           <title>{siteTitle}</title>
         </Head>
-        <section className={`${styles.section} ${styles.sectionCreators}`} id="template">
+        <section className={`${styles.section} ${styles.sectionCreators}`}>
           <div className={styles.container}>
             <div className={styles.inner}>
               <img className={styles.sectionImage} src={`${this.state.router.basePath}/images/creators-mobile.jpg`} alt="Creators" />
@@ -58,7 +35,7 @@ class App extends Component<{
             </div>
           </div>
         </section>
-        <section className={`${styles.section} ${styles.sectionProducers}`} id="app">
+        <section className={`${styles.section} ${styles.sectionProducers}`}>
           <div className={styles.container}>
             <div className={styles.inner}>
               <img className={styles.sectionImage} src={`${this.state.router.basePath}/images/producers-mobile.jpg`} alt="Producers" />
@@ -68,42 +45,8 @@ class App extends Component<{
             </div>
           </div>
         </section>
-        <section className={styles.plugins} id="plugins">
-          <div className={styles.pluginsHeader}>
-            <h3 className={styles.pluginsTitle}>Plugins</h3>
-            <input className={styles.pluginsSearch} placeholder="Filter by keyword" value={this.state.query} onChange={this.handleChange} />
-          </div>
-          <div className={styles.pluginsList}>
-            {this.state.pluginsFiltered.map(({ id, slug, name, tags, version}) => (
-              <Link href="/plugins/[slug]" as={`/plugins/${slug}`} key={name}>
-                <div className={styles.plugin}>
-                  <img className={styles.pluginImage} src={`https://github.com/${id}/releases/latest/download/plugin.png`} alt={name} />
-                  <div className={styles.pluginDetails}>
-                    <h4 className={styles.pluginTitle}>{name} <span className={styles.pluginVersion}>v{version}</span></h4>
-                    <ul className={styles.pluginTags}>
-                      <img className={styles.pluginIcon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
-                      {tags.map((tag) => (
-                        <li className={styles.pluginTag} key={tag}>{tag},</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
       </Layout>
     )
   }
 }
-export default withRouter(App)
-
-export const getStaticProps: GetStaticProps = async () => {
-  const plugins = await getPlugins()
-  console.log(plugins)
-  return {
-    props: {
-      plugins
-    }
-  }
-}
+export default withRouter(Home)

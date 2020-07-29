@@ -6,7 +6,7 @@ import styles from '../../styles/plugin.module.css'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import { withRouter, Router } from 'next/router'
 
-class PlugDetail extends Component<{
+class PluginPage extends Component<{
   plugin: Plugin,
   router: Router
 }, {
@@ -102,11 +102,10 @@ class PlugDetail extends Component<{
     )
   }
 }
-export default withRouter(PlugDetail)
+export default withRouter(PluginPage)
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPluginPaths()
-  console.log(paths)
   return {
     paths,
     fallback: false
@@ -115,7 +114,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const plugin = await getPluginData(params.slug as string)
-  console.log(plugin)
   return {
     props: {
       plugin

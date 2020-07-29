@@ -8,7 +8,7 @@ import remark from 'remark'
 import html from 'remark-html'
 import { withRouter, Router } from 'next/router'
 
-class DocDetail extends Component<{
+class DocPage extends Component<{
   allDocs,
   doc,
   router: Router
@@ -50,7 +50,7 @@ class DocDetail extends Component<{
     )
   }
 }
-export default withRouter(DocDetail)
+export default withRouter(DocPage)
 
 type Params = {
   params: {
