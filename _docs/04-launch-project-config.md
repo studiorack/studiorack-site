@@ -9,5 +9,3 @@ Navigate to a music project folder containing a project.json config, install all
 Then start the project using
 
     studiorack start
-
-[Develop new plugins &gt;](/docs/05-develop-new-plugins)

@@ -16,7 +16,7 @@ The StudioRack CLI allows you to create, install, and publish plugins.
 
 ## Create
 
-`studiorack create <folder>` creates a new plugin using the starter template in the following structure:
+`studiorack create <folder>` creates a new plugin using the starter template with the following structure:
 
     /folder
         /index.js
