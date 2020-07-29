@@ -8,13 +8,8 @@
 }
 
 .markdown a {
-  display: block;
-  padding: .25rem;
-  text-decoration: none;
-}
-
-.markdown a:hover {
-  text-decoration: underline;
+  display: inline-block;
+  margin: .25rem;
 }
 
 .markdown code,
