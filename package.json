@@ -1,7 +1,7 @@
 {
-  "name": "studiorack-registry",
+  "name": "studiorack-site",
   "version": "0.0.22",
-  "description": "Audio plugin registry with searchable plugin metadata",
+  "description": "Audio plugin site with searchable plugin list, tools and documentation",
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/studiorack/studiorack-registry.git"
+    "url": "git+https://github.com/studiorack/studiorack-site.git"
   },
   "keywords": [
     "audio",
     "plugin",
-    "registry",
+    "site",
     "vst",
     "daw",
     "metadata",
@@ -23,9 +23,9 @@
   "author": "kmturley",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/studiorack/studiorack-registry/issues"
+    "url": "https://github.com/studiorack/studiorack-site/issues"
   },
-  "homepage": "https://github.com/studiorack/studiorack-registry#readme",
+  "homepage": "https://github.com/studiorack/studiorack-site#readme",
   "dependencies": {
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",

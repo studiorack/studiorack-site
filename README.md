@@ -1,7 +1,7 @@
-# studiorack-registry
-![Release](https://github.com/studiorack/studiorack-registry/workflows/Release/badge.svg)
+# studiorack-site
+![Release](https://github.com/studiorack/studiorack-site/workflows/Release/badge.svg)
 
-Audio plugin registry containing plugin metadata, which is searchable and filterable, using:
+Audio plugin site with searchable plugin list, tools and documentation using:
 
 * NodeJS 14.4.x
 * NextJS 9.3.x
