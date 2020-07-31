@@ -93,3 +93,7 @@ button:hover,
     font-size: 24px;
   }
 }
+
+.active {
+  border-bottom-color:#fff !important;
+}
