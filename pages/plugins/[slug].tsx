@@ -26,28 +26,25 @@ class PluginPage extends Component<{
 
   play = () => {
     const el = document.getElementById('audio') as HTMLAudioElement
-    el.addEventListener('ended', (e) => {
-      this.setState({
-        isPlaying: false
-      });
-    });
     if (el.paused) {
+      el.removeEventListener('ended', this.ended);
+      el.addEventListener('ended', this.ended);
       el.currentTime = 0;
       el.play();
+      this.setState({ isPlaying: true });
     }
-    this.setState({
-      isPlaying: true
-    });
   }
 
   pause = () => {
     const el = document.getElementById('audio') as HTMLAudioElement
     if (!el.paused) {
       el.pause();
-      this.setState({
-        isPlaying: false
-      });
+      this.setState({ isPlaying: false });
     }
+  }
+
+  ended = () => {
+    this.setState({ isPlaying: false });
   }
 
   render() {
