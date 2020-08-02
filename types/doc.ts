@@ -1,5 +1,3 @@
-import Author from './author'
-
 type Doc = {
   slug: string
   title: string
