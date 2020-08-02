@@ -2,26 +2,28 @@ import { Component } from 'react'
 import styles from '../styles/layout.module.css'
 import { withRouter, Router } from 'next/router'
 
+type NavigationProps = {
+  home?: boolean,
+  router: Router
+}
+
 class Navigation extends Component<{
-  children: React.ReactNode,
   home?: boolean,
   router: Router
 }, {
-  children: React.ReactNode
   home?: boolean
   router: Router
 }> {
 
-  constructor(props) {
+  constructor(props: NavigationProps) {
     super(props)
     this.state = {
-      children: props.children,
       home: props.home,
       router: props.router
     }
   }
 
-  isSelected = (path) => {
+  isSelected = (path: string) => {
     if (path === '/') {
       return this.state.router.asPath === path ? 'active': ''
     }

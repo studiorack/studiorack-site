@@ -7,11 +7,9 @@ export const siteTitle = 'StudioRack'
 export const siteDesc = 'Automate your plugin publishing workflow, easy plugin installation and management'
 
 export default function Layout({
-  children,
-  home
+  children
 }: {
   children: React.ReactNode
-  home?: boolean
 }) {
   const {basePath} = useRouter()
   return (
