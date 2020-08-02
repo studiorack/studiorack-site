@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/studiorack/studiorack-site#readme",
   "dependencies": {
-    "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
     "next": "^9.4.5-canary.31",
     "react": "16.13.1",

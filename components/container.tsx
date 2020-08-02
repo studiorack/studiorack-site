@@ -3,9 +3,15 @@ import Doc from '../types/doc'
 import styles from '../styles/docs.module.css'
 import { withRouter, Router } from 'next/router'
 
+type ContainerProps = {
+  children: React.ReactNode,
+  docs: Doc[],
+  router: Router
+}
+
 class Container extends Component<{
-  children,
-  docs
+  children: React.ReactNode,
+  docs: Doc[],
   router: Router
 }, {
   children: React.ReactNode
@@ -13,7 +19,7 @@ class Container extends Component<{
   router: Router
 }> {
 
-  constructor(props) {
+  constructor(props: ContainerProps) {
     super(props)
     this.state = {
       children: props.children,
@@ -22,7 +28,7 @@ class Container extends Component<{
     }
   }
 
-  isSelected = (path) => {
+  isSelected = (path: string) => {
     if (path === '/') {
       return this.state.router.asPath === path ? 'active': ''
     }

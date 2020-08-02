@@ -27,7 +27,7 @@ export async function getPlugins() {
       plugin.id = repo
       plugin.slug = toSlug(repo)
       return plugin
-    }).catch((err) => {
+    }).catch(() => {
       return false
     })
   })).then((results) => {
@@ -55,7 +55,7 @@ export async function getPluginData(slug: string) {
     plugin.id = repo
     plugin.slug = toSlug(repo)
     return plugin
-  }).catch((err) => {
+  }).catch(() => {
     return {
       id: repo,
       slug: toSlug(repo),
