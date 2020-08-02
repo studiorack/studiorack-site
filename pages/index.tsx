@@ -21,7 +21,7 @@ class Home extends Component<{
 
   render() {
     return (
-      <Layout home>
+      <Layout>
         <Head>
           <title>{siteTitle}</title>
         </Head>
