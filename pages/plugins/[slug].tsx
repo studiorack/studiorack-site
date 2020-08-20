@@ -107,14 +107,16 @@ class PluginPage extends Component<PluginProps, {
               <h3 className={styles.title}>{this.state.plugin.name} <span className={styles.version}>v{this.state.plugin.version}</span></h3>
               <p className={styles.author}>By <a href={this.state.plugin.homepage} target="_blank">{this.state.plugin.author}</a></p>
               <p>{this.state.plugin.description}</p>
-              <p>Size: {this.formatBytes(this.state.plugin.size)}</p>
-              <p>Updated: {this.timeSince(this.state.plugin.date)} ago</p>
-              <ul className={styles.tags}>
-                <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
-                {this.state.plugin.tags.map((tag) => (
-                  <li className={styles.tag} key={tag}>{tag},</li>
-                ))}
-              </ul>
+              <p>
+                <span className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" /> {this.formatBytes(this.state.plugin.size)}</span>
+                <span className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-date.svg`} alt="Date updated" /> {this.timeSince(this.state.plugin.date)} ago</span>
+                <ul className={styles.tags}>
+                  <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
+                  {this.state.plugin.tags.map((tag) => (
+                    <li className={styles.tag} key={tag}>{tag},</li>
+                  ))}
+                </ul>
+              </p>
             </div>
           </div>
         </div>
