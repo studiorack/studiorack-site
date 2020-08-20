@@ -2,10 +2,12 @@ import repos from './repos.json'
 
 export interface Plugin {
   author: string,
+  date: string,
   description: string,
   homepage: string,
   id: string,
   name: string,
+  size: number,
   slug: string,
   tags: Array<string>,
   version: string

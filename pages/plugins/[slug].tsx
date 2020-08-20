@@ -26,6 +26,40 @@ class PluginPage extends Component<PluginProps, {
     }
   }
 
+  formatBytes(bytes:number, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  }
+
+  timeSince(date:string) {
+    var seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+    var interval = seconds / 31536000;
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
+
   play = () => {
     const el = document.getElementById('audio') as HTMLAudioElement
     if (el.paused) {
@@ -73,6 +107,8 @@ class PluginPage extends Component<PluginProps, {
               <h3 className={styles.title}>{this.state.plugin.name} <span className={styles.version}>v{this.state.plugin.version}</span></h3>
               <p className={styles.author}>By <a href={this.state.plugin.homepage} target="_blank">{this.state.plugin.author}</a></p>
               <p>{this.state.plugin.description}</p>
+              <p>Size: {this.formatBytes(this.state.plugin.size)}</p>
+              <p>Updated: {this.timeSince(this.state.plugin.date)} ago</p>
               <ul className={styles.tags}>
                 <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
                 {this.state.plugin.tags.map((tag) => (
