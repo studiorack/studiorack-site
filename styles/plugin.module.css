@@ -37,8 +37,14 @@
   font-size: .75rem;
 }
 
+.metadataList {
+  font-size: .9rem;
+}
+
 .metadata {
-  display: block;
+  align-items: center;
+  display: flex;
+  margin-bottom: .5rem;
 }
 
 .tags {
