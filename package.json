@@ -1,6 +1,6 @@
 {
   "name": "studiorack-site",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "Audio plugin site with searchable plugin list, tools and documentation",
   "scripts": {
     "dev": "next dev",
