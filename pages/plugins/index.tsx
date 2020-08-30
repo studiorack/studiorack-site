@@ -20,6 +20,7 @@ class PluginList extends Component<PluginListProps, {
 
   constructor(props: PluginListProps) {
     super(props)
+    console.log(props.plugins)
     this.state = {
       pluginsFiltered: props.plugins,
       router: props.router,
@@ -59,7 +60,7 @@ class PluginList extends Component<PluginListProps, {
             {this.state.pluginsFiltered.map(({ id, slug, name, tags, version}) => (
               <Link href="/plugins/[slug]" as={`/plugins/${slug}`} key={name}>
                 <div className={styles.plugin}>
-                  <img className={styles.pluginImage} src={`https://github.com/${id}/releases/latest/download/plugin.png`} alt={name} />
+                  <img className={styles.pluginImage} src={`https://github.com/${id}/releases/download/v${version}/plugin.png`} alt={name} />
                   <div className={styles.pluginDetails}>
                     <h4 className={styles.pluginTitle}>{name} <span className={styles.pluginVersion}>v{version}</span></h4>
                     <ul className={styles.pluginTags}>
