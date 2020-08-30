@@ -20,7 +20,6 @@ class PluginList extends Component<PluginListProps, {
 
   constructor(props: PluginListProps) {
     super(props)
-    console.log(props.plugins)
     this.state = {
       pluginsFiltered: props.plugins,
       router: props.router,
