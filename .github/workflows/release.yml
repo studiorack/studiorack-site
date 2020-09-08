@@ -1,6 +1,10 @@
 name: Release
 
-on:
+on: 
+  workflow_dispatch:
+  schedule:
+      # Every night at 01:00am
+    - cron: '0 1 * * *'
   push:
     tags:
       - "v*"
