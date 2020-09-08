@@ -1,4 +1,5 @@
 .section {
+  background-position: center;
   background-size: cover;
   padding: 1.5rem;
   scroll-snap-align: start;
@@ -12,14 +13,6 @@
 .container {
   margin: 0 auto;
   max-width: 1024px;
-}
-
-.inner {
-  max-width: 360px;
-}
-
-.sectionProducers .inner {
-  margin: 0 0 0 auto;
 }
 
 .plugins {
@@ -100,6 +93,10 @@
     padding-top: 15rem;
   }
 
+  .sectionOpenSource {
+    background-image: url(../public/images/studio-audio-rack.jpg);
+  }
+
   .sectionCreators {
     background-image: url(../public/images/creators.jpg);
   }
@@ -110,6 +107,14 @@
 
   .sectionImage {
     display: none;
+  }
+
+  .inner {
+    max-width: 360px;
+  }
+
+  .sectionProducers .inner {
+    margin: 0 0 0 auto;
   }
 
   .pluginsList {
