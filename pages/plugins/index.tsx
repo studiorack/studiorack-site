@@ -1,7 +1,7 @@
 import { Component, ChangeEvent } from 'react'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../../components/layout'
-import styles from '../../styles/index.module.css'
+import styles from '../../styles/plugins.module.css'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { getPlugins, Plugin } from '../../lib/plugins'
@@ -56,19 +56,26 @@ class PluginList extends Component<PluginListProps, {
             <input className={styles.pluginsSearch} placeholder="Filter by keyword" value={this.state.query} onChange={this.handleChange} />
           </div>
           <div className={styles.pluginsList}>
-            {this.state.pluginsFiltered.map(({ id, slug, name, tags, version}) => (
-              <Link href="/plugins/[slug]" as={`/plugins/${slug}`} key={name}>
+            {this.state.pluginsFiltered.map((plugin, pluginIndex) => (
+              <Link href="/plugins/[slug]" as={`/plugins/${plugin.slug}`} key={`${plugin.name}-${pluginIndex}`}>
                 <div className={styles.plugin}>
-                  <img className={styles.pluginImage} src={`https://github.com/${id}/releases/download/v${version}/plugin.png`} alt={name} />
                   <div className={styles.pluginDetails}>
-                    <h4 className={styles.pluginTitle}>{name} <span className={styles.pluginVersion}>v{version}</span></h4>
+                    <div className={styles.pluginHead}>
+                      <h4 className={styles.pluginTitle}>{plugin.name} <span className={styles.pluginVersion}>v{plugin.version}</span></h4>
+                      {plugin.status === 'installed' ?
+                        <span className={styles.pluginButtonInstalled}><img className={styles.pluginButtonIcon} src={`${this.state.router.basePath}/images/icon-installed.svg`} alt="Installed" /></span>
+                        :
+                        <span className={styles.pluginButton}><img className={styles.pluginButtonIcon} src={`${this.state.router.basePath}/images/icon-download.svg`} alt="Download" /></span>
+                      }
+                    </div>
                     <ul className={styles.pluginTags}>
                       <img className={styles.pluginIcon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
-                      {tags.map((tag) => (
-                        <li className={styles.pluginTag} key={tag}>{tag},</li>
+                      {plugin.tags.map((tag, tagIndex) => (
+                        <li className={styles.pluginTag} key={`${tag}-${tagIndex}`}>{tag},</li>
                       ))}
                     </ul>
                   </div>
+                  <img className={styles.pluginImage} src={`https://github.com/${plugin.id}/releases/download/v${plugin.version}/plugin.png`} alt={plugin.name} />
                 </div>
               </Link>
             ))}

@@ -125,7 +125,7 @@ class PluginPage extends Component<PluginProps, {
         <div className={styles.options}>
           <div className={styles.row}>
             <div className={`${styles.cell} ${styles.download}`}>
-              <p>Download .zip file:</p>
+              <p>Download and install manually:</p>
               <a className={`button ${styles.button}`} href={`https://github.com/${this.state.plugin.id}/releases/download/v${this.state.plugin.version}/plugin-linux.zip`}>Linux</a>
               <a className={`button ${styles.button}`} href={`https://github.com/${this.state.plugin.id}/releases/download/v${this.state.plugin.version}/plugin-mac.zip`}>MacOS</a>
               <a className={`button ${styles.button}`} href={`https://github.com/${this.state.plugin.id}/releases/download/v${this.state.plugin.version}/plugin-win.zip`}>Windows</a>

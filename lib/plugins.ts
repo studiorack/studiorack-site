@@ -9,6 +9,7 @@ export interface Plugin {
   name: string,
   size: number,
   slug: string,
+  status: string,
   tags: Array<string>,
   version: string
 }
