@@ -28,7 +28,7 @@ class PluginList extends Component<PluginListProps, {
   }
 
   handleChange = (event: ChangeEvent) => {
-    const el = event.target as HTMLInputElement;
+    const el = event.target as HTMLInputElement
     const query = el.value ? el.value.toLowerCase() : ''
     const filtered = this.props.plugins.filter((plugin) => {
       if (plugin.name.toLowerCase().indexOf(query) != -1 ||

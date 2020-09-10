@@ -27,67 +27,67 @@ class PluginPage extends Component<PluginProps, {
   }
 
   formatBytes(bytes:number, decimals = 2) {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    if (bytes === 0) return '0 Bytes'
+    const k = 1024
+    const dm = decimals < 0 ? 0 : decimals
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
   }
 
   timeSince(date:string) {
-    var seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
-    var interval = seconds / 31536000;
+    var seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000)
+    var interval = seconds / 31536000
     if (interval > 1) {
-      return Math.floor(interval) + " years";
+      return Math.floor(interval) + " years"
     }
-    interval = seconds / 2592000;
+    interval = seconds / 2592000
     if (interval > 1) {
-      return Math.floor(interval) + " months";
+      return Math.floor(interval) + " months"
     }
-    interval = seconds / 86400;
+    interval = seconds / 86400
     if (interval > 1) {
-      return Math.floor(interval) + " days";
+      return Math.floor(interval) + " days"
     }
-    interval = seconds / 3600;
+    interval = seconds / 3600
     if (interval > 1) {
-      return Math.floor(interval) + " hours";
+      return Math.floor(interval) + " hours"
     }
-    interval = seconds / 60;
+    interval = seconds / 60
     if (interval > 1) {
-      return Math.floor(interval) + " minutes";
+      return Math.floor(interval) + " minutes"
     }
-    return Math.floor(seconds) + " seconds";
+    return Math.floor(seconds) + " seconds"
   }
 
   play = () => {
     const el = document.getElementById('audio') as HTMLAudioElement
     if (el.paused) {
-      el.removeEventListener('ended', this.ended);
-      el.addEventListener('ended', this.ended);
-      el.currentTime = 0;
-      el.play();
-      this.setState({ isPlaying: true });
+      el.removeEventListener('ended', this.ended)
+      el.addEventListener('ended', this.ended)
+      el.currentTime = 0
+      el.play()
+      this.setState({ isPlaying: true })
     }
   }
 
   pause = () => {
     const el = document.getElementById('audio') as HTMLAudioElement
     if (!el.paused) {
-      el.pause();
-      this.setState({ isPlaying: false });
+      el.pause()
+      this.setState({ isPlaying: false })
     }
   }
 
   ended = () => {
-    this.setState({ isPlaying: false });
+    this.setState({ isPlaying: false })
   }
 
   render() {
     return (
     <Layout>
       <Head>
-        <title>{this.state.plugin.name}</title>
+        <title>{this.state.plugin.name || ''}</title>
       </Head>
       <article>
         <div className={styles.header}>
