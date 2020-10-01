@@ -15,11 +15,11 @@ export interface Plugin {
 }
 
 function toSlug(input: string) {
-  return input.replace('/', '_')
+  return input.replace(/\//g, '_')
 }
 
 function fromSlug(input: string) {
-  return input.replace('_', '/')
+  return input.replace(/_/g, '/')
 }
 
 export async function getPlugins() {
