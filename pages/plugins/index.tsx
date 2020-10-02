@@ -44,6 +44,14 @@ class PluginList extends Component<PluginListProps, {
     })
   }
 
+  getRepo = (plugin: Plugin) => {
+    return plugin.id.slice(0, plugin.id.lastIndexOf('/'))
+  }
+
+  getPluginId = (plugin: Plugin) => {
+    return plugin.id.slice(plugin.id.lastIndexOf('/'))
+  }
+
   render() {
     return (
       <Layout>
@@ -75,7 +83,7 @@ class PluginList extends Component<PluginListProps, {
                       ))}
                     </ul>
                   </div>
-                  <img className={styles.pluginImage} src={`https://github.com/${plugin.id}/releases/download/v${plugin.version}/plugin.png`} alt={plugin.name} />
+                  <img className={styles.pluginImage} src={`https://github.com/${this.getRepo(plugin)}/releases/download/v${plugin.version}/${this.getPluginId(plugin)}.png`} alt={plugin.name} />
                 </div>
               </Link>
             ))}
