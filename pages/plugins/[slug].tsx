@@ -88,7 +88,7 @@ class PluginPage extends Component<PluginProps, {
   }
 
   getPluginId = (plugin: Plugin) => {
-    return plugin.id.slice(plugin.id.lastIndexOf('/'))
+    return plugin.id.slice(plugin.id.lastIndexOf('/') + 1)
   }
 
   render() {
