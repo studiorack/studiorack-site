@@ -134,9 +134,9 @@ class PluginPage extends Component<PluginProps, {
           <div className={styles.row}>
             <div className={`${styles.cell} ${styles.download}`}>
               <p>Download and install manually:</p>
-              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/plugin-linux.zip`}>Linux</a>
-              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/plugin-mac.zip`}>MacOS</a>
-              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/plugin-win.zip`}>Windows</a>
+              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/${this.getPluginId(this.state.plugin)}-linux.zip`}>Linux</a>
+              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/${this.getPluginId(this.state.plugin)}-mac.zip`}>MacOS</a>
+              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/${this.getPluginId(this.state.plugin)}-win.zip`}>Windows</a>
             </div>
             <div className={`${styles.cell} ${styles.install}`}>
               <p>Install via command line:</p>
