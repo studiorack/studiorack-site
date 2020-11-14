@@ -1,10 +1,10 @@
 import { Component } from 'react'
 import Layout from '../../components/layout'
-import { getAllPluginPaths, getPluginData, Plugin } from '../../lib/plugins'
 import Head from 'next/head'
 import styles from '../../styles/plugin.module.css'
 import { GetStaticPaths } from 'next'
 import { withRouter, Router } from 'next/router'
+import { pathFromSlashes, pathToSlashes, Plugin, pluginGet, pluginsGet, pluginLatest } from '@studiorack/core'
 
 type PluginProps = {
   plugin: Plugin,
@@ -152,9 +152,17 @@ class PluginPage extends Component<PluginProps, {
 export default withRouter(PluginPage)
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPluginPaths()
+  const paths = await pluginsGet()
+  const list = []
+  for (const pluginId in paths) {
+    list.push({
+      params: {
+        slug: pathFromSlashes(pluginId)
+      }
+    })
+  }
   return {
-    paths,
+    paths: list,
     fallback: false
   }
 }
@@ -166,10 +174,13 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const plugin = await getPluginData(params.slug)
+  const pluginId = pathToSlashes(params.slug)
+  const plugin = await pluginGet(pluginId)
+  const version = pluginLatest(plugin)
+  console.log(version);
   return {
     props: {
-      plugin
+      plugin: version
     }
   }
 }

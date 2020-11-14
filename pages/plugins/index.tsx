@@ -4,8 +4,8 @@ import Layout, { siteTitle } from '../../components/layout'
 import styles from '../../styles/plugins.module.css'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
-import { getPlugins, Plugin } from '../../lib/plugins'
 import { withRouter, Router } from 'next/router'
+import { pathFromSlashes, Plugin, pluginLatest, pluginsGet } from '@studiorack/core'
 
 type PluginListProps = {
   plugins: Plugin[],
@@ -96,10 +96,15 @@ class PluginList extends Component<PluginListProps, {
 export default withRouter(PluginList)
 
 export const getStaticProps: GetStaticProps = async () => {
-  const plugins = await getPlugins()
+  const plugins = await pluginsGet()
+  const list:Plugin[] = []
+  for (const pluginId in plugins) {
+    const plugin = pluginLatest(plugins[pluginId])
+    list.push(plugin)
+  }
   return {
     props: {
-      plugins
+      plugins: list
     }
   }
 }
