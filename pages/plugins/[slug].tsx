@@ -12,7 +12,7 @@ type PluginProps = {
 }
 
 class PluginPage extends Component<PluginProps, {
-  isPlaying: Boolean,
+  isPlaying: boolean,
   router: Router,
   plugin: Plugin
 }> {

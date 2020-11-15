@@ -44,7 +44,7 @@ class DocPage extends Component<DocProps, {
       <Container docs={this.state.allDocs}>
         <h1>{this.state.doc.title}</h1>
         <div
-          className={markdownStyles['markdown']}
+          className={markdownStyles.markdown}
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </Container>

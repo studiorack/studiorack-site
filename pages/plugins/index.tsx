@@ -40,7 +40,7 @@ class PluginList extends Component<PluginListProps, {
     })
     this.setState({
       pluginsFiltered: filtered,
-      query: query
+      query
     })
   }
 

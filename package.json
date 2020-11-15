@@ -7,7 +7,8 @@
     "build": "next build && next export",
     "format": "prettier --write \"pages/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "start": "next start"
+    "start": "next start",
+    "test": "echo 'No tests were run'"
   },
   "repository": {
     "type": "git",
