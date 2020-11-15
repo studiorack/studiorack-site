@@ -31,8 +31,8 @@ class PluginList extends Component<PluginListProps, {
     const el = event.target as HTMLInputElement
     const query = el.value ? el.value.toLowerCase() : ''
     const filtered = this.props.plugins.filter((plugin) => {
-      if (plugin.name.toLowerCase().indexOf(query) != -1 ||
-        plugin.description.toLowerCase().indexOf(query) != -1 ||
+      if (plugin.name.toLowerCase().indexOf(query) !== -1 ||
+        plugin.description.toLowerCase().indexOf(query) !== -1 ||
         plugin.tags.includes(query)) {
         return plugin
       }
@@ -45,11 +45,11 @@ class PluginList extends Component<PluginListProps, {
   }
 
   getRepo = (plugin: Plugin) => {
-    return plugin.id.slice(0, plugin.id.lastIndexOf('/'))
+    return plugin.id?.slice(0, plugin.id.lastIndexOf('/'))
   }
 
   getPluginId = (plugin: Plugin) => {
-    return plugin.id.slice(plugin.id.lastIndexOf('/') + 1)
+    return plugin.id?.slice(plugin.id.lastIndexOf('/') + 1)
   }
 
   render() {

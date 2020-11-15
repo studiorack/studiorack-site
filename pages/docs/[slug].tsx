@@ -93,10 +93,10 @@ export async function getStaticPaths() {
   const docs = getAllDocs(['slug']) as Doc[]
 
   return {
-    paths: docs.map((docs) => {
+    paths: docs.map((doc) => {
       return {
         params: {
-          slug: docs.slug,
+          slug: doc.slug,
         },
       }
     }),

@@ -36,8 +36,8 @@ class PluginPage extends Component<PluginProps, {
   }
 
   timeSince(date:string) {
-    var seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000)
-    var interval = seconds / 31536000
+    const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000)
+    let interval = seconds / 31536000
     if (interval > 1) {
       return Math.floor(interval) + " years"
     }
