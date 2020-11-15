@@ -3,7 +3,8 @@
 
 Audio plugin site with searchable plugin list, tools and documentation using:
 
-* NodeJS 14.4.x
+* NodeJS 12.x
+* TypeScript 4.x
 * NextJS 9.3.x
 * React 16.13.x
 
