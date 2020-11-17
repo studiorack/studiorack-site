@@ -84,11 +84,11 @@ class PluginPage extends Component<PluginProps, {
   }
 
   getRepo = (plugin: Plugin) => {
-    return plugin.id.slice(0, plugin.id.lastIndexOf('/'))
+    return plugin.id?.slice(0, plugin.id.lastIndexOf('/'))
   }
 
   getPluginId = (plugin: Plugin) => {
-    return plugin.id.slice(plugin.id.lastIndexOf('/') + 1)
+    return plugin.id?.slice(plugin.id.lastIndexOf('/') + 1)
   }
 
   render() {
