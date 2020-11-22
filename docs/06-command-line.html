@@ -4,9 +4,9 @@
 <li><a href="#init">Init</a></li>
 <li><a href="#install">Install</a></li>
 <li><a href="#uninstall">Uninstall</a></li>
-<li><a href="#publish">Publish</a></li>
 <li><a href="#search">Search</a></li>
 <li><a href="#start">Start</a></li>
+<li><a href="#validate">Validate</a></li>
 <li><a href="#help">Help</a></li>
 </ul>
 <span id="create"></span><h2>Create</h2>
@@ -23,14 +23,12 @@
 <span id="init"></span><h2>Init</h2>
 <p><code>studiorack init</code> initiates the current folder as a studiorack project. This will create a project.json with your configuration:</p>
 <pre><code>{
-  "name": "Example audio project",
-  "version": "1.0.0",
-  "description": "Example audio project description",
-  "main": "Test.als",
-  "preview": {
-    "audio": "Test.wav",
-    "image": "Test.png"
-  },
+  "name": "My Project",
+  "version": "0.0.1",
+  "description": "My project description",
+  "main": "Song.als",
+  "audio": "Song.wav",
+  "image": "Song.png",
   "plugins": {
     "plugin-name": "1.0.0"
   }
@@ -38,23 +36,23 @@
 </code></pre>
 <span id="install"></span><h2>Install</h2>
 <p><code>studiorack install [options] [id]</code> adds a plugin and updates the project.json config. For example:</p>
-<pre><code>studiorack install kmturley/studiorack-plugin --global
+<pre><code>studiorack install studiorack/studiorack-plugin/adelay --global
 </code></pre>
 <span id="uninstall"></span><h2>Uninstall</h2>
 <p><code>studiorack uninstall [options] [id]</code> removes a plugin and updates the project.json config. For example:</p>
-<pre><code>studiorack uninstall kmturley/studiorack-plugin --global
-</code></pre>
-<span id="publish"></span><h2>Publish</h2>
-<p><code>studiorack publish</code> opens a pull request to the main GitHub registry. For example:</p>
-<pre><code>studiorack publish
+<pre><code>studiorack uninstall studiorack/studiorack-plugin/adelay --global
 </code></pre>
 <span id="search"></span><h2>Search</h2>
-<p><code>studiorack search &#x3C;query></code> search the plugin registry for plugins by name. For example:</p>
+<p><code>studiorack search [options] &#x3C;query></code> Search plugin registry by query. For example:</p>
 <pre><code>studiorack search delay
 </code></pre>
 <span id="start"></span><h2>Start</h2>
 <p><code>studiorack start [path]</code> open the current music project. For example:</p>
 <pre><code>studiorack start
+</code></pre>
+<span id="validate"></span><h2>Validate</h2>
+<p><code>studiorack validate [options] [path]</code> Validate a plugin using the Steinberg VST3 SDK validator. For example:</p>
+<pre><code>studiorack validate ./plugins/**/*.vst3
 </code></pre>
 <span id="help"></span><h2>Help</h2>
 <p><code>studiorack --help</code> lists the available CLI commands which looks like this:</p>
@@ -66,13 +64,13 @@ Options:
     -h, --help                display help for command
 
 Commands:
-    create &#x3C;folder>           Create a new folder using the plugin starter template
-    init                      Set up a new or existing StudioRack project.
-    install [options] [id]    Install a plugin and update project config.
-    uninstall [options] [id]  Uninstall a plugin and update project config.
-    publish                   Publish plugin to the registry
-    search &#x3C;query>            Search plugin registry by query.
-    start [path]              Start music project using the project config.
-    help [command]            display help for command
+    create &#x3C;folder>            Create a new folder using the plugin starter template
+    init                       Set up a new or existing StudioRack project.
+    install [options] [id]     Install a plugin and update project config.
+    uninstall [options] [id]   Uninstall a plugin and update project config.
+    search [options] &#x3C;query>   Search plugin registry by query.
+    start [path]               Start music project using the project config.
+    validate [options] [path]  Validate a plugin using the Steinberg VST3 SDK validator
+    help [command]             display help for command
 </code></pre>
-</div></div></div></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"allDocs":[{"title":"Create a project config","slug":"02-create-a-project-config"},{"title":"Add \u0026 remove plugins","slug":"03-add-remove-plugins"},{"title":"Launch project config","slug":"04-launch-project-config"},{"title":"Develop new plugins","slug":"05-develop-new-plugins"},{"title":"Command line","slug":"06-command-line"}],"doc":{"title":"Command line","slug":"06-command-line","content":"\u003cp\u003eThe StudioRack CLI allows you to create, install, and publish plugins.\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#create\"\u003eCreate\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#init\"\u003eInit\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#install\"\u003eInstall\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#uninstall\"\u003eUninstall\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#publish\"\u003ePublish\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#search\"\u003eSearch\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#start\"\u003eStart\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#help\"\u003eHelp\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eCreate\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack create \u0026#x3C;folder\u003e\u003c/code\u003e creates a new plugin using the starter template with the following structure:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e/folder\n    /index.js\n    /LICENSE\n    /README.md\n    /src\n    /vst2sdk\n    /vst3sdk\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eFollow the instructions in generated README.md to install and build your plugin.\u003c/p\u003e\n\u003ch2\u003eInit\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack init\u003c/code\u003e initiates the current folder as a studiorack project. This will create a project.json with your configuration:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{\n  \"name\": \"Example audio project\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Example audio project description\",\n  \"main\": \"Test.als\",\n  \"preview\": {\n    \"audio\": \"Test.wav\",\n    \"image\": \"Test.png\"\n  },\n  \"plugins\": {\n    \"plugin-name\": \"1.0.0\"\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eInstall\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack install [options] [id]\u003c/code\u003e adds a plugin and updates the project.json config. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack install kmturley/studiorack-plugin --global\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eUninstall\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack uninstall [options] [id]\u003c/code\u003e removes a plugin and updates the project.json config. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack uninstall kmturley/studiorack-plugin --global\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003ePublish\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack publish\u003c/code\u003e opens a pull request to the main GitHub registry. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack publish\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eSearch\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack search \u0026#x3C;query\u003e\u003c/code\u003e search the plugin registry for plugins by name. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack search delay\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eStart\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack start [path]\u003c/code\u003e open the current music project. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack start\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eHelp\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack --help\u003c/code\u003e lists the available CLI commands which looks like this:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eUsage:\n    studiorack [options] [command]\n\nOptions:\n    -V, --version             output the version number\n    -h, --help                display help for command\n\nCommands:\n    create \u0026#x3C;folder\u003e           Create a new folder using the plugin starter template\n    init                      Set up a new or existing StudioRack project.\n    install [options] [id]    Install a plugin and update project config.\n    uninstall [options] [id]  Uninstall a plugin and update project config.\n    publish                   Publish plugin to the registry\n    search \u0026#x3C;query\u003e            Search plugin registry by query.\n    start [path]              Start music project using the project config.\n    help [command]            display help for command\n\u003c/code\u003e\u003c/pre\u003e\n"}},"__N_SSG":true},"page":"/docs/[slug]","query":{"slug":"06-command-line"},"buildId":"latest","assetPrefix":"/studiorack-site","nextExport":false,"isFallback":false,"gsp":true}</script><script nomodule="" src="/studiorack-site/_next/static/runtime/polyfills-d5b2ca82aa16561723ed.js"></script><script src="/studiorack-site/_next/static/runtime/main-04e2775828fd250e37b8.js" async=""></script><script src="/studiorack-site/_next/static/runtime/webpack-8014d193e93491a941e6.js" async=""></script><script src="/studiorack-site/_next/static/chunks/framework.d557686129d5a5cc0c94.js" async=""></script><script src="/studiorack-site/_next/static/chunks/commons.1857e05be3e4c241aa0b.js" async=""></script><script src="/studiorack-site/_next/static/pages/_app-d887bff5720b58c30be7.js" async=""></script><script src="/studiorack-site/_next/static/chunks/cd395c55c576b83e28ca25842a576550065354c4.63eb2f5902a4d48c77f2.js" async=""></script><script src="/studiorack-site/_next/static/pages/docs/%5Bslug%5D-df10f58a39899b09d137.js" async=""></script><script src="/studiorack-site/_next/static/latest/_buildManifest.js" async=""></script><script src="/studiorack-site/_next/static/latest/_ssgManifest.js" async=""></script></body></html>
+</div></div></div></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"allDocs":[{"title":"Create a project config","slug":"02-create-a-project-config"},{"title":"Add \u0026 remove plugins","slug":"03-add-remove-plugins"},{"title":"Launch project config","slug":"04-launch-project-config"},{"title":"Develop new plugins","slug":"05-develop-new-plugins"},{"title":"Command line","slug":"06-command-line"}],"doc":{"title":"Command line","slug":"06-command-line","content":"\u003cp\u003eThe StudioRack CLI allows you to create, install, and publish plugins.\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#create\"\u003eCreate\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#init\"\u003eInit\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#install\"\u003eInstall\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#uninstall\"\u003eUninstall\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#search\"\u003eSearch\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#start\"\u003eStart\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#validate\"\u003eValidate\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#help\"\u003eHelp\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eCreate\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack create \u0026#x3C;folder\u003e\u003c/code\u003e creates a new plugin using the starter template with the following structure:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e/folder\n    /index.js\n    /LICENSE\n    /README.md\n    /src\n    /vst2sdk\n    /vst3sdk\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eFollow the instructions in generated README.md to install and build your plugin.\u003c/p\u003e\n\u003ch2\u003eInit\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack init\u003c/code\u003e initiates the current folder as a studiorack project. This will create a project.json with your configuration:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e{\n  \"name\": \"My Project\",\n  \"version\": \"0.0.1\",\n  \"description\": \"My project description\",\n  \"main\": \"Song.als\",\n  \"audio\": \"Song.wav\",\n  \"image\": \"Song.png\",\n  \"plugins\": {\n    \"plugin-name\": \"1.0.0\"\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eInstall\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack install [options] [id]\u003c/code\u003e adds a plugin and updates the project.json config. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack install studiorack/studiorack-plugin/adelay --global\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eUninstall\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack uninstall [options] [id]\u003c/code\u003e removes a plugin and updates the project.json config. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack uninstall studiorack/studiorack-plugin/adelay --global\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eSearch\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack search [options] \u0026#x3C;query\u003e\u003c/code\u003e Search plugin registry by query. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack search delay\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eStart\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack start [path]\u003c/code\u003e open the current music project. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack start\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eValidate\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack validate [options] [path]\u003c/code\u003e Validate a plugin using the Steinberg VST3 SDK validator. For example:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003estudiorack validate ./plugins/**/*.vst3\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eHelp\u003c/h2\u003e\n\u003cp\u003e\u003ccode\u003estudiorack --help\u003c/code\u003e lists the available CLI commands which looks like this:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eUsage:\n    studiorack [options] [command]\n\nOptions:\n    -V, --version             output the version number\n    -h, --help                display help for command\n\nCommands:\n    create \u0026#x3C;folder\u003e            Create a new folder using the plugin starter template\n    init                       Set up a new or existing StudioRack project.\n    install [options] [id]     Install a plugin and update project config.\n    uninstall [options] [id]   Uninstall a plugin and update project config.\n    search [options] \u0026#x3C;query\u003e   Search plugin registry by query.\n    start [path]               Start music project using the project config.\n    validate [options] [path]  Validate a plugin using the Steinberg VST3 SDK validator\n    help [command]             display help for command\n\u003c/code\u003e\u003c/pre\u003e\n"}},"__N_SSG":true},"page":"/docs/[slug]","query":{"slug":"06-command-line"},"buildId":"latest","assetPrefix":"/studiorack-site","nextExport":false,"isFallback":false,"gsp":true}</script><script nomodule="" src="/studiorack-site/_next/static/runtime/polyfills-d5b2ca82aa16561723ed.js"></script><script src="/studiorack-site/_next/static/runtime/main-04e2775828fd250e37b8.js" async=""></script><script src="/studiorack-site/_next/static/runtime/webpack-8014d193e93491a941e6.js" async=""></script><script src="/studiorack-site/_next/static/chunks/framework.d557686129d5a5cc0c94.js" async=""></script><script src="/studiorack-site/_next/static/chunks/commons.1857e05be3e4c241aa0b.js" async=""></script><script src="/studiorack-site/_next/static/pages/_app-d887bff5720b58c30be7.js" async=""></script><script src="/studiorack-site/_next/static/chunks/cd395c55c576b83e28ca25842a576550065354c4.63eb2f5902a4d48c77f2.js" async=""></script><script src="/studiorack-site/_next/static/pages/docs/%5Bslug%5D-df10f58a39899b09d137.js" async=""></script><script src="/studiorack-site/_next/static/latest/_buildManifest.js" async=""></script><script src="/studiorack-site/_next/static/latest/_ssgManifest.js" async=""></script></body></html>
