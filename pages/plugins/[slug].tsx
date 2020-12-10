@@ -107,12 +107,12 @@ class PluginPage extends Component<PluginProps, {
                 :
                 <img className={styles.imagePlay} src={`${this.state.router.basePath}/images/icon-play.svg`} alt="Play" onClick={this.play} />
               }
-                <img className={styles.image} src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/${this.getPluginId(this.state.plugin)}.png`} alt={this.state.plugin.name} />
+                <img className={styles.image} src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/${this.getPluginId(this.state.plugin)}.png`} alt={this.state.plugin.name || ''} />
               </div>
               <audio src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/v${this.state.plugin.version}/${this.getPluginId(this.state.plugin)}.wav`} id="audio">Your browser does not support the audio element.</audio>
             </div>
             <div className={styles.details}>
-              <h3 className={styles.title}>{this.state.plugin.name} <span className={styles.version}>v{this.state.plugin.version}</span></h3>
+              <h3 className={styles.title}>{this.state.plugin.name || ''} <span className={styles.version}>v{this.state.plugin.version}</span></h3>
               <p className={styles.author}>By <a href={this.state.plugin.homepage} target="_blank">{this.state.plugin.author}</a></p>
               <p>{this.state.plugin.description}</p>
               <div className={styles.metadataList}>
