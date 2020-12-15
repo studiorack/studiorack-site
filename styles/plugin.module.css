@@ -29,7 +29,7 @@
   display: block;
   margin: 0 auto 1rem auto;
   max-height: 300px;
-  width: 100%;
+  max-width: 100%;
 }
 
 .version {
@@ -99,10 +99,6 @@
     justify-content: center;
     margin: 0 auto;
     max-width: 1024px;
-  }
-
-  .media {
-    width: 33.33%;
   }
 
   .image {
