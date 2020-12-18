@@ -21,7 +21,7 @@ class PluginList extends Component<PluginListProps, {
   constructor(props: PluginListProps) {
     super(props)
     this.state = {
-      pluginsFiltered: props.plugins,
+      pluginsFiltered: props.plugins || [],
       router: props.router,
       query: ''
     }
@@ -39,7 +39,7 @@ class PluginList extends Component<PluginListProps, {
       return false
     })
     this.setState({
-      pluginsFiltered: filtered,
+      pluginsFiltered: filtered || [],
       query
     })
   }
