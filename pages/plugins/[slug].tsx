@@ -91,6 +91,14 @@ class PluginPage extends Component<PluginProps, {
     return plugin.id?.slice(plugin.id.lastIndexOf('/') + 1)
   }
 
+  getPlayButton() {
+    if (this.state.isPlaying) {
+      return <img className={styles.imagePlay} src={`${this.state.router.basePath}/images/icon-pause.svg`} alt="Pause" onClick={this.pause} />
+    } else {
+      return <img className={styles.imagePlay} src={`${this.state.router.basePath}/images/icon-play.svg`} alt="Play" onClick={this.play} />
+    }
+  }
+
   render() {
     return (
     <Layout>
@@ -102,21 +110,26 @@ class PluginPage extends Component<PluginProps, {
           <div className={styles.headerInner}>
             <div className={styles.media}>
               <div className={styles.imageContainer}>
-              {this.state.isPlaying ?
-                <img className={styles.imagePlay} src={`${this.state.router.basePath}/images/icon-pause.svg`} alt="Pause" onClick={this.pause} />
-                :
-                <img className={styles.imagePlay} src={`${this.state.router.basePath}/images/icon-play.svg`} alt="Play" onClick={this.play} />
+              {this.state.plugin.files.audio ?
+                this.getPlayButton()
+                : ''
               }
-                <img className={styles.image} src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.getPluginId(this.state.plugin)}.png`} alt={this.state.plugin.name || ''} />
+              {this.state.plugin.files.image ?
+                <img className={styles.image} src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.image.name}`} alt={this.state.plugin.name || ''} />
+                : ''
+              }
               </div>
-              <audio src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.getPluginId(this.state.plugin)}.wav`} id="audio">Your browser does not support the audio element.</audio>
+              {this.state.plugin.files.audio ?
+                <audio src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.audio.name}`} id="audio">Your browser does not support the audio element.</audio>
+                : ''
+              }
             </div>
             <div className={styles.details}>
               <h3 className={styles.title}>{this.state.plugin.name || ''} <span className={styles.version}>v{this.state.plugin.version}</span></h3>
               <p className={styles.author}>By <a href={this.state.plugin.homepage} target="_blank">{this.state.plugin.author}</a></p>
               <p>{this.state.plugin.description}</p>
               <div className={styles.metadataList}>
-                <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" /> {this.formatBytes(this.state.plugin.size)}</div>
+                {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" /> {this.formatBytes(this.state.plugin.size)}</div> */}
                 <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-date.svg`} alt="Date updated" /> {this.timeSince(this.state.plugin.date)} ago</div>
                 <div className={styles.metadata}>
                   <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
@@ -134,9 +147,18 @@ class PluginPage extends Component<PluginProps, {
           <div className={styles.row}>
             <div className={`${styles.cell} ${styles.download}`}>
               <p>Download and install manually:</p>
-              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.getPluginId(this.state.plugin)}-linux.zip`}>Linux</a>
-              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.getPluginId(this.state.plugin)}-mac.zip`}>MacOS</a>
-              <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.getPluginId(this.state.plugin)}-win.zip`}>Windows</a>
+              { this.state.plugin.files.linux ? 
+                <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.linux.name}`}>Linux</a>
+                : ''
+              }
+              { this.state.plugin.files.mac ?
+                <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.mac.name}`}>MacOS</a>
+                : ''
+              }
+              { this.state.plugin.files.win ?
+                <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.win.name}`}>Windows</a>
+                : ''
+              }
             </div>
             <div className={`${styles.cell} ${styles.install}`}>
               <p>Install via command line:</p>

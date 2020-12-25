@@ -83,7 +83,10 @@ class PluginList extends Component<PluginListProps, {
                       ))}
                     </ul>
                   </div>
-                  <img className={styles.pluginImage} src={`https://github.com/${this.getRepo(plugin)}/releases/download/${plugin.release}/${this.getPluginId(plugin)}.png`} alt={plugin.name} />
+                  { plugin.files.image ?
+                    <img className={styles.pluginImage} src={`https://github.com/${this.getRepo(plugin)}/releases/download/${plugin.release}/${plugin.files.image.name}`} alt={plugin.name} />
+                    : ''
+                  }
                 </div>
               </Link>
             ))}
