@@ -32,11 +32,15 @@ class Navigation extends Component<{
 
   render() {
     return (
-    <ul className={styles.navigation}>
-      <li><a href={`${this.state.router.basePath}/`} className={this.isSelected('/')}>Tools</a></li>
-      <li><a href={`${this.state.router.basePath}/plugins`} className={this.isSelected('/plugins')}>Plugins</a></li>
-      <li><a href={`${this.state.router.basePath}/docs`} className={this.isSelected('/docs')}>Docs</a></li>
-    </ul>
+    <div className={styles.navigation}>
+      <input className={styles.menuBtn} type="checkbox" id="menu-btn" />
+      <label className={styles.menuIcn} htmlFor="menu-btn"><span className={styles.menuNavIcn}></span></label>
+      <ul className={styles.menu}>
+        <li><a href={`${this.state.router.basePath}/`} className={this.isSelected('/')}>Tools</a></li>
+        <li><a href={`${this.state.router.basePath}/plugins`} className={this.isSelected('/plugins')}>Plugins</a></li>
+        <li><a href={`${this.state.router.basePath}/docs`} className={this.isSelected('/docs')}>Docs</a></li>
+      </ul>
+    </div>
     )
   }
 }
