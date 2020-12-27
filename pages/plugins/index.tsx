@@ -1,4 +1,4 @@
-import { Component, ChangeEvent } from 'react'
+import { Component, ChangeEvent, SyntheticEvent } from 'react'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../../components/layout'
 import styles from '../../styles/plugins.module.css'
@@ -44,6 +44,15 @@ class PluginList extends Component<PluginListProps, {
     })
   }
 
+  imageError = (event: SyntheticEvent) => {
+    const el = event.target as HTMLImageElement
+    const fallback = `${this.state.router.basePath}/images/plugin.png`
+    if (el.getAttribute('src') !== fallback) {
+      el.setAttribute('src', fallback)
+    }
+    return undefined
+  }
+
   getRepo = (plugin: Plugin) => {
     return plugin.id?.slice(0, plugin.id.lastIndexOf('/'))
   }
@@ -84,8 +93,9 @@ class PluginList extends Component<PluginListProps, {
                     </ul>
                   </div>
                   { plugin.files.image ?
-                    <img className={styles.pluginImage} src={`https://github.com/${this.getRepo(plugin)}/releases/download/${plugin.release}/${plugin.files.image.name}`} alt={plugin.name} />
-                    : ''
+                    <img className={styles.pluginImage} src={`https://github.com/${this.getRepo(plugin)}/releases/download/${plugin.release}/${plugin.files.image.name}`} alt={plugin.name} onError={this.imageError} />
+                    :
+                    <img className={styles.pluginImage} src={`${this.state.router.basePath}/images/plugin.png}`} alt={plugin.name} onError={this.imageError} />
                   }
                 </div>
               </Link>
