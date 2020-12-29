@@ -69,7 +69,7 @@ class PluginList extends Component<PluginListProps, {
         </Head>
         <section className={styles.plugins}>
           <div className={styles.pluginsHeader}>
-            <h3 className={styles.pluginsTitle}>Plugins</h3>
+            <h3 className={styles.pluginsTitle}>Plugins <span className={styles.pluginCount}>({this.state.pluginsFiltered.length})</span></h3>
             <input className={styles.pluginsSearch} placeholder="Filter by keyword" value={this.state.query} onChange={this.handleChange} />
           </div>
           <div className={styles.pluginsList}>
