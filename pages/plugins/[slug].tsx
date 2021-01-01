@@ -5,26 +5,11 @@ import styles from '../../styles/plugin.module.css'
 import { GetStaticPaths } from 'next'
 import { withRouter, Router } from 'next/router'
 import { Plugin, pluginGet, pluginsGet, pluginLatest } from '@studiorack/core'
-import slugify from 'slugify'
+import { idToSlug, slugToId, pathGetId, pathGetRepo } from '../../node_modules/@studiorack/core/dist/utils'
 
 type PluginProps = {
   plugin: Plugin,
   router: Router
-}
-
-// Todo: figure out why these can't be loaded from @studiorack/core
-const URLSAFE_REGEX = /[^\w\s$*_+~.()'"!\-:@\/]+/g;
-
-function cleanPath(pathItem: string) {
-  return pathItem.replace('', '');
-}
-
-function idToSlug(id: string) {
-  return slugify(cleanPath(id).replace(/\//g, '_'), { lower: true, remove: URLSAFE_REGEX });
-}
-
-function slugToId(id: string) {
-  return slugify(cleanPath(id).replace(/_/g, '/'), { lower: true, remove: URLSAFE_REGEX });
 }
 
 class PluginPage extends Component<PluginProps, {
@@ -99,14 +84,6 @@ class PluginPage extends Component<PluginProps, {
     this.setState({ isPlaying: false })
   }
 
-  getRepo = (plugin: Plugin) => {
-    return plugin.id?.slice(0, plugin.id.lastIndexOf('/'))
-  }
-
-  getPluginId = (plugin: Plugin) => {
-    return plugin.id?.slice(plugin.id.lastIndexOf('/') + 1)
-  }
-
   getPlayButton() {
     if (this.state.isPlaying) {
       return <img className={styles.imagePlay} src={`${this.state.router.basePath}/images/icon-pause.svg`} alt="Pause" onClick={this.pause} />
@@ -131,12 +108,12 @@ class PluginPage extends Component<PluginProps, {
                 : ''
               }
               {this.state.plugin.files.image ?
-                <img className={styles.image} src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.image.name}`} alt={this.state.plugin.name || ''} />
+                <img className={styles.image} src={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.image.name}`} alt={this.state.plugin.name || ''} />
                 : ''
               }
               </div>
               {this.state.plugin.files.audio ?
-                <audio src={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.audio.name}`} id="audio">Your browser does not support the audio element.</audio>
+                <audio src={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.audio.name}`} id="audio">Your browser does not support the audio element.</audio>
                 : ''
               }
             </div>
@@ -164,15 +141,15 @@ class PluginPage extends Component<PluginProps, {
             <div className={`${styles.cell} ${styles.download}`}>
               <p>Download and install manually:</p>
               { this.state.plugin.files.linux ? 
-                <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.linux.name}`}>Linux</a>
+                <a className={`button ${styles.button}`} href={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.linux.name}`}>Linux</a>
                 : ''
               }
               { this.state.plugin.files.mac ?
-                <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.mac.name}`}>MacOS</a>
+                <a className={`button ${styles.button}`} href={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.mac.name}`}>MacOS</a>
                 : ''
               }
               { this.state.plugin.files.win ?
-                <a className={`button ${styles.button}`} href={`https://github.com/${this.getRepo(this.state.plugin)}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.win.name}`}>Windows</a>
+                <a className={`button ${styles.button}`} href={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.win.name}`}>Windows</a>
                 : ''
               }
             </div>

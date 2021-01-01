@@ -6,23 +6,11 @@ import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { withRouter, Router } from 'next/router'
 import { Plugin, pluginLatest, pluginsGet } from '@studiorack/core'
-import slugify from 'slugify'
+import { idToSlug, pathGetRepo } from '../../node_modules/@studiorack/core/dist/utils'
 
 type PluginListProps = {
   plugins: Plugin[],
   router: Router
-}
-
-// Todo: figure out why these can't be loaded from @studiorack/core
-const URLSAFE_REGEX = /[^\w\s$*_+~.()'"!\-:@\/]+/g;
-
-function cleanPath(pathItem: string) {
-  return pathItem.replace('', '');
-}
-
-function pathGetRepo(pathItem: string) {
-  const pathParts = cleanPath(pathItem).split('/');
-  return slugify(`${pathParts[0]}/${pathParts[1]}`, { lower: true, remove: URLSAFE_REGEX });
 }
 
 class PluginList extends Component<PluginListProps, {
@@ -79,7 +67,7 @@ class PluginList extends Component<PluginListProps, {
           </div>
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin, pluginIndex) => (
-              <Link href="/plugins/[slug]" as={`/plugins/${plugin.slug}`} key={`${plugin.name}-${pluginIndex}`}>
+              <Link href="/plugins/[slug]" as={`/plugins/${idToSlug(plugin.id || '')}`} key={`${plugin.name}-${pluginIndex}`}>
                 <div className={styles.plugin}>
                   <div className={styles.pluginDetails}>
                     <div className={styles.pluginHead}>
