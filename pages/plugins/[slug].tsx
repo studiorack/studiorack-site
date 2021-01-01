@@ -4,11 +4,27 @@ import Head from 'next/head'
 import styles from '../../styles/plugin.module.css'
 import { GetStaticPaths } from 'next'
 import { withRouter, Router } from 'next/router'
-import { pathFromSlashes, pathToSlashes, Plugin, pluginGet, pluginsGet, pluginLatest } from '@studiorack/core'
+import { Plugin, pluginGet, pluginsGet, pluginLatest } from '@studiorack/core'
+import slugify from 'slugify'
 
 type PluginProps = {
   plugin: Plugin,
   router: Router
+}
+
+// Todo: figure out why these can't be loaded from @studiorack/core
+const URLSAFE_REGEX = /[^\w\s$*_+~.()'"!\-:@\/]+/g;
+
+function cleanPath(pathItem: string) {
+  return pathItem.replace('', '');
+}
+
+function idToSlug(id: string) {
+  return slugify(cleanPath(id).replace(/\//g, '_'), { lower: true, remove: URLSAFE_REGEX });
+}
+
+function slugToId(id: string) {
+  return slugify(cleanPath(id).replace(/_/g, '/'), { lower: true, remove: URLSAFE_REGEX });
 }
 
 class PluginPage extends Component<PluginProps, {
@@ -179,7 +195,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   for (const pluginId in paths) {
     list.push({
       params: {
-        slug: pathFromSlashes(pluginId)
+        slug: idToSlug(pluginId)
       }
     })
   }
@@ -196,7 +212,7 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const pluginId = pathToSlashes(params.slug)
+  const pluginId = slugToId(params.slug)
   const plugin = await pluginGet(pluginId)
   const version = pluginLatest(plugin)
   console.log(version);

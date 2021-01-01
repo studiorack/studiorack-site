@@ -5,11 +5,24 @@ import styles from '../../styles/plugins.module.css'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { withRouter, Router } from 'next/router'
-import { pathFromSlashes, Plugin, pluginLatest, pluginsGet } from '@studiorack/core'
+import { Plugin, pluginLatest, pluginsGet } from '@studiorack/core'
+import slugify from 'slugify'
 
 type PluginListProps = {
   plugins: Plugin[],
   router: Router
+}
+
+// Todo: figure out why these can't be loaded from @studiorack/core
+const URLSAFE_REGEX = /[^\w\s$*_+~.()'"!\-:@\/]+/g;
+
+function cleanPath(pathItem: string) {
+  return pathItem.replace('', '');
+}
+
+function pathGetRepo(pathItem: string) {
+  const pathParts = cleanPath(pathItem).split('/');
+  return slugify(`${pathParts[0]}/${pathParts[1]}`, { lower: true, remove: URLSAFE_REGEX });
 }
 
 class PluginList extends Component<PluginListProps, {
@@ -53,14 +66,6 @@ class PluginList extends Component<PluginListProps, {
     return undefined
   }
 
-  getRepo = (plugin: Plugin) => {
-    return plugin.id?.slice(0, plugin.id.lastIndexOf('/'))
-  }
-
-  getPluginId = (plugin: Plugin) => {
-    return plugin.id?.slice(plugin.id.lastIndexOf('/') + 1)
-  }
-
   render() {
     return (
       <Layout>
@@ -93,7 +98,7 @@ class PluginList extends Component<PluginListProps, {
                     </ul>
                   </div>
                   { plugin.files.image ?
-                    <img className={styles.pluginImage} src={`https://github.com/${this.getRepo(plugin)}/releases/download/${plugin.release}/${plugin.files.image.name}`} alt={plugin.name} onError={this.imageError} />
+                    <img className={styles.pluginImage} src={`https://github.com/${pathGetRepo(plugin.id || 'id')}/releases/download/${plugin.release}/${plugin.files.image.name}`} alt={plugin.name} onError={this.imageError} />
                     : ""
                   }
                 </div>
