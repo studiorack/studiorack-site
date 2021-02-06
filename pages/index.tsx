@@ -29,12 +29,15 @@ class Home extends Component<HomeProps, {
           <title>{siteTitle}</title>
         </Head>
         <section className={`${styles.section} ${styles.sectionOpenSource}`}>
-          <div className={styles.container}>
+          <div className={`${styles.container} ${styles.containerCols}`}>
             <div className={styles.inner}>
               <img className={styles.sectionImage} src={`${this.state.router.basePath}/images/studio-audio-rack-mobile.jpg`} alt="Open source" />
               <h2 className={styles.title}>An open-source audio plugin ecosystem</h2>
               <p>Our tools are built using GitHub and open-source libraries, ensuring you will always be able to access them.</p>
               <a className="button" href={`${this.state.router.basePath}/plugins`}>Browse plugins</a>
+            </div>
+            <div className={`${styles.inner} ${styles.innerCol}`}>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/38ECZs5kg7A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
           </div>
         </section>

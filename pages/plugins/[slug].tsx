@@ -5,7 +5,7 @@ import styles from '../../styles/plugin.module.css'
 import { GetStaticPaths } from 'next'
 import { withRouter, Router } from 'next/router'
 import { Plugin, pluginGet, pluginsGet, pluginLatest } from '@studiorack/core'
-import { idToSlug, slugToId, pathGetId, pathGetRepo } from '../../node_modules/@studiorack/core/dist/utils'
+import { idToSlug, slugToId, pathGetRepo } from '../../node_modules/@studiorack/core/dist/utils'
 
 type PluginProps = {
   plugin: Plugin,
