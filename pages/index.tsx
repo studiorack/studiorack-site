@@ -37,7 +37,7 @@ class Home extends Component<HomeProps, {
               <a className="button" href={`${this.state.router.basePath}/plugins`}>Browse plugins</a>
             </div>
             <div className={`${styles.inner} ${styles.innerCol}`}>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/38ECZs5kg7A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/38ECZs5kg7A" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>
           </div>
         </section>
