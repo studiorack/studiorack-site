@@ -4,18 +4,18 @@ import Head from 'next/head'
 import styles from '../../styles/plugin.module.css'
 import { GetStaticPaths } from 'next'
 import { withRouter, Router } from 'next/router'
-import { Plugin, pluginGet, pluginsGet, pluginLatest } from '@studiorack/core'
-import { idToSlug, slugToId, pathGetRepo } from '../../node_modules/@studiorack/core/dist/utils'
+import { PluginInterface, pluginGet, pluginsGet } from '@studiorack/core'
+import { idToSlug, slugToId } from '../../node_modules/@studiorack/core/dist/utils'
 
 type PluginProps = {
-  plugin: Plugin,
+  plugin: PluginInterface,
   router: Router
 }
 
 class PluginPage extends Component<PluginProps, {
   isPlaying: boolean,
   router: Router,
-  plugin: Plugin
+  plugin: PluginInterface
 }> {
 
   constructor(props: PluginProps) {
@@ -108,12 +108,12 @@ class PluginPage extends Component<PluginProps, {
                 : ''
               }
               {this.state.plugin.files.image ?
-                <img className={styles.image} src={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.image.name}`} alt={this.state.plugin.name || ''} />
+                <img className={styles.image} src={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.image.name}`} alt={this.state.plugin.name || ''} />
                 : ''
               }
               </div>
               {this.state.plugin.files.audio ?
-                <audio src={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.audio.name}`} id="audio">Your browser does not support the audio element.</audio>
+                <audio src={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.audio.name}`} id="audio">Your browser does not support the audio element.</audio>
                 : ''
               }
             </div>
@@ -127,8 +127,8 @@ class PluginPage extends Component<PluginProps, {
                 <div className={styles.metadata}>
                   <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
                     <ul className={styles.tags}>
-                    {this.state.plugin.tags.map((tag) => (
-                      <li className={styles.tag} key={tag}>{tag},</li>
+                    {this.state.plugin.tags.map((tag: string, tagIndex: number) => (
+                      <li className={styles.tag} key={`${tag}-${tagIndex}`}>{tag},</li>
                     ))}
                   </ul>
                 </div>
@@ -141,15 +141,15 @@ class PluginPage extends Component<PluginProps, {
             <div className={`${styles.cell} ${styles.download}`}>
               <p>Download and install manually:</p>
               { this.state.plugin.files.linux ? 
-                <a className={`button ${styles.button}`} href={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.linux.name}`}>Linux</a>
+                <a className={`button ${styles.button}`} href={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.linux.name}`}>Linux</a>
                 : ''
               }
               { this.state.plugin.files.mac ?
-                <a className={`button ${styles.button}`} href={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.mac.name}`}>MacOS</a>
+                <a className={`button ${styles.button}`} href={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.mac.name}`}>MacOS</a>
                 : ''
               }
               { this.state.plugin.files.win ?
-                <a className={`button ${styles.button}`} href={`https://github.com/${pathGetRepo(this.state.plugin.id || '')}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.win.name}`}>Windows</a>
+                <a className={`button ${styles.button}`} href={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.win.name}`}>Windows</a>
                 : ''
               }
             </div>
@@ -190,12 +190,11 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const pluginId = slugToId(params.slug)
-  const plugin = await pluginGet(pluginId)
-  const version = pluginLatest(plugin)
-  console.log(version);
+  const plugin: PluginInterface = await pluginGet(pluginId)
+  console.log(plugin);
   return {
     props: {
-      plugin: version
+      plugin
     }
   }
 }

@@ -5,16 +5,16 @@ import styles from '../../styles/plugins.module.css'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import { withRouter, Router } from 'next/router'
-import { Plugin, pluginLatest, pluginsGet } from '@studiorack/core'
-import { idToSlug, pathGetRepo } from '../../node_modules/@studiorack/core/dist/utils'
+import { PluginInterface, pluginLatest, pluginsGet } from '@studiorack/core'
+import { idToSlug } from '../../node_modules/@studiorack/core/dist/utils'
 
 type PluginListProps = {
-  plugins: Plugin[],
+  plugins: PluginInterface[],
   router: Router
 }
 
 class PluginList extends Component<PluginListProps, {
-  pluginsFiltered: Plugin[]
+  pluginsFiltered: PluginInterface[]
   router: Router
   query: string,
 }> {
@@ -31,7 +31,7 @@ class PluginList extends Component<PluginListProps, {
   handleChange = (event: ChangeEvent) => {
     const el = event.target as HTMLInputElement
     const query = el.value ? el.value.toLowerCase() : ''
-    const filtered = this.props.plugins.filter((plugin) => {
+    const filtered = this.props.plugins.filter((plugin: PluginInterface) => {
       if (plugin.name.toLowerCase().indexOf(query) !== -1 ||
         plugin.description.toLowerCase().indexOf(query) !== -1 ||
         plugin.tags.includes(query)) {
@@ -66,27 +66,23 @@ class PluginList extends Component<PluginListProps, {
             <input className={styles.pluginsSearch} placeholder="Filter by keyword" value={this.state.query} onChange={this.handleChange} />
           </div>
           <div className={styles.pluginsList}>
-            {this.state.pluginsFiltered.map((plugin, pluginIndex) => (
-              <Link href="/plugins/[slug]" as={`/plugins/${idToSlug(plugin.id || '')}`} key={`${plugin.name}-${pluginIndex}`}>
+            {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
+              <Link href="/plugins/[slug]" as={`/plugins/${idToSlug(plugin.repo + '/' + plugin.id)}`} key={`${idToSlug(plugin.repo + '/' + plugin.id)}-${pluginIndex}`}>
                 <div className={styles.plugin}>
                   <div className={styles.pluginDetails}>
                     <div className={styles.pluginHead}>
                       <h4 className={styles.pluginTitle}>{plugin.name} <span className={styles.pluginVersion}>v{plugin.version}</span></h4>
-                      {plugin.status === 'installed' ?
-                        <span className={styles.pluginButtonInstalled}><img className={styles.pluginButtonIcon} src={`${this.state.router.basePath}/images/icon-installed.svg`} alt="Installed" /></span>
-                        :
-                        <span className={styles.pluginButton}><img className={styles.pluginButtonIcon} src={`${this.state.router.basePath}/images/icon-download.svg`} alt="Download" /></span>
-                      }
+                      <span className={styles.pluginButton}><img className={styles.pluginButtonIcon} src={`${this.state.router.basePath}/images/icon-download.svg`} alt="Download" /></span>
                     </div>
                     <ul className={styles.pluginTags}>
                       <img className={styles.pluginIcon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
-                      {plugin.tags.map((tag, tagIndex) => (
-                        <li className={styles.pluginTag} key={`${tag}-${tagIndex}`}>{tag},</li>
+                      {plugin.tags.map((tag: string, tagIndex: number) => (
+                        <li className={styles.pluginTag} key={`${tag}-${tagIndex}-${pluginIndex}`}>{tag},</li>
                       ))}
                     </ul>
                   </div>
                   { plugin.files.image ?
-                    <img className={styles.pluginImage} src={`https://github.com/${pathGetRepo(plugin.id || 'id')}/releases/download/${plugin.release}/${plugin.files.image.name}`} alt={plugin.name} onError={this.imageError} />
+                    <img className={styles.pluginImage} src={`https://github.com/${plugin.repo}/releases/download/${plugin.release}/${plugin.files.image.name}`} alt={plugin.name} onError={this.imageError} />
                     : ""
                   }
                 </div>
@@ -102,9 +98,9 @@ export default withRouter(PluginList)
 
 export const getStaticProps: GetStaticProps = async () => {
   const plugins = await pluginsGet()
-  const list:Plugin[] = []
+  const list:PluginInterface[] = []
   for (const pluginId in plugins) {
-    const plugin = pluginLatest(plugins[pluginId])
+    const plugin: PluginInterface = pluginLatest(plugins[pluginId])
     list.push(plugin)
   }
   return {
