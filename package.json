@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "format": "prettier --write \"pages/**/*.ts\"",
+    "format": "prettier --write \"pages/**/*.{ts,tsx}\"",
     "lint": "tslint -p tsconfig.json",
     "start": "next start",
     "test": "echo 'No tests were run'"
