@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { withRouter, Router } from 'next/router';
 import { PluginInterface, pluginLatest, pluginsGet } from '@studiorack/core';
-import { idToSlug } from '../../node_modules/@studiorack/core/dist/utils';
+import { idToSlug, pluginFileUrl } from '../../node_modules/@studiorack/core/dist/utils';
 
 type PluginListProps = {
   plugins: PluginInterface[];
@@ -113,7 +113,7 @@ class PluginList extends Component<
                   {plugin.files.image ? (
                     <img
                       className={styles.pluginImage}
-                      src={`https://github.com/${plugin.repo}/releases/download/${plugin.release}/${plugin.files.image.name}`}
+                      src={pluginFileUrl(plugin, 'image')}
                       alt={plugin.name}
                       onError={this.imageError}
                     />

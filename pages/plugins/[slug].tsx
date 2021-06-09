@@ -5,7 +5,7 @@ import styles from '../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router';
 import { PluginInterface, pluginGet, pluginsGet } from '@studiorack/core';
-import { idToSlug, slugToId } from '../../node_modules/@studiorack/core/dist/utils';
+import { idToSlug, pluginFileUrl, slugToId } from '../../node_modules/@studiorack/core/dist/utils';
 
 type PluginProps = {
   plugin: PluginInterface;
@@ -123,7 +123,7 @@ class PluginPage extends Component<
                   {this.state.plugin.files.image ? (
                     <img
                       className={styles.image}
-                      src={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.image.name}`}
+                      src={pluginFileUrl(this.state.plugin, 'image')}
                       alt={this.state.plugin.name || ''}
                     />
                   ) : (
@@ -132,7 +132,7 @@ class PluginPage extends Component<
                 </div>
                 {this.state.plugin.files.audio ? (
                   <audio
-                    src={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.audio.name}`}
+                    src={pluginFileUrl(this.state.plugin, 'audio')}
                     id="audio"
                   >
                     Your browser does not support the audio element.
@@ -183,7 +183,7 @@ class PluginPage extends Component<
                 {this.state.plugin.files.linux ? (
                   <a
                     className={`button ${styles.button}`}
-                    href={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.linux.name}`}
+                    href={pluginFileUrl(this.state.plugin, 'linux')}
                   >
                     Linux
                   </a>
@@ -193,7 +193,7 @@ class PluginPage extends Component<
                 {this.state.plugin.files.mac ? (
                   <a
                     className={`button ${styles.button}`}
-                    href={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.mac.name}`}
+                    href={pluginFileUrl(this.state.plugin, 'mac')}
                   >
                     MacOS
                   </a>
@@ -203,7 +203,7 @@ class PluginPage extends Component<
                 {this.state.plugin.files.win ? (
                   <a
                     className={`button ${styles.button}`}
-                    href={`https://github.com/${this.state.plugin.repo}/releases/download/${this.state.plugin.release}/${this.state.plugin.files.win.name}`}
+                    href={pluginFileUrl(this.state.plugin, 'win')}
                   >
                     Windows
                   </a>
