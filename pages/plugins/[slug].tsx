@@ -131,10 +131,7 @@ class PluginPage extends Component<
                   )}
                 </div>
                 {this.state.plugin.files.audio ? (
-                  <audio
-                    src={pluginFileUrl(this.state.plugin, 'audio')}
-                    id="audio"
-                  >
+                  <audio src={pluginFileUrl(this.state.plugin, 'audio')} id="audio">
                     Your browser does not support the audio element.
                   </audio>
                 ) : (
@@ -163,6 +160,20 @@ class PluginPage extends Component<
                     {this.timeSince(this.state.plugin.date)} ago
                   </div>
                   <div className={styles.metadata}>
+                    <img
+                      className={styles.icon}
+                      src={`${this.state.router.basePath}/images/icon-license.svg`}
+                      alt="License"
+                    />{' '}
+                    {this.state.plugin.license ? (
+                      <a href={this.state.plugin.license.url} target="_blank">
+                        {this.state.plugin.license.name}
+                      </a>
+                    ) : (
+                      'none'
+                    )}
+                  </div>
+                  <div className={styles.metadata}>
                     <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
                     <ul className={styles.tags}>
                       {this.state.plugin.tags.map((tag: string, tagIndex: number) => (
@@ -181,30 +192,21 @@ class PluginPage extends Component<
               <div className={`${styles.cell} ${styles.download}`}>
                 <p>Download and install manually:</p>
                 {this.state.plugin.files.linux ? (
-                  <a
-                    className={`button ${styles.button}`}
-                    href={pluginFileUrl(this.state.plugin, 'linux')}
-                  >
+                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'linux')}>
                     Linux
                   </a>
                 ) : (
                   ''
                 )}
                 {this.state.plugin.files.mac ? (
-                  <a
-                    className={`button ${styles.button}`}
-                    href={pluginFileUrl(this.state.plugin, 'mac')}
-                  >
+                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'mac')}>
                     MacOS
                   </a>
                 ) : (
                   ''
                 )}
                 {this.state.plugin.files.win ? (
-                  <a
-                    className={`button ${styles.button}`}
-                    href={pluginFileUrl(this.state.plugin, 'win')}
-                  >
+                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'win')}>
                     Windows
                   </a>
                 ) : (
@@ -213,7 +215,9 @@ class PluginPage extends Component<
               </div>
               <div className={`${styles.cell} ${styles.install}`}>
                 <p>Install via command line:</p>
-                <pre className={styles.codeBox}>studiorack plugin install {this.state.plugin.repo}/{this.state.plugin.id}</pre>
+                <pre className={styles.codeBox}>
+                  studiorack plugin install {this.state.plugin.repo}/{this.state.plugin.id}
+                </pre>
               </div>
             </div>
           </div>

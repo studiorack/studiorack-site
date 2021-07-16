@@ -37,7 +37,7 @@ class PluginList extends Component<
       if (
         plugin.name.toLowerCase().indexOf(query) !== -1 ||
         plugin.description.toLowerCase().indexOf(query) !== -1 ||
-        plugin.tags.filter(tag => tag.toLowerCase().indexOf(query) !== -1).length
+        plugin.tags.filter((tag) => tag.toLowerCase().indexOf(query) !== -1).length
       ) {
         return plugin;
       }
