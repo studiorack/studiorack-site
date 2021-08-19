@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/studiorack/studiorack-site#readme",
   "dependencies": {
-    "@studiorack/core": "^1.1.3",
+    "@studiorack/core": "^1.1.5",
     "gray-matter": "^4.0.2",
     "next": "^10.0.4",
     "react": "16.13.1",
