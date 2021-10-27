@@ -150,12 +150,13 @@ class PluginPage extends Component<
                 </p>
                 <p>{this.state.plugin.description}</p>
                 <div className={styles.metadataList}>
-                  {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" /> {this.formatBytes(this.state.plugin.size)}</div> */}
+                  {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" loading="lazy" /> {this.formatBytes(this.state.plugin.size)}</div> */}
                   <div className={styles.metadata}>
                     <img
                       className={styles.icon}
                       src={`${this.state.router.basePath}/images/icon-date.svg`}
                       alt="Date updated"
+                      loading="lazy"
                     />{' '}
                     {this.timeSince(this.state.plugin.date)} ago
                   </div>
@@ -164,6 +165,7 @@ class PluginPage extends Component<
                       className={styles.icon}
                       src={`${this.state.router.basePath}/images/icon-license.svg`}
                       alt="License"
+                      loading="lazy"
                     />{' '}
                     {this.state.plugin.license ? (
                       <a href={this.state.plugin.license.url} target="_blank">
@@ -174,7 +176,7 @@ class PluginPage extends Component<
                     )}
                   </div>
                   <div className={styles.metadata}>
-                    <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" />
+                    <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" loading="lazy" />
                     <ul className={styles.tags}>
                       {this.state.plugin.tags.map((tag: string, tagIndex: number) => (
                         <li className={styles.tag} key={`${tag}-${tagIndex}`}>

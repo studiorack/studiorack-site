@@ -27,7 +27,7 @@ export default function Layout({
       </Head>
       <header className={styles.header}>
         <a href={`${basePath}/`} className={styles.headerLink}>
-          <img className={styles.logoImage} src={`${basePath}/images/studio-rack-logo.svg`} alt={siteTitle} />
+          <img className={styles.logoImage} src={`${basePath}/images/studio-rack-logo.svg`} alt={siteTitle} loading="lazy" />
           <span className={styles.logoText}>Studio<span className={styles.logoTextBold}>Rack</span></span>
         </a>
         <Navigation></Navigation>

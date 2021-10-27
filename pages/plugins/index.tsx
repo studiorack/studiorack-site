@@ -94,6 +94,7 @@ class PluginList extends Component<
                           className={styles.pluginButtonIcon}
                           src={`${this.state.router.basePath}/images/icon-download.svg`}
                           alt="Download"
+                          loading="lazy"
                         />
                       </span>
                     </div>
@@ -102,6 +103,7 @@ class PluginList extends Component<
                         className={styles.pluginIcon}
                         src={`${this.state.router.basePath}/images/icon-tag.svg`}
                         alt="Tags"
+                        loading="lazy"
                       />
                       {plugin.tags.map((tag: string, tagIndex: number) => (
                         <li className={styles.pluginTag} key={`${tag}-${tagIndex}-${pluginIndex}`}>
@@ -116,6 +118,7 @@ class PluginList extends Component<
                       src={pluginFileUrl(plugin, 'image')}
                       alt={plugin.name}
                       onError={this.imageError}
+                      loading="lazy"
                     />
                   ) : (
                     ''
