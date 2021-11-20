@@ -29,7 +29,7 @@
   font-weight: 700;
 }
 
-.navigation a {
+.navItem {
   border-bottom: 3px solid transparent;
   color: #fff;
   display: block;
@@ -38,8 +38,20 @@
   transition: border .25s ease-out;
 }
 
-.navigation a:hover {
-  border-bottom-color:#fff;
+.navItem:hover,
+.navItemActive {
+  border-bottom: 3px solid #fff;
+}
+
+.navButton {
+  margin: .5rem;
+  padding: 1rem;
+}
+
+.navButtonIcon {
+  height: 15px;
+  margin-left: .5rem;
+  width: 15px;
 }
 
 .menu {
@@ -96,7 +108,7 @@
 }
 
 .menuBtn:checked ~ .menu {
-  max-height: 240px;
+  max-height: 280px;
 }
 
 .menuBtn:checked ~ .menuIcn .menuNavIcn {
@@ -124,6 +136,9 @@
     font-size: 30px;
     margin: 0 0 0 1rem;
     text-transform: uppercase;
+  }
+  .navItem {
+    margin-right: .5rem;
   }
   .menu {
     clear: none;

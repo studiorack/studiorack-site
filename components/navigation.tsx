@@ -25,9 +25,9 @@ class Navigation extends Component<{
 
   isSelected = (path: string) => {
     if (path === '/') {
-      return this.state.router.asPath === path ? 'active': ''
+      return this.state.router.asPath === path ? styles.navItemActive: ''
     }
-    return this.state.router.asPath.startsWith(path) ? 'active': ''
+    return this.state.router.asPath.startsWith(path) ? styles.navItemActive: ''
   }
 
   render() {
@@ -36,9 +36,19 @@ class Navigation extends Component<{
       <input className={styles.menuBtn} type="checkbox" id="menu-btn" />
       <label className={styles.menuIcn} htmlFor="menu-btn"><span className={styles.menuNavIcn}></span></label>
       <ul className={styles.menu}>
-        <li><a href={`${this.state.router.basePath}/`} className={this.isSelected('/')}>Tools</a></li>
-        <li><a href={`${this.state.router.basePath}/plugins`} className={this.isSelected('/plugins')}>Plugins</a></li>
-        <li><a href={`${this.state.router.basePath}/docs`} className={this.isSelected('/docs')}>Docs</a></li>
+        <li><a href={`${this.state.router.basePath}/`} className={`${styles.navItem} ${this.isSelected('/')}`}>Tools</a></li>
+        <li><a href={`${this.state.router.basePath}/plugins`} className={`${styles.navItem} ${this.isSelected('/plugins')}`}>Plugins</a></li>
+        <li><a href={`${this.state.router.basePath}/docs`} className={`${styles.navItem} ${this.isSelected('/docs')}`}>Docs</a></li>
+        <li>
+          <a href="https://discord.gg/6VSA7n6J" className={`${styles.navButton} button`} target="_blank">Community
+          <img
+            className={styles.navButtonIcon}
+            src={`${this.state.router.basePath}/images/icon-external-link.svg`}
+            alt="External link"
+            loading="lazy"
+          />
+          </a>
+        </li>
       </ul>
     </div>
     )
