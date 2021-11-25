@@ -148,7 +148,14 @@ class PluginPage extends Component<
                     {this.state.plugin.author}
                   </a>
                 </p>
-                <p>{this.state.plugin.description}</p>
+                <p>
+                  {this.state.plugin.description}
+                  { this.state.plugin.tags.includes('sfz') ? (
+                    <span> (This instrument needs to be loaded into a <a href="/plugins/studiorack_sfizz_sfizz" target="_blank">SFZ player</a>)</span>
+                    ) : (
+                      ''
+                    )}
+                </p>
                 <div className={styles.metadataList}>
                   {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" loading="lazy" /> {this.formatBytes(this.state.plugin.size)}</div> */}
                   <div className={styles.metadata}>
