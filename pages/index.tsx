@@ -109,6 +109,9 @@ class Home extends Component<
               <a className="button" href="https://github.com/studiorack/studiorack-template-juce" target="_blank">
                 JUCE
               </a>
+              <a className="button" href="https://github.com/studiorack/studiorack-template-sfz" target="_blank">
+                SFZ
+              </a>
               <a className="button" href="https://github.com/studiorack/studiorack-template-steinberg" target="_blank">
                 Steinberg
               </a>
