@@ -1,11 +1,11 @@
 import { Component } from 'react';
-import Layout from '../../components/layout';
+import Layout from '../../../../components/layout';
 import Head from 'next/head';
-import styles from '../../styles/plugin.module.css';
+import styles from '../../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router';
-import { PluginInterface, pluginGet, pluginsGet } from '@studiorack/core';
-import { idToSlug, pluginFileUrl, slugToId } from '../../node_modules/@studiorack/core/dist/utils';
+import { PluginInterface, pluginGet, pluginsGet, PluginPack, pluginLatest } from '@studiorack/core';
+import { pluginFileUrl } from '../../../../node_modules/@studiorack/core/dist/utils';
 
 type PluginProps = {
   plugin: PluginInterface;
@@ -243,12 +243,15 @@ class PluginPage extends Component<
 export default withRouter(PluginPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await pluginsGet();
+  const pluginPack: PluginPack = await pluginsGet();
   const list = [];
-  for (const pluginId in paths) {
+  for (const id in pluginPack) {
+    const plugin: PluginInterface = pluginLatest(pluginPack[id]);
     list.push({
       params: {
-        slug: idToSlug(pluginId),
+        pluginId: plugin.id,
+        repoId: plugin.repo.split('/')[1],
+        userId: plugin.repo.split('/')[0]
       },
     });
   }
@@ -260,14 +263,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 type Params = {
   params: {
-    slug: string;
+    pluginId: string;
+    repoId: string;
+    userId: string;
   };
 };
 
 export async function getStaticProps({ params }: Params) {
-  const pluginId = slugToId(params.slug);
-  const plugin: PluginInterface = await pluginGet(pluginId);
-  console.log(plugin);
+  const plugin: PluginInterface = await pluginGet(`${params.userId}/${params.repoId}/${params.pluginId}`);
   return {
     props: {
       plugin,

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { withRouter, Router } from 'next/router';
 import { PluginInterface, pluginLatest, pluginsGet } from '@studiorack/core';
-import { idToSlug, pluginFileUrl } from '../../node_modules/@studiorack/core/dist/utils';
+import { pluginFileUrl } from '../../node_modules/@studiorack/core/dist/utils';
 
 type PluginListProps = {
   plugins: PluginInterface[];
@@ -79,9 +79,9 @@ class PluginList extends Component<
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
               <Link
-                href="/plugins/[slug]"
-                as={`/plugins/${idToSlug(plugin.repo + '/' + plugin.id)}`}
-                key={`${idToSlug(plugin.repo + '/' + plugin.id)}-${pluginIndex}`}
+                href="/plugins/[userId]/[repoId]/[pluginId]"
+                as={`/plugins/${plugin.repo}/${plugin.id}`}
+                key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}
               >
                 <div className={styles.plugin}>
                   <div className={styles.pluginDetails}>
