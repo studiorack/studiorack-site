@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Crumb from '../../../../components/crumb';
 import Layout from '../../../../components/layout';
 import Head from 'next/head';
 import styles from '../../../../styles/plugin.module.css';
@@ -116,6 +117,11 @@ class PluginPage extends Component<
         </Head>
         <article>
           <div className={styles.header}>
+            <div className={styles.headerInner2}>
+              <Crumb
+                items={['plugins', this.state.plugin.repo.split('/')[0], this.state.plugin.repo.split('/')[1]]}
+              ></Crumb>
+            </div>
             <div className={styles.headerInner}>
               <div className={styles.media}>
                 <div className={styles.imageContainer}>
@@ -150,11 +156,18 @@ class PluginPage extends Component<
                 </p>
                 <p>
                   {this.state.plugin.description}
-                  { this.state.plugin.tags.includes('sfz') ? (
-                    <span> (This instrument needs to be loaded into a <a href="/plugins/studiorack_sfizz_sfizz" target="_blank">SFZ player</a>)</span>
-                    ) : (
-                      ''
-                    )}
+                  {this.state.plugin.tags.includes('sfz') ? (
+                    <span>
+                      {' '}
+                      (This instrument needs to be loaded into a{' '}
+                      <a href="/plugins/studiorack_sfizz_sfizz" target="_blank">
+                        SFZ player
+                      </a>
+                      )
+                    </span>
+                  ) : (
+                    ''
+                  )}
                 </p>
                 <div className={styles.metadataList}>
                   {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" loading="lazy" /> {this.formatBytes(this.state.plugin.size)}</div> */}
@@ -183,7 +196,12 @@ class PluginPage extends Component<
                     )}
                   </div>
                   <div className={styles.metadata}>
-                    <img className={styles.icon} src={`${this.state.router.basePath}/images/icon-tag.svg`} alt="Tags" loading="lazy" />
+                    <img
+                      className={styles.icon}
+                      src={`${this.state.router.basePath}/images/icon-tag.svg`}
+                      alt="Tags"
+                      loading="lazy"
+                    />
                     <ul className={styles.tags}>
                       {this.state.plugin.tags.map((tag: string, tagIndex: number) => (
                         <li className={styles.tag} key={`${tag}-${tagIndex}`}>
@@ -223,8 +241,14 @@ class PluginPage extends Component<
                 )}
               </div>
               <div className={`${styles.cell} ${styles.install}`}>
-                <p>Install via <a href="https://www.npmjs.com/package/@studiorack/cli" target="_blank">StudioRack CLI</a>:</p>
-                { this.state.plugin.tags.includes('sfz') ? (
+                <p>
+                  Install via{' '}
+                  <a href="https://www.npmjs.com/package/@studiorack/cli" target="_blank">
+                    StudioRack CLI
+                  </a>
+                  :
+                </p>
+                {this.state.plugin.tags.includes('sfz') ? (
                   <pre className={styles.codeBox}>studiorack plugin install studiorack/sfizz/sfizz</pre>
                 ) : (
                   ''
@@ -251,7 +275,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       params: {
         pluginId: plugin.id,
         repoId: plugin.repo.split('/')[1],
-        userId: plugin.repo.split('/')[0]
+        userId: plugin.repo.split('/')[0],
       },
     });
   }

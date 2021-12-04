@@ -1,5 +1,6 @@
 import { Component, ChangeEvent, SyntheticEvent } from 'react';
 import Head from 'next/head';
+import Crumb from '../../../../components/crumb';
 import Layout, { siteTitle } from '../../../../components/layout';
 import styles from '../../../../styles/plugins.module.css';
 import Link from 'next/link';
@@ -10,6 +11,8 @@ import { pluginFileUrl } from '../../../../node_modules/@studiorack/core/dist/ut
 type PluginListProps = {
   plugins: PluginInterface[];
   router: Router;
+  repoId: string;
+  userId: string;
 };
 
 class PluginList extends Component<
@@ -18,6 +21,8 @@ class PluginList extends Component<
     pluginsFiltered: PluginInterface[];
     router: Router;
     query: string;
+    repoId: string;
+    userId: string;
   }
 > {
   constructor(props: PluginListProps) {
@@ -26,6 +31,8 @@ class PluginList extends Component<
       pluginsFiltered: props.plugins || [],
       router: props.router,
       query: '',
+      repoId: props.repoId,
+      userId: props.userId,
     };
   }
 
@@ -64,17 +71,8 @@ class PluginList extends Component<
           <title>{siteTitle}</title>
         </Head>
         <section className={styles.plugins}>
-          <div className={styles.pluginsHeader}>
-            <h3 className={styles.pluginsTitle}>
-              Plugins <span className={styles.pluginCount}>({this.state.pluginsFiltered.length})</span>
-            </h3>
-            <input
-              className={styles.pluginsSearch}
-              placeholder="Filter by keyword"
-              value={this.state.query}
-              onChange={this.handleChange}
-            />
-          </div>
+          <Crumb items={['plugins', this.state.userId]}></Crumb>
+          <h2>{this.state.repoId}</h2>
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
               <Link
@@ -141,7 +139,7 @@ export async function getStaticPaths() {
     list.push({
       params: {
         repoId: plugin.repo.split('/')[1],
-        userId: plugin.repo.split('/')[0]
+        userId: plugin.repo.split('/')[0],
       },
     });
   }
@@ -170,6 +168,8 @@ export async function getStaticProps({ params }: Params) {
   return {
     props: {
       plugins: list,
+      repoId: params.repoId,
+      userId: params.userId,
     },
   };
 }
