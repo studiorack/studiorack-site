@@ -219,21 +219,21 @@ class PluginPage extends Component<
               <div className={`${styles.cell} ${styles.download}`}>
                 <p>Download and install manually:</p>
                 {this.state.plugin.files.linux ? (
-                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'linux')}>
+                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'linux')} title="Linux x64">
                     Linux
                   </a>
                 ) : (
                   ''
                 )}
                 {this.state.plugin.files.mac ? (
-                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'mac')}>
+                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'mac')} title="MacOS x64">
                     MacOS
                   </a>
                 ) : (
                   ''
                 )}
                 {this.state.plugin.files.win ? (
-                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'win')}>
+                  <a className={`button ${styles.button}`} href={pluginFileUrl(this.state.plugin, 'win')} title="Windows x64">
                     Windows
                   </a>
                 ) : (
