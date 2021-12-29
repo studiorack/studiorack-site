@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 function getBasePath() {
   return useRouter().basePath;
@@ -15,13 +15,9 @@ function getCrumbUrl(items: string[], itemToMatch: string) {
 
 function isSelected(path: string) {
   if (path === '/') {
-    return useRouter().asPath === path ? 'active': ''
+    return useRouter().asPath === path ? 'active' : '';
   }
-  return useRouter().asPath.startsWith(path) ? 'active': ''
+  return useRouter().asPath.startsWith(path) ? 'active' : '';
 }
 
-export {
-  getBasePath,
-  getCrumbUrl,
-  isSelected
-}
+export { getBasePath, getCrumbUrl, isSelected };

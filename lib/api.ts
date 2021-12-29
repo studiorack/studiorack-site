@@ -14,7 +14,7 @@ export function getDocBySlug(slug: string, fields: string[]) {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  const items:any = {};
+  const items: any = {};
 
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
@@ -28,14 +28,13 @@ export function getDocBySlug(slug: string, fields: string[]) {
     if (data[field]) {
       items[field] = data[field];
     }
-  })
+  });
 
-  return items
+  return items;
 }
 
 export function getAllDocs(fields: string[]) {
-  const slugs = getDocSlugs()
-  const docs = slugs
-    .map((slug) => getDocBySlug(slug, fields))
-  return docs
+  const slugs = getDocSlugs();
+  const docs = slugs.map((slug) => getDocBySlug(slug, fields));
+  return docs;
 }

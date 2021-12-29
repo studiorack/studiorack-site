@@ -1,13 +1,13 @@
-import styles from '../styles/plugins.module.css'
-import Link from 'next/link'
-import { getBasePath } from '../lib/path'
-import { imageError } from '../lib/image'
-import { pluginFileUrl } from '../node_modules/@studiorack/core/dist/utils'
+import styles from '../styles/plugins.module.css';
+import Link from 'next/link';
+import { getBasePath } from '../lib/path';
+import { imageError } from '../lib/image';
+import { pluginFileUrl } from '../node_modules/@studiorack/core/dist/utils';
 
 type GridItemProps = {
   plugin: any;
   pluginIndex: number;
-}
+};
 
 const GridItem = ({ plugin, pluginIndex }: GridItemProps) => (
   <Link
@@ -31,12 +31,7 @@ const GridItem = ({ plugin, pluginIndex }: GridItemProps) => (
           </span>
         </div>
         <ul className={styles.pluginTags}>
-          <img
-            className={styles.pluginIcon}
-            src={`${getBasePath()}/images/icon-tag.svg`}
-            alt="Tags"
-            loading="lazy"
-          />
+          <img className={styles.pluginIcon} src={`${getBasePath()}/images/icon-tag.svg`} alt="Tags" loading="lazy" />
           {plugin.tags.map((tag: string, tagIndex: number) => (
             <li className={styles.pluginTag} key={`${tag}-${tagIndex}-${pluginIndex}`}>
               {tag},
@@ -57,6 +52,6 @@ const GridItem = ({ plugin, pluginIndex }: GridItemProps) => (
       )}
     </div>
   </Link>
-)
+);
 
 export default GridItem;

@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { getBasePath } from '../lib/path'
+import { getBasePath } from '../lib/path';
 
 export function imageError(event: SyntheticEvent) {
   const el = event.target as HTMLImageElement;
@@ -8,4 +8,4 @@ export function imageError(event: SyntheticEvent) {
     el.setAttribute('src', fallback);
   }
   return undefined;
-};
+}
