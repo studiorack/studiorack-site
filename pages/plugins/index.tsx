@@ -46,7 +46,7 @@ class PluginList extends Component<
       pluginsFiltered: filtered || [],
       query,
     });
-  };
+  }
 
   render() {
     return (

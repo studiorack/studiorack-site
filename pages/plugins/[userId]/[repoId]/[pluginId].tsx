@@ -73,7 +73,7 @@ class PluginPage extends Component<
       el.play();
       this.setState({ isPlaying: true });
     }
-  };
+  }
 
   pause = () => {
     const el = document.getElementById('audio') as HTMLAudioElement;
@@ -81,11 +81,11 @@ class PluginPage extends Component<
       el.pause();
       this.setState({ isPlaying: false });
     }
-  };
+  }
 
   ended = () => {
     this.setState({ isPlaying: false });
-  };
+  }
 
   getPlayButton() {
     if (this.state.isPlaying) {
