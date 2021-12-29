@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Container from '../../components/container';
+import SubNav from '../../components/subnav';
 import Layout from '../../components/layout';
 import styles from '../../styles/doc.module.css';
 import { getAllDocs } from '../../lib/api';
@@ -34,7 +34,7 @@ class DocList extends Component<
           <Head>
             <title>Documentation</title>
           </Head>
-          <Container docs={this.state.allDocs}>
+          <SubNav docs={this.state.allDocs}>
             <h1>Getting started</h1>
             <p>System Requirements:</p>
             <ul className={styles.markdownUl}>
@@ -59,7 +59,7 @@ class DocList extends Component<
                 Develop new plugins &gt;
               </a>
             </p>
-          </Container>
+          </SubNav>
         </Layout>
       </>
     );
