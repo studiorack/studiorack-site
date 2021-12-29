@@ -1,17 +1,8 @@
 import styles from '../styles/components/crumb.module.css'
-import { useRouter } from 'next/router'
+import { getBasePath, getCrumbUrl } from '../lib/path'
 
 type CrumbProps = {
   items: string[];
-}
-
-function getCrumbUrl(items: string[], itemToMatch: string) {
-  let url: string = '';
-  for (const item of items) {
-    url += '/' + item;
-    if (item === itemToMatch) break;
-  }
-  return url;
 }
 
 const Crumb = ({ items }: CrumbProps) => (
@@ -19,7 +10,7 @@ const Crumb = ({ items }: CrumbProps) => (
     <ul className={styles.crumbList}>
       {items.map((item: string, itemIndex: number) => (
         <li className={styles.crumbItem} key={`${item}-${itemIndex}`}>
-          /<a className={styles.crumbLink} href={`${useRouter().basePath}${getCrumbUrl(items, item)}`}>{item}</a>
+          /<a className={styles.crumbLink} href={`${getBasePath()}${getCrumbUrl(items, item)}`}>{item}</a>
         </li>
       ))}
     </ul>
