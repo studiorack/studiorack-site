@@ -48,7 +48,6 @@ class PluginList extends Component<
     });
   };
 
-
   render() {
     return (
       <Layout>
