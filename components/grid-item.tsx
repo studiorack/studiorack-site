@@ -13,7 +13,6 @@ const GridItem = ({ plugin, pluginIndex }: GridItemProps) => (
   <Link
     href="/plugins/[userId]/[repoId]/[pluginId]"
     as={`/plugins/${plugin.repo}/${plugin.id}`}
-    key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}
   >
     <div className={styles.plugin}>
       <div className={styles.pluginDetails}>

@@ -4,12 +4,10 @@ import Crumb from '../../../components/crumb';
 import Layout, { siteTitle } from '../../../components/layout';
 import styles from '../../../styles/plugins.module.css';
 import GridItem from '../../../components/grid-item';
-import { withRouter, Router } from 'next/router';
 import { PluginInterface, pluginLatest, PluginPack, pluginsGet } from '@studiorack/core';
 
 type PluginListProps = {
   plugins: PluginInterface[];
-  router: Router;
   userId: string;
 };
 
@@ -17,7 +15,6 @@ class PluginList extends Component<
   PluginListProps,
   {
     pluginsFiltered: PluginInterface[];
-    router: Router;
     query: string;
     userId: string;
   }
@@ -26,29 +23,9 @@ class PluginList extends Component<
     super(props);
     this.state = {
       pluginsFiltered: props.plugins || [],
-      router: props.router,
       query: '',
       userId: props.userId,
     };
-  }
-
-  handleChange = (event: ChangeEvent) => {
-    const el = event.target as HTMLInputElement;
-    const query = el.value ? el.value.toLowerCase() : '';
-    const filtered = this.props.plugins.filter((plugin: PluginInterface) => {
-      if (
-        plugin.name.toLowerCase().indexOf(query) !== -1 ||
-        plugin.description.toLowerCase().indexOf(query) !== -1 ||
-        plugin.tags.filter((tag) => tag.toLowerCase().indexOf(query) !== -1).length
-      ) {
-        return plugin;
-      }
-      return false;
-    });
-    this.setState({
-      pluginsFiltered: filtered || [],
-      query,
-    });
   }
 
   render() {
@@ -62,7 +39,7 @@ class PluginList extends Component<
           <h2>{this.state.userId}</h2>
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
-              <GridItem plugin={plugin} pluginIndex={pluginIndex}></GridItem>
+              <GridItem plugin={plugin} pluginIndex={pluginIndex} key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}></GridItem>
             ))}
           </div>
         </section>
@@ -70,7 +47,7 @@ class PluginList extends Component<
     );
   }
 }
-export default withRouter(PluginList);
+export default PluginList;
 
 export async function getStaticPaths() {
   const pluginPack: PluginPack = await pluginsGet();
