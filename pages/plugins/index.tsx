@@ -4,15 +4,23 @@ import Layout, { siteTitle } from '../../components/layout';
 import styles from '../../styles/plugins.module.css';
 import GridItem from '../../components/grid-item';
 import { GetStaticProps } from 'next';
-import { PluginInterface, pluginLatest, PluginPack, pluginsGet } from '@studiorack/core';
+import { PluginCategory, PluginInterface, pluginLatest, PluginPack, pluginsGet } from '@studiorack/core';
+import { configDefaults } from '../../node_modules/@studiorack/core/dist/config-defaults';
 
 type PluginListProps = {
+  category: string;
+  pluginTypes: { [property: string]: PluginCategory };
   plugins: PluginInterface[];
+  pluginsFiltered: PluginInterface[];
+  query: string;
 };
 
 class PluginList extends Component<
   PluginListProps,
   {
+    category: string;
+    pluginTypes: { [property: string]: PluginCategory };
+    plugins: PluginInterface[];
     pluginsFiltered: PluginInterface[];
     query: string;
   }
@@ -20,29 +28,50 @@ class PluginList extends Component<
   constructor(props: PluginListProps) {
     super(props);
     this.state = {
-      pluginsFiltered: props.plugins || [],
+      category: 'all',
+      pluginTypes: configDefaults().pluginInstrumentCategories,
+      plugins: props.plugins || [],
+      pluginsFiltered: props.pluginsFiltered || [],
       query: '',
     };
   }
 
-  handleChange = (event: ChangeEvent) => {
-    const el = event.target as HTMLInputElement;
-    const query = el.value ? el.value.toLowerCase() : '';
-    const filtered = this.props.plugins.filter((plugin: PluginInterface) => {
+  filterPlugins = () => {
+    console.log('filterPlugins', this.state);
+    return this.state.plugins.filter((plugin: PluginInterface) => {
+      const matchingTags = plugin.tags.filter((element) =>
+        this.state.pluginTypes[this.state.category].tags.includes(element)
+      );
       if (
-        plugin.name.toLowerCase().indexOf(query) !== -1 ||
-        plugin.description.toLowerCase().indexOf(query) !== -1 ||
-        plugin.tags.filter((tag) => tag.toLowerCase().indexOf(query) !== -1).length
+        (this.state.category === 'all' || matchingTags.length > 0) &&
+        (plugin.name.toLowerCase().indexOf(this.state.query) !== -1 ||
+          plugin.description.toLowerCase().indexOf(this.state.query) !== -1 ||
+          plugin.tags.includes(this.state.query))
       ) {
         return plugin;
       }
       return false;
     });
-    this.setState({
-      pluginsFiltered: filtered || [],
-      query,
+  };
+
+  handleChange = (event: ChangeEvent) => {
+    const el = event.target as HTMLInputElement;
+    const query = el.value ? el.value.toLowerCase() : '';
+    this.setState({ query }, () => {
+      this.setState({ pluginsFiltered: this.filterPlugins() });
     });
-  }
+  };
+
+  isSelected = (path: string) => {
+    return this.state.category === path ? 'selected' : '';
+  };
+
+  selectCategory = (event: React.MouseEvent): void => {
+    const category = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-category') || '';
+    this.setState({ category }, () => {
+      this.setState({ pluginsFiltered: this.filterPlugins() });
+    });
+  };
 
   render() {
     return (
@@ -62,9 +91,26 @@ class PluginList extends Component<
               onChange={this.handleChange}
             />
           </div>
+          <ul className={styles.pluginsCategory}>
+            {Object.keys(this.state.pluginTypes).map((projectTypeKey: string, projectTypeIndex: number) => (
+              <li key={`${projectTypeKey}-${projectTypeIndex}`}>
+                <a
+                  data-category={projectTypeKey}
+                  onClick={this.selectCategory}
+                  className={this.isSelected(projectTypeKey)}
+                >
+                  {this.state.pluginTypes[projectTypeKey].name}
+                </a>
+              </li>
+            ))}
+          </ul>
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
-              <GridItem plugin={plugin} pluginIndex={pluginIndex} key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}></GridItem>
+              <GridItem
+                plugin={plugin}
+                pluginIndex={pluginIndex}
+                key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}
+              ></GridItem>
             ))}
           </div>
         </section>
@@ -84,6 +130,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       plugins: list,
+      pluginsFiltered: list,
     },
   };
 };
