@@ -19,8 +19,7 @@ const Home = () => (
           />
           <h2 className={styles.title}>An open-source audio plugin ecosystem</h2>
           <p>
-            Our tools are built using GitHub and open-source libraries, ensuring you will always be able to access
-            them.
+            Our tools are built using GitHub and open-source libraries, ensuring you will always be able to access them.
           </p>
           <a className="button" href={`${getBasePath()}/plugins`}>
             Browse plugins
@@ -49,8 +48,8 @@ const Home = () => (
           />
           <h2 className={styles.title}>Easy plugin installation &amp; management</h2>
           <p>
-            Our app and command line tools allow you to search our plugin registry for free plugins. You can install
-            and manage plugin versions all from one place.
+            Our app and command line tools allow you to search our plugin registry for free plugins. You can install and
+            manage plugin versions all from one place.
           </p>
           <a className="button" href="https://github.com/studiorack/studiorack-app/releases/latest" target="_blank">
             Download the app
@@ -72,8 +71,8 @@ const Home = () => (
           />
           <h2 className={styles.title}>Automate your plugin publishing workflow</h2>
           <p>
-            Our plugin starter templates use GitHub Actions to automatically build your plugin, publishing Windows,
-            Mac and Linux versions directly to GitHub Releases.
+            Our plugin starter templates use GitHub Actions to automatically build your plugin, publishing Windows, Mac
+            and Linux versions directly to GitHub Releases.
           </p>
           <a className="button" href="https://github.com/studiorack/studiorack-template-dpf" target="_blank">
             DPF

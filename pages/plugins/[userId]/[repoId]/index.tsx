@@ -42,7 +42,11 @@ class PluginList extends Component<
           <h2>{this.state.repoId}</h2>
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
-              <GridItem plugin={plugin} pluginIndex={pluginIndex} key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}></GridItem>
+              <GridItem
+                plugin={plugin}
+                pluginIndex={pluginIndex}
+                key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}
+              ></GridItem>
             ))}
           </div>
         </section>
