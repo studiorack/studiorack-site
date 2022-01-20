@@ -43,7 +43,14 @@ class PluginList extends Component<
     const el = event.target as HTMLInputElement;
     const query = el.value ? el.value.toLowerCase() : '';
     this.setState({ query }, () => {
-      this.setState({ pluginsFiltered: filterPlugins(this.state.category, this.state.plugins, this.state.pluginTypes, this.state.query) });
+      this.setState({
+        pluginsFiltered: filterPlugins(
+          this.state.category,
+          this.state.plugins,
+          this.state.pluginTypes,
+          this.state.query
+        ),
+      });
     });
   };
 
@@ -54,7 +61,14 @@ class PluginList extends Component<
   selectCategory = (event: React.MouseEvent): void => {
     const category = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-category') || '';
     this.setState({ category }, () => {
-      this.setState({ pluginsFiltered: filterPlugins(this.state.category, this.state.plugins, this.state.pluginTypes, this.state.query) });
+      this.setState({
+        pluginsFiltered: filterPlugins(
+          this.state.category,
+          this.state.plugins,
+          this.state.pluginTypes,
+          this.state.query
+        ),
+      });
     });
   };
 

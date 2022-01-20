@@ -5,7 +5,7 @@ import Head from 'next/head';
 import styles from '../../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router';
-import { PluginInterface, pluginGet, pluginsGet, PluginPack, pluginLatest, } from '@studiorack/core';
+import { PluginInterface, pluginGet, pluginsGet, PluginPack, pluginLatest } from '@studiorack/core';
 import { pluginFileUrl } from '@studiorack/core/dist/utils';
 
 type PluginProps = {
@@ -306,7 +306,6 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  console.log(params)
   const plugin: PluginInterface = await pluginGet(`${params.userId}/${params.repoId}/${params.pluginId}`);
   return {
     props: {

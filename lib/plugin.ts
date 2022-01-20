@@ -1,14 +1,17 @@
 import { PluginCategory, PluginInterface } from '@studiorack/core';
 
-function filterPlugins(category: string, plugins: PluginInterface[], pluginTypes: { [property: string]: PluginCategory }, query: string): PluginInterface[] {
+function filterPlugins(
+  category: string,
+  plugins: PluginInterface[],
+  pluginTypes: { [property: string]: PluginCategory },
+  query: string
+): PluginInterface[] {
   console.log('filterPlugins', category, plugins, pluginTypes, query);
   return plugins.filter((plugin: PluginInterface) => {
-    const matchingTags = plugin.tags.filter((element) =>
-      pluginTypes[category].tags.includes(element)
-    );
+    const matchingTags = plugin.tags.filter((element) => pluginTypes[category].tags.includes(element));
     console.log(category, pluginTypes[category].tags, matchingTags);
     if (
-      (category === 'all' && matchingTags.length > 0 || matchingTags.length > 0) &&
+      ((category === 'all' && matchingTags.length > 0) || matchingTags.length > 0) &&
       (plugin.name.toLowerCase().indexOf(query) !== -1 ||
         plugin.description.toLowerCase().indexOf(query) !== -1 ||
         plugin.tags.includes(query))
@@ -17,6 +20,6 @@ function filterPlugins(category: string, plugins: PluginInterface[], pluginTypes
     }
     return false;
   });
-};
+}
 
 export { filterPlugins };
