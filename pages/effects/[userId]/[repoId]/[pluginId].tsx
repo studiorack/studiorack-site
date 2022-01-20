@@ -5,8 +5,8 @@ import Head from 'next/head';
 import styles from '../../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router';
-import { PluginInterface, pluginGet, pluginsGet, PluginPack, pluginLatest } from '@studiorack/core';
-import { pluginFileUrl } from '../../../../node_modules/@studiorack/core/dist/utils';
+import { PluginInterface, pluginGet, pluginsGet, PluginPack, pluginLatest, } from '@studiorack/core';
+import { pluginFileUrl } from '@studiorack/core/dist/utils';
 
 type PluginProps = {
   plugin: PluginInterface;
@@ -119,7 +119,7 @@ class PluginPage extends Component<
           <div className={styles.header}>
             <div className={styles.headerInner2}>
               <Crumb
-                items={['plugins', this.state.plugin.repo.split('/')[0], this.state.plugin.repo.split('/')[1]]}
+                items={['effects', this.state.plugin.repo.split('/')[0], this.state.plugin.repo.split('/')[1]]}
               ></Crumb>
             </div>
             <div className={styles.headerInner}>
@@ -160,7 +160,7 @@ class PluginPage extends Component<
                     <span>
                       {' '}
                       (This instrument needs to be loaded into a{' '}
-                      <a href="/plugins/studiorack_sfizz_sfizz" target="_blank">
+                      <a href="/effects/studiorack_sfizz_sfizz" target="_blank">
                         SFZ player
                       </a>
                       )
@@ -306,6 +306,7 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
+  console.log(params)
   const plugin: PluginInterface = await pluginGet(`${params.userId}/${params.repoId}/${params.pluginId}`);
   return {
     props: {

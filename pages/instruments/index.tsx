@@ -5,7 +5,8 @@ import styles from '../../styles/plugins.module.css';
 import GridItem from '../../components/grid-item';
 import { GetStaticProps } from 'next';
 import { PluginCategory, PluginInterface, pluginLatest, PluginPack, pluginsGet } from '@studiorack/core';
-import { configDefaults } from '../../node_modules/@studiorack/core/dist/config-defaults';
+import { configDefaults } from '@studiorack/core/dist/config-defaults';
+import { filterPlugins } from '../../lib/plugin';
 
 type PluginListProps = {
   category: string;
@@ -27,38 +28,22 @@ class PluginList extends Component<
 > {
   constructor(props: PluginListProps) {
     super(props);
+    const pluginTypes: { [property: string]: PluginCategory } = configDefaults().pluginInstrumentCategories;
+    pluginTypes.all.tags.push('Instrument');
     this.state = {
       category: 'all',
-      pluginTypes: configDefaults().pluginInstrumentCategories,
+      pluginTypes,
       plugins: props.plugins || [],
-      pluginsFiltered: props.pluginsFiltered || [],
+      pluginsFiltered: filterPlugins('all', props.plugins, pluginTypes, ''),
       query: '',
     };
   }
-
-  filterPlugins = () => {
-    console.log('filterPlugins', this.state);
-    return this.state.plugins.filter((plugin: PluginInterface) => {
-      const matchingTags = plugin.tags.filter((element) =>
-        this.state.pluginTypes[this.state.category].tags.includes(element)
-      );
-      if (
-        (this.state.category === 'all' || matchingTags.length > 0) &&
-        (plugin.name.toLowerCase().indexOf(this.state.query) !== -1 ||
-          plugin.description.toLowerCase().indexOf(this.state.query) !== -1 ||
-          plugin.tags.includes(this.state.query))
-      ) {
-        return plugin;
-      }
-      return false;
-    });
-  };
 
   handleChange = (event: ChangeEvent) => {
     const el = event.target as HTMLInputElement;
     const query = el.value ? el.value.toLowerCase() : '';
     this.setState({ query }, () => {
-      this.setState({ pluginsFiltered: this.filterPlugins() });
+      this.setState({ pluginsFiltered: filterPlugins(this.state.category, this.state.plugins, this.state.pluginTypes, this.state.query) });
     });
   };
 
@@ -69,7 +54,7 @@ class PluginList extends Component<
   selectCategory = (event: React.MouseEvent): void => {
     const category = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-category') || '';
     this.setState({ category }, () => {
-      this.setState({ pluginsFiltered: this.filterPlugins() });
+      this.setState({ pluginsFiltered: filterPlugins(this.state.category, this.state.plugins, this.state.pluginTypes, this.state.query) });
     });
   };
 
@@ -82,7 +67,7 @@ class PluginList extends Component<
         <section className={styles.plugins}>
           <div className={styles.pluginsHeader}>
             <h3 className={styles.pluginsTitle}>
-              Plugins <span className={styles.pluginCount}>({this.state.pluginsFiltered.length})</span>
+              Instruments <span className={styles.pluginCount}>({this.state.pluginsFiltered.length})</span>
             </h3>
             <input
               className={styles.pluginsSearch}

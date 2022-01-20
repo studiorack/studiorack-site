@@ -14,8 +14,13 @@ const Navigation = () => (
         </a>
       </li>
       <li>
-        <a href={`${getBasePath()}/plugins`} className={`${styles.navItem} ${isSelected('/plugins')}`}>
-          Plugins
+        <a href={`${getBasePath()}/instruments`} className={`${styles.navItem} ${isSelected('/instruments')}`}>
+          Instruments
+        </a>
+      </li>
+      <li>
+        <a href={`${getBasePath()}/effects`} className={`${styles.navItem} ${isSelected('/effects')}`}>
+          Effects
         </a>
       </li>
       <li>

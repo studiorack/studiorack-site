@@ -35,7 +35,7 @@ class PluginList extends Component<
           <title>{siteTitle}</title>
         </Head>
         <section className={styles.plugins}>
-          <Crumb items={['plugins']}></Crumb>
+          <Crumb items={['effects']}></Crumb>
           <h2>{this.state.userId}</h2>
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
