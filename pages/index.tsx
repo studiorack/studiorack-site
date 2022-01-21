@@ -21,8 +21,8 @@ const Home = () => (
           <p>
             Our tools are built using GitHub and open-source libraries, ensuring you will always be able to access them.
           </p>
-          <a className="button" href={`${getBasePath()}/plugins`}>
-            Browse plugins
+          <a className="button" href={`${getBasePath()}/instruments`}>
+            Browse instruments
           </a>
         </div>
         <div className={`${styles.inner} ${styles.innerCol}`}>
