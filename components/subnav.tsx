@@ -1,5 +1,5 @@
 import Doc from '../types/doc';
-import styles from '../styles/docs.module.css';
+import styles from '../styles/components/subnav.module.css';
 import { getBasePath, isSelected } from '../lib/path';
 
 type SubNavProps = {

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Navigation from './navigation';
-import styles from '../styles/layout.module.css';
+import styles from '../styles/components/layout.module.css';
 import { getBasePath } from '../lib/path';
 
 export const siteTitle = 'StudioRack';

@@ -1,4 +1,4 @@
-import styles from '../styles/plugins.module.css';
+import styles from '../styles/components/grid-item.module.css';
 import Link from 'next/link';
 import { getBasePath } from '../lib/path';
 import { imageError } from '../lib/image';

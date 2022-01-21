@@ -1,4 +1,4 @@
-import styles from '../styles/layout.module.css';
+import styles from '../styles/components/navigation.module.css';
 import { getBasePath, isSelected } from '../lib/path';
 
 const Navigation = () => (
