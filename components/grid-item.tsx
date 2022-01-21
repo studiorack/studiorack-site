@@ -5,12 +5,13 @@ import { imageError } from '../lib/image';
 import { pluginFileUrl } from '../node_modules/@studiorack/core/dist/utils';
 
 type GridItemProps = {
+  section: string;
   plugin: any;
   pluginIndex: number;
 };
 
-const GridItem = ({ plugin, pluginIndex }: GridItemProps) => (
-  <Link href="/instruments/[userId]/[repoId]/[pluginId]" as={`/instruments/${plugin.repo}/${plugin.id}`}>
+const GridItem = ({ section, plugin, pluginIndex }: GridItemProps) => (
+  <Link href={`/${section}/[userId]/[repoId]/[pluginId]`} as={`/${section}/${plugin.repo}/${plugin.id}`}>
     <div className={styles.plugin}>
       <div className={styles.pluginDetails}>
         <div className={styles.pluginHead}>

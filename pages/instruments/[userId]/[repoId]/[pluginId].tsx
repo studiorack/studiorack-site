@@ -279,7 +279,7 @@ class PluginPage extends Component<
 export default withRouter(PluginPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pluginPack: PluginPack = await pluginsGet();
+  const pluginPack: PluginPack = await pluginsGet('instruments');
   const list = [];
   for (const id in pluginPack) {
     const plugin: PluginInterface = pluginLatest(pluginPack[id]);

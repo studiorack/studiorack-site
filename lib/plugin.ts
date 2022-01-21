@@ -11,7 +11,7 @@ function filterPlugins(
     const matchingTags = plugin.tags.filter((element) => pluginTypes[category].tags.includes(element));
     console.log(category, pluginTypes[category].tags, matchingTags);
     if (
-      ((category === 'all' && matchingTags.length > 0) || matchingTags.length > 0) &&
+      (category === 'all' || matchingTags.length > 0) &&
       (plugin.name.toLowerCase().indexOf(query) !== -1 ||
         plugin.description.toLowerCase().indexOf(query) !== -1 ||
         plugin.tags.includes(query))

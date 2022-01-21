@@ -40,6 +40,7 @@ class PluginList extends Component<
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
               <GridItem
+                section="instruments"
                 plugin={plugin}
                 pluginIndex={pluginIndex}
                 key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}
@@ -54,7 +55,7 @@ class PluginList extends Component<
 export default PluginList;
 
 export async function getStaticPaths() {
-  const pluginPack: PluginPack = await pluginsGet();
+  const pluginPack: PluginPack = await pluginsGet('instruments');
   const list = [];
   for (const id in pluginPack) {
     const plugin: PluginInterface = pluginLatest(pluginPack[id]);
@@ -77,7 +78,7 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const plugins = await pluginsGet();
+  const plugins = await pluginsGet('instruments');
   const list: PluginInterface[] = [];
   for (const pluginId in plugins) {
     const plugin: PluginInterface = pluginLatest(plugins[pluginId]);

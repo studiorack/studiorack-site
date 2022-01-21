@@ -28,13 +28,11 @@ class PluginList extends Component<
 > {
   constructor(props: PluginListProps) {
     super(props);
-    const pluginTypes: { [property: string]: PluginCategory } = configDefaults().pluginInstrumentCategories;
-    pluginTypes.all.tags.push('Instrument');
     this.state = {
       category: 'all',
-      pluginTypes,
+      pluginTypes: configDefaults().pluginInstrumentCategories,
       plugins: props.plugins || [],
-      pluginsFiltered: filterPlugins('all', props.plugins, pluginTypes, ''),
+      pluginsFiltered: props.plugins || [],
       query: '',
     };
   }
@@ -106,6 +104,7 @@ class PluginList extends Component<
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
               <GridItem
+                section="instruments"
                 plugin={plugin}
                 pluginIndex={pluginIndex}
                 key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}
@@ -120,7 +119,7 @@ class PluginList extends Component<
 export default PluginList;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const plugins: PluginPack = await pluginsGet();
+  const plugins: PluginPack = await pluginsGet('instruments');
   const list: PluginInterface[] = [];
   for (const pluginId in plugins) {
     const plugin: PluginInterface = pluginLatest(plugins[pluginId]);
