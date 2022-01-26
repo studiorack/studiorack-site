@@ -88,19 +88,21 @@ class PluginList extends Component<
               onChange={this.handleChange}
             />
           </div>
-          <ul className={styles.pluginsCategory}>
-            {Object.keys(this.state.pluginTypes).map((projectTypeKey: string, projectTypeIndex: number) => (
-              <li key={`${projectTypeKey}-${projectTypeIndex}`}>
-                <a
-                  data-category={projectTypeKey}
-                  onClick={this.selectCategory}
-                  className={this.isSelected(projectTypeKey)}
-                >
-                  {this.state.pluginTypes[projectTypeKey].name}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className={styles.pluginsCategoryWrapper}>
+            <ul className={styles.pluginsCategory}>
+              {Object.keys(this.state.pluginTypes).map((projectTypeKey: string, projectTypeIndex: number) => (
+                <li key={`${projectTypeKey}-${projectTypeIndex}`}>
+                  <a
+                    data-category={projectTypeKey}
+                    onClick={this.selectCategory}
+                    className={this.isSelected(projectTypeKey)}
+                  >
+                    {this.state.pluginTypes[projectTypeKey].name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
               <GridItem
