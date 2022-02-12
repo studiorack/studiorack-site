@@ -15,6 +15,10 @@ jobs:
         run: |
           npm install
 
+      - name: Audit
+        run: |
+          npm run audit
+
       - name: Lint
         run: |
           npm run lint
