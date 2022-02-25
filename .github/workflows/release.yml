@@ -3,8 +3,9 @@ name: Release
 on: 
   workflow_dispatch:
   schedule:
-      # Every night at 01:00am
-    - cron: '0 1 * * *'
+      # https://crontab.guru/#10_0_*_*_0
+      # At 00:10 on Sunday.
+    - cron: '10 0 * * 0'
   push:
     tags:
       - "v*"
