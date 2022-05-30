@@ -7,6 +7,7 @@ import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router';
 import { PluginInterface, pluginGet, pluginsGet, PluginPack, pluginLatest } from '@studiorack/core';
 import { pluginFileUrl } from '@studiorack/core/dist/utils';
+import Dependency from '../../../../components/dependency';
 
 type PluginProps = {
   plugin: PluginInterface;
@@ -171,18 +172,7 @@ class PluginPage extends Component<
                 </p>
                 <p>
                   {this.state.plugin.description}
-                  {this.state.plugin.tags.includes('sfz') ? (
-                    <span>
-                      {' '}
-                      (This instrument needs to be loaded into a{' '}
-                      <a href="/instruments/studiorack_sfizz_sfizz" target="_blank">
-                        SFZ player
-                      </a>
-                      )
-                    </span>
-                  ) : (
-                    ''
-                  )}
+                  <Dependency plugin={this.state.plugin} message />
                 </p>
                 <div className={styles.metadataList}>
                   {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" loading="lazy" /> {this.formatBytes(this.state.plugin.size)}</div> */}
@@ -275,11 +265,7 @@ class PluginPage extends Component<
                   </a>
                   :
                 </p>
-                {this.state.plugin.tags.includes('sfz') ? (
-                  <pre className={styles.codeBox}>studiorack plugin install studiorack/sfizz/sfizz</pre>
-                ) : (
-                  ''
-                )}
+                <Dependency plugin={this.state.plugin} />
                 <pre className={styles.codeBox}>
                   studiorack plugin install {this.state.plugin.repo}/{this.state.plugin.id}
                 </pre>
