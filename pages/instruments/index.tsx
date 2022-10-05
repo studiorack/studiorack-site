@@ -32,17 +32,17 @@ class PluginList extends Component<
   constructor(props: PluginListProps) {
     super(props);
     const params = props.router.query;
-    const category = params.category as string || 'all';
+    const category = (params.category as string) || 'all';
     const pluginTypes = configDefaults('appFolder', 'pluginFolder', 'projectFolder').pluginInstrumentCategories;
     const plugins = props.plugins || [];
-    const query = params.query as string || '';
+    const query = (params.query as string) || '';
     this.state = {
       category,
       pluginTypes,
       plugins,
       pluginsFiltered: filterPlugins(category, plugins, pluginTypes, query),
       query,
-      router: props.router
+      router: props.router,
     };
   }
 
@@ -63,18 +63,13 @@ class PluginList extends Component<
 
   updateFilter() {
     this.setState({
-      pluginsFiltered: filterPlugins(
-        this.state.category,
-        this.state.plugins,
-        this.state.pluginTypes,
-        this.state.query
-      ),
+      pluginsFiltered: filterPlugins(this.state.category, this.state.plugins, this.state.pluginTypes, this.state.query),
     });
   }
 
   updateUrl = (category: string, query: string) => {
     this.state.router.push(`/instruments?category=${category}&query=${query}`, undefined, { shallow: true });
-  }
+  };
 
   handleChange = (event: ChangeEvent) => {
     const el = event.target as HTMLInputElement;
