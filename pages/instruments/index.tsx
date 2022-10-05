@@ -105,6 +105,7 @@ class PluginList extends Component<
             <input
               className={styles.pluginsSearch}
               placeholder="Filter by keyword"
+              type="search"
               value={this.state.query}
               onChange={this.handleChange}
             />
