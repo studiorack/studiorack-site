@@ -131,6 +131,9 @@ class PluginPage extends Component<
       <Layout>
         <Head>
           <title>{this.state.plugin.name || ''}</title>
+          <meta name="description" content={this.state.plugin.description || ''} />
+          <meta name="og:image" content={pluginFileUrl(this.state.plugin, 'image')} />
+          <meta name="og:title" content={this.state.plugin.name || ''} />
         </Head>
         <article>
           <div className={styles.header}>
