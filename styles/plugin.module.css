@@ -17,6 +17,15 @@
   transform: translate(-50%, -50%);
 }
 
+.sfzPlayer {
+  cursor: pointer;
+  left: 50%;
+  position: absolute;
+  top: 100%;
+  transform: translate(-50%, -50%);
+  width: 144px;
+}
+
 .title {
   margin: 0;
 }

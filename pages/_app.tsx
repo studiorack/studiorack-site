@@ -38,6 +38,15 @@ const App = ({ Component, pageProps }: AppProps) => {
           `,
         }}
       />
+      <Script
+        strategy="beforeInteractive"
+        id="webaudio-controls-config"
+      >{`window.WebAudioControlsOptions = { useMidi: 1 };`}</Script>
+      <Script
+        strategy="beforeInteractive"
+        src="https://github.com/kmturley/webaudio-controls/releases/download/v1.0.0/webaudio-controls.min.js"
+      />
+      <Script strategy="beforeInteractive" src="https://kmturley.github.io/sfz-web-player/sfz.min.js" />
       <Component {...pageProps} />
     </>
   );

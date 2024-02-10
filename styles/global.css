@@ -1,3 +1,5 @@
+@import url("https://kmturley.github.io/sfz-web-player/main.min.css");
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 70px;
@@ -105,4 +107,20 @@ button:hover,
 
 .active {
   border-bottom-color:#fff !important;
+}
+
+#sfzPlayer .player {
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+#sfzPlayer.open .player {
+  max-height: calc(100vh);
+}
+
+#sfzPlayer .editor {
+  flex-grow: 1;
 }

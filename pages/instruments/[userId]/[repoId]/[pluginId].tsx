@@ -10,6 +10,12 @@ import { pluginFileUrl } from '@studiorack/core/dist/utils';
 import Dependency from '../../../../components/dependency';
 import Downloads from '../../../../components/download';
 
+declare global {
+  interface Window {
+    Sfz: any;
+  }
+}
+
 type PluginProps = {
   plugin: PluginInterface;
   router: Router;
@@ -126,6 +132,29 @@ class PluginPage extends Component<
     }
   }
 
+  // Prototype of embedded sfz web player.
+  // There are better ways to do this.
+  loadSfzPlayer(event: React.MouseEvent) {
+    const el = document.getElementById('sfzPlayer');
+    if (!el) return;
+    if (el.className === 'open') {
+      el.className = '';
+      return;
+    }
+    const name = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-name') || '';
+    const id = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-repo') || '';
+    console.log('loadSfzPlayer', name, id);
+    el.innerHTML = '';
+    const player = new window.Sfz.Player('sfzPlayer', {
+      audio: {},
+      instrument: { name, id },
+      interface: {},
+    });
+    window.setTimeout(() => {
+      el.className = 'open';
+    }, 0);
+  }
+
   render() {
     return (
       <Layout>
@@ -136,6 +165,7 @@ class PluginPage extends Component<
           <meta name="og:title" content={this.state.plugin.name || ''} />
         </Head>
         <article>
+          <div id="sfzPlayer"></div>
           <div className={styles.header}>
             <div className={styles.headerInner2}>
               <Crumb
@@ -146,6 +176,19 @@ class PluginPage extends Component<
               <div className={styles.media}>
                 <div className={styles.imageContainer}>
                   {this.state.plugin.files.audio ? this.getPlayButton() : ''}
+                  {this.state.plugin.tags.includes('sfz') ? (
+                    <img
+                      className={styles.sfzPlayer}
+                      data-name={this.state.plugin.name}
+                      data-repo={this.state.plugin.repo}
+                      src={`${this.state.router.basePath}/images/sfz-player.png`}
+                      alt="open in sfz player"
+                      loading="lazy"
+                      onClick={this.loadSfzPlayer}
+                    />
+                  ) : (
+                    ''
+                  )}
                   {this.state.plugin.files.image ? (
                     <img
                       className={styles.image}
