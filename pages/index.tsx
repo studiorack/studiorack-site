@@ -1,7 +1,7 @@
-import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
+import Head from 'next/head.js';
+import Layout, { siteTitle } from '../components/layout.jsx';
 import styles from '../styles/index.module.css';
-import { getBasePath } from '../lib/path';
+import { getBasePath } from '../lib/path.js';
 
 const Home = () => (
   <Layout>
@@ -17,9 +17,12 @@ const Home = () => (
             alt="Open source"
             loading="lazy"
           />
-          <h2 className={styles.title}>An open-source audio plugin ecosystem</h2>
+          <h2 className={styles.title}>
+            An open-source audio plugin ecosystem
+          </h2>
           <p>
-            Our tools are built using GitHub and open-source libraries, ensuring you will always be able to access them.
+            Our tools are built using GitHub and open-source libraries, ensuring
+            you will always be able to access them.
           </p>
           <a className="button" href={`${getBasePath()}/instruments`}>
             Browse instruments
@@ -46,15 +49,26 @@ const Home = () => (
             alt="Producers"
             loading="lazy"
           />
-          <h2 className={styles.title}>Easy plugin installation &amp; management</h2>
+          <h2 className={styles.title}>
+            Easy plugin installation &amp; management
+          </h2>
           <p>
-            Our app and command line tools allow you to search our plugin registry for free plugins. You can install and
-            manage plugin versions all from one place.
+            Our app and command line tools allow you to search our plugin
+            registry for free plugins. You can install and manage plugin
+            versions all from one place.
           </p>
-          <a className="button" href="https://github.com/studiorack/studiorack-app/releases/latest" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-app/releases/latest"
+            target="_blank"
+          >
             Download the app
           </a>{' '}
-          <a className="button button-clear" href="https://www.npmjs.com/package/@studiorack/cli" target="_blank">
+          <a
+            className="button button-clear"
+            href="https://www.npmjs.com/package/@studiorack/cli"
+            target="_blank"
+          >
             Install the CLI
           </a>
         </div>
@@ -69,33 +83,68 @@ const Home = () => (
             alt="Creators"
             loading="lazy"
           />
-          <h2 className={styles.title}>Automate your plugin publishing workflow</h2>
+          <h2 className={styles.title}>
+            Automate your plugin publishing workflow
+          </h2>
           <p>
-            Our plugin starter templates use GitHub Actions to automatically build your plugin, publishing Windows, Mac
-            and Linux versions directly to GitHub Releases.
+            Our plugin starter templates use GitHub Actions to automatically
+            build your plugin, publishing Windows, Mac and Linux versions
+            directly to GitHub Releases.
           </p>
-          <a className="button" href="https://github.com/studiorack/studiorack-template-clap" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-template-clap"
+            target="_blank"
+          >
             CLAP
           </a>
-          <a className="button" href="https://github.com/studiorack/studiorack-template-dpf" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-template-dpf"
+            target="_blank"
+          >
             DPF
           </a>
-          <a className="button" href="https://github.com/studiorack/studiorack-template-dplug" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-template-dplug"
+            target="_blank"
+          >
             Dplug
           </a>
-          <a className="button" href="https://github.com/studiorack/studiorack-template-iplug" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-template-iplug"
+            target="_blank"
+          >
             iPlug
           </a>
-          <a className="button" href="https://github.com/studiorack/studiorack-template-juce" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-template-juce"
+            target="_blank"
+          >
             JUCE
           </a>
-          <a className="button" href="https://github.com/studiorack/studiorack-template-sf2" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-template-sf2"
+            target="_blank"
+          >
             SF2
           </a>
-          <a className="button" href="https://github.com/studiorack/studiorack-template-sfz" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-template-sfz"
+            target="_blank"
+          >
             SFZ
           </a>
-          <a className="button" href="https://github.com/studiorack/studiorack-template-steinberg" target="_blank">
+          <a
+            className="button"
+            href="https://github.com/studiorack/studiorack-template-steinberg"
+            target="_blank"
+          >
             Steinberg
           </a>
         </div>

@@ -1,6 +1,10 @@
 .header {
-  background: rgb(255,40,79);
-  background: linear-gradient(160deg, rgba(255,40,79,1) 0%, rgba(21,71,201,1) 100%);
+  background: rgb(255, 40, 79);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 40, 79, 1) 0%,
+    rgba(21, 71, 201, 1) 100%
+  );
   padding: 1.5rem;
 }
 
@@ -43,17 +47,17 @@
 
 .version {
   color: #999;
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
 
 .metadataList {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .metadata {
   align-items: center;
   display: flex;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .metadata a {
@@ -68,12 +72,12 @@
 }
 
 .icon {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   width: 20px;
 }
 
 .tag {
-  margin-right: .25rem;
+  margin-right: 0.25rem;
 }
 
 .options {
@@ -88,12 +92,12 @@
 }
 
 .button {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .codeBox {
   background-color: #111;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   font-size: 1rem;
   line-height: 1.25rem;
   padding: 1rem 1.5rem;
@@ -135,7 +139,7 @@
   .row {
     display: flex;
   }
-  
+
   .cell {
     margin-right: 1rem;
   }

@@ -1,8 +1,8 @@
 import styles from '../styles/components/grid-item.module.css';
-import Link from 'next/link';
-import { getBasePath } from '../lib/path';
-import { imageError } from '../lib/image';
-import { pluginFileUrl } from '../node_modules/@studiorack/core/dist/utils';
+import Link from 'next/link.js';
+import { getBasePath } from '../lib/path.js';
+import { imageError } from '../lib/image.js';
+import { pluginFileUrl } from '../node_modules/@studiorack/core/build/utils.js';
 
 type GridItemProps = {
   section: string;
@@ -11,12 +11,16 @@ type GridItemProps = {
 };
 
 const GridItem = ({ section, plugin, pluginIndex }: GridItemProps) => (
-  <Link href={`/${section}/[userId]/[repoId]/[pluginId]`} as={`/${section}/${plugin.repo}/${plugin.id}`}>
+  <Link
+    href={`/${section}/[userId]/[repoId]/[pluginId]`}
+    as={`/${section}/${plugin.id}`}
+  >
     <div className={styles.plugin}>
       <div className={styles.pluginDetails}>
         <div className={styles.pluginHead}>
           <h4 className={styles.pluginTitle}>
-            {plugin.name} <span className={styles.pluginVersion}>v{plugin.version}</span>
+            {plugin.name}{' '}
+            <span className={styles.pluginVersion}>v{plugin.version}</span>
           </h4>
           <span className={styles.pluginButton}>
             <img
@@ -28,9 +32,17 @@ const GridItem = ({ section, plugin, pluginIndex }: GridItemProps) => (
           </span>
         </div>
         <ul className={styles.pluginTags}>
-          <img className={styles.pluginIcon} src={`${getBasePath()}/images/icon-tag.svg`} alt="Tags" loading="lazy" />
+          <img
+            className={styles.pluginIcon}
+            src={`${getBasePath()}/images/icon-tag.svg`}
+            alt="Tags"
+            loading="lazy"
+          />
           {plugin.tags.map((tag: string, tagIndex: number) => (
-            <li className={styles.pluginTag} key={`${tag}-${tagIndex}-${pluginIndex}`}>
+            <li
+              className={styles.pluginTag}
+              key={`${tag}-${tagIndex}-${pluginIndex}`}
+            >
               {tag},
             </li>
           ))}

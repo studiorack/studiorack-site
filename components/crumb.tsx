@@ -1,5 +1,5 @@
 import styles from '../styles/components/crumb.module.css';
-import { getBasePath, getCrumbUrl } from '../lib/path';
+import { getBasePath, getCrumbUrl } from '../lib/path.js';
 
 type CrumbProps = {
   items: string[];
@@ -11,7 +11,10 @@ const Crumb = ({ items }: CrumbProps) => (
       {items.map((item: string, itemIndex: number) => (
         <li className={styles.crumbItem} key={`${item}-${itemIndex}`}>
           /
-          <a className={styles.crumbLink} href={`${getBasePath()}${getCrumbUrl(items, item)}`}>
+          <a
+            className={styles.crumbLink}
+            href={`${getBasePath()}${getCrumbUrl(items, item)}`}
+          >
             {item}
           </a>
         </li>

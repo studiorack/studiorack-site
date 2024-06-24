@@ -1,14 +1,21 @@
 import { Component } from 'react';
-import Crumb from '../../../../components/crumb';
-import Layout from '../../../../components/layout';
-import Head from 'next/head';
+import Crumb from '../../../../components/crumb.jsx';
+import Layout from '../../../../components/layout.jsx';
+import Head from 'next/head.js';
 import styles from '../../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
-import { withRouter, Router } from 'next/router';
-import { PluginInterface, pluginGet, pluginsGet, PluginPack, pluginLatest } from '@studiorack/core';
-import { pluginFileUrl } from '@studiorack/core/dist/utils';
-import Dependency from '../../../../components/dependency';
-import Downloads from '../../../../components/download';
+import { withRouter, Router } from 'next/router.js';
+import {
+  PluginVersion,
+  pluginGet,
+  pluginLicense,
+  pluginsGet,
+  PluginPack,
+  pluginLatest,
+} from '@studiorack/core';
+import { pluginFileUrl } from '../../../../node_modules/@studiorack/core/build/utils.js';
+import Dependency from '../../../../components/dependency.jsx';
+import Downloads from '../../../../components/download.jsx';
 
 declare global {
   interface Window {
@@ -17,7 +24,7 @@ declare global {
 }
 
 type PluginProps = {
-  plugin: PluginInterface;
+  plugin: PluginVersion;
   router: Router;
 };
 
@@ -26,7 +33,7 @@ class PluginPage extends Component<
   {
     isPlaying: boolean;
     router: Router;
-    plugin: PluginInterface;
+    plugin: PluginVersion;
   }
 > {
   constructor(props: PluginProps) {
@@ -48,7 +55,9 @@ class PluginPage extends Component<
   }
 
   timeSince(date: string) {
-    const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+    const seconds = Math.floor(
+      (new Date().getTime() - new Date(date).getTime()) / 1000,
+    );
     let interval = seconds / 31536000;
     if (interval > 2) {
       return Math.floor(interval) + ' years';
@@ -141,8 +150,12 @@ class PluginPage extends Component<
       el.className = '';
       return;
     }
-    const name = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-name') || '';
-    const id = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-repo') || '';
+    const name =
+      (event.currentTarget as HTMLTextAreaElement).getAttribute('data-name') ||
+      '';
+    const id =
+      (event.currentTarget as HTMLTextAreaElement).getAttribute('data-repo') ||
+      '';
     console.log('loadSfzPlayer', name, id);
     el.innerHTML = '';
     const player = new window.Sfz.Player('sfzPlayer', {
@@ -160,8 +173,14 @@ class PluginPage extends Component<
       <Layout>
         <Head>
           <title>{this.state.plugin.name || ''}</title>
-          <meta name="description" content={this.state.plugin.description || ''} />
-          <meta name="og:image" content={pluginFileUrl(this.state.plugin, 'image')} />
+          <meta
+            name="description"
+            content={this.state.plugin.description || ''}
+          />
+          <meta
+            name="og:image"
+            content={pluginFileUrl(this.state.plugin, 'image')}
+          />
           <meta name="og:title" content={this.state.plugin.name || ''} />
         </Head>
         <article>
@@ -169,7 +188,11 @@ class PluginPage extends Component<
           <div className={styles.header}>
             <div className={styles.headerInner2}>
               <Crumb
-                items={['instruments', this.state.plugin.repo.split('/')[0], this.state.plugin.repo.split('/')[1]]}
+                items={[
+                  'instruments',
+                  this.state.plugin.id?.split('/')[0] || '',
+                  this.state.plugin.id?.split('/')[1] || '',
+                ]}
               ></Crumb>
             </div>
             <div className={styles.headerInner}>
@@ -180,7 +203,7 @@ class PluginPage extends Component<
                     <img
                       className={styles.sfzPlayer}
                       data-name={this.state.plugin.name}
-                      data-repo={this.state.plugin.repo}
+                      data-repo={this.state.plugin.id}
                       src={`${this.state.router.basePath}/images/sfz-player.png`}
                       alt="open in sfz player"
                       loading="lazy"
@@ -200,7 +223,10 @@ class PluginPage extends Component<
                   )}
                 </div>
                 {this.state.plugin.files.audio ? (
-                  <audio src={pluginFileUrl(this.state.plugin, 'audio')} id="audio">
+                  <audio
+                    src={pluginFileUrl(this.state.plugin, 'audio')}
+                    id="audio"
+                  >
                     Your browser does not support the audio element.
                   </audio>
                 ) : (
@@ -209,7 +235,10 @@ class PluginPage extends Component<
               </div>
               <div className={styles.details}>
                 <h3 className={styles.title}>
-                  {this.state.plugin.name || ''} <span className={styles.version}>v{this.state.plugin.version}</span>
+                  {this.state.plugin.name || ''}{' '}
+                  <span className={styles.version}>
+                    v{this.state.plugin.version}
+                  </span>
                 </h3>
                 <p className={styles.author}>
                   By{' '}
@@ -240,8 +269,11 @@ class PluginPage extends Component<
                       loading="lazy"
                     />{' '}
                     {this.state.plugin.license ? (
-                      <a href={this.state.plugin.license.url} target="_blank">
-                        {this.state.plugin.license.name}
+                      <a
+                        href={pluginLicense(this.state.plugin.license).url}
+                        target="_blank"
+                      >
+                        {pluginLicense(this.state.plugin.license).name}
                       </a>
                     ) : (
                       'none'
@@ -255,11 +287,13 @@ class PluginPage extends Component<
                       loading="lazy"
                     />
                     <ul className={styles.tags}>
-                      {this.state.plugin.tags.map((tag: string, tagIndex: number) => (
-                        <li className={styles.tag} key={`${tag}-${tagIndex}`}>
-                          {tag},
-                        </li>
-                      ))}
+                      {this.state.plugin.tags.map(
+                        (tag: string, tagIndex: number) => (
+                          <li className={styles.tag} key={`${tag}-${tagIndex}`}>
+                            {tag},
+                          </li>
+                        ),
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -275,14 +309,18 @@ class PluginPage extends Component<
               <div className={`${styles.cell} ${styles.install}`}>
                 <p>
                   Install via{' '}
-                  <a href="https://www.npmjs.com/package/@studiorack/cli" target="_blank">
+                  <a
+                    href="https://www.npmjs.com/package/@studiorack/cli"
+                    target="_blank"
+                  >
                     StudioRack CLI
                   </a>
                   :
                 </p>
                 <Dependency plugin={this.state.plugin} />
                 <pre className={styles.codeBox}>
-                  studiorack plugin install {this.state.plugin.repo}/{this.state.plugin.id}
+                  studiorack plugin install {this.state.plugin.id}/
+                  {this.state.plugin.id}
                 </pre>
               </div>
             </div>
@@ -298,12 +336,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPack: PluginPack = await pluginsGet('instruments');
   const list = [];
   for (const id in pluginPack) {
-    const plugin: PluginInterface = pluginLatest(pluginPack[id]);
+    const plugin: PluginVersion = pluginLatest(pluginPack[id]);
     list.push({
       params: {
         pluginId: plugin.id,
-        repoId: plugin.repo.split('/')[1],
-        userId: plugin.repo.split('/')[0],
+        repoId: plugin.id?.split('/')[1],
+        userId: plugin.id?.split('/')[0],
       },
     });
   }
@@ -322,7 +360,9 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const plugin: PluginInterface = await pluginGet(`${params.userId}/${params.repoId}/${params.pluginId}`);
+  const plugin: PluginVersion = await pluginGet(
+    `${params.userId}/${params.repoId}/${params.pluginId}`,
+  );
   return {
     props: {
       plugin,
