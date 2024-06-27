@@ -1,12 +1,12 @@
 import { Component } from 'react';
-import SubNav from '../../components/subnav.jsx';
-import Layout from '../../components/layout.jsx';
-import { getDocBySlug, getAllDocs } from '../../lib/api.js';
-import Doc from '../../types/doc.js';
+import SubNav from '../../components/subnav';
+import Layout from '../../components/layout';
+import { getDocBySlug, getAllDocs } from '../../lib/api';
+import Doc from '../../types/doc';
 import markdownStyles from '../../styles/doc.module.css';
 import { remark } from 'remark';
 import html from 'remark-html';
-import { withRouter, Router } from 'next/router.js';
+import { withRouter, Router } from 'next/router';
 
 type DocProps = {
   allDocs: Doc[];

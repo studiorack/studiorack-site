@@ -1,19 +1,18 @@
 import { Component, ChangeEvent } from 'react';
-import Head from 'next/head.js';
-import { withRouter, Router } from 'next/router.js';
-import Layout, { siteTitle } from '../../components/layout.jsx';
+import Head from 'next/head';
+import { withRouter, Router } from 'next/router';
+import Layout, { siteTitle } from '../../components/layout';
 import styles from '../../styles/plugins.module.css';
-import GridItem from '../../components/grid-item.jsx';
+import GridItem from '../../components/grid-item';
 import { GetStaticProps } from 'next';
 import {
   PluginCategory,
   PluginVersion,
-  pluginLatest,
   PluginPack,
   pluginsGet,
 } from '@studiorack/core';
-import { configDefaults } from '../../node_modules/@studiorack/core/build/config-defaults.js';
-import { filterPlugins } from '../../lib/plugin.js';
+import { configDefaults } from '../../node_modules/@studiorack/core/build/config-defaults';
+import { filterPlugins, getPlugin } from '../../lib/plugin';
 
 type PluginListProps = {
   category: string;
@@ -168,10 +167,10 @@ class PluginList extends Component<
 export default withRouter(PluginList);
 
 export const getStaticProps: GetStaticProps = async () => {
-  const plugins: PluginPack = await pluginsGet('effects');
+  const pluginPack: PluginPack = await pluginsGet('effects');
   const list: PluginVersion[] = [];
-  for (const pluginId in plugins) {
-    const plugin: PluginVersion = pluginLatest(plugins[pluginId]);
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
     list.push(plugin);
   }
   return {

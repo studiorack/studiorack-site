@@ -4,7 +4,7 @@ import {
   pluginFileUrl,
   pathGetExt,
   pathGetWithoutExt,
-} from '../node_modules/@studiorack/core/build/utils.js';
+} from '../node_modules/@studiorack/core/build/utils';
 
 type DownloadsProps = {
   plugin: PluginVersion;

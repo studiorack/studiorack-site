@@ -1,8 +1,8 @@
 import styles from '../styles/components/grid-item.module.css';
-import Link from 'next/link.js';
-import { getBasePath } from '../lib/path.js';
-import { imageError } from '../lib/image.js';
-import { pluginFileUrl } from '../node_modules/@studiorack/core/build/utils.js';
+import Link from 'next/link';
+import { getBasePath } from '../lib/path';
+import { imageError } from '../lib/image';
+import { pluginFileUrl } from '../node_modules/@studiorack/core/build/utils';
 
 type GridItemProps = {
   section: string;

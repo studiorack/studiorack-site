@@ -1,6 +1,6 @@
-import Doc from '../types/doc.js';
+import Doc from '../types/doc';
 import styles from '../styles/components/subnav.module.css';
-import { getBasePath, isSelected } from '../lib/path.js';
+import { getBasePath, isSelected } from '../lib/path';
 
 type SubNavProps = {
   children: React.ReactNode;

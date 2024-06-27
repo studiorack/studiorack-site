@@ -1,5 +1,5 @@
 import styles from '../styles/components/navigation.module.css';
-import { getBasePath, isSelected } from '../lib/path.js';
+import { getBasePath, isSelected } from '../lib/path';
 
 const Navigation = () => (
   <div className={styles.navigation}>

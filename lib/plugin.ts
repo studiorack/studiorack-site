@@ -1,6 +1,11 @@
-import { PluginCategory, PluginVersion } from '@studiorack/core';
+import {
+  PluginCategory,
+  PluginEntry,
+  PluginPack,
+  PluginVersion,
+} from '../node_modules/@studiorack/core/build/types/plugin';
 
-function filterPlugins(
+export function filterPlugins(
   category: string,
   plugins: PluginVersion[],
   pluginTypes: { [property: string]: PluginCategory },
@@ -23,4 +28,10 @@ function filterPlugins(
   });
 }
 
-export { filterPlugins };
+export function getPlugin(pluginPack: PluginPack, pluginId: string) {
+  const pluginEntry: PluginEntry = pluginPack[pluginId];
+  const plugin: PluginVersion = pluginEntry.versions[pluginEntry.version];
+  plugin.id = pluginId;
+  plugin.version = pluginEntry.version;
+  return plugin;
+}

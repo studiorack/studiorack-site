@@ -1,5 +1,5 @@
 import styles from '../styles/plugin.module.css';
-import { getBasePath } from '../lib/path.js';
+import { getBasePath } from '../lib/path';
 import { PluginVersion } from '@studiorack/core';
 
 type DependencyProps = {

@@ -1,7 +1,7 @@
-import Head from 'next/head.js';
-import Navigation from './navigation.jsx';
+import Head from 'next/head';
+import Navigation from './navigation';
 import styles from '../styles/components/layout.module.css';
-import { getBasePath } from '../lib/path.js';
+import { getBasePath } from '../lib/path';
 
 export const siteTitle = 'StudioRack';
 export const siteDesc =

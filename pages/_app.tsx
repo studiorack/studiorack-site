@@ -1,10 +1,10 @@
 import '../styles/global.css';
-import { AppProps } from 'next/app.js';
+import { AppProps } from 'next/app';
 
 import { useEffect } from 'react';
-import Script from 'next/script.js';
-import { useRouter } from 'next/router.js';
-import { GA_TRACKING_ID, pageview } from '../lib/gtag.js';
+import Script from 'next/script';
+import { useRouter } from 'next/router';
+import { GA_TRACKING_ID, pageview } from '../lib/gtag';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();

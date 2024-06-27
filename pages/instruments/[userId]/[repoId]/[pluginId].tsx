@@ -1,21 +1,22 @@
 import { Component } from 'react';
-import Crumb from '../../../../components/crumb.jsx';
-import Layout from '../../../../components/layout.jsx';
+import Crumb from '../../../../components/crumb';
+import Layout from '../../../../components/layout';
 import Head from 'next/head.js';
 import styles from '../../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router.js';
 import {
-  PluginVersion,
   pluginGet,
-  pluginLicense,
   pluginsGet,
+} from '../../../../node_modules/@studiorack/core/build/plugin';
+import {
+  PluginVersion,
   PluginPack,
-  pluginLatest,
-} from '@studiorack/core';
+} from '../../../../node_modules/@studiorack/core/build/types/plugin';
 import { pluginFileUrl } from '../../../../node_modules/@studiorack/core/build/utils.js';
-import Dependency from '../../../../components/dependency.jsx';
-import Downloads from '../../../../components/download.jsx';
+import Dependency from '../../../../components/dependency';
+import Downloads from '../../../../components/download';
+import { getPlugin } from '../../../../lib/plugin';
 
 declare global {
   interface Window {
@@ -270,10 +271,16 @@ class PluginPage extends Component<
                     />{' '}
                     {this.state.plugin.license ? (
                       <a
-                        href={pluginLicense(this.state.plugin.license).url}
+                        href={
+                          typeof this.state.plugin.license === 'string'
+                            ? this.state.plugin.license
+                            : this.state.plugin.license.url
+                        }
                         target="_blank"
                       >
-                        {pluginLicense(this.state.plugin.license).name}
+                        {typeof this.state.plugin.license === 'string'
+                          ? this.state.plugin.license
+                          : this.state.plugin.license.name}
                       </a>
                     ) : (
                       'none'
@@ -335,8 +342,13 @@ export default withRouter(PluginPage);
 export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPack: PluginPack = await pluginsGet('instruments');
   const list = [];
-  for (const id in pluginPack) {
-    const plugin: PluginVersion = pluginLatest(pluginPack[id]);
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
+    console.log({
+      pluginId: plugin.id,
+      repoId: plugin.id?.split('/')[1],
+      userId: plugin.id?.split('/')[0],
+    });
     list.push({
       params: {
         pluginId: plugin.id,
@@ -360,6 +372,8 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
+  console.log(params);
+  console.log(`${params.userId}/${params.repoId}/${params.pluginId}`);
   const plugin: PluginVersion = await pluginGet(
     `${params.userId}/${params.repoId}/${params.pluginId}`,
   );

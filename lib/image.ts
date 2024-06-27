@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { getBasePath } from '../lib/path.js';
+import { getBasePath } from '../lib/path';
 
 export function imageError(event: SyntheticEvent) {
   const el = event.target as HTMLImageElement;

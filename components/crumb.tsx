@@ -1,5 +1,5 @@
 import styles from '../styles/components/crumb.module.css';
-import { getBasePath, getCrumbUrl } from '../lib/path.js';
+import { getBasePath, getCrumbUrl } from '../lib/path';
 
 type CrumbProps = {
   items: string[];

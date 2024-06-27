@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
-import Doc from '../types/doc.js';
+import Doc from '../types/doc';
 
 const docsDirectory = join(process.cwd(), '_docs');
 

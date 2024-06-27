@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router.js';
+import { useRouter } from 'next/router';
 
 function getBasePath() {
   return useRouter().basePath;

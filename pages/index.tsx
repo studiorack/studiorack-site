@@ -1,7 +1,7 @@
-import Head from 'next/head.js';
-import Layout, { siteTitle } from '../components/layout.jsx';
+import Head from 'next/head';
+import Layout, { siteTitle } from '../components/layout';
 import styles from '../styles/index.module.css';
-import { getBasePath } from '../lib/path.js';
+import { getBasePath } from '../lib/path';
 
 const Home = () => (
   <Layout>

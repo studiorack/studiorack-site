@@ -1,11 +1,11 @@
 import { Component } from 'react';
-import SubNav from '../../components/subnav.js';
-import Layout from '../../components/layout.jsx';
+import SubNav from '../../components/subnav';
+import Layout from '../../components/layout';
 import styles from '../../styles/doc.module.css';
-import { getAllDocs } from '../../lib/api.js';
-import Head from 'next/head.js';
-import Doc from '../../types/doc.js';
-import { withRouter, Router } from 'next/router.js';
+import { getAllDocs } from '../../lib/api';
+import Head from 'next/head';
+import Doc from '../../types/doc';
+import { withRouter, Router } from 'next/router';
 
 type DocListProps = {
   allDocs: Doc[];

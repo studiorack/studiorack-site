@@ -1,15 +1,11 @@
 import { Component, ChangeEvent } from 'react';
-import Head from 'next/head.js';
-import Crumb from '../../../../components/crumb.jsx';
-import Layout, { siteTitle } from '../../../../components/layout.jsx';
+import Head from 'next/head';
+import Crumb from '../../../../components/crumb';
+import Layout, { siteTitle } from '../../../../components/layout';
 import styles from '../../../../styles/plugins.module.css';
-import GridItem from '../../../../components/grid-item.jsx';
-import {
-  PluginVersion,
-  pluginLatest,
-  PluginPack,
-  pluginsGet,
-} from '@studiorack/core';
+import GridItem from '../../../../components/grid-item';
+import { PluginVersion, PluginPack, pluginsGet } from '@studiorack/core';
+import { getPlugin } from '../../../../lib/plugin';
 
 type PluginListProps = {
   plugins: PluginVersion[];
@@ -67,8 +63,8 @@ export default PluginList;
 export async function getStaticPaths() {
   const pluginPack: PluginPack = await pluginsGet('effects');
   const list = [];
-  for (const id in pluginPack) {
-    const plugin: PluginVersion = pluginLatest(pluginPack[id]);
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
     list.push({
       params: {
         repoId: plugin.id?.split('/')[1],
@@ -90,10 +86,10 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const plugins = await pluginsGet('effects');
+  const pluginPack: PluginPack = await pluginsGet('effects');
   const list: PluginVersion[] = [];
-  for (const pluginId in plugins) {
-    const plugin: PluginVersion = pluginLatest(plugins[pluginId]);
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
     if (plugin.id === `${params.userId}/${params.repoId}`) {
       list.push(plugin);
     }

@@ -1,21 +1,21 @@
 import { Component } from 'react';
-import Crumb from '../../../../components/crumb.jsx';
-import Layout from '../../../../components/layout.jsx';
-import Head from 'next/head.js';
+import Crumb from '../../../../components/crumb';
+import Layout from '../../../../components/layout';
+import Head from 'next/head';
 import styles from '../../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
-import { withRouter, Router } from 'next/router.js';
+import { withRouter, Router } from 'next/router';
 import {
   PluginVersion,
   pluginGet,
   pluginLicense,
   pluginsGet,
   PluginPack,
-  pluginLatest,
 } from '@studiorack/core';
-import { pluginFileUrl } from '../../../../node_modules/@studiorack/core/build/utils.jsx';
-import Dependency from '../../../../components/dependency.jsx';
-import Downloads from '../../../../components/download.jsx';
+import { pluginFileUrl } from '../../../../node_modules/@studiorack/core/build/utils';
+import Dependency from '../../../../components/dependency';
+import Downloads from '../../../../components/download';
+import { getPlugin } from '../../../../lib/plugin';
 
 type PluginProps = {
   plugin: PluginVersion;
@@ -288,8 +288,8 @@ export default withRouter(PluginPage);
 export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPack: PluginPack = await pluginsGet('effects');
   const list = [];
-  for (const id in pluginPack) {
-    const plugin: PluginVersion = pluginLatest(pluginPack[id]);
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
     list.push({
       params: {
         pluginId: plugin.id,
