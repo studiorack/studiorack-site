@@ -4,17 +4,18 @@ import Crumb from '../../../components/crumb';
 import Layout, { siteTitle } from '../../../components/layout';
 import styles from '../../../styles/plugins.module.css';
 import GridItem from '../../../components/grid-item';
-import { PluginInterface, pluginLatest, PluginPack, pluginsGet } from '@studiorack/core';
+import { PluginVersion, PluginPack, pluginsGet } from '@studiorack/core';
+import { getPlugin } from '../../../lib/plugin';
 
 type PluginListProps = {
-  plugins: PluginInterface[];
+  plugins: PluginVersion[];
   userId: string;
 };
 
 class PluginList extends Component<
   PluginListProps,
   {
-    pluginsFiltered: PluginInterface[];
+    pluginsFiltered: PluginVersion[];
     query: string;
     userId: string;
   }
@@ -38,14 +39,16 @@ class PluginList extends Component<
           <Crumb items={['instruments']}></Crumb>
           <h2>{this.state.userId}</h2>
           <div className={styles.pluginsList}>
-            {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
-              <GridItem
-                section="instruments"
-                plugin={plugin}
-                pluginIndex={pluginIndex}
-                key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}
-              ></GridItem>
-            ))}
+            {this.state.pluginsFiltered.map(
+              (plugin: PluginVersion, pluginIndex: number) => (
+                <GridItem
+                  section="instruments"
+                  plugin={plugin}
+                  pluginIndex={pluginIndex}
+                  key={`${plugin.id}-${pluginIndex}`}
+                ></GridItem>
+              ),
+            )}
           </div>
         </section>
       </Layout>
@@ -57,11 +60,11 @@ export default PluginList;
 export async function getStaticPaths() {
   const pluginPack: PluginPack = await pluginsGet('instruments');
   const list = [];
-  for (const id in pluginPack) {
-    const plugin: PluginInterface = pluginLatest(pluginPack[id]);
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
     list.push({
       params: {
-        userId: plugin.repo.split('/')[0],
+        userId: plugin.id?.split('/')[0],
       },
     });
   }
@@ -78,12 +81,12 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const plugins = await pluginsGet('instruments');
-  const list: PluginInterface[] = [];
-  for (const pluginId in plugins) {
-    const plugin: PluginInterface = pluginLatest(plugins[pluginId]);
-    console.log(plugin.repo.split('/')[0], params.userId);
-    if (plugin.repo.split('/')[0] === params.userId) {
+  const pluginPack: PluginPack = await pluginsGet('instruments');
+  const list: PluginVersion[] = [];
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
+    console.log(plugin.id?.split('/')[0], params.userId);
+    if (plugin.id?.split('/')[0] === params.userId) {
       list.push(plugin);
     }
   }

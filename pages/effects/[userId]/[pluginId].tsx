@@ -1,17 +1,23 @@
 import { Component } from 'react';
-import Crumb from '../../../../components/crumb';
-import Layout from '../../../../components/layout';
+import Crumb from '../../../components/crumb';
+import Layout from '../../../components/layout';
 import Head from 'next/head';
-import styles from '../../../../styles/plugin.module.css';
+import styles from '../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router';
-import { PluginInterface, pluginGet, pluginsGet, PluginPack, pluginLatest } from '@studiorack/core';
-import { pluginFileUrl } from '@studiorack/core/dist/utils';
-import Dependency from '../../../../components/dependency';
-import Downloads from '../../../../components/download';
+import {
+  PluginVersion,
+  pluginGet,
+  pluginsGet,
+  PluginPack,
+} from '@studiorack/core';
+import { pluginFileUrl } from '../../../node_modules/@studiorack/core/build/utils';
+import Dependency from '../../../components/dependency';
+import Downloads from '../../../components/download';
+import { getPlugin, pluginLicense } from '../../../lib/plugin';
 
 type PluginProps = {
-  plugin: PluginInterface;
+  plugin: PluginVersion;
   router: Router;
 };
 
@@ -20,7 +26,7 @@ class PluginPage extends Component<
   {
     isPlaying: boolean;
     router: Router;
-    plugin: PluginInterface;
+    plugin: PluginVersion;
   }
 > {
   constructor(props: PluginProps) {
@@ -42,7 +48,9 @@ class PluginPage extends Component<
   }
 
   timeSince(date: string) {
-    const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+    const seconds = Math.floor(
+      (new Date().getTime() - new Date(date).getTime()) / 1000,
+    );
     let interval = seconds / 31536000;
     if (interval > 2) {
       return Math.floor(interval) + ' years';
@@ -131,15 +139,25 @@ class PluginPage extends Component<
       <Layout>
         <Head>
           <title>{this.state.plugin.name || ''}</title>
-          <meta name="description" content={this.state.plugin.description || ''} />
-          <meta name="og:image" content={pluginFileUrl(this.state.plugin, 'image')} />
+          <meta
+            name="description"
+            content={this.state.plugin.description || ''}
+          />
+          <meta
+            name="og:image"
+            content={pluginFileUrl(this.state.plugin, 'image')}
+          />
           <meta name="og:title" content={this.state.plugin.name || ''} />
         </Head>
         <article>
           <div className={styles.header}>
             <div className={styles.headerInner2}>
               <Crumb
-                items={['effects', this.state.plugin.repo.split('/')[0], this.state.plugin.repo.split('/')[1]]}
+                items={[
+                  'effects',
+                  this.state.plugin.id?.split('/')[0] || '',
+                  this.state.plugin.id?.split('/')[1] || '',
+                ]}
               ></Crumb>
             </div>
             <div className={styles.headerInner}>
@@ -157,7 +175,10 @@ class PluginPage extends Component<
                   )}
                 </div>
                 {this.state.plugin.files.audio ? (
-                  <audio src={pluginFileUrl(this.state.plugin, 'audio')} id="audio">
+                  <audio
+                    src={pluginFileUrl(this.state.plugin, 'audio')}
+                    id="audio"
+                  >
                     Your browser does not support the audio element.
                   </audio>
                 ) : (
@@ -166,7 +187,10 @@ class PluginPage extends Component<
               </div>
               <div className={styles.details}>
                 <h3 className={styles.title}>
-                  {this.state.plugin.name || ''} <span className={styles.version}>v{this.state.plugin.version}</span>
+                  {this.state.plugin.name || ''}{' '}
+                  <span className={styles.version}>
+                    v{this.state.plugin.version}
+                  </span>
                 </h3>
                 <p className={styles.author}>
                   By{' '}
@@ -197,8 +221,11 @@ class PluginPage extends Component<
                       loading="lazy"
                     />{' '}
                     {this.state.plugin.license ? (
-                      <a href={this.state.plugin.license.url} target="_blank">
-                        {this.state.plugin.license.name}
+                      <a
+                        href={pluginLicense(this.state.plugin.license).url}
+                        target="_blank"
+                      >
+                        {pluginLicense(this.state.plugin.license).name}
                       </a>
                     ) : (
                       'none'
@@ -212,11 +239,13 @@ class PluginPage extends Component<
                       loading="lazy"
                     />
                     <ul className={styles.tags}>
-                      {this.state.plugin.tags.map((tag: string, tagIndex: number) => (
-                        <li className={styles.tag} key={`${tag}-${tagIndex}`}>
-                          {tag},
-                        </li>
-                      ))}
+                      {this.state.plugin.tags.map(
+                        (tag: string, tagIndex: number) => (
+                          <li className={styles.tag} key={`${tag}-${tagIndex}`}>
+                            {tag},
+                          </li>
+                        ),
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -232,14 +261,17 @@ class PluginPage extends Component<
               <div className={`${styles.cell} ${styles.install}`}>
                 <p>
                   Install via{' '}
-                  <a href="https://www.npmjs.com/package/@studiorack/cli" target="_blank">
+                  <a
+                    href="https://www.npmjs.com/package/@studiorack/cli"
+                    target="_blank"
+                  >
                     StudioRack CLI
                   </a>
                   :
                 </p>
                 <Dependency plugin={this.state.plugin} />
                 <pre className={styles.codeBox}>
-                  studiorack plugin install {this.state.plugin.repo}/{this.state.plugin.id}
+                  studiorack plugin install {this.state.plugin.id}
                 </pre>
               </div>
             </div>
@@ -254,13 +286,12 @@ export default withRouter(PluginPage);
 export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPack: PluginPack = await pluginsGet('effects');
   const list = [];
-  for (const id in pluginPack) {
-    const plugin: PluginInterface = pluginLatest(pluginPack[id]);
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
     list.push({
       params: {
-        pluginId: plugin.id,
-        repoId: plugin.repo.split('/')[1],
-        userId: plugin.repo.split('/')[0],
+        pluginId: plugin.id?.split('/')[1],
+        userId: plugin.id?.split('/')[0],
       },
     });
   }
@@ -273,13 +304,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 type Params = {
   params: {
     pluginId: string;
-    repoId: string;
     userId: string;
   };
 };
 
 export async function getStaticProps({ params }: Params) {
-  const plugin: PluginInterface = await pluginGet(`${params.userId}/${params.repoId}/${params.pluginId}`);
+  const plugin: PluginVersion = await pluginGet(
+    `${params.userId}/${params.pluginId}`,
+  );
   return {
     props: {
       plugin,

@@ -1,20 +1,19 @@
 # studiorack-site
+
 ![Release](https://github.com/studiorack/studiorack-site/workflows/Release/badge.svg)
 
 Audio plugin site with searchable plugin list, tools and documentation using:
 
-* NodeJS 17.x
-* TypeScript 4.x
-* NextJS 12.x
-* React 17.x
-
+- NodeJS 18.x
+- TypeScript 5.x
+- NextJS 14.x
+- React 18.x
 
 ## Installation
 
 Install dependencies using:
 
     npm install
-
 
 ## Usage
 
@@ -30,7 +29,6 @@ Get the api at:
 
     http://localhost:3000/api/plugins
 
-
 ## Deployment
 
 Release an updated version on GitHub by simply creating a version tag:
@@ -41,7 +39,6 @@ Release an updated version on GitHub by simply creating a version tag:
 This will run an automated build and deploy process on GitHub Actions:
 
     .github/workflows/release.yml
-
 
 ## Contact
 

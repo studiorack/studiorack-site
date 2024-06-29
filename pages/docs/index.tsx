@@ -42,20 +42,34 @@ class DocList extends Component<
               <li className={styles.markdownLi}>NodeJS 12+</li>
             </ul>
             <p>To install the command line tool, run the command:</p>
-            <pre className={styles.markdownPre}>npm install @studiorack/cli -g</pre>
+            <pre className={styles.markdownPre}>
+              npm install @studiorack/cli -g
+            </pre>
             <p>Verify the tool has been installed by running:</p>
             <pre className={styles.markdownPre}>studiorack --version</pre>
             <h2 className={styles.markdownH2}>Music producers</h2>
-            <p>Follow our guide on how to start a music project and install plugins:</p>
             <p>
-              <a href={`${this.state.router.basePath}/docs/02-create-a-project-config`} className={styles.markdownA}>
+              Follow our guide on how to start a music project and install
+              plugins:
+            </p>
+            <p>
+              <a
+                href={`${this.state.router.basePath}/docs/02-create-a-project-config`}
+                className={styles.markdownA}
+              >
                 Create a project config &gt;
               </a>
             </p>
             <h2 className={styles.markdownH2}>Plugin developers</h2>
-            <p>Jump straight to the advanced guide on how to create your own audio plugins:</p>
             <p>
-              <a href={`${this.state.router.basePath}/docs/05-develop-new-plugins`} className={styles.markdownA}>
+              Jump straight to the advanced guide on how to create your own
+              audio plugins:
+            </p>
+            <p>
+              <a
+                href={`${this.state.router.basePath}/docs/05-develop-new-plugins`}
+                className={styles.markdownA}
+              >
                 Develop new plugins &gt;
               </a>
             </p>

@@ -5,15 +5,20 @@ import Layout, { siteTitle } from '../../components/layout';
 import styles from '../../styles/plugins.module.css';
 import GridItem from '../../components/grid-item';
 import { GetStaticProps } from 'next';
-import { PluginCategory, PluginInterface, pluginLatest, PluginPack, pluginsGet } from '@studiorack/core';
-import { configDefaults } from '@studiorack/core/dist/config-defaults';
-import { filterPlugins } from '../../lib/plugin';
+import {
+  PluginCategory,
+  PluginVersion,
+  PluginPack,
+  pluginsGet,
+} from '@studiorack/core';
+import { configDefaults } from '../../node_modules/@studiorack/core/build/config-defaults';
+import { filterPlugins, getPlugin } from '../../lib/plugin';
 
 type PluginListProps = {
   category: string;
   pluginTypes: { [property: string]: PluginCategory };
-  plugins: PluginInterface[];
-  pluginsFiltered: PluginInterface[];
+  plugins: PluginVersion[];
+  pluginsFiltered: PluginVersion[];
   query: string;
   router: Router;
 };
@@ -23,8 +28,8 @@ class PluginList extends Component<
   {
     category: string;
     pluginTypes: { [property: string]: PluginCategory };
-    plugins: PluginInterface[];
-    pluginsFiltered: PluginInterface[];
+    plugins: PluginVersion[];
+    pluginsFiltered: PluginVersion[];
     query: string;
     router: Router;
   }
@@ -33,7 +38,12 @@ class PluginList extends Component<
     super(props);
     const params = props.router.query;
     const category = (params.category as string) || 'all';
-    const pluginTypes = configDefaults('appFolder', 'pluginFolder', 'projectFolder').pluginEffectCategories;
+    const pluginTypes = configDefaults(
+      'appFolder',
+      'pluginFolder',
+      'presetFolder',
+      'projectFolder',
+    ).pluginEffectCategories;
     const plugins = props.plugins || [];
     const query = (params.query as string) || '';
     this.state = {
@@ -63,12 +73,21 @@ class PluginList extends Component<
 
   updateFilter() {
     this.setState({
-      pluginsFiltered: filterPlugins(this.state.category, this.state.plugins, this.state.pluginTypes, this.state.query),
+      pluginsFiltered: filterPlugins(
+        this.state.category,
+        this.state.plugins,
+        this.state.pluginTypes,
+        this.state.query,
+      ),
     });
   }
 
   updateUrl = (category: string, query: string) => {
-    this.state.router.push(`/effects?category=${category}&query=${query}`, undefined, { shallow: true });
+    this.state.router.push(
+      `/effects?category=${category}&query=${query}`,
+      undefined,
+      { shallow: true },
+    );
   };
 
   handleChange = (event: ChangeEvent) => {
@@ -82,7 +101,10 @@ class PluginList extends Component<
   };
 
   selectCategory = (event: React.MouseEvent): void => {
-    const category = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-category') || '';
+    const category =
+      (event.currentTarget as HTMLTextAreaElement).getAttribute(
+        'data-category',
+      ) || '';
     this.updateUrl(category, this.state.query);
   };
 
@@ -95,7 +117,10 @@ class PluginList extends Component<
         <section className={styles.plugins}>
           <div className={styles.pluginsHeader}>
             <h3 className={styles.pluginsTitle}>
-              Effects <span className={styles.pluginCount}>({this.state.pluginsFiltered.length})</span>
+              Effects{' '}
+              <span className={styles.pluginCount}>
+                ({this.state.pluginsFiltered.length})
+              </span>
             </h3>
             <input
               className={styles.pluginsSearch}
@@ -107,28 +132,32 @@ class PluginList extends Component<
           </div>
           <div className={styles.pluginsCategoryWrapper}>
             <ul className={styles.pluginsCategory}>
-              {Object.keys(this.state.pluginTypes).map((projectTypeKey: string, projectTypeIndex: number) => (
-                <li key={`${projectTypeKey}-${projectTypeIndex}`}>
-                  <a
-                    data-category={projectTypeKey}
-                    onClick={this.selectCategory}
-                    className={this.isSelected(projectTypeKey)}
-                  >
-                    {this.state.pluginTypes[projectTypeKey].name}
-                  </a>
-                </li>
-              ))}
+              {Object.keys(this.state.pluginTypes).map(
+                (projectTypeKey: string, projectTypeIndex: number) => (
+                  <li key={`${projectTypeKey}-${projectTypeIndex}`}>
+                    <a
+                      data-category={projectTypeKey}
+                      onClick={this.selectCategory}
+                      className={this.isSelected(projectTypeKey)}
+                    >
+                      {this.state.pluginTypes[projectTypeKey].name}
+                    </a>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
           <div className={styles.pluginsList}>
-            {this.state.pluginsFiltered.map((plugin: PluginInterface, pluginIndex: number) => (
-              <GridItem
-                section="effects"
-                plugin={plugin}
-                pluginIndex={pluginIndex}
-                key={`${plugin.repo}/${plugin.id}-${pluginIndex}`}
-              ></GridItem>
-            ))}
+            {this.state.pluginsFiltered.map(
+              (plugin: PluginVersion, pluginIndex: number) => (
+                <GridItem
+                  section="effects"
+                  plugin={plugin}
+                  pluginIndex={pluginIndex}
+                  key={`${plugin.id}-${pluginIndex}`}
+                ></GridItem>
+              ),
+            )}
           </div>
         </section>
       </Layout>
@@ -138,10 +167,10 @@ class PluginList extends Component<
 export default withRouter(PluginList);
 
 export const getStaticProps: GetStaticProps = async () => {
-  const plugins: PluginPack = await pluginsGet('effects');
-  const list: PluginInterface[] = [];
-  for (const pluginId in plugins) {
-    const plugin: PluginInterface = pluginLatest(plugins[pluginId]);
+  const pluginPack: PluginPack = await pluginsGet('effects');
+  const list: PluginVersion[] = [];
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
     list.push(plugin);
   }
   return {

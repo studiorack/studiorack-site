@@ -1,15 +1,22 @@
 {
   "name": "studiorack-site",
-  "version": "0.0.33",
+  "version": "2.0.0",
   "description": "Audio plugin site with searchable plugin list, tools and documentation",
+  "type": "module",
+  "main": "./main.js",
+  "exports": "./build/main.js",
+  "types": "./build/main.d.ts",
+  "files": [
+    "build"
+  ],
   "scripts": {
+    "build": "next build",
     "dev": "next dev",
     "dev:static": "serve ./out",
-    "build": "next build && next export",
-    "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "lint": "tslint -p tsconfig.json",
+    "format": "prettier . --write",
+    "lint": "eslint ./**/*.ts",
     "start": "next start",
-    "test": "echo 'No tests were run'"
+    "test": "vitest run ./tests"
   },
   "repository": {
     "type": "git",
@@ -25,27 +32,37 @@
     "search"
   ],
   "author": "kmturley",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/studiorack/studiorack-site/issues"
   },
   "homepage": "https://github.com/studiorack/studiorack-site#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "@studiorack/core": "^1.1.54",
+    "@studiorack/core": "^2.0.12",
     "gray-matter": "^4.0.3",
-    "next": "^12.0.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "remark": "^14.0.1",
-    "remark-html": "^15.0.0"
+    "next": "^14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1"
   },
   "devDependencies": {
-    "@types/node": "^16.11.7",
-    "@types/react": "^17.0.34",
-    "prettier": "^2.4.1",
-    "serve": "^13.0.2",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.4.4"
+    "@eslint/js": "^9.2.0",
+    "@testing-library/react": "^16.0.0",
+    "@types/node": "20.14.8",
+    "@types/react": "18.3.3",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^8.57.0",
+    "globals": "^15.2.0",
+    "jsdom": "^24.1.0",
+    "prettier": "^3.2.5",
+    "serve": "^14.2.3",
+    "tsx": "^4.10.1",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.8.0",
+    "vitest": "^1.6.0"
   }
 }

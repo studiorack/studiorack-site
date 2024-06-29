@@ -12,12 +12,15 @@ const SubNav = ({ children, docs }: SubNavProps) => (
     <div className={styles.sidebar}>
       <h4>Documentation</h4>
       <ul className={styles.menu}>
-        {docs.map((doc) => {
+        {docs.map(doc => {
           return doc.slug === '06-command-line' ? (
             ''
           ) : (
             <li className={styles.menuItem} key={doc.slug}>
-              <a href={`${getBasePath()}/docs/${doc.slug}`} className={isSelected(`/docs/${doc.slug}`)}>
+              <a
+                href={`${getBasePath()}/docs/${doc.slug}`}
+                className={isSelected(`/docs/${doc.slug}`)}
+              >
                 {doc.title}
               </a>
             </li>
@@ -27,7 +30,10 @@ const SubNav = ({ children, docs }: SubNavProps) => (
       <h4>API Reference</h4>
       <ul className={styles.menu}>
         <li className={styles.menuItem} key="06-command-line">
-          <a href={`${getBasePath()}/docs/06-command-line`} className={isSelected(`/docs/06-command-line`)}>
+          <a
+            href={`${getBasePath()}/docs/06-command-line`}
+            className={isSelected(`/docs/06-command-line`)}
+          >
             Command line
           </a>
         </li>

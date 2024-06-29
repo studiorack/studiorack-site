@@ -39,16 +39,22 @@ class DocPage extends Component<
   }
 
   render() {
-    let content = this.state.doc.content.replace('/docs', `${this.state.router.basePath}/docs`);
+    let content = this.state.doc.content.replace(
+      '/docs',
+      `${this.state.router.basePath}/docs`,
+    );
     content = content.replace(
       /<h2>(.*?)<\/h2>/g,
-      (tag, title) => `<span id="${this.convertToSlug(title)}"></span>${tag}`
+      (tag, title) => `<span id="${this.convertToSlug(title)}"></span>${tag}`,
     );
     return (
       <Layout>
         <SubNav docs={this.state.allDocs}>
           <h1>{this.state.doc.title}</h1>
-          <div className={markdownStyles.markdown} dangerouslySetInnerHTML={{ __html: content }} />
+          <div
+            className={markdownStyles.markdown}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </SubNav>
       </Layout>
     );
@@ -88,7 +94,7 @@ export async function getStaticPaths() {
   const docs = getAllDocs(['slug']) as Doc[];
 
   return {
-    paths: docs.map((doc) => {
+    paths: docs.map(doc => {
       return {
         params: {
           slug: doc.slug,
