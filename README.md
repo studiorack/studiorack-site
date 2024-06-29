@@ -4,10 +4,10 @@
 
 Audio plugin site with searchable plugin list, tools and documentation using:
 
-- NodeJS 17.x
-- TypeScript 4.x
-- NextJS 12.x
-- React 17.x
+- NodeJS 18.x
+- TypeScript 5.x
+- NextJS 14.x
+- React 18.x
 
 ## Installation
 
