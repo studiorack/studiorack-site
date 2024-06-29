@@ -54,7 +54,6 @@ class PluginList extends Component<
       query,
       router: props.router,
     };
-    console.log(plugins[0]);
   }
 
   componentDidUpdate(prevProps: any) {

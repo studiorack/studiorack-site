@@ -15,7 +15,7 @@ const Dependency = ({ plugin, message = false }: DependencyProps) => {
           {' '}
           (This instrument needs to be loaded into a{' '}
           <a
-            href={`${getBasePath()}/instruments/studiorack/sfizz/sfizz`}
+            href={`${getBasePath()}/instruments/studiorack/sfizz`}
             target="_blank"
           >
             SFZ player
@@ -26,7 +26,7 @@ const Dependency = ({ plugin, message = false }: DependencyProps) => {
     } else {
       return (
         <pre className={styles.codeBox}>
-          studiorack plugin install studiorack/sfizz/sfizz
+          studiorack plugin install studiorack/sfizz
         </pre>
       );
     }
@@ -37,7 +37,7 @@ const Dependency = ({ plugin, message = false }: DependencyProps) => {
           {' '}
           (This instrument needs to be loaded into a{' '}
           <a
-            href={`${getBasePath()}/instruments/studiorack/juicysf/juicysf`}
+            href={`${getBasePath()}/instruments/studiorack/juicysf`}
             target="_blank"
           >
             SoundFont 2 player
@@ -48,12 +48,12 @@ const Dependency = ({ plugin, message = false }: DependencyProps) => {
     } else {
       return (
         <pre className={styles.codeBox}>
-          studiorack plugin install studiorack/juicysf/juicysf
+          studiorack plugin install studiorack/juicysf
         </pre>
       );
     }
   } else {
-    return <div />;
+    return <span />;
   }
 };
 

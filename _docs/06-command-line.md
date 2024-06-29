@@ -117,7 +117,7 @@ Follow the instructions in generated README.md to install and build your plugin.
 
 `studiorack plugin install <input>` Install a plugin manually by id:
 
-    studiorack plugin install studiorack/studiorack-template-steinberg/adelay
+    studiorack plugin install studiorack/mda
 
 ## Plugin list
 

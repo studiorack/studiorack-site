@@ -8,4 +8,5 @@ export default {
   generateBuildId: async () => {
     return 'latest'; // TODO version the site feed using package.version
   },
+  output: 'export',
 };

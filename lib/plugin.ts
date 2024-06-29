@@ -1,6 +1,8 @@
+import { configDefaults } from '../node_modules/@studiorack/core/build/config-defaults';
 import {
   PluginCategory,
   PluginEntry,
+  PluginLicense,
   PluginPack,
   PluginVersion,
 } from '../node_modules/@studiorack/core/build/types/plugin';
@@ -34,4 +36,22 @@ export function getPlugin(pluginPack: PluginPack, pluginId: string) {
   plugin.id = pluginId;
   plugin.version = pluginEntry.version;
   return plugin;
+}
+
+export function pluginLicense(key: string | PluginLicense) {
+  if (typeof key !== 'string') return key;
+  const licenses: PluginLicense[] = configDefaults(
+    'appFolder',
+    'pluginFolder',
+    'presetFolder',
+    'projectFolder',
+  ).licenses;
+  let licenseMatch: PluginLicense = licenses[licenses.length - 1];
+  licenses.forEach((license: PluginLicense) => {
+    if (key === license.key) {
+      licenseMatch = license;
+      return;
+    }
+  });
+  return licenseMatch;
 }

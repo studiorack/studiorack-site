@@ -1,3 +1,10 @@
+.pluginLink,
+.pluginLink:hover {
+  border-bottom: none;
+  padding-bottom: 0;
+  transition: none;
+}
+
 .plugin {
   background-color: #111;
   border-radius: 0.5rem;

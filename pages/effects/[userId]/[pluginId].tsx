@@ -1,28 +1,20 @@
 import { Component } from 'react';
-import Crumb from '../../../../components/crumb';
-import Layout from '../../../../components/layout';
-import Head from 'next/head.js';
-import styles from '../../../../styles/plugin.module.css';
+import Crumb from '../../../components/crumb';
+import Layout from '../../../components/layout';
+import Head from 'next/head';
+import styles from '../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
-import { withRouter, Router } from 'next/router.js';
-import {
-  pluginGet,
-  pluginsGet,
-} from '../../../../node_modules/@studiorack/core/build/plugin';
+import { withRouter, Router } from 'next/router';
 import {
   PluginVersion,
+  pluginGet,
+  pluginsGet,
   PluginPack,
-} from '../../../../node_modules/@studiorack/core/build/types/plugin';
-import { pluginFileUrl } from '../../../../node_modules/@studiorack/core/build/utils.js';
-import Dependency from '../../../../components/dependency';
-import Downloads from '../../../../components/download';
-import { getPlugin } from '../../../../lib/plugin';
-
-declare global {
-  interface Window {
-    Sfz: any;
-  }
-}
+} from '@studiorack/core';
+import { pluginFileUrl } from '../../../node_modules/@studiorack/core/build/utils';
+import Dependency from '../../../components/dependency';
+import Downloads from '../../../components/download';
+import { getPlugin, pluginLicense } from '../../../lib/plugin';
 
 type PluginProps = {
   plugin: PluginVersion;
@@ -142,33 +134,6 @@ class PluginPage extends Component<
     }
   }
 
-  // Prototype of embedded sfz web player.
-  // There are better ways to do this.
-  loadSfzPlayer(event: React.MouseEvent) {
-    const el = document.getElementById('sfzPlayer');
-    if (!el) return;
-    if (el.className === 'open') {
-      el.className = '';
-      return;
-    }
-    const name =
-      (event.currentTarget as HTMLTextAreaElement).getAttribute('data-name') ||
-      '';
-    const id =
-      (event.currentTarget as HTMLTextAreaElement).getAttribute('data-repo') ||
-      '';
-    console.log('loadSfzPlayer', name, id);
-    el.innerHTML = '';
-    const player = new window.Sfz.Player('sfzPlayer', {
-      audio: {},
-      instrument: { name, id },
-      interface: {},
-    });
-    window.setTimeout(() => {
-      el.className = 'open';
-    }, 0);
-  }
-
   render() {
     return (
       <Layout>
@@ -185,12 +150,11 @@ class PluginPage extends Component<
           <meta name="og:title" content={this.state.plugin.name || ''} />
         </Head>
         <article>
-          <div id="sfzPlayer"></div>
           <div className={styles.header}>
             <div className={styles.headerInner2}>
               <Crumb
                 items={[
-                  'instruments',
+                  'effects',
                   this.state.plugin.id?.split('/')[0] || '',
                   this.state.plugin.id?.split('/')[1] || '',
                 ]}
@@ -200,19 +164,6 @@ class PluginPage extends Component<
               <div className={styles.media}>
                 <div className={styles.imageContainer}>
                   {this.state.plugin.files.audio ? this.getPlayButton() : ''}
-                  {this.state.plugin.tags.includes('sfz') ? (
-                    <img
-                      className={styles.sfzPlayer}
-                      data-name={this.state.plugin.name}
-                      data-repo={this.state.plugin.id}
-                      src={`${this.state.router.basePath}/images/sfz-player.png`}
-                      alt="open in sfz player"
-                      loading="lazy"
-                      onClick={this.loadSfzPlayer}
-                    />
-                  ) : (
-                    ''
-                  )}
                   {this.state.plugin.files.image ? (
                     <img
                       className={styles.image}
@@ -271,16 +222,10 @@ class PluginPage extends Component<
                     />{' '}
                     {this.state.plugin.license ? (
                       <a
-                        href={
-                          typeof this.state.plugin.license === 'string'
-                            ? this.state.plugin.license
-                            : this.state.plugin.license.url
-                        }
+                        href={pluginLicense(this.state.plugin.license).url}
                         target="_blank"
                       >
-                        {typeof this.state.plugin.license === 'string'
-                          ? this.state.plugin.license
-                          : this.state.plugin.license.name}
+                        {pluginLicense(this.state.plugin.license).name}
                       </a>
                     ) : (
                       'none'
@@ -326,8 +271,7 @@ class PluginPage extends Component<
                 </p>
                 <Dependency plugin={this.state.plugin} />
                 <pre className={styles.codeBox}>
-                  studiorack plugin install {this.state.plugin.id}/
-                  {this.state.plugin.id}
+                  studiorack plugin install {this.state.plugin.id}
                 </pre>
               </div>
             </div>
@@ -340,19 +284,13 @@ class PluginPage extends Component<
 export default withRouter(PluginPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pluginPack: PluginPack = await pluginsGet('instruments');
+  const pluginPack: PluginPack = await pluginsGet('effects');
   const list = [];
   for (const pluginId in pluginPack) {
     const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
-    console.log({
-      pluginId: plugin.id,
-      repoId: plugin.id?.split('/')[1],
-      userId: plugin.id?.split('/')[0],
-    });
     list.push({
       params: {
-        pluginId: plugin.id,
-        repoId: plugin.id?.split('/')[1],
+        pluginId: plugin.id?.split('/')[1],
         userId: plugin.id?.split('/')[0],
       },
     });
@@ -366,16 +304,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 type Params = {
   params: {
     pluginId: string;
-    repoId: string;
     userId: string;
   };
 };
 
 export async function getStaticProps({ params }: Params) {
-  console.log(params);
-  console.log(`${params.userId}/${params.repoId}/${params.pluginId}`);
   const plugin: PluginVersion = await pluginGet(
-    `${params.userId}/${params.repoId}/${params.pluginId}`,
+    `${params.userId}/${params.pluginId}`,
   );
   return {
     props: {

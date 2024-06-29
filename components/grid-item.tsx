@@ -12,8 +12,9 @@ type GridItemProps = {
 
 const GridItem = ({ section, plugin, pluginIndex }: GridItemProps) => (
   <Link
-    href={`/${section}/[userId]/[repoId]/[pluginId]`}
+    href={`/${section}/[userId]/[pluginId]`}
     as={`/${section}/${plugin.id}`}
+    className={styles.pluginLink}
   >
     <div className={styles.plugin}>
       <div className={styles.pluginDetails}>
