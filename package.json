@@ -51,10 +51,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.2.0",
+    "@testing-library/react": "^16.0.0",
     "@types/node": "20.14.8",
     "@types/react": "18.3.3",
+    "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^8.57.0",
     "globals": "^15.2.0",
+    "jsdom": "^24.1.0",
     "prettier": "^3.2.5",
     "serve": "^14.2.3",
     "tsx": "^4.10.1",
