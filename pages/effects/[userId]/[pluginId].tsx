@@ -242,7 +242,10 @@ class PluginPage extends Component<
                       {this.state.plugin.tags.map(
                         (tag: string, tagIndex: number) => (
                           <li className={styles.tag} key={`${tag}-${tagIndex}`}>
-                            {tag},
+                            {tag}
+                            {tagIndex !== this.state.plugin.tags.length - 1
+                              ? ','
+                              : ''}
                           </li>
                         ),
                       )}

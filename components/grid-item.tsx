@@ -44,7 +44,8 @@ const GridItem = ({ section, plugin, pluginIndex }: GridItemProps) => (
               className={styles.pluginTag}
               key={`${tag}-${tagIndex}-${pluginIndex}`}
             >
-              {tag},
+              {tag}
+              {tagIndex !== plugin.tags.length - 1 ? ',' : ''}
             </li>
           ))}
         </ul>
