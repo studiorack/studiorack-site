@@ -1,5 +1,6 @@
 import Doc from '../types/doc';
 import styles from '../styles/components/subnav.module.css';
+import stylesContent from '../styles/docs.module.css';
 import { getBasePath, isSelected } from '../lib/path';
 
 type SubNavProps = {
@@ -39,7 +40,7 @@ const SubNav = ({ children, docs }: SubNavProps) => (
         </li>
       </ul>
     </div>
-    <div className={styles.content}>{children}</div>
+    <div className={stylesContent.content}>{children}</div>
   </div>
 );
 

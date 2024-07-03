@@ -36,10 +36,14 @@ class DocList extends Component<
           </Head>
           <SubNav docs={this.state.allDocs}>
             <h1>Getting started</h1>
+            <p>
+              You can use StudioRack features via the website, app or command
+              line tool. This guide is for the command line tool.
+            </p>
             <p>System Requirements:</p>
             <ul className={styles.markdownUl}>
               <li className={styles.markdownLi}>Linux, MacOS or Windows</li>
-              <li className={styles.markdownLi}>NodeJS 12+</li>
+              <li className={styles.markdownLi}>NodeJS 18+</li>
             </ul>
             <p>To install the command line tool, run the command:</p>
             <pre className={styles.markdownPre}>
@@ -47,11 +51,12 @@ class DocList extends Component<
             </pre>
             <p>Verify the tool has been installed by running:</p>
             <pre className={styles.markdownPre}>studiorack --version</pre>
-            <h2 className={styles.markdownH2}>Music producers</h2>
             <p>
-              Follow our guide on how to start a music project and install
-              plugins:
+              From here the guide has two pathways, choose the path which best
+              aligns with your objectives.
             </p>
+            <h2 className={styles.markdownH2}>Music producers</h2>
+            <p>Easy plugin installation &amp; management:</p>
             <p>
               <a
                 href={`${this.state.router.basePath}/docs/02-create-a-project-config`}
@@ -61,10 +66,7 @@ class DocList extends Component<
               </a>
             </p>
             <h2 className={styles.markdownH2}>Plugin developers</h2>
-            <p>
-              Jump straight to the advanced guide on how to create your own
-              audio plugins:
-            </p>
+            <p>Automate your plugin publishing workflow</p>
             <p>
               <a
                 href={`${this.state.router.basePath}/docs/05-develop-new-plugins`}
