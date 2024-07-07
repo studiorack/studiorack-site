@@ -2,9 +2,15 @@
 
 ![Release](https://github.com/studiorack/studiorack-site/workflows/Release/badge.svg)
 
-Audio plugin site with searchable plugin list, tools and documentation using:
+Audio plugin site with searchable plugin list, tools and documentation.
 
-- NodeJS 18.x
+![StudioRack Site](/screenshot.jpg)
+
+## Developer information
+
+StudioRack Site was built using:
+
+- NodeJS 20.x
 - TypeScript 5.x
 - NextJS 14.x
 - React 18.x
