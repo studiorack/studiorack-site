@@ -5,6 +5,7 @@ import {
   pathGetExt,
   pathGetWithoutExt,
 } from '../node_modules/@studiorack/core/build/utils';
+import { getBasePath } from '../lib/path';
 
 type DownloadsProps = {
   plugin: PluginVersion;
@@ -27,6 +28,12 @@ const Downloads = ({ plugin }: DownloadsProps) => {
           title="High-quality"
         >
           High-quality
+          <img
+            className={styles.pluginButtonIcon}
+            src={`${getBasePath()}/images/icon-download.svg`}
+            alt="Download"
+            loading="lazy"
+          />
         </a>
         <a
           className={`button ${styles.button}`}
@@ -34,6 +41,12 @@ const Downloads = ({ plugin }: DownloadsProps) => {
           title="Compressed"
         >
           Compressed
+          <img
+            className={styles.pluginButtonIcon}
+            src={`${getBasePath()}/images/icon-download.svg`}
+            alt="Download"
+            loading="lazy"
+          />
         </a>
       </span>
     );
@@ -47,6 +60,12 @@ const Downloads = ({ plugin }: DownloadsProps) => {
             title="Linux x64"
           >
             Linux
+            <img
+              className={styles.pluginButtonIcon}
+              src={`${getBasePath()}/images/icon-download.svg`}
+              alt="Download"
+              loading="lazy"
+            />
           </a>
         ) : (
           ''
@@ -58,6 +77,12 @@ const Downloads = ({ plugin }: DownloadsProps) => {
             title="MacOS x64"
           >
             MacOS
+            <img
+              className={styles.pluginButtonIcon}
+              src={`${getBasePath()}/images/icon-download.svg`}
+              alt="Download"
+              loading="lazy"
+            />
           </a>
         ) : (
           ''
@@ -69,6 +94,12 @@ const Downloads = ({ plugin }: DownloadsProps) => {
             title="Windows x64"
           >
             Windows
+            <img
+              className={styles.pluginButtonIcon}
+              src={`${getBasePath()}/images/icon-download.svg`}
+              alt="Download"
+              loading="lazy"
+            />
           </a>
         ) : (
           ''

@@ -95,6 +95,12 @@
   margin-bottom: 1.5rem;
 }
 
+.pluginButtonIcon {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  width: 14px;
+}
+
 .button {
   margin-right: 0.5rem;
 }
