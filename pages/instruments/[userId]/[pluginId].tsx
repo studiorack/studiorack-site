@@ -302,6 +302,13 @@ class PluginPage extends Component<
                       )}
                     </ul>
                   </div>
+                  <div className={styles.metadataFooter}>
+                    <a href={this.state.plugin.homepage} target="_blank">
+                      <button className="button button-clear">
+                        View source
+                      </button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

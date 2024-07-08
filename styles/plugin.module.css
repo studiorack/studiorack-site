@@ -54,14 +54,18 @@
   font-size: 0.9rem;
 }
 
+.metadataList a {
+  border-bottom: none;
+}
+
 .metadata {
   align-items: center;
   display: flex;
   margin-bottom: 0.5rem;
 }
 
-.metadata a {
-  border-bottom: none;
+.metadataFooter {
+  margin-top: 1.5rem;
 }
 
 .tags {
@@ -93,6 +97,14 @@
 
 .button {
   margin-right: 0.5rem;
+}
+
+.button .progress {
+  display: none;
+}
+
+.button:disabled .progress {
+  display: inline;
 }
 
 .codeBox {
