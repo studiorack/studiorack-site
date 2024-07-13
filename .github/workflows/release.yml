@@ -1,14 +1,16 @@
 name: Release
 
 on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
   workflow_dispatch:
   schedule:
     # https://crontab.guru/#10_0_*_*_0
     # At 00:10 on Sunday.
     - cron: '10 0 * * 0'
-  push:
-    tags:
-      - 'v*'
 
 jobs:
   release:
