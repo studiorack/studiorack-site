@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Audio plugin site with searchable plugin list, tools and documentation",
   "type": "module",
-  "main": "./main.js",
+  "main": "./build/main.js",
   "exports": "./build/main.js",
   "types": "./build/main.d.ts",
   "files": [
