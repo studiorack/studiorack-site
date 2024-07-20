@@ -20,7 +20,9 @@ export function filterPlugins(
     );
     if (
       (category === 'all' || matchingTags.length > 0) &&
-      (plugin.name.toLowerCase().indexOf(query) !== -1 ||
+      (plugin.author.toLowerCase().indexOf(query) !== -1 ||
+        plugin.id?.toLowerCase().indexOf(query) !== -1 ||
+        plugin.name.toLowerCase().indexOf(query) !== -1 ||
         plugin.description.toLowerCase().indexOf(query) !== -1 ||
         plugin.tags.includes(query))
     ) {
