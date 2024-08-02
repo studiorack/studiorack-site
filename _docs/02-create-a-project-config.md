@@ -18,7 +18,6 @@ This will create a studiorack .json file with your configuration:
       "homepage": "https://studiorack.github.io/studiorack-site/",
       "name": "StudioRack Project",
       "description": "Created using StudioRack",
-      "repo": "songs/april",
       "tags": [
         "StudioRack"
       ],

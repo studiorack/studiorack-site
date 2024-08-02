@@ -152,13 +152,10 @@ class PluginPage extends Component<
     const name =
       (event.currentTarget as HTMLTextAreaElement).getAttribute('data-name') ||
       '';
-    const repo =
-      (event.currentTarget as HTMLTextAreaElement).getAttribute('data-repo') ||
-      '';
     const id =
       (event.currentTarget as HTMLTextAreaElement).getAttribute('data-id') ||
       '';
-    console.log('loadSfzPlayer', name, repo, id);
+    console.log('loadSfzPlayer', name, id);
     el.innerHTML = '';
     const player = new window.Sfz.Player('sfzPlayer', {
       audio: {},
@@ -205,7 +202,6 @@ class PluginPage extends Component<
                     <img
                       className={styles.sfzPlayer}
                       data-name={this.state.plugin.name}
-                      data-repo={this.state.plugin.repo}
                       data-id={this.state.plugin.id}
                       src={`${this.state.router.basePath}/images/sfz-player.png`}
                       alt="open in sfz player"
