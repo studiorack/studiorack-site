@@ -4,7 +4,11 @@ import styles from '../styles/components/filters.module.css';
 import MultiSelect from './multi-select';
 import { ChangeEvent } from 'react';
 
-const Filters = () => {
+type FiltersProps = {
+  section: string;
+};
+
+const Filters = ({ section }: FiltersProps) => {
   const router = useRouter();
   const search: string = router.query['search'] as string;
 
@@ -20,9 +24,12 @@ const Filters = () => {
   return (
     <div className={styles.filters}>
       <span className={styles.filtersTitle}>Filter by:</span>
-      <MultiSelect label="Category" values={getCategories()}></MultiSelect>
-      <MultiSelect label="License" values={getLicenses()}></MultiSelect>
-      <MultiSelect label="Platform" values={getPlatforms()}></MultiSelect>
+      <MultiSelect
+        label="Category"
+        items={getCategories(section)}
+      ></MultiSelect>
+      <MultiSelect label="License" items={getLicenses()}></MultiSelect>
+      <MultiSelect label="Platform" items={getPlatforms()}></MultiSelect>
       <input
         className={styles.filtersSearch}
         placeholder="Keyword"

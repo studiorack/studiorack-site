@@ -6,52 +6,52 @@ import {
   PluginVersion,
 } from '../node_modules/@studiorack/core/build/types/plugin';
 import { NextRouter } from 'next/router';
+import { ConfigList } from '@studiorack/core';
 import { includesValue } from './utils';
 
-// Temporary code until refactor.
 export function filterPlugins(
+  categories: ConfigList,
   plugins: PluginVersion[],
   router: NextRouter,
-): PluginVersion[] {
-  const category = (router.query.category as string | string[]) || 'all';
-  const categories = configDefaults(
-    'appFolder',
-    'pluginFolder',
-    'presetFolder',
-    'projectFolder',
-  ).pluginInstrumentCategories;
-  const search = (router.query.search as string) || '';
+) {
+  const category = router.query['category'] as string | string[];
+  // Tidy this up later on.
   let categoryTags: string[] = [];
-  if (typeof category === 'string') {
-    categoryTags = categories[category].tags;
-  } else {
-    category.forEach(category => {
-      categoryTags = categoryTags.concat(categories[category].tags);
-    });
+  if (category) {
+    if (typeof category === 'string') {
+      categoryTags = categories[category].tags;
+    } else {
+      category.forEach(cat => {
+        categoryTags = categoryTags.concat(categories[cat].tags);
+      });
+    }
   }
-  console.log('filterPlugins', categoryTags, search);
-
+  const license = router.query['license'] as string | string[];
+  const platform = router.query['platform'] as string | string[];
+  const search: string = router.query['search'] as string;
   return plugins.filter((plugin: PluginVersion) => {
+    const platformsSupported = Object.keys(plugin.files);
+    if (category && !includesValue(categoryTags, plugin.tags)) return false;
     if (
-      router.query['license'] &&
-      !includesValue(router.query['license'], pluginLicense(plugin.license).key)
+      license &&
+      !includesValue(
+        license,
+        typeof plugin.license === 'object'
+          ? plugin.license.key
+          : plugin.license,
+      )
     )
       return false;
-    // if (router.query['platform'] && !plugin.files[router.query['platform']]) return false;
-    const matchingTags = plugin.tags.filter(pluginTag =>
-      categoryTags.includes(pluginTag),
-    );
+    if (platform && !includesValue(platform, platformsSupported)) return false;
     if (
-      (category === 'all' || matchingTags.length > 0) &&
-      (plugin.author.toLowerCase().indexOf(search) !== -1 ||
-        plugin.id?.toLowerCase().indexOf(search) !== -1 ||
-        plugin.name.toLowerCase().indexOf(search) !== -1 ||
-        plugin.description.toLowerCase().indexOf(search) !== -1 ||
-        plugin.tags.includes(search))
-    ) {
-      return plugin;
-    }
-    return false;
+      search &&
+      plugin.id?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      plugin.name?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      plugin.description?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      plugin.tags?.indexOf(search.toLowerCase()) === -1
+    )
+      return false;
+    return plugin;
   });
 }
 

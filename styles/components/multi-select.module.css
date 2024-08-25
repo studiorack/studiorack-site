@@ -3,6 +3,10 @@
   position: relative;
 }
 
+.multiselect[id='license'] {
+  min-width: 15rem;
+}
+
 .multiselectTitle {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -66,7 +70,8 @@
   border-radius: 1rem;
   box-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.1);
   display: none;
-  overflow: hidden;
+  max-height: 70vh;
+  overflow-y: scroll;
   position: absolute;
   width: 100%;
   z-index: 1;

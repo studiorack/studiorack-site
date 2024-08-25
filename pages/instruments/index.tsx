@@ -12,6 +12,7 @@ import Filters from '../../components/filters';
 import { GetStaticProps } from 'next';
 import { configDefaults } from '../../node_modules/@studiorack/core/build/config-defaults';
 import { pluginsGet } from '../../node_modules/@studiorack/core/build/plugin';
+import { ConfigList } from '@studiorack/core';
 
 type InstrumentsProps = {
   plugins: PluginVersion[];
@@ -19,7 +20,17 @@ type InstrumentsProps = {
 
 const Instruments = ({ plugins }: InstrumentsProps) => {
   const router = useRouter();
-  const pluginsFiltered: PluginVersion[] = filterPlugins(plugins, router);
+  const categories: ConfigList = configDefaults(
+    'appFolder',
+    'pluginFolder',
+    'presetFolder',
+    'projectFolder',
+  ).pluginInstrumentCategories;
+  const pluginsFiltered: PluginVersion[] = filterPlugins(
+    categories,
+    plugins,
+    router,
+  );
   return (
     <Layout>
       <Head>
@@ -34,7 +45,7 @@ const Instruments = ({ plugins }: InstrumentsProps) => {
             </span>
           </h3>
         </div>
-        <Filters />
+        <Filters section="instruments" />
         <div className={styles.pluginsList}>
           {pluginsFiltered.map((plugin: PluginVersion, pluginIndex: number) => (
             <GridItem

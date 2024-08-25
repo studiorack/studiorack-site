@@ -1,21 +1,35 @@
 import { ConfigList, PluginLicense } from '@studiorack/core';
 import { configDefaults } from '../node_modules/@studiorack/core/build/config-defaults';
 
-export function getCategories(): string[] {
-  const categories: ConfigList = configDefaults(
+export function getCategories(section: string) {
+  // Pass these through later.
+  let categories: ConfigList = configDefaults(
     'appFolder',
     'pluginFolder',
     'presetFolder',
     'projectFolder',
   ).pluginInstrumentCategories;
+  if (section === 'effects') {
+    categories = configDefaults(
+      'appFolder',
+      'pluginFolder',
+      'presetFolder',
+      'projectFolder',
+    ).pluginEffectCategories;
+  }
+  // Remove in core library if not needed.
+  delete categories['all'];
   return Object.keys(categories)
     .map((key: string) => {
-      return categories[key].name;
+      return {
+        label: categories[key].name,
+        value: key,
+      };
     })
-    .sort((a, b) => a.localeCompare(b));
+    .sort((a, b) => a.label.localeCompare(b.label));
 }
 
-export function getLicenses(): string[] {
+export function getLicenses() {
   const licenses: PluginLicense[] = configDefaults(
     'appFolder',
     'pluginFolder',
@@ -24,11 +38,27 @@ export function getLicenses(): string[] {
   ).licenses;
   return licenses
     .map((license: PluginLicense) => {
-      return license.key;
+      return {
+        label: license.name,
+        value: license.key,
+      };
     })
-    .sort((a, b) => a.localeCompare(b));
+    .sort((a, b) => a.label.localeCompare(b.label));
 }
 
-export function getPlatforms(): string[] {
-  return ['Linux', 'Mac', 'Windows'];
+export function getPlatforms() {
+  return [
+    {
+      label: 'Linux',
+      value: 'linux',
+    },
+    {
+      label: 'Mac',
+      value: 'mac',
+    },
+    {
+      label: 'Windows',
+      value: 'win',
+    },
+  ];
 }

@@ -2,12 +2,17 @@ import { useRouter } from 'next/router';
 import { includesValue, toSlug } from '../lib/utils';
 import styles from '../styles/components/multi-select.module.css';
 
-type MultiSelectProps = {
+type MultiSelectItem = {
   label: string;
-  values: string[];
+  value: string;
 };
 
-const MultiSelect = ({ label, values }: MultiSelectProps) => {
+type MultiSelectProps = {
+  label: string;
+  items: MultiSelectItem[];
+};
+
+const MultiSelect = ({ label, items }: MultiSelectProps) => {
   const router = useRouter();
   const slug: string = toSlug(label);
 
@@ -48,21 +53,22 @@ const MultiSelect = ({ label, values }: MultiSelectProps) => {
         <option>{label}</option>
       </select>
       <div className={styles.multiselectCheckboxes} id={label}>
-        {values.map((value: string, index: number) => (
+        {items.map((item: MultiSelectItem, index: number) => (
           <label
             className={styles.multiselectLabel}
-            htmlFor={toSlug(value)}
-            key={toSlug(value)}
+            htmlFor={toSlug(item.value)}
+            key={toSlug(item.value)}
+            title={item.label}
           >
             <input
               className={styles.multiselectInput}
               type="checkbox"
-              id={toSlug(value)}
-              name={toSlug(value)}
+              id={toSlug(item.value)}
+              name={toSlug(item.value)}
               onClick={updateUrl}
-              defaultChecked={isChecked(value)}
+              defaultChecked={isChecked(item.value)}
             />
-            {value}
+            {item.label}
           </label>
         ))}
       </div>
