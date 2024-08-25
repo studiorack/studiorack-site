@@ -1,34 +1,57 @@
 import { configDefaults } from '../node_modules/@studiorack/core/build/config-defaults';
 import {
-  PluginCategory,
   PluginEntry,
   PluginLicense,
   PluginPack,
   PluginVersion,
 } from '../node_modules/@studiorack/core/build/types/plugin';
+import { NextRouter } from 'next/router';
+import { ConfigList } from '@studiorack/core';
+import { includesValue } from './utils';
 
 export function filterPlugins(
-  category: string,
+  categories: ConfigList,
   plugins: PluginVersion[],
-  pluginTypes: { [property: string]: PluginCategory },
-  query: string,
-): PluginVersion[] {
-  console.log('filterPlugins', category, query);
-  return plugins.filter((plugin: PluginVersion) => {
-    const matchingTags = plugin.tags.filter(element =>
-      pluginTypes[category].tags.includes(element),
-    );
-    if (
-      (category === 'all' || matchingTags.length > 0) &&
-      (plugin.author.toLowerCase().indexOf(query) !== -1 ||
-        plugin.id?.toLowerCase().indexOf(query) !== -1 ||
-        plugin.name.toLowerCase().indexOf(query) !== -1 ||
-        plugin.description.toLowerCase().indexOf(query) !== -1 ||
-        plugin.tags.includes(query))
-    ) {
-      return plugin;
+  router: NextRouter,
+) {
+  const category = router.query['category'] as string | string[];
+  // Tidy this up later on.
+  let categoryTags: string[] = [];
+  if (category) {
+    if (typeof category === 'string') {
+      categoryTags = categories[category].tags;
+    } else {
+      category.forEach(cat => {
+        categoryTags = categoryTags.concat(categories[cat].tags);
+      });
     }
-    return false;
+  }
+  const license = router.query['license'] as string | string[];
+  const platform = router.query['platform'] as string | string[];
+  const search: string = router.query['search'] as string;
+  return plugins.filter((plugin: PluginVersion) => {
+    const platformsSupported = Object.keys(plugin.files);
+    if (category && !includesValue(categoryTags, plugin.tags)) return false;
+    if (
+      license &&
+      !includesValue(
+        license,
+        typeof plugin.license === 'object'
+          ? plugin.license.key
+          : plugin.license,
+      )
+    )
+      return false;
+    if (platform && !includesValue(platform, platformsSupported)) return false;
+    if (
+      search &&
+      plugin.id?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      plugin.name?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      plugin.description?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      plugin.tags?.indexOf(search.toLowerCase()) === -1
+    )
+      return false;
+    return plugin;
   });
 }
 
