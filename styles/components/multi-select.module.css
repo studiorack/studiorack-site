@@ -26,40 +26,35 @@
 }
 
 .icon-category {
-  background-image: url(../../public/images/icon-category.svg),
-    url(../../public/images/icon-arrow-down.svg);
+  background-image: url(../../public/images/icon-category.svg), url(../../public/images/icon-arrow-down.svg);
   background-position:
     left 1rem center,
     right 1rem center;
 }
 
 .icon-license {
-  background-image: url(../../public/images/icon-license.svg),
-    url(../../public/images/icon-arrow-down.svg);
+  background-image: url(../../public/images/icon-license.svg), url(../../public/images/icon-arrow-down.svg);
   background-position:
     left 1rem center,
     right 1rem center;
 }
 
 .icon-cost {
-  background-image: url(../../public/images/icon-cost.svg),
-    url(../../public/images/icon-arrow-down.svg);
+  background-image: url(../../public/images/icon-cost.svg), url(../../public/images/icon-arrow-down.svg);
   background-position:
     left 1rem center,
     right 1rem center;
 }
 
 .icon-compatibility {
-  background-image: url(../../public/images/icon-compatibility.svg),
-    url(../../public/images/icon-arrow-down.svg);
+  background-image: url(../../public/images/icon-compatibility.svg), url(../../public/images/icon-arrow-down.svg);
   background-position:
     left 1rem center,
     right 1rem center;
 }
 
 .icon-platform {
-  background-image: url(../../public/images/icon-platform.svg),
-    url(../../public/images/icon-arrow-down.svg);
+  background-image: url(../../public/images/icon-platform.svg), url(../../public/images/icon-arrow-down.svg);
   background-position:
     left 1rem center,
     right 1rem center;

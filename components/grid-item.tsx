@@ -11,17 +11,12 @@ type GridItemProps = {
 };
 
 const GridItem = ({ section, plugin, pluginIndex }: GridItemProps) => (
-  <Link
-    href={`/${section}/[userId]/[pluginId]`}
-    as={`/${section}/${plugin.id}`}
-    className={styles.pluginLink}
-  >
+  <Link href={`/${section}/[userId]/[pluginId]`} as={`/${section}/${plugin.id}`} className={styles.pluginLink}>
     <div className={styles.plugin}>
       <div className={styles.pluginDetails}>
         <div className={styles.pluginHead}>
           <h4 className={styles.pluginTitle}>
-            {plugin.name}{' '}
-            <span className={styles.pluginVersion}>v{plugin.version}</span>
+            {plugin.name} <span className={styles.pluginVersion}>v{plugin.version}</span>
           </h4>
           <span className={styles.pluginButton}>
             <img
@@ -33,17 +28,9 @@ const GridItem = ({ section, plugin, pluginIndex }: GridItemProps) => (
           </span>
         </div>
         <ul className={styles.pluginTags}>
-          <img
-            className={styles.pluginIcon}
-            src={`${getBasePath()}/images/icon-tag.svg`}
-            alt="Tags"
-            loading="lazy"
-          />
+          <img className={styles.pluginIcon} src={`${getBasePath()}/images/icon-tag.svg`} alt="Tags" loading="lazy" />
           {plugin.tags.map((tag: string, tagIndex: number) => (
-            <li
-              className={styles.pluginTag}
-              key={`${tag}-${tagIndex}-${pluginIndex}`}
-            >
+            <li className={styles.pluginTag} key={`${tag}-${tagIndex}-${pluginIndex}`}>
               {tag}
               {tagIndex !== plugin.tags.length - 1 ? ',' : ''}
             </li>

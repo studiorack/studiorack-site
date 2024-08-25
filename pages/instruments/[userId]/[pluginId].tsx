@@ -5,10 +5,7 @@ import Head from 'next/head.js';
 import styles from '../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router.js';
-import {
-  pluginGet,
-  pluginsGet,
-} from '../../../node_modules/@studiorack/core/build/plugin';
+import { pluginGet, pluginsGet } from '../../../node_modules/@studiorack/core/build/plugin';
 import { PluginVersion, PluginPack } from '@studiorack/core';
 import { pluginFileUrl } from '../../../node_modules/@studiorack/core/build/utils';
 import Dependency from '../../../components/dependency';
@@ -54,9 +51,7 @@ class PluginPage extends Component<
   }
 
   timeSince(date: string) {
-    const seconds = Math.floor(
-      (new Date().getTime() - new Date(date).getTime()) / 1000,
-    );
+    const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
     let interval = seconds / 31536000;
     if (interval > 2) {
       return Math.floor(interval) + ' years';
@@ -149,12 +144,8 @@ class PluginPage extends Component<
       el.className = '';
       return;
     }
-    const name =
-      (event.currentTarget as HTMLTextAreaElement).getAttribute('data-name') ||
-      '';
-    const id =
-      (event.currentTarget as HTMLTextAreaElement).getAttribute('data-id') ||
-      '';
+    const name = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-name') || '';
+    const id = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-id') || '';
     console.log('loadSfzPlayer', name, id);
     el.innerHTML = '';
     const player = new window.Sfz.Player('sfzPlayer', {
@@ -172,14 +163,8 @@ class PluginPage extends Component<
       <Layout>
         <Head>
           <title>{this.state.plugin.name || ''}</title>
-          <meta
-            name="description"
-            content={this.state.plugin.description || ''}
-          />
-          <meta
-            name="og:image"
-            content={pluginFileUrl(this.state.plugin, 'image')}
-          />
+          <meta name="description" content={this.state.plugin.description || ''} />
+          <meta name="og:image" content={pluginFileUrl(this.state.plugin, 'image')} />
           <meta name="og:title" content={this.state.plugin.name || ''} />
         </Head>
         <article>
@@ -222,10 +207,7 @@ class PluginPage extends Component<
                   )}
                 </div>
                 {this.state.plugin.files.audio ? (
-                  <audio
-                    src={pluginFileUrl(this.state.plugin, 'audio')}
-                    id="audio"
-                  >
+                  <audio src={pluginFileUrl(this.state.plugin, 'audio')} id="audio">
                     Your browser does not support the audio element.
                   </audio>
                 ) : (
@@ -234,10 +216,7 @@ class PluginPage extends Component<
               </div>
               <div className={styles.details}>
                 <h3 className={styles.title}>
-                  {this.state.plugin.name || ''}{' '}
-                  <span className={styles.version}>
-                    v{this.state.plugin.version}
-                  </span>
+                  {this.state.plugin.name || ''} <span className={styles.version}>v{this.state.plugin.version}</span>
                 </h3>
                 <p className={styles.author}>
                   By{' '}
@@ -268,10 +247,7 @@ class PluginPage extends Component<
                       loading="lazy"
                     />{' '}
                     {this.state.plugin.license ? (
-                      <a
-                        href={pluginLicense(this.state.plugin.license).url}
-                        target="_blank"
-                      >
+                      <a href={pluginLicense(this.state.plugin.license).url} target="_blank">
                         {pluginLicense(this.state.plugin.license).name}
                       </a>
                     ) : (
@@ -286,23 +262,17 @@ class PluginPage extends Component<
                       loading="lazy"
                     />
                     <ul className={styles.tags}>
-                      {this.state.plugin.tags.map(
-                        (tag: string, tagIndex: number) => (
-                          <li className={styles.tag} key={`${tag}-${tagIndex}`}>
-                            {tag}
-                            {tagIndex !== this.state.plugin.tags.length - 1
-                              ? ','
-                              : ''}
-                          </li>
-                        ),
-                      )}
+                      {this.state.plugin.tags.map((tag: string, tagIndex: number) => (
+                        <li className={styles.tag} key={`${tag}-${tagIndex}`}>
+                          {tag}
+                          {tagIndex !== this.state.plugin.tags.length - 1 ? ',' : ''}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                   <div className={styles.metadataFooter}>
                     <a href={this.state.plugin.homepage} target="_blank">
-                      <button className="button button-clear">
-                        View source
-                      </button>
+                      <button className="button button-clear">View source</button>
                     </a>
                   </div>
                 </div>
@@ -318,18 +288,13 @@ class PluginPage extends Component<
               <div className={`${styles.cell} ${styles.install}`}>
                 <p>
                   Install via{' '}
-                  <a
-                    href="https://www.npmjs.com/package/@studiorack/cli"
-                    target="_blank"
-                  >
+                  <a href="https://www.npmjs.com/package/@studiorack/cli" target="_blank">
                     StudioRack CLI
                   </a>
                   :
                 </p>
                 <Dependency plugin={this.state.plugin} />
-                <pre className={styles.codeBox}>
-                  studiorack plugin install {this.state.plugin.id}
-                </pre>
+                <pre className={styles.codeBox}>studiorack plugin install {this.state.plugin.id}</pre>
               </div>
             </div>
           </div>
@@ -372,9 +337,7 @@ type Params = {
 export async function getStaticProps({ params }: Params) {
   console.log(params);
   console.log(`${params.userId}/${params.pluginId}`);
-  const plugin: PluginVersion = await pluginGet(
-    `${params.userId}/${params.pluginId}`,
-  );
+  const plugin: PluginVersion = await pluginGet(`${params.userId}/${params.pluginId}`);
   return {
     props: {
       plugin,

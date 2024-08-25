@@ -23,10 +23,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-      />
+      <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
       <Script
         id="gtag-init"
         strategy="afterInteractive"
@@ -49,10 +46,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         strategy="beforeInteractive"
         src="https://github.com/kmturley/webaudio-controls/releases/download/v1.0.0/webaudio-controls.min.js"
       />
-      <Script
-        strategy="beforeInteractive"
-        src="https://sfzlab.github.io/sfz-web-player/sfz.min.js"
-      />
+      <Script strategy="beforeInteractive" src="https://sfzlab.github.io/sfz-web-player/sfz.min.js" />
       <Component {...pageProps} />
     </>
   );

@@ -9,43 +9,27 @@ const Navigation = () => (
     </label>
     <ul className={styles.menu}>
       <li>
-        <a
-          href={`${getBasePath()}/`}
-          className={`${styles.navItem} ${isSelected('/')}`}
-        >
+        <a href={`${getBasePath()}/`} className={`${styles.navItem} ${isSelected('/')}`}>
           Tools
         </a>
       </li>
       <li>
-        <a
-          href={`${getBasePath()}/instruments`}
-          className={`${styles.navItem} ${isSelected('/instruments')}`}
-        >
+        <a href={`${getBasePath()}/instruments`} className={`${styles.navItem} ${isSelected('/instruments')}`}>
           Instruments
         </a>
       </li>
       <li>
-        <a
-          href={`${getBasePath()}/effects`}
-          className={`${styles.navItem} ${isSelected('/effects')}`}
-        >
+        <a href={`${getBasePath()}/effects`} className={`${styles.navItem} ${isSelected('/effects')}`}>
           Effects
         </a>
       </li>
       <li>
-        <a
-          href={`${getBasePath()}/docs`}
-          className={`${styles.navItem} ${isSelected('/docs')}`}
-        >
+        <a href={`${getBasePath()}/docs`} className={`${styles.navItem} ${isSelected('/docs')}`}>
           Docs
         </a>
       </li>
       <li>
-        <a
-          href="https://discord.gg/9D94f98PxP"
-          className={`${styles.navButton} button`}
-          target="_blank"
-        >
+        <a href="https://discord.gg/9D94f98PxP" className={`${styles.navButton} button`} target="_blank">
           Community
           <img
             className={styles.navButtonIcon}

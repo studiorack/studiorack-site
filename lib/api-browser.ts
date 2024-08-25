@@ -10,12 +10,7 @@ export function getCategories(section: string) {
     'projectFolder',
   ).pluginInstrumentCategories;
   if (section === 'effects') {
-    categories = configDefaults(
-      'appFolder',
-      'pluginFolder',
-      'presetFolder',
-      'projectFolder',
-    ).pluginEffectCategories;
+    categories = configDefaults('appFolder', 'pluginFolder', 'presetFolder', 'projectFolder').pluginEffectCategories;
   }
   // Remove in core library if not needed.
   delete categories['all'];

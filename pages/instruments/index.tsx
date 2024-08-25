@@ -1,7 +1,4 @@
-import {
-  PluginPack,
-  PluginVersion,
-} from '../../node_modules/@studiorack/core/build/types/plugin';
+import { PluginPack, PluginVersion } from '../../node_modules/@studiorack/core/build/types/plugin';
 import { useRouter } from 'next/router';
 import { filterPlugins, getPlugin } from '../../lib/plugin';
 import styles from '../../styles/plugins.module.css';
@@ -26,11 +23,7 @@ const Instruments = ({ plugins }: InstrumentsProps) => {
     'presetFolder',
     'projectFolder',
   ).pluginInstrumentCategories;
-  const pluginsFiltered: PluginVersion[] = filterPlugins(
-    categories,
-    plugins,
-    router,
-  );
+  const pluginsFiltered: PluginVersion[] = filterPlugins(categories, plugins, router);
   return (
     <Layout>
       <Head>
@@ -39,10 +32,7 @@ const Instruments = ({ plugins }: InstrumentsProps) => {
       <section className={styles.plugins}>
         <div className={styles.pluginsHeader}>
           <h3 className={styles.pluginsTitle}>
-            Instruments{' '}
-            <span className={styles.pluginCount}>
-              ({pluginsFiltered.length})
-            </span>
+            Instruments <span className={styles.pluginCount}>({pluginsFiltered.length})</span>
           </h3>
         </div>
         <Filters section="instruments" />

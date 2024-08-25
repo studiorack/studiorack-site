@@ -34,9 +34,7 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
   };
 
   const updateUrl = () => {
-    const form: HTMLFormElement = document.getElementById(
-      slug,
-    ) as HTMLFormElement;
+    const form: HTMLFormElement = document.getElementById(slug) as HTMLFormElement;
     router.query[slug] = Array.from(new FormData(form).keys());
     router.push({
       pathname: router.pathname,
@@ -46,10 +44,7 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
 
   return (
     <form className={styles.multiselect} id={slug}>
-      <select
-        className={`${styles.multiselectTitle} ${styles['icon-' + slug]}`}
-        onMouseDown={showCheckboxes}
-      >
+      <select className={`${styles.multiselectTitle} ${styles['icon-' + slug]}`} onMouseDown={showCheckboxes}>
         <option>{label}</option>
       </select>
       <div className={styles.multiselectCheckboxes} id={label}>

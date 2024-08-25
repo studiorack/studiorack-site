@@ -9,11 +9,7 @@ import { NextRouter } from 'next/router';
 import { ConfigList } from '@studiorack/core';
 import { includesValue } from './utils';
 
-export function filterPlugins(
-  categories: ConfigList,
-  plugins: PluginVersion[],
-  router: NextRouter,
-) {
+export function filterPlugins(categories: ConfigList, plugins: PluginVersion[], router: NextRouter) {
   const category = router.query['category'] as string | string[];
   // Tidy this up later on.
   let categoryTags: string[] = [];
@@ -32,15 +28,7 @@ export function filterPlugins(
   return plugins.filter((plugin: PluginVersion) => {
     const platformsSupported = Object.keys(plugin.files);
     if (category && !includesValue(categoryTags, plugin.tags)) return false;
-    if (
-      license &&
-      !includesValue(
-        license,
-        typeof plugin.license === 'object'
-          ? plugin.license.key
-          : plugin.license,
-      )
-    )
+    if (license && !includesValue(license, typeof plugin.license === 'object' ? plugin.license.key : plugin.license))
       return false;
     if (platform && !includesValue(platform, platformsSupported)) return false;
     if (

@@ -39,16 +39,14 @@ class PluginList extends Component<
           <Crumb items={['effects']}></Crumb>
           <h2>{this.state.userId}</h2>
           <div className={styles.pluginsList}>
-            {this.state.pluginsFiltered.map(
-              (plugin: PluginVersion, pluginIndex: number) => (
-                <GridItem
-                  section="effects"
-                  plugin={plugin}
-                  pluginIndex={pluginIndex}
-                  key={`${plugin.id}-${pluginIndex}`}
-                ></GridItem>
-              ),
-            )}
+            {this.state.pluginsFiltered.map((plugin: PluginVersion, pluginIndex: number) => (
+              <GridItem
+                section="effects"
+                plugin={plugin}
+                pluginIndex={pluginIndex}
+                key={`${plugin.id}-${pluginIndex}`}
+              ></GridItem>
+            ))}
           </div>
         </section>
       </Layout>

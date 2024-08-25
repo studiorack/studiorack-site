@@ -24,10 +24,7 @@ const Filters = ({ section }: FiltersProps) => {
   return (
     <div className={styles.filters}>
       <span className={styles.filtersTitle}>Filter by:</span>
-      <MultiSelect
-        label="Category"
-        items={getCategories(section)}
-      ></MultiSelect>
+      <MultiSelect label="Category" items={getCategories(section)}></MultiSelect>
       <MultiSelect label="License" items={getLicenses()}></MultiSelect>
       <MultiSelect label="Platform" items={getPlatforms()}></MultiSelect>
       <input

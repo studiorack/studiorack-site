@@ -39,10 +39,7 @@ class DocPage extends Component<
   }
 
   render() {
-    let content = this.state.doc.content.replace(
-      '/docs',
-      `${this.state.router.basePath}/docs`,
-    );
+    let content = this.state.doc.content.replace('/docs', `${this.state.router.basePath}/docs`);
     content = content.replace(
       /<h2>(.*?)<\/h2>/g,
       (tag, title) => `<span id="${this.convertToSlug(title)}"></span>${tag}`,
@@ -51,10 +48,7 @@ class DocPage extends Component<
       <Layout>
         <SubNav docs={this.state.allDocs}>
           <h1>{this.state.doc.title}</h1>
-          <div
-            className={markdownStyles.markdown}
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          <div className={markdownStyles.markdown} dangerouslySetInnerHTML={{ __html: content }} />
         </SubNav>
       </Layout>
     );

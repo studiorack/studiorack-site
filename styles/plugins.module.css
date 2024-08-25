@@ -24,11 +24,7 @@
 }
 
 .pluginsCategoryWrapper:after {
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    black 90%
-  );
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), black 90%);
   bottom: 0;
   content: '';
   pointer-events: none;

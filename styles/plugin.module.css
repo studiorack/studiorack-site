@@ -1,10 +1,6 @@
 .header {
   background: rgb(255, 40, 79);
-  background: linear-gradient(
-    160deg,
-    rgba(255, 40, 79, 1) 0%,
-    rgba(21, 71, 201, 1) 100%
-  );
+  background: linear-gradient(160deg, rgba(255, 40, 79, 1) 0%, rgba(21, 71, 201, 1) 100%);
   padding: 1.5rem;
 }
 
