@@ -1,6 +1,18 @@
 import slugify from 'slugify';
+import { siteTitle } from '../components/layout';
 
-function includesValue(items: string | string[] | undefined, values: string | string[] | undefined) {
+export function pageTitle(items: string[]) {
+  return (
+    siteTitle +
+    items
+      .map((item: string) => {
+        return ` | ${item}`;
+      })
+      .join('')
+  );
+}
+
+export function includesValue(items: string | string[] | undefined, values: string | string[] | undefined) {
   if (!items || !values) return false;
   if (typeof items === 'string') {
     if (typeof values === 'string') return items === toSlug(values);
@@ -23,10 +35,8 @@ function includesValue(items: string | string[] | undefined, values: string | st
   }
 }
 
-function toSlug(input: string) {
+export function toSlug(input: string) {
   return slugify(input || '', {
     lower: true,
   });
 }
-
-export { includesValue, toSlug };

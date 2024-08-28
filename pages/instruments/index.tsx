@@ -2,7 +2,7 @@ import { PluginPack, PluginVersion } from '../../node_modules/@studiorack/core/b
 import { useRouter } from 'next/router';
 import { filterPlugins, getPlugin } from '../../lib/plugin';
 import styles from '../../styles/plugins.module.css';
-import Layout, { siteTitle } from '../../components/layout';
+import Layout from '../../components/layout';
 import GridItem from '../../components/grid-item';
 import Head from 'next/head';
 import Filters from '../../components/filters';
@@ -11,6 +11,7 @@ import { configDefaults } from '../../node_modules/@studiorack/core/build/config
 import { pluginsGet } from '../../node_modules/@studiorack/core/build/plugin';
 import { ConfigList } from '@studiorack/core';
 import Header from '../../components/header';
+import { pageTitle } from '../../lib/utils';
 
 type InstrumentsProps = {
   plugins: PluginVersion[];
@@ -28,7 +29,7 @@ const Instruments = ({ plugins }: InstrumentsProps) => {
   return (
     <Layout>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{pageTitle(['Instruments'])}</title>
       </Head>
       <section className={styles.plugins}>
         <Header title="Instruments" count={pluginsFiltered.length} />

@@ -1,12 +1,13 @@
-import { Component, ChangeEvent } from 'react';
+import { Component } from 'react';
 import Head from 'next/head';
 import Crumb from '../../../components/crumb';
-import Layout, { siteTitle } from '../../../components/layout';
+import Layout from '../../../components/layout';
 import styles from '../../../styles/plugins.module.css';
 import GridItem from '../../../components/grid-item';
 import { PluginVersion, PluginPack, pluginsGet } from '@studiorack/core';
 import { getPlugin } from '../../../lib/plugin';
 import Header from '../../../components/header';
+import { pageTitle } from '../../../lib/utils';
 
 type PluginListProps = {
   plugins: PluginVersion[];
@@ -34,7 +35,7 @@ class PluginList extends Component<
     return (
       <Layout>
         <Head>
-          <title>{siteTitle}</title>
+          <title>{pageTitle(['Effects', this.state.userId])}</title>
         </Head>
         <section className={styles.plugins}>
           <Crumb items={['effects']}></Crumb>

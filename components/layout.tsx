@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Navigation from './navigation';
 import styles from '../styles/components/layout.module.css';
 import { getBasePath } from '../lib/path';
+import { pageTitle } from '../lib/utils';
 
 export const siteTitle = 'StudioRack';
 export const siteDesc = 'Automate your plugin publishing workflow, easy plugin installation and management';
@@ -13,7 +14,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => (
   <div className={styles.container}>
     <Head>
-      <title>{siteTitle}</title>
+      <title>{pageTitle(['An open-source audio plugin ecosystem'])}</title>
       <meta name="description" content={siteDesc} />
       <meta name="og:image" content={`${getBasePath()}/images/creators-mobile.jpg`} />
       <meta name="og:title" content={siteTitle} />

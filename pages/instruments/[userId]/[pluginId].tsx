@@ -11,6 +11,7 @@ import { pluginFileUrl } from '../../../node_modules/@studiorack/core/build/util
 import Dependency from '../../../components/dependency';
 import Downloads from '../../../components/download';
 import { getPlugin, pluginLicense } from '../../../lib/plugin';
+import { pageTitle } from '../../../lib/utils';
 
 declare global {
   interface Window {
@@ -162,7 +163,7 @@ class PluginPage extends Component<
     return (
       <Layout>
         <Head>
-          <title>{this.state.plugin.name || ''}</title>
+          <title>{pageTitle(['Instruments', this.state.plugin.name])}</title>
           <meta name="description" content={this.state.plugin.description || ''} />
           <meta name="og:image" content={pluginFileUrl(this.state.plugin, 'image')} />
           <meta name="og:title" content={this.state.plugin.name || ''} />
