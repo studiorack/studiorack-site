@@ -263,18 +263,18 @@ export default withRouter(PluginPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPack: PluginPack = await pluginsGet('effects');
-  const list = [];
-  for (const pluginId in pluginPack) {
-    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
-    list.push({
+  const paths = [];
+  for (const pluginFullId in pluginPack) {
+    const [userId, pluginId] = pluginFullId.split('/');
+    paths.push({
       params: {
-        pluginId: plugin.id?.split('/')[1],
-        userId: plugin.id?.split('/')[0],
+        pluginId,
+        userId,
       },
     });
   }
   return {
-    paths: list,
+    paths,
     fallback: false,
   };
 };
@@ -287,10 +287,9 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const plugin: PluginVersion = await pluginGet(`${params.userId}/${params.pluginId}`);
   return {
     props: {
-      plugin,
+      plugin: await pluginGet(`${params.userId}/${params.pluginId}`),
     },
   };
 }

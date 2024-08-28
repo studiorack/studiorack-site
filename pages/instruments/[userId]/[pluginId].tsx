@@ -39,7 +39,6 @@ class PluginPage extends Component<
       plugin: props.plugin,
       router: props.router,
     };
-    console.log(props.plugin);
   }
 
   formatBytes(bytes: number, decimals = 2) {
@@ -308,22 +307,18 @@ export default withRouter(PluginPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPack: PluginPack = await pluginsGet('instruments');
-  const list = [];
-  for (const pluginId in pluginPack) {
-    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
-    console.log({
-      pluginId: plugin.id?.split('/')[1],
-      userId: plugin.id?.split('/')[0],
-    });
-    list.push({
+  const paths = [];
+  for (const pluginFullId in pluginPack) {
+    const [userId, pluginId] = pluginFullId.split('/');
+    paths.push({
       params: {
-        pluginId: plugin.id?.split('/')[1],
-        userId: plugin.id?.split('/')[0],
+        pluginId,
+        userId,
       },
     });
   }
   return {
-    paths: list,
+    paths,
     fallback: false,
   };
 };
@@ -336,12 +331,9 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  console.log(params);
-  console.log(`${params.userId}/${params.pluginId}`);
-  const plugin: PluginVersion = await pluginGet(`${params.userId}/${params.pluginId}`);
   return {
     props: {
-      plugin,
+      plugin: await pluginGet(`${params.userId}/${params.pluginId}`),
     },
   };
 }

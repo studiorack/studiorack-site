@@ -1,4 +1,4 @@
-import { Component, ChangeEvent } from 'react';
+import { Component } from 'react';
 import Head from 'next/head';
 import Crumb from '../../../components/crumb';
 import Layout from '../../../components/layout';
@@ -8,6 +8,7 @@ import { PluginVersion, PluginPack, pluginsGet } from '@studiorack/core';
 import { getPlugin } from '../../../lib/plugin';
 import Header from '../../../components/header';
 import { pageTitle } from '../../../lib/utils';
+import { GetStaticPaths } from 'next';
 
 type PluginListProps = {
   plugins: PluginVersion[];
@@ -57,22 +58,22 @@ class PluginList extends Component<
 }
 export default PluginList;
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const pluginPack: PluginPack = await pluginsGet('instruments');
-  const list = [];
-  for (const pluginId in pluginPack) {
-    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
-    list.push({
+  const paths = [];
+  for (const pluginFullId in pluginPack) {
+    const [userId] = pluginFullId.split('/');
+    paths.push({
       params: {
-        userId: plugin.id?.split('/')[0],
+        userId,
       },
     });
   }
   return {
-    paths: list,
+    paths,
     fallback: false,
   };
-}
+};
 
 type Params = {
   params: {
@@ -82,17 +83,15 @@ type Params = {
 
 export async function getStaticProps({ params }: Params) {
   const pluginPack: PluginPack = await pluginsGet('instruments');
-  const list: PluginVersion[] = [];
+  const plugins: PluginVersion[] = [];
   for (const pluginId in pluginPack) {
-    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
-    console.log(plugin.id?.split('/')[0], params.userId);
-    if (plugin.id?.split('/')[0] === params.userId) {
-      list.push(plugin);
+    if (pluginId.split('/')[0] === params.userId) {
+      plugins.push(getPlugin(pluginPack, pluginId));
     }
   }
   return {
     props: {
-      plugins: list,
+      plugins,
       userId: params.userId,
     },
   };

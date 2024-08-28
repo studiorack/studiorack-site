@@ -2,6 +2,7 @@ import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
 import Doc from '../types/doc';
+import { PluginEntry, PluginPack, pluginsGet, PluginVersion } from '@studiorack/core';
 
 const docsDirectory = join(process.cwd(), '_docs');
 
@@ -41,4 +42,22 @@ export function getAllDocs(fields: string[]) {
   const slugs = getDocSlugs();
   const docs = slugs.map(slug => getDocBySlug(slug, fields));
   return docs;
+}
+
+export function getPlugin(pluginPack: PluginPack, pluginId: string) {
+  const pluginEntry: PluginEntry = pluginPack[pluginId];
+  const plugin: PluginVersion = pluginEntry.versions[pluginEntry.version];
+  plugin.id = pluginId;
+  plugin.version = pluginEntry.version;
+  return plugin;
+}
+
+export async function getPlugins(section: string) {
+  const pluginPack: PluginPack = await pluginsGet(section);
+  const plugins: PluginVersion[] = [];
+  for (const pluginId in pluginPack) {
+    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
+    plugins.push(plugin);
+  }
+  return plugins;
 }

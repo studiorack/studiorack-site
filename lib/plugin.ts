@@ -6,7 +6,7 @@ import {
   PluginVersion,
 } from '../node_modules/@studiorack/core/build/types/plugin';
 import { NextRouter } from 'next/router';
-import { ConfigList } from '@studiorack/core';
+import { ConfigList } from '../node_modules/@studiorack/core/build/types/config';
 import { pluginFileUrl, pathGetExt, pathGetWithoutExt } from '../node_modules/@studiorack/core/build/utils';
 import { includesValue } from './utils';
 import { getLicenses } from './api-browser';

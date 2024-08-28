@@ -1,18 +1,17 @@
-import { PluginPack, PluginVersion } from '../../node_modules/@studiorack/core/build/types/plugin';
+import { PluginVersion } from '../../node_modules/@studiorack/core/build/types/plugin';
 import { useRouter } from 'next/router';
-import { filterPlugins, getPlugin } from '../../lib/plugin';
+import { filterPlugins } from '../../lib/plugin';
 import styles from '../../styles/plugins.module.css';
 import Layout from '../../components/layout';
 import GridItem from '../../components/grid-item';
 import Head from 'next/head';
 import Filters from '../../components/filters';
 import { GetStaticProps } from 'next';
-import { configDefaults } from '../../node_modules/@studiorack/core/build/config-defaults';
-import { pluginsGet } from '../../node_modules/@studiorack/core/build/plugin';
 import { ConfigList } from '@studiorack/core';
 import Header from '../../components/header';
 import { pageTitle } from '../../lib/utils';
 import { getCategories } from '../../lib/api-browser';
+import { getPlugins } from '../../lib/api';
 
 type InstrumentsProps = {
   plugins: PluginVersion[];
@@ -48,15 +47,9 @@ const Instruments = ({ plugins }: InstrumentsProps) => {
 export default Instruments;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const pluginPack: PluginPack = await pluginsGet('instruments');
-  const plugins: PluginVersion[] = [];
-  for (const pluginId in pluginPack) {
-    const plugin: PluginVersion = getPlugin(pluginPack, pluginId);
-    plugins.push(plugin);
-  }
   return {
     props: {
-      plugins,
+      plugins: await getPlugins('instruments'),
     },
   };
 };
