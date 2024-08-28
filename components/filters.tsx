@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { getCategories, getLicenses, getPlatforms } from '../lib/api-browser';
+import { getCategoriesLabels, getLicensesLabels, getPlatformsLabels } from '../lib/api-browser';
 import styles from '../styles/components/filters.module.css';
 import MultiSelect from './multi-select';
 import { ChangeEvent } from 'react';
@@ -24,9 +24,9 @@ const Filters = ({ section }: FiltersProps) => {
   return (
     <div className={styles.filters}>
       <span className={styles.filtersTitle}>Filter by:</span>
-      <MultiSelect label="Category" items={getCategories(section)}></MultiSelect>
-      <MultiSelect label="License" items={getLicenses()}></MultiSelect>
-      <MultiSelect label="Platform" items={getPlatforms()}></MultiSelect>
+      <MultiSelect label="Category" items={getCategoriesLabels(section)}></MultiSelect>
+      <MultiSelect label="License" items={getLicensesLabels()}></MultiSelect>
+      <MultiSelect label="Platform" items={getPlatformsLabels()}></MultiSelect>
       <input
         className={styles.filtersSearch}
         placeholder="Keyword"

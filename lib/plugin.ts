@@ -1,4 +1,3 @@
-import { configDefaults } from '../node_modules/@studiorack/core/build/config-defaults';
 import {
   PluginEntry,
   PluginFiles,
@@ -10,6 +9,7 @@ import { NextRouter } from 'next/router';
 import { ConfigList } from '@studiorack/core';
 import { pluginFileUrl, pathGetExt, pathGetWithoutExt } from '../node_modules/@studiorack/core/build/utils';
 import { includesValue } from './utils';
+import { getLicenses } from './api-browser';
 
 export function filterPlugins(categories: ConfigList, plugins: PluginVersion[], router: NextRouter) {
   const category = router.query['category'] as string | string[];
@@ -62,12 +62,7 @@ export function pluginFileUrlCompressed(plugin: PluginVersion, type: keyof Plugi
 
 export function pluginLicense(key: string | PluginLicense) {
   if (typeof key !== 'string') return key;
-  const licenses: PluginLicense[] = configDefaults(
-    'appFolder',
-    'pluginFolder',
-    'presetFolder',
-    'projectFolder',
-  ).licenses;
+  const licenses: PluginLicense[] = getLicenses();
   let licenseMatch: PluginLicense = licenses[licenses.length - 1];
   licenses.forEach((license: PluginLicense) => {
     if (key === license.key) {

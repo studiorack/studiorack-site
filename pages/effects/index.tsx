@@ -12,6 +12,7 @@ import { pluginsGet } from '../../node_modules/@studiorack/core/build/plugin';
 import { ConfigList } from '@studiorack/core';
 import Header from '../../components/header';
 import { pageTitle } from '../../lib/utils';
+import { getCategories } from '../../lib/api-browser';
 
 type EffectsProps = {
   plugins: PluginVersion[];
@@ -19,12 +20,7 @@ type EffectsProps = {
 
 const Effects = ({ plugins }: EffectsProps) => {
   const router = useRouter();
-  const categories: ConfigList = configDefaults(
-    'appFolder',
-    'pluginFolder',
-    'presetFolder',
-    'projectFolder',
-  ).pluginEffectCategories;
+  const categories: ConfigList = getCategories('effects');
   const pluginsFiltered: PluginVersion[] = filterPlugins(categories, plugins, router);
   return (
     <Layout>

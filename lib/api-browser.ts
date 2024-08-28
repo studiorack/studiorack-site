@@ -2,16 +2,14 @@ import { ConfigList, PluginLicense } from '@studiorack/core';
 import { configDefaults } from '../node_modules/@studiorack/core/build/config-defaults';
 
 export function getCategories(section: string) {
-  // Pass these through later.
-  let categories: ConfigList = configDefaults(
-    'appFolder',
-    'pluginFolder',
-    'presetFolder',
-    'projectFolder',
-  ).pluginInstrumentCategories;
   if (section === 'effects') {
-    categories = configDefaults('appFolder', 'pluginFolder', 'presetFolder', 'projectFolder').pluginEffectCategories;
+    return configDefaults('app', 'plugin', 'preset', 'project').pluginEffectCategories;
   }
+  return configDefaults('app', 'plugin', 'preset', 'project').pluginInstrumentCategories;
+}
+
+export function getCategoriesLabels(section: string) {
+  const categories: ConfigList = getCategories(section);
   // Remove in core library if not needed.
   delete categories['all'];
   return Object.keys(categories)
@@ -25,12 +23,11 @@ export function getCategories(section: string) {
 }
 
 export function getLicenses() {
-  const licenses: PluginLicense[] = configDefaults(
-    'appFolder',
-    'pluginFolder',
-    'presetFolder',
-    'projectFolder',
-  ).licenses;
+  return configDefaults('app', 'plugin', 'preset', 'project').licenses;
+}
+
+export function getLicensesLabels() {
+  const licenses: PluginLicense[] = getLicenses();
   return licenses
     .map((license: PluginLicense) => {
       return {
@@ -56,4 +53,8 @@ export function getPlatforms() {
       value: 'win',
     },
   ];
+}
+
+export function getPlatformsLabels() {
+  return getPlatforms();
 }

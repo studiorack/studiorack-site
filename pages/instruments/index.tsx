@@ -12,6 +12,7 @@ import { pluginsGet } from '../../node_modules/@studiorack/core/build/plugin';
 import { ConfigList } from '@studiorack/core';
 import Header from '../../components/header';
 import { pageTitle } from '../../lib/utils';
+import { getCategories } from '../../lib/api-browser';
 
 type InstrumentsProps = {
   plugins: PluginVersion[];
@@ -19,12 +20,7 @@ type InstrumentsProps = {
 
 const Instruments = ({ plugins }: InstrumentsProps) => {
   const router = useRouter();
-  const categories: ConfigList = configDefaults(
-    'appFolder',
-    'pluginFolder',
-    'presetFolder',
-    'projectFolder',
-  ).pluginInstrumentCategories;
+  const categories: ConfigList = getCategories('instruments');
   const pluginsFiltered: PluginVersion[] = filterPlugins(categories, plugins, router);
   return (
     <Layout>
