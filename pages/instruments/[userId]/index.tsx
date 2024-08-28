@@ -6,6 +6,7 @@ import styles from '../../../styles/plugins.module.css';
 import GridItem from '../../../components/grid-item';
 import { PluginVersion, PluginPack, pluginsGet } from '@studiorack/core';
 import { getPlugin } from '../../../lib/plugin';
+import Header from '../../../components/header';
 
 type PluginListProps = {
   plugins: PluginVersion[];
@@ -37,7 +38,7 @@ class PluginList extends Component<
         </Head>
         <section className={styles.plugins}>
           <Crumb items={['instruments']}></Crumb>
-          <h2>{this.state.userId}</h2>
+          <Header title={this.state.userId} />
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginVersion, pluginIndex: number) => (
               <GridItem

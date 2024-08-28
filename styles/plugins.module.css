@@ -4,21 +4,6 @@
   width: 100%;
 }
 
-.pluginsTitle {
-  margin-bottom: 1rem;
-}
-
-.pluginCount {
-  color: #666;
-  font-size: 1rem;
-}
-
-.pluginsHeader {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
-
 .pluginsCategoryWrapper {
   position: relative;
 }
@@ -71,9 +56,6 @@
 }
 
 @media (min-width: 48rem) {
-  .pluginCount {
-    font-size: 1.4rem;
-  }
   .pluginsList {
     display: grid;
     grid-auto-rows: minmax(100px, auto);

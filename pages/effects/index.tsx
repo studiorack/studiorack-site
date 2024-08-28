@@ -10,6 +10,7 @@ import { GetStaticProps } from 'next';
 import { configDefaults } from '../../node_modules/@studiorack/core/build/config-defaults';
 import { pluginsGet } from '../../node_modules/@studiorack/core/build/plugin';
 import { ConfigList } from '@studiorack/core';
+import Header from '../../components/header';
 
 type EffectsProps = {
   plugins: PluginVersion[];
@@ -30,11 +31,7 @@ const Effects = ({ plugins }: EffectsProps) => {
         <title>{siteTitle}</title>
       </Head>
       <section className={styles.plugins}>
-        <div className={styles.pluginsHeader}>
-          <h3 className={styles.pluginsTitle}>
-            Effects <span className={styles.pluginCount}>({pluginsFiltered.length})</span>
-          </h3>
-        </div>
+        <Header title="Effects" count={pluginsFiltered.length} />
         <Filters section="effects" />
         <div className={styles.pluginsList}>
           {pluginsFiltered.map((plugin: PluginVersion, pluginIndex: number) => (
