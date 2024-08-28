@@ -1,12 +1,14 @@
 import { configDefaults } from '../node_modules/@studiorack/core/build/config-defaults';
 import {
   PluginEntry,
+  PluginFiles,
   PluginLicense,
   PluginPack,
   PluginVersion,
 } from '../node_modules/@studiorack/core/build/types/plugin';
 import { NextRouter } from 'next/router';
 import { ConfigList } from '@studiorack/core';
+import { pluginFileUrl, pathGetExt, pathGetWithoutExt } from '../node_modules/@studiorack/core/build/utils';
 import { includesValue } from './utils';
 
 export function filterPlugins(categories: ConfigList, plugins: PluginVersion[], router: NextRouter) {
@@ -49,6 +51,13 @@ export function getPlugin(pluginPack: PluginPack, pluginId: string) {
   plugin.id = pluginId;
   plugin.version = pluginEntry.version;
   return plugin;
+}
+
+export function pluginFileUrlCompressed(plugin: PluginVersion, type: keyof PluginFiles) {
+  const fileUrl: string = pluginFileUrl(plugin, type);
+  const fileWithoutExt: string = pathGetWithoutExt(fileUrl);
+  const fileExt: string = pathGetExt(fileUrl);
+  return `${fileWithoutExt}-compact.${fileExt}`;
 }
 
 export function pluginLicense(key: string | PluginLicense) {

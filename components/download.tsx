@@ -1,18 +1,12 @@
 import styles from '../styles/plugin.module.css';
 import { PluginVersion } from '@studiorack/core';
-import { pluginFileUrl, pathGetExt, pathGetWithoutExt } from '../node_modules/@studiorack/core/build/utils';
+import { pluginFileUrl } from '../node_modules/@studiorack/core/build/utils';
 import { getBasePath } from '../lib/path';
+import { pluginFileUrlCompressed } from '../lib/plugin';
 
 type DownloadsProps = {
   plugin: PluginVersion;
 };
-
-function pluginFileUrlCompressed(plugin: any, platform: any) {
-  const fileUrl: string = pluginFileUrl(plugin, platform);
-  const fileWithoutExt: string = pathGetWithoutExt(fileUrl);
-  const fileExt: string = pathGetExt(fileUrl);
-  return `${fileWithoutExt}-compact.${fileExt}`;
-}
 
 const Downloads = ({ plugin }: DownloadsProps) => {
   if (plugin.tags.includes('sfz') || plugin.tags.includes('sf2')) {
