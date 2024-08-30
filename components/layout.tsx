@@ -12,7 +12,7 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => (
-  <div className={styles.container}>
+  <div className={styles.layoutContainer}>
     <Head>
       <title>{pageTitle(['An open-source audio plugin ecosystem'])}</title>
       <meta name="description" content={siteDesc} />
@@ -28,16 +28,11 @@ const Layout = ({ children }: LayoutProps) => (
       <link rel="icon" type="image/png" sizes="16x16" href={`${getBasePath()}/icons/favicon-16x16.png`} />
       <link rel="manifest" href={`${getBasePath()}/icons/site.webmanifest`}></link>
     </Head>
-    <header className={styles.header}>
-      <a href={`${getBasePath()}/`} className={styles.headerLink}>
-        <img
-          className={styles.logoImage}
-          src={`${getBasePath()}/images/studio-rack-logo.svg`}
-          alt={siteTitle}
-          loading="lazy"
-        />
-        <span className={styles.logoText}>
-          Studio<span className={styles.logoTextBold}>Rack</span>
+    <header className={styles.layoutHeader}>
+      <a href={`${getBasePath()}/`} className={styles.layoutLink}>
+        <img src={`${getBasePath()}/images/studio-rack-logo.svg`} alt={siteTitle} loading="lazy" />
+        <span className={styles.layoutLogo}>
+          Studio<span className={styles.layoutLogoBold}>Rack</span>
         </span>
       </a>
       <Navigation></Navigation>

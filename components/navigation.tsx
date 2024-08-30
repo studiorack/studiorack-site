@@ -2,12 +2,12 @@ import styles from '../styles/components/navigation.module.css';
 import { getBasePath, isSelected } from '../lib/path';
 
 const Navigation = () => (
-  <div className={styles.navigation}>
-    <input className={styles.menuBtn} type="checkbox" id="menu-btn" />
-    <label className={styles.menuIcn} htmlFor="menu-btn">
-      <span className={styles.menuNavIcn}></span>
+  <div>
+    <input className={styles.navMenuBtn} type="checkbox" id="menu-btn" />
+    <label className={styles.navMenuIcn} htmlFor="menu-btn">
+      <span className={styles.navMenuNavIcn}></span>
     </label>
-    <ul className={styles.menu}>
+    <ul className={styles.navMenu}>
       <li>
         <a href={`${getBasePath()}/`} className={`${styles.navItem} ${isSelected('/')}`}>
           Tools
