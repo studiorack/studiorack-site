@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Crumb from '../../../components/crumb';
 import Layout from '../../../components/layout';
 import styles from '../../../styles/plugins.module.css';
-import GridItem from '../../../components/grid-item';
+import Card from '../../../components/card';
 import { PluginVersion, PluginPack, pluginsGet } from '@studiorack/core';
 import { getPlugin } from '../../../lib/plugin';
 import Header from '../../../components/header';
@@ -43,12 +43,12 @@ class PluginList extends Component<
           <Header title={this.state.userId} />
           <div className={styles.pluginsList}>
             {this.state.pluginsFiltered.map((plugin: PluginVersion, pluginIndex: number) => (
-              <GridItem
+              <Card
                 section="effects"
                 plugin={plugin}
                 pluginIndex={pluginIndex}
                 key={`${plugin.id}-${pluginIndex}`}
-              ></GridItem>
+              ></Card>
             ))}
           </div>
         </section>

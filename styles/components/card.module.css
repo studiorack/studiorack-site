@@ -1,11 +1,11 @@
-.pluginLink,
-.pluginLink:hover {
+.cardLink,
+.cardLink:hover {
   border-bottom: none;
   padding-bottom: 0;
   transition: none;
 }
 
-.plugin {
+.card {
   background-color: #111;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -16,26 +16,26 @@
   transition: background-color 0.25s ease-out;
 }
 
-.plugin:hover {
+.card:hover {
   background-color: #222;
 }
 
-.pluginDetails {
+.cardDetails {
   margin-bottom: 1.5rem;
 }
 
-.pluginHead {
+.cardHead {
   display: flex;
   justify-content: space-between;
 }
 
-.pluginTitle {
+.cardTitle {
   flex-shrink: 1;
   margin: 0;
 }
 
-.pluginButton,
-.pluginButtonInstalled {
+.cardButton,
+.cardButtonInstalled {
   background-color: #0d51ff;
   border-radius: 4px;
   display: flex;
@@ -47,36 +47,41 @@
   width: 15px;
 }
 
-.pluginButtonIcon {
+.cardButtonIcon {
   max-width: 100%;
 }
 
-.pluginButtonInstalled {
+.cardButtonInstalled {
   background-color: #48ad6a;
 }
 
-.pluginVersion {
+.cardVersion {
   color: #666;
   font-size: 0.75rem;
 }
 
-.pluginTags {
-  display: flex;
+.cardTags {
+  display: inline-block;
   list-style: none;
   margin: 0;
+  overflow-x: hidden;
   padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
-.pluginIcon {
+.cardIcon {
   margin-right: 0.5rem;
   width: 15px;
 }
 
-.pluginTag {
+.cardTag {
+  display: inline;
   margin-right: 0.25rem;
 }
 
-.pluginImage {
+.cardImage {
   display: cover;
   width: 100%;
 }

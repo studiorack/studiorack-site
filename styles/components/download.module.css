@@ -1,0 +1,17 @@
+.downloadButton {
+  margin-right: 0.5rem;
+}
+
+.downloadButton .progress {
+  display: none;
+}
+
+.downloadButton:disabled .progress {
+  display: inline;
+}
+
+.downloadButtonIcon {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  width: 14px;
+}

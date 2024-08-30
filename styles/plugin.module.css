@@ -91,24 +91,6 @@
   margin-bottom: 1.5rem;
 }
 
-.pluginButtonIcon {
-  margin-left: 0.5rem;
-  vertical-align: middle;
-  width: 14px;
-}
-
-.button {
-  margin-right: 0.5rem;
-}
-
-.button .progress {
-  display: none;
-}
-
-.button:disabled .progress {
-  display: inline;
-}
-
 @media (min-width: 48rem) {
   .header {
     padding-bottom: 5rem;

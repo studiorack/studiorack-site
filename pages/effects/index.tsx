@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { filterPlugins } from '../../lib/plugin';
 import styles from '../../styles/plugins.module.css';
 import Layout from '../../components/layout';
-import GridItem from '../../components/grid-item';
+import Card from '../../components/card';
 import Head from 'next/head';
 import Filters from '../../components/filters';
 import { GetStaticProps } from 'next';
@@ -31,12 +31,12 @@ const Effects = ({ plugins }: EffectsProps) => {
         <Filters section="effects" />
         <div className={styles.pluginsList}>
           {pluginsFiltered.map((plugin: PluginVersion, pluginIndex: number) => (
-            <GridItem
+            <Card
               section="effects"
               plugin={plugin}
               pluginIndex={pluginIndex}
               key={`${plugin.id}-${pluginIndex}`}
-            ></GridItem>
+            ></Card>
           ))}
         </div>
       </section>
