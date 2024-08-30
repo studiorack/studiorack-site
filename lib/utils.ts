@@ -12,6 +12,15 @@ export function pageTitle(items: string[]) {
   );
 }
 
+export function formatBytes(bytes: number, decimals = 2) {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
 export function includesValue(items: string | string[] | undefined, values: string | string[] | undefined) {
   if (!items || !values) return false;
   if (typeof items === 'string') {
@@ -33,6 +42,46 @@ export function includesValue(items: string | string[] | undefined, values: stri
       });
     });
   }
+}
+
+export function timeSince(date: string) {
+  const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+  let interval = seconds / 31536000;
+  if (interval > 2) {
+    return Math.floor(interval) + ' years';
+  }
+  if (interval > 1) {
+    return Math.floor(interval) + ' year';
+  }
+  interval = seconds / 2592000;
+  if (interval > 2) {
+    return Math.floor(interval) + ' months';
+  }
+  if (interval > 1) {
+    return Math.floor(interval) + ' month';
+  }
+  interval = seconds / 86400;
+  if (interval > 2) {
+    return Math.floor(interval) + ' days';
+  }
+  if (interval > 1) {
+    return Math.floor(interval) + ' day';
+  }
+  interval = seconds / 3600;
+  if (interval > 2) {
+    return Math.floor(interval) + ' hours';
+  }
+  if (interval > 1) {
+    return Math.floor(interval) + ' hour';
+  }
+  interval = seconds / 60;
+  if (interval > 2) {
+    return Math.floor(interval) + ' minutes';
+  }
+  if (interval > 1) {
+    return Math.floor(interval) + ' minute';
+  }
+  return Math.floor(seconds) + ' seconds';
 }
 
 export function toSlug(input: string) {

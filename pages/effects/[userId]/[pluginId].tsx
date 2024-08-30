@@ -10,7 +10,7 @@ import { pluginFileUrl } from '../../../node_modules/@studiorack/core/build/util
 import Dependency from '../../../components/dependency';
 import Downloads from '../../../components/download';
 import { pluginLicense } from '../../../lib/plugin';
-import { pageTitle } from '../../../lib/utils';
+import { formatBytes, pageTitle, timeSince } from '../../../lib/utils';
 import Code from '../../../components/code';
 
 type PluginProps = {
@@ -33,55 +33,6 @@ class PluginPage extends Component<
       plugin: props.plugin,
       router: props.router,
     };
-  }
-
-  formatBytes(bytes: number, decimals = 2) {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-  }
-
-  timeSince(date: string) {
-    const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
-    let interval = seconds / 31536000;
-    if (interval > 2) {
-      return Math.floor(interval) + ' years';
-    }
-    if (interval > 1) {
-      return Math.floor(interval) + ' year';
-    }
-    interval = seconds / 2592000;
-    if (interval > 2) {
-      return Math.floor(interval) + ' months';
-    }
-    if (interval > 1) {
-      return Math.floor(interval) + ' month';
-    }
-    interval = seconds / 86400;
-    if (interval > 2) {
-      return Math.floor(interval) + ' days';
-    }
-    if (interval > 1) {
-      return Math.floor(interval) + ' day';
-    }
-    interval = seconds / 3600;
-    if (interval > 2) {
-      return Math.floor(interval) + ' hours';
-    }
-    if (interval > 1) {
-      return Math.floor(interval) + ' hour';
-    }
-    interval = seconds / 60;
-    if (interval > 2) {
-      return Math.floor(interval) + ' minutes';
-    }
-    if (interval > 1) {
-      return Math.floor(interval) + ' minute';
-    }
-    return Math.floor(seconds) + ' seconds';
   }
 
   play = () => {
@@ -186,7 +137,7 @@ class PluginPage extends Component<
                   <Dependency plugin={this.state.plugin} />
                 </p>
                 <div className={styles.metadataList}>
-                  {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" loading="lazy" /> {this.formatBytes(this.state.plugin.size)}</div> */}
+                  {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" loading="lazy" /> {formatBytes(this.state.plugin.files.linux.size)}</div> */}
                   <div className={styles.metadata}>
                     <img
                       className={styles.icon}
@@ -194,7 +145,7 @@ class PluginPage extends Component<
                       alt="Date updated"
                       loading="lazy"
                     />{' '}
-                    {this.timeSince(this.state.plugin.date)} ago
+                    {timeSince(this.state.plugin.date)} ago
                   </div>
                   <div className={styles.metadata}>
                     <img
