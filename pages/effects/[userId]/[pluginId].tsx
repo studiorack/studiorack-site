@@ -238,20 +238,8 @@ class PluginPage extends Component<
           </div>
           <div className={styles.options}>
             <div className={styles.row}>
-              <div className={`${styles.cell} ${styles.download}`}>
-                <p>Download and install manually:</p>
-                <Downloads plugin={this.state.plugin} />
-              </div>
-              <div className={`${styles.cell} ${styles.install}`}>
-                <p>
-                  Install via{' '}
-                  <a href="https://www.npmjs.com/package/@studiorack/cli" target="_blank">
-                    StudioRack CLI
-                  </a>
-                  :
-                </p>
-                <Code plugin={this.state.plugin} />
-              </div>
+              <Downloads plugin={this.state.plugin} />
+              <Code plugin={this.state.plugin} />
             </div>
           </div>
         </article>

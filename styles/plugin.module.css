@@ -77,11 +77,6 @@
   padding: 2rem 1.5rem;
 }
 
-.download,
-.install {
-  margin-bottom: 1.5rem;
-}
-
 @media (min-width: 48rem) {
   .header {
     padding-bottom: 5rem;
@@ -120,11 +115,5 @@
 
   .cell {
     margin-right: 1rem;
-  }
-
-  .install {
-    border-left: 1px solid #666;
-    flex: 1;
-    padding-left: 2rem;
   }
 }

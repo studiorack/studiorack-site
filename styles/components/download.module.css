@@ -1,3 +1,7 @@
+.download {
+  margin-bottom: 1.5rem;
+}
+
 .downloadButton {
   margin-right: 0.5rem;
 }
@@ -14,4 +18,10 @@
   margin-left: 0.5rem;
   vertical-align: middle;
   width: 14px;
+}
+
+@media (min-width: 48rem) {
+  .download {
+    margin-right: 2rem;
+  }
 }

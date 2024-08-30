@@ -8,9 +8,10 @@ type DownloadsProps = {
   plugin: PluginVersion;
 };
 
-const Downloads = ({ plugin }: DownloadsProps) => {
-  if (plugin.tags.includes('sfz') || plugin.tags.includes('sf2')) {
-    return (
+const Downloads = ({ plugin }: DownloadsProps) => (
+  <div className={`${styles.download}`}>
+    <p>Download and install manually:</p>
+    {plugin.tags.includes('sfz') || plugin.tags.includes('sf2') ? (
       <span>
         <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'linux')} title="High-quality">
           High-quality
@@ -31,9 +32,7 @@ const Downloads = ({ plugin }: DownloadsProps) => {
           />
         </a> */}
       </span>
-    );
-  } else {
-    return (
+    ) : (
       <span>
         {plugin.files.linux ? (
           <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'linux')} title="Linux x64">
@@ -75,8 +74,8 @@ const Downloads = ({ plugin }: DownloadsProps) => {
           ''
         )}
       </span>
-    );
-  }
-};
+    )}
+  </div>
+);
 
 export default Downloads;
