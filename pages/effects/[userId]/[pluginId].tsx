@@ -9,7 +9,7 @@ import { PluginVersion, pluginGet, pluginsGet, PluginPack } from '@studiorack/co
 import { pluginFileUrl } from '../../../node_modules/@studiorack/core/build/utils';
 import Dependency from '../../../components/dependency';
 import Downloads from '../../../components/download';
-import { getPlugin, pluginLicense } from '../../../lib/plugin';
+import { pluginLicense } from '../../../lib/plugin';
 import { pageTitle } from '../../../lib/utils';
 import Code from '../../../components/code';
 

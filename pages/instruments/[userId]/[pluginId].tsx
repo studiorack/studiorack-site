@@ -13,6 +13,7 @@ import Downloads from '../../../components/download';
 import { getPlugin, pluginLicense } from '../../../lib/plugin';
 import { pageTitle } from '../../../lib/utils';
 import Code from '../../../components/code';
+import Player from '../../../components/player';
 
 declare global {
   interface Window {
@@ -136,29 +137,6 @@ class PluginPage extends Component<
     }
   }
 
-  // Prototype of embedded sfz web player.
-  // There are better ways to do this.
-  loadSfzPlayer(event: React.MouseEvent) {
-    const el = document.getElementById('sfzPlayer');
-    if (!el) return;
-    if (el.className === 'open') {
-      el.className = '';
-      return;
-    }
-    const name = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-name') || '';
-    const id = (event.currentTarget as HTMLTextAreaElement).getAttribute('data-id') || '';
-    console.log('loadSfzPlayer', name, id);
-    el.innerHTML = '';
-    const player = new window.Sfz.Player('sfzPlayer', {
-      audio: {},
-      instrument: { name, id },
-      interface: {},
-    });
-    window.setTimeout(() => {
-      el.className = 'open';
-    }, 0);
-  }
-
   render() {
     return (
       <Layout>
@@ -184,19 +162,7 @@ class PluginPage extends Component<
               <div className={styles.media}>
                 <div className={styles.imageContainer}>
                   {this.state.plugin.files.audio ? this.getPlayButton() : ''}
-                  {this.state.plugin.tags.includes('sfz') ? (
-                    <img
-                      className={styles.sfzPlayer}
-                      data-name={this.state.plugin.name}
-                      data-id={this.state.plugin.id}
-                      src={`${this.state.router.basePath}/images/sfz-player.png`}
-                      alt="open in sfz player"
-                      loading="lazy"
-                      onClick={this.loadSfzPlayer}
-                    />
-                  ) : (
-                    ''
-                  )}
+                  {this.state.plugin.tags.includes('sfz') ? <Player plugin={this.state.plugin} /> : ''}
                   {this.state.plugin.files.image ? (
                     <img
                       className={styles.image}
