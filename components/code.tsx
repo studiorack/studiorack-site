@@ -14,7 +14,7 @@ const Code = ({ plugin }: CodeProps) => (
       </a>
       {plugin.tags.includes('sfz') ? (
         <span>
-          <pre className={styles.codeLine}>studiorack plugin install sfztools/sfizzz</pre>
+          <pre className={styles.codeLine}>studiorack plugin install sfztools/sfizz</pre>
           <pre className={styles.codeLine}>studiorack plugin install {plugin.id}</pre>
         </span>
       ) : plugin.tags.includes('sf2') ? (
