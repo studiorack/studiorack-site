@@ -3,12 +3,14 @@
   border-bottom: none;
   padding-bottom: 0;
   transition: none;
+  width: 100%;
 }
 
 .card {
   background-color: #111;
   border-radius: 0.5rem;
   cursor: pointer;
+  height: 100%;
   max-height: 200px;
   overflow: hidden;
   padding: 1.5rem 1.5rem 0 1.5rem;
