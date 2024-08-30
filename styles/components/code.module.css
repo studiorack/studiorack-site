@@ -1,0 +1,8 @@
+.dependency {
+  background-color: #111;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  padding: 1rem 1.5rem;
+  white-space: normal;
+}

@@ -109,15 +109,6 @@
   display: inline;
 }
 
-.codeBox {
-  background-color: #111;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  line-height: 1.25rem;
-  padding: 1rem 1.5rem;
-  white-space: normal;
-}
-
 @media (min-width: 48rem) {
   .header {
     padding-bottom: 5rem;

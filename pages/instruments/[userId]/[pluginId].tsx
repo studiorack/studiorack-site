@@ -12,6 +12,7 @@ import Dependency from '../../../components/dependency';
 import Downloads from '../../../components/download';
 import { getPlugin, pluginLicense } from '../../../lib/plugin';
 import { pageTitle } from '../../../lib/utils';
+import Code from '../../../components/code';
 
 declare global {
   interface Window {
@@ -226,7 +227,7 @@ class PluginPage extends Component<
                 </p>
                 <p>
                   {this.state.plugin.description}
-                  <Dependency plugin={this.state.plugin} message />
+                  <Dependency plugin={this.state.plugin} />
                 </p>
                 <div className={styles.metadataList}>
                   {/* <div className={styles.metadata}><img className={styles.icon} src={`${this.state.router.basePath}/images/icon-filesize.svg`} alt="Filesize" loading="lazy" /> {this.formatBytes(this.state.plugin.size)}</div> */}
@@ -293,8 +294,7 @@ class PluginPage extends Component<
                   </a>
                   :
                 </p>
-                <Dependency plugin={this.state.plugin} />
-                <pre className={styles.codeBox}>studiorack plugin install {this.state.plugin.id}</pre>
+                <Code plugin={this.state.plugin} />
               </div>
             </div>
           </div>

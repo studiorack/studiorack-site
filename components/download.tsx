@@ -21,7 +21,7 @@ const Downloads = ({ plugin }: DownloadsProps) => {
             loading="lazy"
           />
         </a>
-        <a className={`button ${styles.button}`} href={pluginFileUrlCompressed(plugin, 'linux')} title="Compressed">
+        {/* <a className={`button ${styles.button}`} href={pluginFileUrlCompressed(plugin, 'linux')} title="Compressed">
           Compressed
           <img
             className={styles.pluginButtonIcon}
@@ -29,7 +29,7 @@ const Downloads = ({ plugin }: DownloadsProps) => {
             alt="Download"
             loading="lazy"
           />
-        </a>
+        </a> */}
       </span>
     );
   } else {
