@@ -1,13 +1,15 @@
 import {
+  ConfigList,
   PluginEntry,
   PluginFiles,
   PluginLicense,
   PluginPack,
   PluginVersion,
-} from '../node_modules/@studiorack/core/build/types/plugin';
+  pluginFileUrl,
+  pathGetExt,
+  pathGetWithoutExt,
+} from '@studiorack/core';
 import { NextRouter } from 'next/router';
-import { ConfigList } from '../node_modules/@studiorack/core/build/types/config';
-import { pluginFileUrl, pathGetExt, pathGetWithoutExt } from '../node_modules/@studiorack/core/build/utils';
 import { includesValue } from './utils';
 import { getLicenses } from './api-browser';
 

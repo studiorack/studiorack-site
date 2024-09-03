@@ -2,7 +2,7 @@ import styles from '../styles/components/card.module.css';
 import Link from 'next/link';
 import { getBasePath } from '../lib/path';
 import { imageError } from '../lib/image';
-import { pluginFileUrl } from '../node_modules/@studiorack/core/build/utils';
+import { pluginFileUrl } from '@studiorack/core';
 
 type CardProps = {
   section: string;

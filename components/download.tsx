@@ -1,6 +1,5 @@
 import styles from '../styles/components/download.module.css';
-import { PluginVersion } from '@studiorack/core';
-import { pluginFileUrl } from '../node_modules/@studiorack/core/build/utils';
+import { pluginFileUrl, PluginVersion } from '@studiorack/core';
 import { getBasePath } from '../lib/path';
 // import { pluginFileUrlCompressed } from '../lib/plugin';
 

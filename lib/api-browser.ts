@@ -1,5 +1,4 @@
-import { ConfigList, PluginLicense } from '@studiorack/core';
-import { configDefaults } from '../node_modules/@studiorack/core/build/config-defaults';
+import { configDefaults, ConfigList, PluginLicense } from '@studiorack/core';
 
 export function getCategories(section: string) {
   if (section === 'effects') {

@@ -5,13 +5,11 @@ import Head from 'next/head.js';
 import styles from '../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router.js';
-import { pluginGet, pluginsGet } from '../../../node_modules/@studiorack/core/build/plugin';
-import { PluginVersion, PluginPack } from '@studiorack/core';
-import { pluginFileUrl } from '../../../node_modules/@studiorack/core/build/utils';
+import { PluginVersion, PluginPack, pluginFileUrl, pluginGet, pluginsGet } from '@studiorack/core';
 import Dependency from '../../../components/dependency';
 import Downloads from '../../../components/download';
-import { getPlugin, pluginLicense } from '../../../lib/plugin';
-import { formatBytes, pageTitle, timeSince } from '../../../lib/utils';
+import { pluginLicense } from '../../../lib/plugin';
+import { pageTitle, timeSince } from '../../../lib/utils';
 import Code from '../../../components/code';
 import Player from '../../../components/player';
 

@@ -1,4 +1,4 @@
-import { PluginVersion } from '../../node_modules/@studiorack/core/build/types/plugin';
+import { ConfigList, PluginVersion } from '@studiorack/core';
 import { useRouter } from 'next/router';
 import { filterPlugins } from '../../lib/plugin';
 import styles from '../../styles/plugins.module.css';
@@ -7,7 +7,6 @@ import Card from '../../components/card';
 import Head from 'next/head';
 import Filters from '../../components/filters';
 import { GetStaticProps } from 'next';
-import { ConfigList } from '@studiorack/core';
 import Header from '../../components/header';
 import { pageTitle } from '../../lib/utils';
 import { getCategories } from '../../lib/api-browser';

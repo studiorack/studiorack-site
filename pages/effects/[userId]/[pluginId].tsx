@@ -5,12 +5,11 @@ import Head from 'next/head';
 import styles from '../../../styles/plugin.module.css';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router';
-import { PluginVersion, pluginGet, pluginsGet, PluginPack } from '@studiorack/core';
-import { pluginFileUrl } from '../../../node_modules/@studiorack/core/build/utils';
+import { PluginVersion, pluginFileUrl, pluginGet, pluginsGet, PluginPack } from '@studiorack/core';
 import Dependency from '../../../components/dependency';
 import Downloads from '../../../components/download';
 import { pluginLicense } from '../../../lib/plugin';
-import { formatBytes, pageTitle, timeSince } from '../../../lib/utils';
+import { pageTitle, timeSince } from '../../../lib/utils';
 import Code from '../../../components/code';
 
 type PluginProps = {
