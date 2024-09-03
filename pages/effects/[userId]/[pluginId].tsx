@@ -11,6 +11,7 @@ import Downloads from '../../../components/download';
 import { pluginLicense } from '../../../lib/plugin';
 import { pageTitle, timeSince } from '../../../lib/utils';
 import Code from '../../../components/code';
+import Audio from '../../../components/audio';
 
 type PluginProps = {
   plugin: PluginVersion;
@@ -20,7 +21,6 @@ type PluginProps = {
 class PluginPage extends Component<
   PluginProps,
   {
-    isPlaying: boolean;
     router: Router;
     plugin: PluginVersion;
   }
@@ -28,55 +28,9 @@ class PluginPage extends Component<
   constructor(props: PluginProps) {
     super(props);
     this.state = {
-      isPlaying: false,
       plugin: props.plugin,
       router: props.router,
     };
-  }
-
-  play = () => {
-    const el = document.getElementById('audio') as HTMLAudioElement;
-    if (el.paused) {
-      el.removeEventListener('ended', this.ended);
-      el.addEventListener('ended', this.ended);
-      el.currentTime = 0;
-      el.play();
-      this.setState({ isPlaying: true });
-    }
-  };
-
-  pause = () => {
-    const el = document.getElementById('audio') as HTMLAudioElement;
-    if (!el.paused) {
-      el.pause();
-      this.setState({ isPlaying: false });
-    }
-  };
-
-  ended = () => {
-    this.setState({ isPlaying: false });
-  };
-
-  getPlayButton() {
-    if (this.state.isPlaying) {
-      return (
-        <img
-          className={styles.imagePlay}
-          src={`${this.state.router.basePath}/images/icon-pause.svg`}
-          alt="Pause"
-          onClick={this.pause}
-        />
-      );
-    } else {
-      return (
-        <img
-          className={styles.imagePlay}
-          src={`${this.state.router.basePath}/images/icon-play.svg`}
-          alt="Play"
-          onClick={this.play}
-        />
-      );
-    }
   }
 
   render() {
@@ -102,7 +56,7 @@ class PluginPage extends Component<
             <div className={styles.headerInner}>
               <div className={styles.media}>
                 <div className={styles.imageContainer}>
-                  {this.state.plugin.files.audio ? this.getPlayButton() : ''}
+                  {this.state.plugin.files.audio ? <Audio file={this.state.plugin.files.audio} /> : ''}
                   {this.state.plugin.files.image ? (
                     <img
                       className={styles.image}

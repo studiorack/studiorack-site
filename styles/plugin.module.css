@@ -9,14 +9,6 @@
   z-index: 1;
 }
 
-.imagePlay {
-  cursor: pointer;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .title {
   margin: 0;
 }
