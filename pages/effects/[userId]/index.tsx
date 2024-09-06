@@ -1,14 +1,11 @@
 import { Component } from 'react';
 import Head from 'next/head';
-import Crumb from '../../../components/crumb';
 import Layout from '../../../components/layout';
-import styles from '../../../styles/plugins.module.css';
-import Card from '../../../components/card';
 import { PluginVersion, PluginPack, pluginsGet } from '@studiorack/core';
 import { getPlugin } from '../../../lib/plugin';
-import Header from '../../../components/header';
 import { pageTitle } from '../../../lib/utils';
 import { GetStaticPaths } from 'next';
+import List from '../../../components/list';
 
 type PluginListProps = {
   plugins: PluginVersion[];
@@ -38,20 +35,7 @@ class PluginList extends Component<
         <Head>
           <title>{pageTitle(['Effects', this.state.userId])}</title>
         </Head>
-        <section className={styles.plugins}>
-          <Crumb items={['effects']}></Crumb>
-          <Header title={this.state.userId} />
-          <div className={styles.pluginsList}>
-            {this.state.pluginsFiltered.map((plugin: PluginVersion, pluginIndex: number) => (
-              <Card
-                section="effects"
-                plugin={plugin}
-                pluginIndex={pluginIndex}
-                key={`${plugin.id}-${pluginIndex}`}
-              ></Card>
-            ))}
-          </div>
-        </section>
+        <List filters={false} plugins={this.state.pluginsFiltered} type="effects" title={this.state.userId} />
       </Layout>
     );
   }

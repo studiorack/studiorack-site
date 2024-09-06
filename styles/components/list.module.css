@@ -1,11 +1,11 @@
-.plugins {
+.list {
   box-sizing: border-box;
   padding: 2rem 1.5rem;
   width: 100%;
 }
 
 @media (min-width: 48rem) {
-  .pluginsList {
+  .listGrid {
     display: grid;
     grid-auto-rows: minmax(100px, auto);
     grid-gap: 1.5rem;
@@ -14,19 +14,19 @@
 }
 
 @media (min-width: 64rem) {
-  .pluginsList {
+  .listGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 120rem) {
-  .pluginsList {
+  .listGrid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 160rem) {
-  .pluginsList {
+  .listGrid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }

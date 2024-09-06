@@ -42,7 +42,7 @@ class PluginPage extends Component<
           <meta name="og:image" content={pluginFileUrl(this.state.plugin, 'image')} />
           <meta name="og:title" content={this.state.plugin.name || ''} />
         </Head>
-        <Details plugin={this.state.plugin} type="effects" />
+        <Details plugin={this.state.plugin} type="instruments" />
       </Layout>
     );
   }
