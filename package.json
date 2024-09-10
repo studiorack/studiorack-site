@@ -60,7 +60,6 @@
     "globals": "^15.2.0",
     "jsdom": "^24.1.0",
     "prettier": "^3.2.5",
-    "serve": "^14.2.3",
     "tsx": "^4.10.1",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.8.0",
