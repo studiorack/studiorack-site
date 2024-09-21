@@ -2,6 +2,8 @@ import slugify from 'slugify';
 import { siteTitle } from '../components/layout';
 import { PluginVersion, PluginVersionLocal } from '@studiorack/core';
 
+export const ELECTRON_APP: boolean = false;
+
 export function pageTitle(items: string[]) {
   return (
     siteTitle +

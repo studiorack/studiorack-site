@@ -90,6 +90,21 @@ button:hover,
   background: rgba(255, 255, 255, 0.15);
 }
 
+button:disabled,
+.button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+button:disabled:hover,
+.button:disabled:hover {
+  background-color: #0d51ff;
+}
+
+.button-clear:disabled:hover {
+  background: transparent;
+}
+
 @media (min-width: 48rem) {
   h1 {
     font-size: 56px;

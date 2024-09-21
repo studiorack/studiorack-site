@@ -3,8 +3,9 @@ import { join } from 'path';
 import matter from 'gray-matter';
 import Doc from '../types/doc';
 import { PluginEntry, PluginPack, pluginsGet, PluginVersion } from '@studiorack/core';
+import { ELECTRON_APP } from './utils';
 
-const docsDirectory = join(process.cwd(), '_docs');
+const docsDirectory = ELECTRON_APP ? join(process.cwd(), 'renderer', '_docs') : join(process.cwd(), '_docs');
 
 export function getDocSlugs() {
   return fs.readdirSync(docsDirectory);
