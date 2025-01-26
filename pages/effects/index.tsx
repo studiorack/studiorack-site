@@ -1,4 +1,4 @@
-import { ConfigList, PluginVersion } from '@studiorack/core';
+import { ConfigList } from '@studiorack/core';
 import { useRouter } from 'next/router';
 import { filterPlugins } from '../../lib/plugin';
 import Layout from '../../components/layout';
@@ -6,23 +6,23 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { pageTitle } from '../../lib/utils';
 import { getCategories } from '../../lib/api-browser';
-import { getPlugins } from '../../lib/api';
 import List from '../../components/list';
+import { Manager, PackageInterface, PluginType, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 
 type EffectsProps = {
-  plugins: PluginVersion[];
+  packages: RegistryPackages;
 };
 
-const Effects = ({ plugins }: EffectsProps) => {
+const Effects = ({ packages }: EffectsProps) => {
   const router = useRouter();
   const categories: ConfigList = getCategories('effects');
-  const pluginsFiltered: PluginVersion[] = filterPlugins(categories, plugins, router);
+  const packagesFiltered: PackageInterface[] = filterPlugins([PluginType.Effect], categories, packages, router);
   return (
     <Layout>
       <Head>
         <title>{pageTitle(['Effects'])}</title>
       </Head>
-      <List items={pluginsFiltered} type="effects" title="Effects" />
+      <List items={packagesFiltered} type="effects" title="Effects" />
     </Layout>
   );
 };
@@ -30,9 +30,11 @@ const Effects = ({ plugins }: EffectsProps) => {
 export default Effects;
 
 export const getStaticProps: GetStaticProps = async () => {
+  const manager = new Manager(RegistryType.Plugins);
+  await manager.sync();
   return {
     props: {
-      plugins: await getPlugins('effects'),
+      packages: manager.toJSON(),
     },
   };
 };

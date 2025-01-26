@@ -1,8 +1,8 @@
+import { PackageVersion } from '@open-audio-stack/core';
 import { getBasePath } from '../lib/path';
-import { PluginVersion } from '@studiorack/core';
 
 type DependencyProps = {
-  plugin: PluginVersion;
+  plugin: PackageVersion;
 };
 
 const Dependency = ({ plugin }: DependencyProps) => {

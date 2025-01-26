@@ -1,27 +1,19 @@
 import styles from '../styles/components/list.module.css';
-import {
-  PluginVersion,
-  PluginVersionLocal,
-  PluginTypes,
-  ProjectTypes,
-  ProjectVersion,
-  ProjectVersionLocal,
-} from '@studiorack/core';
+import { PluginTypes, ProjectTypes } from '@studiorack/core';
 import Header from './header';
 import Card from './card';
 import Filters from './filters';
 import Crumb from './crumb';
 import Tabs from './tabs';
+import { PackageInterface } from '@open-audio-stack/core';
 
 type ListProps = {
   filters?: boolean;
-  items: ListItem[];
+  items: PackageInterface[];
   type: string;
   tabs?: PluginTypes | ProjectTypes;
   title: string;
 };
-
-type ListItem = PluginVersion | PluginVersionLocal | ProjectVersion | ProjectVersionLocal;
 
 const List = ({ filters = true, items, type, tabs, title }: ListProps) => (
   <section className={styles.list}>
@@ -30,8 +22,8 @@ const List = ({ filters = true, items, type, tabs, title }: ListProps) => (
     {filters ? <Filters section={type} /> : ''}
     {tabs ? <Tabs items={tabs} /> : ''}
     <div className={styles.listGrid}>
-      {items.map((item: ListItem, index: number) => (
-        <Card section={type} item={item} index={index} key={`${item.id}-${index}`}></Card>
+      {items.map((item: PackageInterface, index: number) => (
+        <Card section={type} item={item} index={index} key={`${item.slug}-${index}`}></Card>
       ))}
     </div>
   </section>

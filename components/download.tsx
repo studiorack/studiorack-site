@@ -1,10 +1,10 @@
 import styles from '../styles/components/download.module.css';
-import { pluginFileUrl, PluginVersion } from '@studiorack/core';
 import { getBasePath } from '../lib/path';
+import { PackageVersion, PluginFile, PresetFile, ProjectFile, System } from '@open-audio-stack/core';
 // import { pluginFileUrlCompressed } from '../lib/plugin';
 
 type DownloadsProps = {
-  plugin: PluginVersion;
+  plugin: PackageVersion;
 };
 
 const Downloads = ({ plugin }: DownloadsProps) => (
@@ -12,7 +12,7 @@ const Downloads = ({ plugin }: DownloadsProps) => (
     <p>Download and install manually:</p>
     {plugin.tags.includes('sfz') || plugin.tags.includes('sf2') ? (
       <span>
-        <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'linux')} title="High-quality">
+        <a className={`button ${styles.downloadButton}`} href={plugin.files[0].url} title="High-quality">
           High-quality
           <img
             className={styles.downloadButtonIcon}
@@ -33,9 +33,12 @@ const Downloads = ({ plugin }: DownloadsProps) => (
       </span>
     ) : (
       <span>
-        {plugin.files.linux ? (
-          <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'linux')} title="Linux x64">
-            Linux
+        {plugin.files.map((file: PluginFile | PresetFile | ProjectFile) => (
+          <a className={`button ${styles.downloadButton}`} href={file.url} title="Linux x64">
+            {file.systems.map((system: System) => (
+              <span key={system.type}>{system.type} </span>
+            ))}
+            ({file.architectures.join(', ')})
             <img
               className={styles.downloadButtonIcon}
               src={`${getBasePath()}/images/icon-download.svg`}
@@ -43,35 +46,7 @@ const Downloads = ({ plugin }: DownloadsProps) => (
               loading="lazy"
             />
           </a>
-        ) : (
-          ''
-        )}
-        {plugin.files.mac ? (
-          <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'mac')} title="MacOS x64">
-            MacOS
-            <img
-              className={styles.downloadButtonIcon}
-              src={`${getBasePath()}/images/icon-download.svg`}
-              alt="Download"
-              loading="lazy"
-            />
-          </a>
-        ) : (
-          ''
-        )}
-        {plugin.files.win ? (
-          <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'win')} title="Windows x64">
-            Windows
-            <img
-              className={styles.downloadButtonIcon}
-              src={`${getBasePath()}/images/icon-download.svg`}
-              alt="Download"
-              loading="lazy"
-            />
-          </a>
-        ) : (
-          ''
-        )}
+        ))}
       </span>
     )}
   </div>

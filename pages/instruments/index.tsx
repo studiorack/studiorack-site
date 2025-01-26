@@ -1,4 +1,5 @@
-import { ConfigList, PluginVersion } from '@studiorack/core';
+import List from '../../components/list';
+import { Manager, PackageInterface, PluginType, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 import { useRouter } from 'next/router';
 import { filterPlugins } from '../../lib/plugin';
 import Layout from '../../components/layout';
@@ -6,23 +7,27 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { pageTitle } from '../../lib/utils';
 import { getCategories } from '../../lib/api-browser';
-import { getPlugins } from '../../lib/api';
-import List from '../../components/list';
+import { ConfigList } from '@studiorack/core';
 
 type InstrumentsProps = {
-  plugins: PluginVersion[];
+  packages: RegistryPackages;
 };
 
-const Instruments = ({ plugins }: InstrumentsProps) => {
+const Instruments = ({ packages }: InstrumentsProps) => {
   const router = useRouter();
   const categories: ConfigList = getCategories('instruments');
-  const pluginsFiltered: PluginVersion[] = filterPlugins(categories, plugins, router);
+  const packagesFiltered: PackageInterface[] = filterPlugins(
+    [PluginType.Generator, PluginType.Instrument, PluginType.Preset, PluginType.Sampler, PluginType.Tool],
+    categories,
+    packages,
+    router,
+  );
   return (
     <Layout>
       <Head>
         <title>{pageTitle(['Instruments'])}</title>
       </Head>
-      <List items={pluginsFiltered} type="instruments" title="Instruments" />
+      <List items={packagesFiltered} type="instruments" title="Instruments" />
     </Layout>
   );
 };
@@ -30,9 +35,11 @@ const Instruments = ({ plugins }: InstrumentsProps) => {
 export default Instruments;
 
 export const getStaticProps: GetStaticProps = async () => {
+  const manager = new Manager(RegistryType.Plugins);
+  await manager.sync();
   return {
     props: {
-      plugins: await getPlugins('instruments'),
+      packages: manager.toJSON(),
     },
   };
 };

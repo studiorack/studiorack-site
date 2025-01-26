@@ -12,8 +12,34 @@ import {
 import { NextRouter } from 'next/router';
 import { includesValue } from './utils';
 import { getLicenses } from './api-browser';
+import {
+  Architecture,
+  FileInterface,
+  PackageInterface,
+  PackageVersion,
+  PluginType,
+  RegistryPackages,
+  SystemType,
+} from '@open-audio-stack/core';
 
-export function filterPlugins(categories: ConfigList, plugins: PluginVersion[], router: NextRouter) {
+export function packageCompatibleFilesMatch(pkg: PackageVersion, archList: Architecture[], sysList: SystemType[]) {
+  return pkg.files.filter((file: FileInterface) => {
+    const archMatches = file.architectures.filter(architecture => {
+      return archList.includes(architecture);
+    });
+    const sysMatches = file.systems.filter(system => {
+      return sysList.includes(system.type);
+    });
+    return archMatches.length && sysMatches.length;
+  });
+}
+
+export function filterPlugins(
+  types: PluginType[],
+  categories: ConfigList,
+  packages: RegistryPackages,
+  router: NextRouter,
+) {
   const category = router.query['category'] as string | string[];
   // Tidy this up later on.
   let categoryTags: string[] = [];
@@ -27,23 +53,31 @@ export function filterPlugins(categories: ConfigList, plugins: PluginVersion[], 
     }
   }
   const license = router.query['license'] as string | string[];
-  const platform = router.query['platform'] as string | string[];
+  const platforms: string[] | undefined =
+    typeof router.query['platform'] === 'string' ? [router.query['platform']] : router.query['platform'];
   const search: string = router.query['search'] as string;
-  return plugins.filter((plugin: PluginVersion) => {
-    const platformsSupported = Object.keys(plugin.files);
-    if (category && !includesValue(categoryTags, plugin.tags)) return false;
-    if (license && !includesValue(license, typeof plugin.license === 'object' ? plugin.license.key : plugin.license))
-      return false;
-    if (platform && !includesValue(platform, platformsSupported)) return false;
+
+  const packagesFiltered: PackageInterface[] = [];
+  for (const slug in packages) {
+    const pkg: PackageInterface = packages[slug];
+    const pkgVersion: PackageVersion = pkg.versions[pkg.version];
+    if (!types.includes(pkgVersion.type as PluginType)) continue;
+    if (category && !includesValue(categoryTags, pkgVersion.tags)) continue;
+    if (license && !includesValue(license, pkgVersion.license)) continue;
+    if (platforms && !packageCompatibleFilesMatch(pkgVersion, [Architecture.X64], platforms as SystemType[]).length)
+      continue;
     if (
       search &&
-      plugin.id?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
-      plugin.name?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
-      plugin.description?.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
-      plugin.tags?.indexOf(search.toLowerCase()) === -1
+      pkg.slug.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      pkgVersion.name.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      pkgVersion.description.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
+      pkgVersion.tags.indexOf(search.toLowerCase()) === -1
     )
-      return false;
-    return plugin;
+      continue;
+    packagesFiltered.push(pkg);
+  }
+  return packagesFiltered.sort((a: PackageInterface, b: PackageInterface) => {
+    return a.versions[a.version].name.localeCompare(b.versions[b.version].name);
   });
 }
 
