@@ -98,7 +98,7 @@ const Details = ({ pkg, pkgVersion, type }: DetailsProps) => (
     <div className={styles.options}>
       <div className={styles.row}>
         <Downloads plugin={pkgVersion} />
-        <Code plugin={pkgVersion} />
+        <Code pkg={pkg} pkgVersion={pkgVersion} />
       </div>
     </div>
   </article>

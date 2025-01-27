@@ -6,8 +6,6 @@ import Layout from '../../components/layout';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { pageTitle } from '../../lib/utils';
-import { getCategories } from '../../lib/api-browser';
-import { ConfigList } from '@studiorack/core';
 
 type InstrumentsProps = {
   packages: RegistryPackages;
@@ -15,12 +13,10 @@ type InstrumentsProps = {
 
 const Instruments = ({ packages }: InstrumentsProps) => {
   const router = useRouter();
-  const categories: ConfigList = getCategories('instruments');
   const packagesFiltered: PackageInterface[] = filterPlugins(
     [PluginType.Generator, PluginType.Instrument, PluginType.Preset, PluginType.Sampler, PluginType.Tool],
-    categories,
-    packages,
     router,
+    packages,
   );
   return (
     <Layout>

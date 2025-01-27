@@ -56,7 +56,7 @@ export function getCategories(section: string): ConfigList {
     },
     synths: {
       name: 'Synths',
-      tags: ['Synths', 'Synth'],
+      tags: ['Synths', 'Synth', 'Synthesizer'],
     },
     vocals: {
       name: 'Vocals',

@@ -3,26 +3,36 @@ import Layout from '../../../components/layout';
 import Head from 'next/head';
 import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router';
-import { PluginVersion, pluginFileUrl, pluginGet, pluginsGet, PluginPack } from '@studiorack/core';
 import { pageTitle } from '../../../lib/utils';
 import Details from '../../../components/details';
+import {
+  Manager,
+  Package,
+  PackageInterface,
+  PackageVersion,
+  RegistryPackages,
+  RegistryType,
+} from '@open-audio-stack/core';
 
 type PluginProps = {
-  plugin: PluginVersion;
+  pkg: PackageInterface;
+  pkgVersion: PackageVersion;
   router: Router;
 };
 
 class PluginPage extends Component<
   PluginProps,
   {
+    pkg: PackageInterface;
+    pkgVersion: PackageVersion;
     router: Router;
-    plugin: PluginVersion;
   }
 > {
   constructor(props: PluginProps) {
     super(props);
     this.state = {
-      plugin: props.plugin,
+      pkg: props.pkg,
+      pkgVersion: props.pkg.versions[props.pkg.version],
       router: props.router,
     };
   }
@@ -31,12 +41,12 @@ class PluginPage extends Component<
     return (
       <Layout>
         <Head>
-          <title>{pageTitle(['Effects', this.state.plugin.name])}</title>
-          <meta name="description" content={this.state.plugin.description || ''} />
-          <meta name="og:image" content={pluginFileUrl(this.state.plugin, 'image')} />
-          <meta name="og:title" content={this.state.plugin.name || ''} />
+          <title>{pageTitle(['Effects', this.state.pkgVersion.name])}</title>
+          <meta name="description" content={this.state.pkgVersion.description || ''} />
+          <meta name="og:image" content={this.state.pkgVersion.image} />
+          <meta name="og:title" content={this.state.pkgVersion.name || ''} />
         </Head>
-        <Details plugin={this.state.plugin} type="effects" />
+        <Details pkg={this.state.pkg} pkgVersion={this.state.pkgVersion} type="effects" />
       </Layout>
     );
   }
@@ -44,10 +54,12 @@ class PluginPage extends Component<
 export default withRouter(PluginPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pluginPack: PluginPack = await pluginsGet('effects');
+  const manager = new Manager(RegistryType.Plugins);
+  await manager.sync();
+  const packages: RegistryPackages = manager.toJSON();
   const paths = [];
-  for (const pluginFullId in pluginPack) {
-    const [userId, pluginId] = pluginFullId.split('/');
+  for (const slug in packages) {
+    const [userId, pluginId] = slug.split('/');
     paths.push({
       params: {
         pluginId,
@@ -69,9 +81,12 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
+  const manager = new Manager(RegistryType.Plugins);
+  await manager.sync();
+  const pkg: Package | undefined = manager.getPackage(`${params.userId}/${params.pluginId}`);
   return {
     props: {
-      plugin: await pluginGet(`${params.userId}/${params.pluginId}`),
+      pkg: pkg?.toJSON(),
     },
   };
 }

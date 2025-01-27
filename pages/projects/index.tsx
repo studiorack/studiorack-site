@@ -6,15 +6,16 @@ import { GetStaticProps } from 'next';
 import { pageTitle } from '../../lib/utils';
 import List from '../../components/list';
 import { filterProjects } from '../../lib/project';
+import { Manager, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 
 type ProjectsProps = {
-  projects: ProjectVersion[];
+  packages: RegistryPackages;
 };
 
-const Projects = ({ projects }: ProjectsProps) => {
+const Projects = ({ packages }: ProjectsProps) => {
   const router = useRouter();
   const projectTypes = configDefaults('appFolder', 'pluginFolder', 'presetFolder', 'projectFolder').projectTypes;
-  const projectsFiltered: ProjectVersion[] = filterProjects(projectTypes, projects, router);
+  const projectsFiltered: ProjectVersion[] = filterProjects(projectTypes, packages, router);
   return (
     <Layout>
       <Head>
@@ -28,13 +29,11 @@ const Projects = ({ projects }: ProjectsProps) => {
 export default Projects;
 
 export const getStaticProps: GetStaticProps = async () => {
-  let projects = await projectsGetLocal();
-  projects = projects.sort(function (a: ProjectVersionLocal, b: ProjectVersionLocal) {
-    return a.name.localeCompare(b.name);
-  });
+  const manager = new Manager(RegistryType.Projects);
+  await manager.sync();
   return {
     props: {
-      projects,
+      packages: manager.toJSON(),
     },
   };
 };
