@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import Layout from '../../../components/layout';
-import Head from 'next/head';
+import Head from 'next/head.js';
 import { GetStaticPaths } from 'next';
-import { withRouter, Router } from 'next/router';
+import { withRouter, Router } from 'next/router.js';
 import { pageTitle } from '../../../lib/utils';
 import Details from '../../../components/details';
 import {
@@ -13,6 +13,12 @@ import {
   RegistryPackages,
   RegistryType,
 } from '@open-audio-stack/core';
+
+declare global {
+  interface Window {
+    Sfz: any;
+  }
+}
 
 type PluginProps = {
   pkg: PackageInterface;
@@ -41,12 +47,12 @@ class PluginPage extends Component<
     return (
       <Layout>
         <Head>
-          <title>{pageTitle(['Effects', this.state.pkgVersion.name])}</title>
+          <title>{pageTitle(['Plugins', this.state.pkgVersion.name])}</title>
           <meta name="description" content={this.state.pkgVersion.description || ''} />
           <meta name="og:image" content={this.state.pkgVersion.image} />
           <meta name="og:title" content={this.state.pkgVersion.name || ''} />
         </Head>
-        <Details pkg={this.state.pkg} pkgVersion={this.state.pkgVersion} type="effects" />
+        <Details pkg={this.state.pkg} pkgVersion={this.state.pkgVersion} type={RegistryType.Plugins} />
       </Layout>
     );
   }

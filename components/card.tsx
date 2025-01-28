@@ -1,20 +1,16 @@
 import styles from '../styles/components/card.module.css';
 import Link from 'next/link';
 import { getBasePath } from '../lib/path';
-import { PackageInterface } from '@open-audio-stack/core';
+import { PackageInterface, RegistryType } from '@open-audio-stack/core';
 
 type CardProps = {
-  section: string;
+  section: RegistryType;
   item: PackageInterface;
   index: number;
 };
 
 const Card = ({ section, item, index }: CardProps) => (
-  <Link
-    href={`/${section}/[userId]/[${section === 'projects' ? 'projectId' : 'pluginId'}]`}
-    as={`/${section}/${item.slug}`}
-    className={styles.cardLink}
-  >
+  <Link href={`/${section}/[userId]/[pluginId]`} as={`/${section}/${item.slug}`} className={styles.cardLink}>
     <div className={styles.card}>
       <div className={styles.cardDetails}>
         <div className={styles.cardHead}>

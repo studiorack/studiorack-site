@@ -1,12 +1,11 @@
-import { configDefaults, projectsGetLocal, ProjectVersion, ProjectVersionLocal } from '@studiorack/core';
 import { useRouter } from 'next/router';
+import { filterProjects } from '../../lib/project';
 import Layout from '../../components/layout';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { pageTitle } from '../../lib/utils';
 import List from '../../components/list';
-import { filterProjects } from '../../lib/project';
-import { Manager, RegistryPackages, RegistryType } from '@open-audio-stack/core';
+import { Manager, PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 
 type ProjectsProps = {
   packages: RegistryPackages;
@@ -14,14 +13,13 @@ type ProjectsProps = {
 
 const Projects = ({ packages }: ProjectsProps) => {
   const router = useRouter();
-  const projectTypes = configDefaults('appFolder', 'pluginFolder', 'presetFolder', 'projectFolder').projectTypes;
-  const projectsFiltered: ProjectVersion[] = filterProjects(projectTypes, packages, router);
+  const packagesFiltered: PackageInterface[] = filterProjects(router, packages);
   return (
     <Layout>
       <Head>
         <title>{pageTitle(['Projects'])}</title>
       </Head>
-      <List items={projectsFiltered} type="projects" title="Projects" filters={false} tabs={projectTypes} />
+      <List items={packagesFiltered} type={RegistryType.Projects} title="Projects" />
     </Layout>
   );
 };

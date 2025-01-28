@@ -32,9 +32,14 @@ class PluginList extends Component<
     return (
       <Layout>
         <Head>
-          <title>{pageTitle(['Effects', this.state.userId])}</title>
+          <title>{pageTitle(['Presets', this.state.userId])}</title>
         </Head>
-        <List items={this.state.packagesFiltered} type="effects" title={this.state.userId} filters={false} />
+        <List
+          items={this.state.packagesFiltered}
+          type={RegistryType.Presets}
+          title={this.state.userId}
+          filters={false}
+        />
       </Layout>
     );
   }
@@ -42,7 +47,7 @@ class PluginList extends Component<
 export default PluginList;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const manager = new Manager(RegistryType.Plugins);
+  const manager = new Manager(RegistryType.Presets);
   await manager.sync();
   const packages: RegistryPackages = manager.toJSON();
   const paths = [];
@@ -67,7 +72,7 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const manager = new Manager(RegistryType.Plugins);
+  const manager = new Manager(RegistryType.Presets);
   await manager.sync();
   const packages: RegistryPackages = manager.toJSON();
   const packagesFiltered: PackageInterface[] = [];

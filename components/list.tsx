@@ -1,17 +1,22 @@
 import styles from '../styles/components/list.module.css';
-import { PluginTypes, ProjectTypes } from '@studiorack/core';
 import Header from './header';
 import Card from './card';
 import Filters from './filters';
 import Crumb from './crumb';
 import Tabs from './tabs';
-import { PackageInterface } from '@open-audio-stack/core';
+import {
+  PackageInterface,
+  PluginFormatOption,
+  PresetFormatOption,
+  ProjectFormatOption,
+  RegistryType,
+} from '@open-audio-stack/core';
 
 type ListProps = {
   filters?: boolean;
   items: PackageInterface[];
-  type: string;
-  tabs?: PluginTypes | ProjectTypes;
+  type: RegistryType;
+  tabs?: PluginFormatOption[] | PresetFormatOption[] | ProjectFormatOption[];
   title: string;
 };
 

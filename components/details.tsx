@@ -8,12 +8,12 @@ import Dependency from './dependency';
 import Downloads from './download';
 import Code from './code';
 import { pluginLicense } from '../lib/plugin';
-import { PackageInterface, PackageVersion } from '@open-audio-stack/core';
+import { PackageInterface, PackageVersion, RegistryType } from '@open-audio-stack/core';
 
 type DetailsProps = {
   pkg: PackageInterface;
   pkgVersion: PackageVersion;
-  type: string;
+  type: RegistryType;
 };
 
 const Details = ({ pkg, pkgVersion, type }: DetailsProps) => (

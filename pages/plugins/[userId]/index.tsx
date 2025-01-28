@@ -32,9 +32,14 @@ class PluginList extends Component<
     return (
       <Layout>
         <Head>
-          <title>{pageTitle(['Instruments', this.state.userId])}</title>
+          <title>{pageTitle(['Plugins', this.state.userId])}</title>
         </Head>
-        <List items={this.state.packagesFiltered} type="instruments" title={this.state.userId} filters={false} />
+        <List
+          items={this.state.packagesFiltered}
+          type={RegistryType.Plugins}
+          title={this.state.userId}
+          filters={false}
+        />
       </Layout>
     );
   }

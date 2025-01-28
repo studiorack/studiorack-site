@@ -1,33 +1,33 @@
 import { useRouter } from 'next/router';
-import { filterPlugins } from '../../lib/plugin';
+import { filterPresets } from '../../lib/preset';
 import Layout from '../../components/layout';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { pageTitle } from '../../lib/utils';
 import List from '../../components/list';
-import { Manager, PackageInterface, PluginType, RegistryPackages, RegistryType } from '@open-audio-stack/core';
+import { Manager, PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 
-type EffectsProps = {
+type PresetsProps = {
   packages: RegistryPackages;
 };
 
-const Effects = ({ packages }: EffectsProps) => {
+const Presets = ({ packages }: PresetsProps) => {
   const router = useRouter();
-  const packagesFiltered: PackageInterface[] = filterPlugins([PluginType.Effect], router, packages);
+  const packagesFiltered: PackageInterface[] = filterPresets(router, packages);
   return (
     <Layout>
       <Head>
-        <title>{pageTitle(['Effects'])}</title>
+        <title>{pageTitle(['Presets'])}</title>
       </Head>
-      <List items={packagesFiltered} type="effects" title="Effects" />
+      <List items={packagesFiltered} type={RegistryType.Presets} title="Presets" />
     </Layout>
   );
 };
 
-export default Effects;
+export default Presets;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const manager = new Manager(RegistryType.Plugins);
+  const manager = new Manager(RegistryType.Presets);
   await manager.sync();
   return {
     props: {

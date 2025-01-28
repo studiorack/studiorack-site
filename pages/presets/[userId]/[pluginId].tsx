@@ -47,12 +47,12 @@ class PluginPage extends Component<
     return (
       <Layout>
         <Head>
-          <title>{pageTitle(['Instruments', this.state.pkgVersion.name])}</title>
+          <title>{pageTitle(['Presets', this.state.pkgVersion.name])}</title>
           <meta name="description" content={this.state.pkgVersion.description || ''} />
           <meta name="og:image" content={this.state.pkgVersion.image} />
           <meta name="og:title" content={this.state.pkgVersion.name || ''} />
         </Head>
-        <Details pkg={this.state.pkg} pkgVersion={this.state.pkgVersion} type="instruments" />
+        <Details pkg={this.state.pkg} pkgVersion={this.state.pkgVersion} type={RegistryType.Presets} />
       </Layout>
     );
   }
@@ -60,7 +60,7 @@ class PluginPage extends Component<
 export default withRouter(PluginPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const manager = new Manager(RegistryType.Plugins);
+  const manager = new Manager(RegistryType.Presets);
   await manager.sync();
   const packages: RegistryPackages = manager.toJSON();
   const paths = [];
@@ -87,7 +87,7 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const manager = new Manager(RegistryType.Plugins);
+  const manager = new Manager(RegistryType.Presets);
   await manager.sync();
   const pkg: Package | undefined = manager.getPackage(`${params.userId}/${params.pluginId}`);
   return {

@@ -1,18 +1,6 @@
-import {
-  PluginEntry,
-  PluginFiles,
-  PluginLicense,
-  PluginPack,
-  PluginVersion,
-  pluginFileUrl,
-  pathGetExt,
-  pathGetWithoutExt,
-} from '@studiorack/core';
 import { NextRouter } from 'next/router';
-import { getLicenses } from './api-browser';
 import {
   Architecture,
-  FileInterface,
   packageCompatibleFiles,
   PackageInterface,
   PackageVersion,
@@ -21,24 +9,9 @@ import {
   RegistryPackages,
   SystemType,
 } from '@open-audio-stack/core';
+import { getParam } from './plugin';
 
-export function packageCompatibleFilesMatch(pkg: PackageVersion, archList: Architecture[], sysList: SystemType[]) {
-  return pkg.files.filter((file: FileInterface) => {
-    const archMatches = file.architectures.filter(architecture => {
-      return archList.includes(architecture);
-    });
-    const sysMatches = file.systems.filter(system => {
-      return sysList.includes(system.type);
-    });
-    return archMatches.length && sysMatches.length;
-  });
-}
-
-export function getParam(router: NextRouter, field: string) {
-  return typeof router.query[field] === 'string' ? [router.query[field]] : router.query[field];
-}
-
-export function filterPlugins(router: NextRouter, packages: RegistryPackages) {
+export function filterPresets(router: NextRouter, packages: RegistryPackages) {
   const type = getParam(router, 'type');
   const category = getParam(router, 'category');
   let categoryTags: string[] = [];
@@ -79,32 +52,4 @@ export function filterPlugins(router: NextRouter, packages: RegistryPackages) {
   return packagesFiltered.sort((a: PackageInterface, b: PackageInterface) => {
     return a.versions[a.version].name.localeCompare(b.versions[b.version].name);
   });
-}
-
-export function getPlugin(pluginPack: PluginPack, pluginId: string) {
-  const pluginEntry: PluginEntry = pluginPack[pluginId];
-  const plugin: PluginVersion = pluginEntry.versions[pluginEntry.version];
-  plugin.id = pluginId;
-  plugin.version = pluginEntry.version;
-  return plugin;
-}
-
-export function pluginFileUrlCompressed(plugin: PluginVersion, type: keyof PluginFiles) {
-  const fileUrl: string = pluginFileUrl(plugin, type);
-  const fileWithoutExt: string = pathGetWithoutExt(fileUrl);
-  const fileExt: string = pathGetExt(fileUrl);
-  return `${fileWithoutExt}-compact.${fileExt}`;
-}
-
-export function pluginLicense(key: string | PluginLicense) {
-  if (typeof key !== 'string') return key;
-  const licenses: PluginLicense[] = getLicenses();
-  let licenseMatch: PluginLicense = licenses[licenses.length - 1];
-  licenses.forEach((license: PluginLicense) => {
-    if (key === license.key) {
-      licenseMatch = license;
-      return;
-    }
-  });
-  return licenseMatch;
 }

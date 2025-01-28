@@ -11,7 +11,7 @@ const Dependency = ({ plugin }: DependencyProps) => {
       <span>
         {' '}
         (This instrument needs to be loaded into a{' '}
-        <a href={`${getBasePath()}/instruments/sfztools/sfizz`} target="_blank">
+        <a href={`${getBasePath()}/plugins/sfztools/sfizz`} target="_blank">
           SFZ player
         </a>
         )
@@ -22,7 +22,7 @@ const Dependency = ({ plugin }: DependencyProps) => {
       <span>
         {' '}
         (This instrument needs to be loaded into a{' '}
-        <a href={`${getBasePath()}/instruments/studiorack/juicysf`} target="_blank">
+        <a href={`${getBasePath()}/plugins/birch-san/juicysfplugin`} target="_blank">
           SoundFont 2 player
         </a>
         )
