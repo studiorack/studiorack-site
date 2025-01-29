@@ -41,7 +41,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@studiorack/core": "^2.0.16",
+    "@open-audio-stack/core": "^0.1.5",
     "gray-matter": "^4.0.3",
     "next": "^14.2.10",
     "react": "^18.3.1",

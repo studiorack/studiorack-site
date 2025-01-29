@@ -11,7 +11,7 @@ import {
 } from '@open-audio-stack/core';
 import { getParam } from './plugin';
 
-export function filterProjects(router: NextRouter, packages: RegistryPackages) {
+export function filterPresets(router: NextRouter, packages: RegistryPackages) {
   const type = getParam(router, 'type');
   const category = getParam(router, 'category');
   let categoryTags: string[] = [];

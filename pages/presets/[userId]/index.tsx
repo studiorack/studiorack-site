@@ -1,21 +1,20 @@
 import { Component } from 'react';
 import Head from 'next/head';
 import Layout from '../../../components/layout';
-import { PluginVersion, PluginPack, pluginsGet } from '@studiorack/core';
-import { getPlugin } from '../../../lib/plugin';
 import { pageTitle } from '../../../lib/utils';
 import { GetStaticPaths } from 'next';
 import List from '../../../components/list';
+import { Manager, PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 
 type PluginListProps = {
-  plugins: PluginVersion[];
+  packagesFiltered: PackageInterface[];
   userId: string;
 };
 
 class PluginList extends Component<
   PluginListProps,
   {
-    pluginsFiltered: PluginVersion[];
+    packagesFiltered: PackageInterface[];
     query: string;
     userId: string;
   }
@@ -23,7 +22,7 @@ class PluginList extends Component<
   constructor(props: PluginListProps) {
     super(props);
     this.state = {
-      pluginsFiltered: props.plugins || [],
+      packagesFiltered: props.packagesFiltered || [],
       query: '',
       userId: props.userId,
     };
@@ -33,9 +32,14 @@ class PluginList extends Component<
     return (
       <Layout>
         <Head>
-          <title>{pageTitle(['Instruments', this.state.userId])}</title>
+          <title>{pageTitle(['Presets', this.state.userId])}</title>
         </Head>
-        <List items={this.state.pluginsFiltered} type="instruments" title={this.state.userId} filters={false} />
+        <List
+          items={this.state.packagesFiltered}
+          type={RegistryType.Presets}
+          title={this.state.userId}
+          filters={false}
+        />
       </Layout>
     );
   }
@@ -43,10 +47,12 @@ class PluginList extends Component<
 export default PluginList;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pluginPack: PluginPack = await pluginsGet('instruments');
+  const manager = new Manager(RegistryType.Presets);
+  await manager.sync();
+  const packages: RegistryPackages = manager.toJSON();
   const paths = [];
-  for (const pluginFullId in pluginPack) {
-    const [userId] = pluginFullId.split('/');
+  for (const slug in packages) {
+    const [userId] = slug.split('/');
     paths.push({
       params: {
         userId,
@@ -66,16 +72,18 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const pluginPack: PluginPack = await pluginsGet('instruments');
-  const plugins: PluginVersion[] = [];
-  for (const pluginId in pluginPack) {
-    if (pluginId.split('/')[0] === params.userId) {
-      plugins.push(getPlugin(pluginPack, pluginId));
+  const manager = new Manager(RegistryType.Presets);
+  await manager.sync();
+  const packages: RegistryPackages = manager.toJSON();
+  const packagesFiltered: PackageInterface[] = [];
+  for (const slug in packages) {
+    if (slug.split('/')[0] === params.userId) {
+      packagesFiltered.push(packages[slug]);
     }
   }
   return {
     props: {
-      plugins,
+      packagesFiltered,
       userId: params.userId,
     },
   };

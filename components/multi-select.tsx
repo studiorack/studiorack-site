@@ -1,15 +1,26 @@
 import { useRouter } from 'next/router';
 import { includesValue, toSlug } from '../lib/utils';
 import styles from '../styles/components/multi-select.module.css';
-
-type MultiSelectItem = {
-  label: string;
-  value: string;
-};
+import {
+  ArchitectureOption,
+  LicenseOption,
+  PluginTypeOption,
+  PresetTypeOption,
+  ProjectTypeOption,
+  SystemTypeOption,
+} from '@open-audio-stack/core';
+import { PluginCategoryOption } from '@open-audio-stack/core/build/types/PluginCategory';
 
 type MultiSelectProps = {
   label: string;
-  items: MultiSelectItem[];
+  items:
+    | PluginTypeOption[]
+    | PresetTypeOption[]
+    | ProjectTypeOption[]
+    | PluginCategoryOption[]
+    | LicenseOption[]
+    | ArchitectureOption[]
+    | SystemTypeOption[];
 };
 
 const MultiSelect = ({ label, items }: MultiSelectProps) => {
@@ -48,12 +59,12 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
         <option>{label}</option>
       </select>
       <div className={styles.multiselectCheckboxes} id={label}>
-        {items.map((item: MultiSelectItem) => (
+        {items.map(item => (
           <label
             className={styles.multiselectLabel}
             htmlFor={toSlug(item.value)}
             key={toSlug(item.value)}
-            title={item.label}
+            title={item.name}
           >
             <input
               className={styles.multiselectInput}
@@ -63,7 +74,7 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
               onClick={updateUrl}
               defaultChecked={isChecked(item.value)}
             />
-            {item.label}
+            {item.name}
           </label>
         ))}
       </div>

@@ -1,14 +1,11 @@
+import { PluginFormatOption, PresetFormatOption, ProjectFormatOption } from '@open-audio-stack/core';
 import styles from '../styles/components/tabs.module.css';
-import { PluginType, PluginTypes, ProjectType, ProjectTypes } from '@studiorack/core';
 import { useRouter } from 'next/router';
 import { ChangeEvent } from 'react';
 
 type TabsProps = {
-  items: PluginTypes | ProjectTypes;
+  items: PluginFormatOption[] | PresetFormatOption[] | ProjectFormatOption[];
 };
-
-type TabsItem = PluginType | ProjectType;
-type TabsKey = keyof PluginTypes & keyof ProjectTypes;
 
 const Tabs = ({ items }: TabsProps) => {
   const router = useRouter();
@@ -45,10 +42,10 @@ const Tabs = ({ items }: TabsProps) => {
             All
           </a>
         </li>
-        {Object.keys(items).map((key: string, index: number) => (
-          <li key={`${key}-${index}`}>
-            <a data-category={key} onClick={selectCategory} className={isSelected(key)}>
-              {(items[key as TabsKey] as TabsItem).name}
+        {items.map((item, index: number) => (
+          <li key={`${item.value}-${index}`}>
+            <a data-category={item.value} onClick={selectCategory} className={isSelected(item.value)}>
+              {item.name}
             </a>
           </li>
         ))}

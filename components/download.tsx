@@ -1,18 +1,17 @@
 import styles from '../styles/components/download.module.css';
-import { pluginFileUrl, PluginVersion } from '@studiorack/core';
 import { getBasePath } from '../lib/path';
-// import { pluginFileUrlCompressed } from '../lib/plugin';
+import { PackageVersion, PluginFile, PresetFile, ProjectFile, System, systemTypes } from '@open-audio-stack/core';
 
 type DownloadsProps = {
-  plugin: PluginVersion;
+  plugin: PackageVersion;
 };
 
 const Downloads = ({ plugin }: DownloadsProps) => (
   <div className={`${styles.download}`}>
     <p>Download and install manually:</p>
-    {plugin.tags.includes('sfz') || plugin.tags.includes('sf2') ? (
+    {/* {plugin.tags.includes('sfz') || plugin.tags.includes('sf2') ? (
       <span>
-        <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'linux')} title="High-quality">
+        <a className={`button ${styles.downloadButton}`} href={plugin.files[0].url} title="High-quality">
           High-quality
           <img
             className={styles.downloadButtonIcon}
@@ -21,21 +20,20 @@ const Downloads = ({ plugin }: DownloadsProps) => (
             loading="lazy"
           />
         </a>
-        {/* <a className={`button ${styles.downloadButton}`} href={pluginFileUrlCompressed(plugin, 'linux')} title="Compressed">
-          Compressed
-          <img
-            className={styles.downloadButtonIcon}
-            src={`${getBasePath()}/images/icon-download.svg`}
-            alt="Download"
-            loading="lazy"
-          />
-        </a> */}
       </span>
-    ) : (
-      <span>
-        {plugin.files.linux ? (
-          <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'linux')} title="Linux x64">
-            Linux
+    ) : ( */}
+    <span>
+      {plugin.files.map((file: PluginFile | PresetFile | ProjectFile) => (
+        <div className={styles.downloadFile}>
+          {file.systems.map((system: System) => (
+            <div className={`${styles.downloadSystem} ${styles['icon-' + system.type]}`}>
+              <span className={styles.downloadSystemName}>
+                {systemTypes.filter(systemType => systemType.value === system.type)[0].name}
+              </span>
+              <span className={styles.downloadSystemArch}>{file.architectures.join(', ')}</span>
+            </div>
+          ))}
+          <a className={`button ${styles.downloadButton}`} href={file.url} title="Download">
             <img
               className={styles.downloadButtonIcon}
               src={`${getBasePath()}/images/icon-download.svg`}
@@ -43,37 +41,10 @@ const Downloads = ({ plugin }: DownloadsProps) => (
               loading="lazy"
             />
           </a>
-        ) : (
-          ''
-        )}
-        {plugin.files.mac ? (
-          <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'mac')} title="MacOS x64">
-            MacOS
-            <img
-              className={styles.downloadButtonIcon}
-              src={`${getBasePath()}/images/icon-download.svg`}
-              alt="Download"
-              loading="lazy"
-            />
-          </a>
-        ) : (
-          ''
-        )}
-        {plugin.files.win ? (
-          <a className={`button ${styles.downloadButton}`} href={pluginFileUrl(plugin, 'win')} title="Windows x64">
-            Windows
-            <img
-              className={styles.downloadButtonIcon}
-              src={`${getBasePath()}/images/icon-download.svg`}
-              alt="Download"
-              loading="lazy"
-            />
-          </a>
-        ) : (
-          ''
-        )}
-      </span>
-    )}
+        </div>
+      ))}
+    </span>
+    {/* )} */}
   </div>
 );
 
