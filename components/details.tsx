@@ -7,8 +7,7 @@ import Player from './player';
 import Dependency from './dependency';
 import Downloads from './download';
 import Code from './code';
-import { pluginLicense } from '../lib/plugin';
-import { PackageInterface, PackageVersion, RegistryType } from '@open-audio-stack/core';
+import { licenses, PackageInterface, PackageVersion, RegistryType } from '@open-audio-stack/core';
 
 type DetailsProps = {
   pkg: PackageInterface;
@@ -67,8 +66,8 @@ const Details = ({ pkg, pkgVersion, type }: DetailsProps) => (
                 loading="lazy"
               />{' '}
               {pkgVersion.license ? (
-                <a href={pluginLicense(pkgVersion.license).url} target="_blank">
-                  {pluginLicense(pkgVersion.license).name}
+                <a href={`https://choosealicense.com/licenses/${pkgVersion.license}`} target="_blank">
+                  {licenses.filter(license => pkgVersion.license === license.value)[0].name}
                 </a>
               ) : (
                 'none'

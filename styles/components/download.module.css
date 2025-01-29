@@ -2,22 +2,53 @@
   margin-bottom: 1.5rem;
 }
 
+.downloadFile {
+  background-color: #111;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  padding: 1rem 4rem 1rem 1rem;
+  position: relative;
+}
+
+.downloadSystem {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.downloadFile div:last-of-type {
+  margin-bottom: 0;
+}
+
+.downloadSystemArch {
+  color: #999;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+
 .downloadButton {
-  margin-right: 0.5rem;
-}
-
-.downloadButton .progress {
-  display: none;
-}
-
-.downloadButton:disabled .progress {
-  display: inline;
+  height: 15px;
+  padding: 8px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0%, -50%);
+  width: 15px;
 }
 
 .downloadButtonIcon {
-  margin-left: 0.5rem;
-  vertical-align: middle;
-  width: 14px;
+  max-width: 100%;
+}
+
+.icon-linux {
+  background: url(../../public/images/icon-linux.svg) no-repeat;
+}
+
+.icon-mac {
+  background: url(../../public/images/icon-mac.svg) no-repeat;
+}
+
+.icon-win {
+  background: url(../../public/images/icon-win.svg) no-repeat;
 }
 
 @media (min-width: 48rem) {

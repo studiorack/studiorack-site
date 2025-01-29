@@ -1,15 +1,4 @@
-import {
-  PluginEntry,
-  PluginFiles,
-  PluginLicense,
-  PluginPack,
-  PluginVersion,
-  pluginFileUrl,
-  pathGetExt,
-  pathGetWithoutExt,
-} from '@studiorack/core';
 import { NextRouter } from 'next/router';
-import { getLicenses } from './api-browser';
 import {
   Architecture,
   FileInterface,
@@ -79,32 +68,4 @@ export function filterPlugins(router: NextRouter, packages: RegistryPackages) {
   return packagesFiltered.sort((a: PackageInterface, b: PackageInterface) => {
     return a.versions[a.version].name.localeCompare(b.versions[b.version].name);
   });
-}
-
-export function getPlugin(pluginPack: PluginPack, pluginId: string) {
-  const pluginEntry: PluginEntry = pluginPack[pluginId];
-  const plugin: PluginVersion = pluginEntry.versions[pluginEntry.version];
-  plugin.id = pluginId;
-  plugin.version = pluginEntry.version;
-  return plugin;
-}
-
-export function pluginFileUrlCompressed(plugin: PluginVersion, type: keyof PluginFiles) {
-  const fileUrl: string = pluginFileUrl(plugin, type);
-  const fileWithoutExt: string = pathGetWithoutExt(fileUrl);
-  const fileExt: string = pathGetExt(fileUrl);
-  return `${fileWithoutExt}-compact.${fileExt}`;
-}
-
-export function pluginLicense(key: string | PluginLicense) {
-  if (typeof key !== 'string') return key;
-  const licenses: PluginLicense[] = getLicenses();
-  let licenseMatch: PluginLicense = licenses[licenses.length - 1];
-  licenses.forEach((license: PluginLicense) => {
-    if (key === license.key) {
-      licenseMatch = license;
-      return;
-    }
-  });
-  return licenseMatch;
 }
