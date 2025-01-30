@@ -5,13 +5,18 @@ import { ChangeEvent } from 'react';
 import {
   licenses,
   pluginCategoryInstruments,
+  PluginCategoryOption,
+  PluginType,
   pluginTypes,
   presetTypes,
+  ProjectFormatOption,
+  projectFormats,
   projectTypes,
   RegistryType,
   systemTypes,
 } from '@open-audio-stack/core';
 import { pluginCategoryEffects } from '@open-audio-stack/core';
+import { getParam } from '../lib/plugin';
 
 type FiltersProps = {
   section: RegistryType;
@@ -19,17 +24,18 @@ type FiltersProps = {
 
 const Filters = ({ section }: FiltersProps) => {
   const router = useRouter();
-  const search: string = (router.query['search'] as string) || '';
-  let categories;
+  const type = getParam(router, 'type');
+  const search = getParam(router, 'search');
+  let categories: PluginCategoryOption[] | ProjectFormatOption[] =
+    type && type[0] === PluginType.Effect ? pluginCategoryEffects : pluginCategoryInstruments;
   let types;
+  // TODO move this logic to parent
   if (section === RegistryType.Plugins) {
-    categories = router.query['search'] === RegistryType.Plugins ? pluginCategoryEffects : pluginCategoryInstruments;
     types = pluginTypes;
   } else if (section === RegistryType.Presets) {
-    categories = presetTypes;
     types = presetTypes;
   } else {
-    categories = projectTypes;
+    categories = projectFormats;
     types = projectTypes;
   }
   const onSearch = (event: ChangeEvent) => {
@@ -46,8 +52,8 @@ const Filters = ({ section }: FiltersProps) => {
       <span className={styles.filtersTitle}>Filter by:</span>
       <MultiSelect label="Type" items={types}></MultiSelect>
       <MultiSelect label="Category" items={categories}></MultiSelect>
-      <MultiSelect label="License" items={licenses}></MultiSelect>
       <MultiSelect label="System" items={systemTypes}></MultiSelect>
+      <MultiSelect label="License" items={licenses}></MultiSelect>
       <input
         className={styles.filtersSearch}
         placeholder="Keyword"
