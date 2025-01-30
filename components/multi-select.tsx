@@ -6,6 +6,7 @@ import {
   LicenseOption,
   PluginTypeOption,
   PresetTypeOption,
+  ProjectFormatOption,
   ProjectTypeOption,
   SystemTypeOption,
 } from '@open-audio-stack/core';
@@ -17,6 +18,7 @@ type MultiSelectProps = {
     | PluginTypeOption[]
     | PresetTypeOption[]
     | ProjectTypeOption[]
+    | ProjectFormatOption[]
     | PluginCategoryOption[]
     | LicenseOption[]
     | ArchitectureOption[]
@@ -60,12 +62,7 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
       </select>
       <div className={styles.multiselectCheckboxes} id={label}>
         {items.map(item => (
-          <label
-            className={styles.multiselectLabel}
-            htmlFor={toSlug(item.value)}
-            key={toSlug(item.value)}
-            title={item.name}
-          >
+          <div className={styles.multiselectCheckbox}>
             <input
               className={styles.multiselectInput}
               type="checkbox"
@@ -74,8 +71,15 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
               onClick={updateUrl}
               defaultChecked={isChecked(item.value)}
             />
-            {item.name}
-          </label>
+            <label
+              className={styles.multiselectLabel}
+              htmlFor={toSlug(item.value)}
+              key={toSlug(item.value)}
+              title={item.name}
+            >
+              {item.name}
+            </label>
+          </div>
         ))}
       </div>
     </form>

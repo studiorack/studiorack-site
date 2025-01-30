@@ -26,7 +26,7 @@ export function filterPresets(router: NextRouter, packages: RegistryPackages) {
   }
   const license = getParam(router, 'license');
   const system = getParam(router, 'system');
-  const search = router.query['search'] as string;
+  const search = getParam(router, 'search');
   const packagesFiltered: PackageInterface[] = [];
   for (const slug in packages) {
     const pkg: PackageInterface = packages[slug];
@@ -40,10 +40,10 @@ export function filterPresets(router: NextRouter, packages: RegistryPackages) {
         continue;
       if (
         search &&
-        pkg.slug.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
-        pkgVersion.name.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
-        pkgVersion.description.toLowerCase().indexOf(search.toLowerCase()) === -1 &&
-        pkgVersion.tags.indexOf(search.toLowerCase()) === -1
+        pkg.slug.toLowerCase().indexOf(search[0].toLowerCase()) === -1 &&
+        pkgVersion.name.toLowerCase().indexOf(search[0].toLowerCase()) === -1 &&
+        pkgVersion.description.toLowerCase().indexOf(search[0].toLowerCase()) === -1 &&
+        pkgVersion.tags.indexOf(search[0].toLowerCase()) === -1
       )
         continue;
       packagesFiltered.push(pkg);

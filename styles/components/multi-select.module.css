@@ -3,16 +3,16 @@
   position: relative;
 }
 
-.multiselect[id='license'] {
-  min-width: 25rem;
-}
-
-.multiselect[id='system'] {
-  min-width: 11rem;
-}
-
 .multiselect[id='type'] {
   min-width: 11rem;
+}
+
+.multiselect[id='category'] {
+  min-width: 12rem;
+}
+
+.multiselect[id='license'] {
+  min-width: 18rem;
 }
 
 .multiselectTitle {
@@ -88,18 +88,20 @@
   z-index: 1;
 }
 
-.multiselectLabel {
-  cursor: pointer;
-  display: block;
+.multiselectCheckbox {
+  display: flex;
   font-size: 1rem;
   font-weight: 400;
-  overflow: hidden;
+  line-height: 1.25;
   padding: 0.75rem 1rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.multiselectLabel:hover {
+.multiselectCheckbox .multiselectInput,
+.multiselectCheckbox .multiselectLabel {
+  cursor: pointer;
+}
+
+.multiselectCheckbox:hover {
   background-color: #222;
 }
 
