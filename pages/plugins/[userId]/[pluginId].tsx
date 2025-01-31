@@ -10,6 +10,7 @@ import {
   Package,
   PackageInterface,
   PackageVersion,
+  PluginFile,
   RegistryPackages,
   RegistryType,
 } from '@open-audio-stack/core';
@@ -26,9 +27,14 @@ type PluginProps = {
   router: Router;
 };
 
+export type DownloadsInterface = {
+  [key: string]: PluginFile[];
+};
+
 class PluginPage extends Component<
   PluginProps,
   {
+    downloads: DownloadsInterface;
     pkg: PackageInterface;
     pkgVersion: PackageVersion;
     router: Router;
@@ -37,6 +43,15 @@ class PluginPage extends Component<
   constructor(props: PluginProps) {
     super(props);
     this.state = {
+      downloads: props.pkg.versions[props.pkg.version].files.reduce((result: DownloadsInterface, file) => {
+        file.systems.forEach(system => {
+          if (!result[system.type]) {
+            result[system.type] = [];
+          }
+          result[system.type].push(file as PluginFile);
+        });
+        return result;
+      }, {}),
       pkg: props.pkg,
       pkgVersion: props.pkg.versions[props.pkg.version],
       router: props.router,
@@ -52,7 +67,12 @@ class PluginPage extends Component<
           <meta name="og:image" content={this.state.pkgVersion.image} />
           <meta name="og:title" content={this.state.pkgVersion.name || ''} />
         </Head>
-        <Details pkg={this.state.pkg} pkgVersion={this.state.pkgVersion} type={RegistryType.Plugins} />
+        <Details
+          downloads={this.state.downloads}
+          pkg={this.state.pkg}
+          pkgVersion={this.state.pkgVersion}
+          type={RegistryType.Plugins}
+        />
       </Layout>
     );
   }

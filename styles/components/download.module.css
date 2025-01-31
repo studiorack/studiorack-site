@@ -2,36 +2,37 @@
   margin-bottom: 1.5rem;
 }
 
-.downloadFile {
-  align-items: center;
+.downloadSystem {
   background-color: #111;
   border-radius: 0.25rem;
-  display: flex;
   margin-bottom: 0.5rem;
   padding: 1rem;
-  justify-content: space-between;
 }
 
-.downloadSystem {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-}
-
-.downloadFile div:last-of-type {
-  margin-bottom: 0;
+.downloadSystemName {
+  padding-left: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .downloadSystemArch {
   color: #999;
   font-size: 0.75rem;
-  margin-left: 0.5rem;
 }
 
 .downloadButton {
   font-size: 0.9rem;
   height: 15px;
-  margin: 0 0 0 1rem;
+  margin-bottom: 0;
   padding: 8px;
+}
+
+.downloadFile {
+  margin-bottom: 0.5rem;
+  padding-left: 1.75rem;
+}
+
+.downloadFile:last-child {
+  margin-bottom: 0;
 }
 
 .downloadButtonIcon {
