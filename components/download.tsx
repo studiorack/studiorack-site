@@ -1,6 +1,6 @@
 import styles from '../styles/components/download.module.css';
 import { getBasePath } from '../lib/path';
-import { PackageFile, PackageFileMap, PluginFile, PresetFile, ProjectFile, systemTypes } from '@open-audio-stack/core';
+import { PackageFile, PackageFileMap, systemTypes } from '@open-audio-stack/core';
 
 type DownloadsProps = {
   downloads: PackageFileMap;
