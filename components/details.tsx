@@ -7,11 +7,10 @@ import Player from './player';
 import Dependency from './dependency';
 import Downloads from './download';
 import Code from './code';
-import { licenses, PackageInterface, PackageVersion, RegistryType } from '@open-audio-stack/core';
-import { DownloadsInterface } from '../pages/plugins/[userId]/[pluginId]';
+import { licenses, PackageFileMap, PackageInterface, PackageVersion, RegistryType } from '@open-audio-stack/core';
 
 type DetailsProps = {
-  downloads: DownloadsInterface;
+  downloads: PackageFileMap;
   pkg: PackageInterface;
   pkgVersion: PackageVersion;
   type: RegistryType;

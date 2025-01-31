@@ -5,13 +5,14 @@
 .downloadSystem {
   background-color: #111;
   border-radius: 0.25rem;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 0.5rem;
-  padding: 1rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .downloadSystemName {
-  padding-left: 1.75rem;
-  margin-bottom: 0.5rem;
+  padding: 0.41rem 0.5rem 0.5rem 1.75rem;
 }
 
 .downloadSystemArch {
@@ -21,14 +22,14 @@
 
 .downloadButton {
   font-size: 0.9rem;
-  height: 15px;
-  margin-bottom: 0;
-  padding: 8px;
+  height: 1rem;
+  margin: 0 0 0 0.5rem;
+  padding: 0.5rem;
 }
 
 .downloadFile {
+  text-align: right;
   margin-bottom: 0.5rem;
-  padding-left: 1.75rem;
 }
 
 .downloadFile:last-child {
@@ -38,23 +39,23 @@
 .downloadButtonIcon {
   margin-left: 0.5rem;
   vertical-align: middle;
-  width: 14px;
+  width: 0.75rem;
 }
 
 .iconAll {
-  background: url(../../public/images/icon-all.svg) no-repeat;
+  background: url(../../public/images/icon-all.svg) no-repeat 0 0.41rem;
 }
 
 .icon-linux {
-  background: url(../../public/images/icon-linux.svg) no-repeat;
+  background: url(../../public/images/icon-linux.svg) no-repeat 0 0.41rem;
 }
 
 .icon-mac {
-  background: url(../../public/images/icon-mac.svg) no-repeat;
+  background: url(../../public/images/icon-mac.svg) no-repeat 0 0.41rem;
 }
 
 .icon-win {
-  background: url(../../public/images/icon-win.svg) no-repeat;
+  background: url(../../public/images/icon-win.svg) no-repeat 0 0.41rem;
 }
 
 @media (min-width: 48rem) {

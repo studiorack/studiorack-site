@@ -8,9 +8,10 @@ import Details from '../../../components/details';
 import {
   Manager,
   Package,
+  PackageFileMap,
+  packageFileMap,
   PackageInterface,
   PackageVersion,
-  PluginFile,
   RegistryPackages,
   RegistryType,
 } from '@open-audio-stack/core';
@@ -27,14 +28,10 @@ type PluginProps = {
   router: Router;
 };
 
-export type DownloadsInterface = {
-  [key: string]: PluginFile[];
-};
-
 class PluginPage extends Component<
   PluginProps,
   {
-    downloads: DownloadsInterface;
+    downloads: PackageFileMap;
     pkg: PackageInterface;
     pkgVersion: PackageVersion;
     router: Router;
@@ -43,15 +40,7 @@ class PluginPage extends Component<
   constructor(props: PluginProps) {
     super(props);
     this.state = {
-      downloads: props.pkg.versions[props.pkg.version].files.reduce((result: DownloadsInterface, file) => {
-        file.systems.forEach(system => {
-          if (!result[system.type]) {
-            result[system.type] = [];
-          }
-          result[system.type].push(file as PluginFile);
-        });
-        return result;
-      }, {}),
+      downloads: packageFileMap(props.pkg.versions[props.pkg.version]),
       pkg: props.pkg,
       pkgVersion: props.pkg.versions[props.pkg.version],
       router: props.router,

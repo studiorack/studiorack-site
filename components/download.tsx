@@ -1,10 +1,9 @@
 import styles from '../styles/components/download.module.css';
 import { getBasePath } from '../lib/path';
-import { PluginFile, PresetFile, ProjectFile, systemTypes } from '@open-audio-stack/core';
-import { DownloadsInterface } from '../pages/plugins/[userId]/[pluginId]';
+import { PackageFile, PackageFileMap, PluginFile, PresetFile, ProjectFile, systemTypes } from '@open-audio-stack/core';
 
 type DownloadsProps = {
-  downloads: DownloadsInterface;
+  downloads: PackageFileMap;
 };
 
 const Downloads = ({ downloads }: DownloadsProps) => (
@@ -15,20 +14,22 @@ const Downloads = ({ downloads }: DownloadsProps) => (
         <div className={`${styles.downloadSystemName} ${styles['icon-' + system]}`}>
           {systemTypes.filter(systemType => systemType.value === system)[0].name}
         </div>
-        {downloads[system].map((file: PluginFile | PresetFile | ProjectFile) => (
-          <div className={styles.downloadFile}>
-            <a className={`button ${styles.downloadButton}`} href={file.url} title="Download">
-              .{file.format}
-              <img
-                className={styles.downloadButtonIcon}
-                src={`${getBasePath()}/images/icon-download.svg`}
-                alt="Download"
-                loading="lazy"
-              />
-            </a>
-            <span className={styles.downloadSystemArch}>{file.architectures.join(', ')}</span>
-          </div>
-        ))}
+        <div className={styles.downloadFiles}>
+          {downloads[system].map((file: PackageFile) => (
+            <div className={styles.downloadFile}>
+              <span className={styles.downloadSystemArch}>{file.architectures.join(', ')}</span>
+              <a className={`button ${styles.downloadButton}`} href={file.url} title="Download">
+                .{file.format}
+                <img
+                  className={styles.downloadButtonIcon}
+                  src={`${getBasePath()}/images/icon-download.svg`}
+                  alt="Download"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
     ))}
   </div>
