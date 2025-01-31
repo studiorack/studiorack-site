@@ -7,15 +7,16 @@ import Player from './player';
 import Dependency from './dependency';
 import Downloads from './download';
 import Code from './code';
-import { licenses, PackageInterface, PackageVersion, RegistryType } from '@open-audio-stack/core';
+import { licenses, PackageFileMap, PackageInterface, PackageVersion, RegistryType } from '@open-audio-stack/core';
 
 type DetailsProps = {
+  downloads: PackageFileMap;
   pkg: PackageInterface;
   pkgVersion: PackageVersion;
   type: RegistryType;
 };
 
-const Details = ({ pkg, pkgVersion, type }: DetailsProps) => (
+const Details = ({ downloads, pkg, pkgVersion, type }: DetailsProps) => (
   <article>
     <div className={styles.header}>
       <div className={styles.headerInner2}>
@@ -96,7 +97,7 @@ const Details = ({ pkg, pkgVersion, type }: DetailsProps) => (
     <div id="sfzPlayer"></div>
     <div className={styles.options}>
       <div className={styles.row}>
-        <Downloads plugin={pkgVersion} />
+        <Downloads downloads={downloads} />
         <Code pkg={pkg} pkgVersion={pkgVersion} />
       </div>
     </div>

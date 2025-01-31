@@ -8,6 +8,8 @@ import Details from '../../../components/details';
 import {
   Manager,
   Package,
+  packageFileMap,
+  PackageFileMap,
   PackageInterface,
   PackageVersion,
   RegistryPackages,
@@ -21,6 +23,7 @@ declare global {
 }
 
 type PluginProps = {
+  downloads: PackageFileMap;
   pkg: PackageInterface;
   pkgVersion: PackageVersion;
   router: Router;
@@ -29,6 +32,7 @@ type PluginProps = {
 class PluginPage extends Component<
   PluginProps,
   {
+    downloads: PackageFileMap;
     pkg: PackageInterface;
     pkgVersion: PackageVersion;
     router: Router;
@@ -37,6 +41,7 @@ class PluginPage extends Component<
   constructor(props: PluginProps) {
     super(props);
     this.state = {
+      downloads: packageFileMap(props.pkg.versions[props.pkg.version]),
       pkg: props.pkg,
       pkgVersion: props.pkg.versions[props.pkg.version],
       router: props.router,
@@ -52,7 +57,12 @@ class PluginPage extends Component<
           <meta name="og:image" content={this.state.pkgVersion.image} />
           <meta name="og:title" content={this.state.pkgVersion.name || ''} />
         </Head>
-        <Details pkg={this.state.pkg} pkgVersion={this.state.pkgVersion} type={RegistryType.Projects} />
+        <Details
+          downloads={this.state.downloads}
+          pkg={this.state.pkg}
+          pkgVersion={this.state.pkgVersion}
+          type={RegistryType.Projects}
+        />
       </Layout>
     );
   }
