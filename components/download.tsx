@@ -1,6 +1,6 @@
 import styles from '../styles/components/download.module.css';
 import { getBasePath } from '../lib/path';
-import { PackageFile, PackageFileMap, systemTypes } from '@open-audio-stack/core';
+import { PackageFile, PackageFileMap, pathGetExt, systemTypes } from '@open-audio-stack/core';
 
 type DownloadsProps = {
   downloads: PackageFileMap;
@@ -19,7 +19,7 @@ const Downloads = ({ downloads }: DownloadsProps) => (
             <div className={styles.downloadFile}>
               <span className={styles.downloadSystemArch}>{file.architectures.join(', ')}</span>
               <a className={`button ${styles.downloadButton}`} href={file.url} title="Download">
-                .{file.format}
+                .{pathGetExt(file.url)}
                 <img
                   className={styles.downloadButtonIcon}
                   src={`${getBasePath()}/images/icon-download.svg`}
