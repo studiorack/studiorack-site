@@ -21,7 +21,7 @@ const Code = ({ pkg, pkgVersion }: CodeProps) => (
       </span>
     ) : pkgVersion.tags.includes('sf2') ? (
       <span>
-        <pre className={styles.codeLine}>studiorack plugin install studiorack/juicysf</pre>
+        <pre className={styles.codeLine}>studiorack plugin install birch-san/juicysfplugin</pre>
         <pre className={styles.codeLine}>studiorack plugin install {pkg.slug}</pre>
       </span>
     ) : (
