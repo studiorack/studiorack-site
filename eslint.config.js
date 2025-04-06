@@ -6,7 +6,7 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ['.next', 'out'],
+    ignores: ['build', 'coverage', '.next', 'node_modules', 'out'],
   },
   {
     languageOptions: { globals: globals.node },
