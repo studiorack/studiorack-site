@@ -90,10 +90,12 @@ const Details = ({ downloads, pkg, pkgVersion, type }: DetailsProps) => (
                 <button className="button button-clear">View source</button>
               </a>
               {pkgVersion.donate ? (
-              <a href={pkgVersion.donate} target="_blank">
-                <button className="button button-clear">Donate</button>
-              </a>
-              ) : ''}
+                <a href={pkgVersion.donate} target="_blank">
+                  <button className="button button-clear">Donate</button>
+                </a>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </div>
