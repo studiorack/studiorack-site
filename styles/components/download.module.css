@@ -28,6 +28,9 @@
 }
 
 .downloadFile {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
   text-align: right;
   margin-bottom: 0.5rem;
 }
