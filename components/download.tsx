@@ -17,7 +17,8 @@ const Downloads = ({ downloads }: DownloadsProps) => (
         <div className={styles.downloadFiles}>
           {downloads[system].map((file: PackageFile) => (
             <div className={styles.downloadFile}>
-              <span className={styles.downloadSystemArch}>{file.architectures.join(', ')}</span>
+              <span className={styles.downloadSystemArch}>{file.architectures.join(', ')} </span>
+              <span className={styles.downloadSystemArch}>{file.contains.join(', ')}</span>
               <a className={`button ${styles.downloadButton}`} href={file.url} title="Download">
                 .{pathGetExt(file.url)}
                 <img
