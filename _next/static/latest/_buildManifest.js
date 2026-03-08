@@ -1,1 +1,62 @@
-self.__BUILD_MANIFEST=function(s,e,c,t,u){return{__rewrites:{afterFiles:[],beforeFiles:[],fallback:[]},"/":["static/css/76538c3ef0010798.css","static/chunks/pages/index-e719b78b77f67df8.js"],"/_error":["static/chunks/pages/_error-7a92967bea80186d.js"],"/docs":[u,"static/chunks/pages/docs-327b010d9e57c406.js"],"/docs/[slug]":[u,"static/chunks/pages/docs/[slug]-07784a1c769b1806.js"],"/plugins":[s,e,"static/chunks/pages/plugins-860af00e741a2f03.js"],"/plugins/[userId]":[s,e,"static/chunks/pages/plugins/[userId]-b8e082c166f79eaf.js"],"/plugins/[userId]/[pluginId]":[c,t,"static/chunks/pages/plugins/[userId]/[pluginId]-8ad876d702bc66aa.js"],"/presets":[s,e,"static/chunks/pages/presets-d6f54240c0f09262.js"],"/presets/[userId]":[s,e,"static/chunks/pages/presets/[userId]-ad4f7ffc9b02a973.js"],"/presets/[userId]/[pluginId]":[c,t,"static/chunks/pages/presets/[userId]/[pluginId]-05ca1eb558c7da36.js"],"/projects":[s,e,"static/chunks/pages/projects-12782cd57fa6a531.js"],"/projects/[userId]":[s,e,"static/chunks/pages/projects/[userId]-04c6f86be08fa7db.js"],"/projects/[userId]/[pluginId]":[c,t,"static/chunks/pages/projects/[userId]/[pluginId]-7e15329d5a0c22e9.js"],sortedPages:["/","/_app","/_error","/docs","/docs/[slug]","/plugins","/plugins/[userId]","/plugins/[userId]/[pluginId]","/presets","/presets/[userId]","/presets/[userId]/[pluginId]","/projects","/projects/[userId]","/projects/[userId]/[pluginId]"]}}("static/chunks/664-1ca5dd3369e59b98.js","static/css/27bd5b9ed2507215.css","static/chunks/502-9f5eb06ff229242b.js","static/css/59c9f07a449d2a7f.css","static/css/b691d52cb7d837c8.css"),self.__BUILD_MANIFEST_CB&&self.__BUILD_MANIFEST_CB();
+self.__BUILD_MANIFEST = {
+  "/": [
+    "static/chunks/f750752f9e45fb84.js"
+  ],
+  "/_error": [
+    "static/chunks/66b0b7783a6ab09a.js"
+  ],
+  "/docs": [
+    "static/chunks/8fe6cd72a2f7db61.js"
+  ],
+  "/docs/[slug]": [
+    "static/chunks/c651c8f35e2b965e.js"
+  ],
+  "/plugins": [
+    "static/chunks/f8459d40455e6d3a.js"
+  ],
+  "/plugins/[userId]": [
+    "static/chunks/12ca4da28ee5a084.js"
+  ],
+  "/plugins/[userId]/[pluginId]": [
+    "static/chunks/3b607fedf793b5b2.js"
+  ],
+  "/presets": [
+    "static/chunks/79de7ef8f3cbdafd.js"
+  ],
+  "/presets/[userId]": [
+    "static/chunks/00be4ebeb0ee2570.js"
+  ],
+  "/presets/[userId]/[pluginId]": [
+    "static/chunks/5aa2e1a5edaecde8.js"
+  ],
+  "/projects": [
+    "static/chunks/138bea5e99b2633d.js"
+  ],
+  "/projects/[userId]": [
+    "static/chunks/5668a63b3312816d.js"
+  ],
+  "/projects/[userId]/[pluginId]": [
+    "static/chunks/4eb8d31312cff26a.js"
+  ],
+  "__rewrites": {
+    "afterFiles": [],
+    "beforeFiles": [],
+    "fallback": []
+  },
+  "sortedPages": [
+    "/",
+    "/_app",
+    "/_error",
+    "/docs",
+    "/docs/[slug]",
+    "/plugins",
+    "/plugins/[userId]",
+    "/plugins/[userId]/[pluginId]",
+    "/presets",
+    "/presets/[userId]",
+    "/presets/[userId]/[pluginId]",
+    "/projects",
+    "/projects/[userId]",
+    "/projects/[userId]/[pluginId]"
+  ]
+};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
