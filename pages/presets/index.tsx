@@ -5,7 +5,8 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { pageTitle } from '../../lib/utils';
 import List from '../../components/list';
-import { Manager, PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
+import { getManager } from '../../lib/manager';
+import { PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 
 type PresetsProps = {
   packages: RegistryPackages;
@@ -27,8 +28,7 @@ const Presets = ({ packages }: PresetsProps) => {
 export default Presets;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const manager = new Manager(RegistryType.Presets);
-  await manager.sync();
+  const manager = await getManager(RegistryType.Presets);
   return {
     props: {
       packages: manager.toJSON(),

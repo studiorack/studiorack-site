@@ -5,14 +5,12 @@
 .downloadSystem {
   background-color: #111;
   border-radius: 0.25rem;
-  display: flex;
-  justify-content: space-between;
   margin-bottom: 0.5rem;
   padding: 0.5rem 0.75rem;
 }
 
 .downloadSystemName {
-  padding: 0.41rem 0.5rem 0.5rem 1.75rem;
+  padding: 0.41rem 0 0.5rem 1.75rem;
 }
 
 .downloadSystemArch {
@@ -21,22 +19,53 @@
 }
 
 .downloadButton {
-  font-size: 0.9rem;
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.8rem;
   height: 1rem;
-  margin: 0 0 0 0.5rem;
+  justify-content: center;
+  margin: 0;
   padding: 0.5rem;
 }
 
 .downloadFile {
   align-items: center;
   display: flex;
-  justify-content: flex-end;
-  text-align: right;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 .downloadFile:last-child {
   margin-bottom: 0;
+}
+
+.downloadFormat {
+  flex: 1;
+  font-size: 0.8rem;
+  min-width: 0;
+}
+
+.downloadMeta {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.downloadArch {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.25rem;
+}
+
+.archBadge {
+  background-color: #222;
+  border-radius: 0.25rem;
+  color: #999;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.35rem;
+  white-space: nowrap;
 }
 
 .downloadButtonIcon {

@@ -5,7 +5,8 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { pageTitle } from '../../lib/utils';
 import List from '../../components/list';
-import { Manager, PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
+import { getManager } from '../../lib/manager';
+import { PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 
 type PluginsProps = {
   packages: RegistryPackages;
@@ -27,8 +28,7 @@ const Plugins = ({ packages }: PluginsProps) => {
 export default Plugins;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const manager = new Manager(RegistryType.Plugins);
-  await manager.sync();
+  const manager = await getManager(RegistryType.Plugins);
   return {
     props: {
       packages: manager.toJSON(),
