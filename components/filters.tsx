@@ -60,7 +60,7 @@ const Filters = ({ section }: FiltersProps) => {
         type="search"
         id="search"
         name="search"
-        value={search}
+        value={search ? search[0] : ''}
         onChange={onSearch}
       />
     </div>
