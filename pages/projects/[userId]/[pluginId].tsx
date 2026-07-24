@@ -5,8 +5,8 @@ import { GetStaticPaths } from 'next';
 import { withRouter, Router } from 'next/router.js';
 import { pageTitle } from '../../../lib/utils';
 import Details from '../../../components/details';
+import { getManager } from '../../../lib/manager';
 import {
-  Manager,
   Package,
   packageFileMap,
   PackageFileMap,
@@ -70,8 +70,7 @@ class PluginPage extends Component<
 export default withRouter(PluginPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const manager = new Manager(RegistryType.Projects);
-  await manager.sync();
+  const manager = await getManager(RegistryType.Projects);
   const packages: RegistryPackages = manager.toJSON();
   const paths = [];
   for (const slug in packages) {
@@ -97,8 +96,7 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const manager = new Manager(RegistryType.Projects);
-  await manager.sync();
+  const manager = await getManager(RegistryType.Projects);
   const pkg: Package | undefined = manager.getPackage(`${params.userId}/${params.pluginId}`);
   return {
     props: {

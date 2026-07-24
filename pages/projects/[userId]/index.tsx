@@ -4,7 +4,8 @@ import Layout from '../../../components/layout';
 import { pageTitle } from '../../../lib/utils';
 import { GetStaticPaths } from 'next';
 import List from '../../../components/list';
-import { Manager, PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
+import { getManager } from '../../../lib/manager';
+import { PackageInterface, RegistryPackages, RegistryType } from '@open-audio-stack/core';
 
 type PluginListProps = {
   packagesFiltered: PackageInterface[];
@@ -47,8 +48,7 @@ class PluginList extends Component<
 export default PluginList;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const manager = new Manager(RegistryType.Projects);
-  await manager.sync();
+  const manager = await getManager(RegistryType.Projects);
   const packages: RegistryPackages = manager.toJSON();
   const paths = [];
   for (const slug in packages) {
@@ -72,8 +72,7 @@ type Params = {
 };
 
 export async function getStaticProps({ params }: Params) {
-  const manager = new Manager(RegistryType.Projects);
-  await manager.sync();
+  const manager = await getManager(RegistryType.Projects);
   const packages: RegistryPackages = manager.toJSON();
   const packagesFiltered: PackageInterface[] = [];
   for (const slug in packages) {
