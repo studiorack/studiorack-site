@@ -62,7 +62,7 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
       </select>
       <div className={styles.multiselectCheckboxes} id={label}>
         {items.map(item => (
-          <div className={styles.multiselectCheckbox}>
+          <div className={styles.multiselectCheckbox} key={toSlug(item.value)}>
             <input
               className={styles.multiselectInput}
               type="checkbox"
@@ -71,12 +71,7 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
               onClick={updateUrl}
               defaultChecked={isChecked(item.value)}
             />
-            <label
-              className={styles.multiselectLabel}
-              htmlFor={toSlug(item.value)}
-              key={toSlug(item.value)}
-              title={item.name}
-            >
+            <label className={styles.multiselectLabel} htmlFor={toSlug(item.value)} title={item.name}>
               {item.name}
             </label>
           </div>
