@@ -12,28 +12,28 @@ self.__BUILD_MANIFEST = {
     "static/chunks/2af4neowy9chh.js"
   ],
   "/plugins": [
-    "static/chunks/3cw9k9r1vjnae.js"
+    "static/chunks/0b775cz4_y5fo.js"
   ],
   "/plugins/[userId]": [
-    "static/chunks/1oqo10hq0ph24.js"
+    "static/chunks/1fu7lbd_ve349.js"
   ],
   "/plugins/[userId]/[pluginId]": [
     "static/chunks/264mn4m8ue3a9.js"
   ],
   "/presets": [
-    "static/chunks/3usca68df_a28.js"
+    "static/chunks/2ff7mgjj-739b.js"
   ],
   "/presets/[userId]": [
-    "static/chunks/1g-cyvt4tzpzq.js"
+    "static/chunks/23effw5a6y0-i.js"
   ],
   "/presets/[userId]/[pluginId]": [
     "static/chunks/2rst6fa385wf5.js"
   ],
   "/projects": [
-    "static/chunks/331y9l341x4n7.js"
+    "static/chunks/0yo1m0ueflc_4.js"
   ],
   "/projects/[userId]": [
-    "static/chunks/3w4v3_mlmr826.js"
+    "static/chunks/2-f72_v2gjoez.js"
   ],
   "/projects/[userId]/[pluginId]": [
     "static/chunks/20n77912mvowr.js"
