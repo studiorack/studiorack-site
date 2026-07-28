@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import styles from '../styles/components/filters.module.css';
 import MultiSelect from './multi-select';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import {
   licenses,
   pluginCategoryInstruments,
@@ -22,8 +22,11 @@ type FiltersProps = {
   section: RegistryType;
 };
 
+const FILTER_KEYS = ['type', 'category', 'system', 'license', 'search'];
+
 const Filters = ({ section }: FiltersProps) => {
   const router = useRouter();
+  const [openFilter, setOpenFilter] = useState<string | null>(null);
   const type = getParam(router, 'type');
   const search = getParam(router, 'search');
   let categories: PluginCategoryOption[] | ProjectFormatOption[] =
@@ -47,13 +50,55 @@ const Filters = ({ section }: FiltersProps) => {
     });
   };
 
+  const toggleFilter = (slug: string) => {
+    setOpenFilter(prev => (prev === slug ? null : slug));
+  };
+
+  const closeFilter = () => setOpenFilter(null);
+
+  const hasActiveFilters = FILTER_KEYS.some(key => router.query[key]);
+
+  const clearFilters = () => {
+    const query = { ...router.query };
+    FILTER_KEYS.forEach(key => delete query[key]);
+    setOpenFilter(null);
+    router.push({
+      pathname: router.pathname,
+      query,
+    });
+  };
+
   return (
     <div className={styles.filters}>
       <span className={styles.filtersTitle}>Filter by:</span>
-      <MultiSelect label="Type" items={types}></MultiSelect>
-      <MultiSelect label="Category" items={categories}></MultiSelect>
-      <MultiSelect label="System" items={systemTypes}></MultiSelect>
-      <MultiSelect label="License" items={licenses}></MultiSelect>
+      <MultiSelect
+        label="Type"
+        items={types}
+        isOpen={openFilter === 'type'}
+        onToggle={() => toggleFilter('type')}
+        onClose={closeFilter}
+      ></MultiSelect>
+      <MultiSelect
+        label="Category"
+        items={categories}
+        isOpen={openFilter === 'category'}
+        onToggle={() => toggleFilter('category')}
+        onClose={closeFilter}
+      ></MultiSelect>
+      <MultiSelect
+        label="System"
+        items={systemTypes}
+        isOpen={openFilter === 'system'}
+        onToggle={() => toggleFilter('system')}
+        onClose={closeFilter}
+      ></MultiSelect>
+      <MultiSelect
+        label="License"
+        items={licenses}
+        isOpen={openFilter === 'license'}
+        onToggle={() => toggleFilter('license')}
+        onClose={closeFilter}
+      ></MultiSelect>
       <input
         className={styles.filtersSearch}
         placeholder="Keyword"
@@ -63,6 +108,11 @@ const Filters = ({ section }: FiltersProps) => {
         value={search ? search[0] : ''}
         onChange={onSearch}
       />
+      {hasActiveFilters && (
+        <button type="button" className={styles.filtersClear} onClick={clearFilters}>
+          Clear all
+        </button>
+      )}
     </div>
   );
 };

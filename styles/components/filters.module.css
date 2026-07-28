@@ -25,11 +25,33 @@
   outline: 1px solid #fff;
 }
 
+.filtersClear {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.75rem 0;
+  text-decoration: none;
+  transition: color 0.2s ease-out;
+}
+
+.filtersClear:hover {
+  background: none;
+  color: #fff;
+  text-decoration: underline;
+}
+
 @media (min-width: 48rem) {
   .filtersSearch {
     display: inline-block;
     font-size: 1.15rem;
     margin-right: 1rem;
     max-width: 180px;
+  }
+
+  .filtersClear {
+    display: inline-block;
+    font-size: 1.15rem;
   }
 }
