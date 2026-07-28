@@ -77,7 +77,7 @@ const MultiSelect = ({ label, items, isOpen, onToggle, onClose }: MultiSelectPro
       </select>
       <div className={`${styles.multiselectCheckboxes} ${isOpen ? styles.multiselectCheckboxesOpen : ''}`}>
         {items.map(item => (
-          <div className={styles.multiselectCheckbox} key={toSlug(item.value)}>
+          <label className={styles.multiselectCheckbox} key={toSlug(item.value)} title={item.name}>
             <input
               className={styles.multiselectInput}
               type="checkbox"
@@ -86,10 +86,8 @@ const MultiSelect = ({ label, items, isOpen, onToggle, onClose }: MultiSelectPro
               onClick={updateUrl}
               defaultChecked={isChecked(item.value)}
             />
-            <label className={styles.multiselectLabel} htmlFor={toSlug(item.value)} title={item.name}>
-              {item.name}
-            </label>
-          </div>
+            <span className={styles.multiselectLabel}>{item.name}</span>
+          </label>
         ))}
       </div>
     </form>

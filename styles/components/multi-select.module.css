@@ -93,16 +93,12 @@
 }
 
 .multiselectCheckbox {
+  cursor: pointer;
   display: flex;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;
   padding: 0.75rem 1rem;
-}
-
-.multiselectCheckbox .multiselectInput,
-.multiselectCheckbox .multiselectLabel {
-  cursor: pointer;
 }
 
 .multiselectCheckbox:hover {
