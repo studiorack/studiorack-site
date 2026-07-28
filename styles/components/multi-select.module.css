@@ -88,6 +88,10 @@
   z-index: 1;
 }
 
+.multiselectCheckboxesOpen {
+  display: block;
+}
+
 .multiselectCheckbox {
   display: flex;
   font-size: 1rem;

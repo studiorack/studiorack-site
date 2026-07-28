@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect, useRef } from 'react';
 import { includesValue, toSlug } from '../lib/utils';
 import styles from '../styles/components/multi-select.module.css';
 import {
@@ -23,22 +24,31 @@ type MultiSelectProps = {
     | LicenseOption[]
     | ArchitectureOption[]
     | SystemTypeOption[];
+  isOpen: boolean;
+  onToggle: () => void;
+  onClose: () => void;
 };
 
-const MultiSelect = ({ label, items }: MultiSelectProps) => {
+const MultiSelect = ({ label, items, isOpen, onToggle, onClose }: MultiSelectProps) => {
   const router = useRouter();
   const slug: string = toSlug(label);
+  const containerRef = useRef<HTMLFormElement>(null);
 
-  const showCheckboxes = (e: any) => {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        onClose();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen, onClose]);
+
+  const handleToggle = (e: any) => {
     e.preventDefault();
     e.target.blur();
-    window.focus();
-    const checkboxes = document.getElementById(label);
-    if (checkboxes?.style.display === 'block') {
-      if (checkboxes) checkboxes.style.display = 'none';
-    } else {
-      if (checkboxes) checkboxes.style.display = 'block';
-    }
+    onToggle();
   };
 
   const isChecked = (value: string) => {
@@ -55,14 +65,19 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
     });
   };
 
+  const selectedCount = items.filter(item => isChecked(item.value)).length;
+
   return (
-    <form className={styles.multiselect} id={slug}>
-      <select className={`${styles.multiselectTitle} ${styles['icon-' + slug]}`} onMouseDown={showCheckboxes}>
-        <option>{label}</option>
+    <form className={styles.multiselect} id={slug} ref={containerRef}>
+      <select className={`${styles.multiselectTitle} ${styles['icon-' + slug]}`} onMouseDown={handleToggle}>
+        <option>
+          {label}
+          {selectedCount > 0 ? ` (${selectedCount})` : ''}
+        </option>
       </select>
-      <div className={styles.multiselectCheckboxes} id={label}>
+      <div className={`${styles.multiselectCheckboxes} ${isOpen ? styles.multiselectCheckboxesOpen : ''}`}>
         {items.map(item => (
-          <div className={styles.multiselectCheckbox}>
+          <div className={styles.multiselectCheckbox} key={toSlug(item.value)}>
             <input
               className={styles.multiselectInput}
               type="checkbox"
@@ -71,12 +86,7 @@ const MultiSelect = ({ label, items }: MultiSelectProps) => {
               onClick={updateUrl}
               defaultChecked={isChecked(item.value)}
             />
-            <label
-              className={styles.multiselectLabel}
-              htmlFor={toSlug(item.value)}
-              key={toSlug(item.value)}
-              title={item.name}
-            >
+            <label className={styles.multiselectLabel} htmlFor={toSlug(item.value)} title={item.name}>
               {item.name}
             </label>
           </div>
