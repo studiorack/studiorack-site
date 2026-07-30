@@ -46,6 +46,7 @@
   color: #666;
   cursor: pointer;
   display: flex;
+  margin: 0;
   padding: 0.6rem 0.85rem;
   transition:
     background-color 0.2s ease-out,
@@ -53,6 +54,7 @@
 }
 
 .listViewButton:hover {
+  background: none;
   color: #fff;
 }
 
