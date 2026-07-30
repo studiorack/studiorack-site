@@ -1,42 +1,42 @@
 self.__BUILD_MANIFEST = {
   "/": [
-    "static/chunks/14bhqemddz75b.js"
+    "static/chunks/0--gjfu0o0s72.js"
   ],
   "/_error": [
     "static/chunks/0czr3in2bqmb0.js"
   ],
   "/docs": [
-    "static/chunks/1l_vxnjg_k7vu.js"
+    "static/chunks/38_xeq_qy7loh.js"
   ],
   "/docs/[slug]": [
-    "static/chunks/068zyx7kf-ukn.js"
+    "static/chunks/30idv_zt5rwwd.js"
   ],
   "/plugins": [
-    "static/chunks/1rxle9szxr-7l.js"
+    "static/chunks/1k-swqxw7-af9.js"
   ],
   "/plugins/[userId]": [
-    "static/chunks/0cvsm1r9-w4n8.js"
+    "static/chunks/1pvrrerxd_xzu.js"
   ],
   "/plugins/[userId]/[pluginId]": [
-    "static/chunks/0dphuvr6622rm.js"
+    "static/chunks/3_mdsqd485agl.js"
   ],
   "/presets": [
-    "static/chunks/0p-m749ziz1gm.js"
+    "static/chunks/3s9dg2iod6vif.js"
   ],
   "/presets/[userId]": [
-    "static/chunks/1adkjcg62lid5.js"
+    "static/chunks/3j2lb4in452kw.js"
   ],
   "/presets/[userId]/[pluginId]": [
-    "static/chunks/41rrz8sn25hqx.js"
+    "static/chunks/3c4xqu_xs19ng.js"
   ],
   "/projects": [
-    "static/chunks/12m4-e9412lne.js"
+    "static/chunks/0xhy48vi5uis2.js"
   ],
   "/projects/[userId]": [
-    "static/chunks/1dvn8y50xwxj1.js"
+    "static/chunks/1r_5gi7klq2fu.js"
   ],
   "/projects/[userId]/[pluginId]": [
-    "static/chunks/0w8uhsthka3n9.js"
+    "static/chunks/0spyaw0im7rmq.js"
   ],
   "__rewrites": {
     "afterFiles": [],
