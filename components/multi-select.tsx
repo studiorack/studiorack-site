@@ -83,8 +83,8 @@ const MultiSelect = ({ label, items, isOpen, onToggle, onClose }: MultiSelectPro
               type="checkbox"
               id={toSlug(item.value)}
               name={toSlug(item.value)}
-              onClick={updateUrl}
-              defaultChecked={isChecked(item.value)}
+              onChange={updateUrl}
+              checked={isChecked(item.value)}
             />
             <span className={styles.multiselectLabel}>{item.name}</span>
           </label>

@@ -7,11 +7,12 @@ type CardProps = {
   section: RegistryType;
   item: PackageInterface;
   index: number;
+  view?: 'grid' | 'list';
 };
 
-const Card = ({ section, item, index }: CardProps) => (
+const Card = ({ section, item, index, view = 'grid' }: CardProps) => (
   <Link href={`/${section}/[userId]/[pluginId]`} as={`/${section}/${item.slug}`} className={styles.cardLink}>
-    <div className={styles.card}>
+    <div className={`${styles.card} ${view === 'list' ? styles.cardList : ''}`}>
       <div className={styles.cardDetails}>
         <div className={styles.cardHead}>
           <h4 className={styles.cardTitle}>

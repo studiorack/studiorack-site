@@ -14,7 +14,6 @@
   max-height: 200px;
   overflow: hidden;
   padding: 1.5rem 1.5rem 0 1.5rem;
-  margin-bottom: 1rem;
   transition: background-color 0.25s ease-out;
 }
 
@@ -86,4 +85,26 @@
 .cardImage {
   display: cover;
   width: 100%;
+}
+
+.cardList {
+  display: block;
+  max-height: none;
+  min-height: 6rem;
+  padding: 0;
+  position: relative;
+}
+
+.cardList .cardDetails {
+  margin-bottom: 0;
+  padding: 1.25rem 1.5rem 1.25rem calc(12rem + 1.5rem);
+}
+
+.cardList .cardImage {
+  bottom: 0;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 12rem;
 }

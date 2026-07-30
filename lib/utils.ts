@@ -1,7 +1,35 @@
 import slugify from 'slugify';
+import { PackageInterface } from '@open-audio-stack/core';
 import { siteTitle } from '../components/layout';
 
 export const ELECTRON_APP: boolean = false;
+
+export const DEFAULT_SORT = 'downloads';
+
+export const sortOptions = [
+  { value: 'downloads', label: 'Downloads' },
+  { value: 'name', label: 'Name' },
+  { value: 'date', label: 'Newest' },
+];
+
+export function sortPackages(items: PackageInterface[], sort: string) {
+  const sorted = [...items];
+  switch (sort) {
+    case 'name':
+      return sorted.sort((a, b) => a.versions[a.version].name.localeCompare(b.versions[b.version].name));
+    case 'date':
+      return sorted.sort(
+        (a, b) => new Date(b.versions[b.version].date).getTime() - new Date(a.versions[a.version].date).getTime(),
+      );
+    case 'downloads':
+    default:
+      return sorted.sort((a, b) => {
+        const downloadsDiff = (b.downloads || 0) - (a.downloads || 0);
+        if (downloadsDiff !== 0) return downloadsDiff;
+        return a.versions[a.version].name.localeCompare(b.versions[b.version].name);
+      });
+  }
+}
 
 export function pageTitle(items: string[]) {
   return (
