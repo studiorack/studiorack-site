@@ -72,17 +72,30 @@ const List = ({ filters = true, items, type, tabs, title }: ListProps) => {
               type="button"
               className={`${styles.listViewButton} ${!isListView ? styles.listViewButtonActive : ''}`}
               aria-pressed={!isListView}
+              aria-label="Grid view"
+              title="Grid view"
               onClick={() => setView('grid')}
             >
-              Grid
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor" />
+                <rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor" />
+                <rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor" />
+                <rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor" />
+              </svg>
             </button>
             <button
               type="button"
               className={`${styles.listViewButton} ${isListView ? styles.listViewButtonActive : ''}`}
               aria-pressed={isListView}
+              aria-label="List view"
+              title="List view"
               onClick={() => setView('list')}
             >
-              List
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1.5" width="14" height="3" rx="1" fill="currentColor" />
+                <rect x="1" y="6.5" width="14" height="3" rx="1" fill="currentColor" />
+                <rect x="1" y="11.5" width="14" height="3" rx="1" fill="currentColor" />
+              </svg>
             </button>
           </div>
         </div>

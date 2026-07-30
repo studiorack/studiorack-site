@@ -88,24 +88,23 @@
 }
 
 .cardList {
-  align-items: stretch;
-  display: flex;
-  gap: 1.5rem;
+  display: block;
   max-height: none;
+  min-height: 6rem;
   padding: 0;
+  position: relative;
 }
 
 .cardList .cardDetails {
-  flex: 1;
   margin-bottom: 0;
-  min-width: 0;
-  padding: 1.25rem 1.5rem 1.25rem 0;
+  padding: 1.25rem 1.5rem 1.25rem calc(12rem + 1.5rem);
 }
 
 .cardList .cardImage {
-  flex-shrink: 0;
-  height: auto;
+  bottom: 0;
+  left: 0;
   object-fit: cover;
-  order: -1;
+  position: absolute;
+  top: 0;
   width: 12rem;
 }

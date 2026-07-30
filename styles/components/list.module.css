@@ -40,12 +40,13 @@
 }
 
 .listViewButton {
+  align-items: center;
   background: none;
   border: none;
-  color: #999;
+  color: #666;
   cursor: pointer;
-  font-size: 0.9rem;
-  padding: 0.6rem 1rem;
+  display: flex;
+  padding: 0.6rem 0.85rem;
   transition:
     background-color 0.2s ease-out,
     color 0.2s ease-out;
@@ -57,7 +58,7 @@
 
 .listViewButtonActive,
 .listViewButtonActive:hover {
-  background-color: #0d51ff;
+  background-color: #222;
   color: #fff;
 }
 
