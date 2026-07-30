@@ -87,3 +87,25 @@
   display: cover;
   width: 100%;
 }
+
+.cardList {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  max-height: none;
+  padding: 1rem 1.5rem;
+}
+
+.cardList .cardDetails {
+  flex: 1;
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+.cardList .cardImage {
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  height: 4rem;
+  object-fit: cover;
+  width: 4rem;
+}

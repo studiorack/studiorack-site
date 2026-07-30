@@ -4,6 +4,64 @@
   width: 100%;
 }
 
+.listControls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.listSort {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #111;
+  background-image: url(../../public/images/icon-arrow-down.svg);
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 1rem;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.6rem 2.25rem 0.6rem 1rem;
+}
+
+.listView {
+  background-color: #111;
+  border-radius: 1rem;
+  display: flex;
+  overflow: hidden;
+}
+
+.listViewButton {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  transition:
+    background-color 0.2s ease-out,
+    color 0.2s ease-out;
+}
+
+.listViewButton:hover {
+  color: #fff;
+}
+
+.listViewButtonActive,
+.listViewButtonActive:hover {
+  background-color: #0d51ff;
+  color: #fff;
+}
+
+.listRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 @media (min-width: 48rem) {
   .listGrid {
     display: grid;
