@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import styles from '../styles/components/filters.module.css';
 import MultiSelect from './multi-select';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import {
   licenses,
   pluginCategoryInstruments,
@@ -17,6 +17,7 @@ import {
 } from '@open-audio-stack/core';
 import { pluginCategoryEffects } from '@open-audio-stack/core';
 import { getParam } from '../lib/plugin';
+import { detectSystemType } from '../lib/system';
 
 type FiltersProps = {
   section: RegistryType;
@@ -27,6 +28,15 @@ const FILTER_KEYS = ['type', 'category', 'system', 'license', 'search'];
 const Filters = ({ section }: FiltersProps) => {
   const router = useRouter();
   const [openFilter, setOpenFilter] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!router.isReady || router.query.system) return;
+    const detected = detectSystemType();
+    if (detected) {
+      router.replace({ pathname: router.pathname, query: { ...router.query, system: detected } });
+    }
+  }, [router.isReady]);
+
   const type = getParam(router, 'type');
   const search = getParam(router, 'search');
   let categories: PluginCategoryOption[] | ProjectFormatOption[] =
