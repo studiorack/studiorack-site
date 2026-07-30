@@ -82,6 +82,13 @@ const Filters = ({ section }: FiltersProps) => {
     <div className={styles.filters}>
       <span className={styles.filtersTitle}>Filter by:</span>
       <MultiSelect
+        label="System"
+        items={systemTypes}
+        isOpen={openFilter === 'system'}
+        onToggle={() => toggleFilter('system')}
+        onClose={closeFilter}
+      ></MultiSelect>
+      <MultiSelect
         label="Type"
         items={types}
         isOpen={openFilter === 'type'}
@@ -93,13 +100,6 @@ const Filters = ({ section }: FiltersProps) => {
         items={categories}
         isOpen={openFilter === 'category'}
         onToggle={() => toggleFilter('category')}
-        onClose={closeFilter}
-      ></MultiSelect>
-      <MultiSelect
-        label="System"
-        items={systemTypes}
-        isOpen={openFilter === 'system'}
-        onToggle={() => toggleFilter('system')}
         onClose={closeFilter}
       ></MultiSelect>
       <MultiSelect
