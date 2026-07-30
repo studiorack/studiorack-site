@@ -7,7 +7,7 @@ import Filters from './filters';
 import Crumb from './crumb';
 import Tabs from './tabs';
 import { getParam } from '../lib/plugin';
-import { sortOptions, sortPackages } from '../lib/utils';
+import { DEFAULT_SORT, sortOptions, sortPackages } from '../lib/utils';
 import {
   PackageInterface,
   PluginFormatOption,
@@ -29,11 +29,12 @@ const List = ({ filters = true, items, type, tabs, title }: ListProps) => {
   const sort = getParam(router, 'sort');
   const view = getParam(router, 'view');
   const isListView = view ? view[0] === 'list' : false;
-  const sortedItems = sort && sort[0] ? sortPackages(items, sort[0]) : items;
+  const sortValue = sort && sort[0] ? sort[0] : DEFAULT_SORT;
+  const sortedItems = sortPackages(items, sortValue);
 
   const onSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const query = { ...router.query };
-    if (event.target.value === 'default') {
+    if (event.target.value === DEFAULT_SORT) {
       delete query.sort;
     } else {
       query.sort = event.target.value;
@@ -56,11 +57,13 @@ const List = ({ filters = true, items, type, tabs, title }: ListProps) => {
       <Crumb items={[type]}></Crumb>
       <Header title={title} count={items.length}>
         <div className={styles.listControls}>
-          <select className={styles.listSort} value={sort ? sort[0] : 'default'} onChange={onSortChange}>
-            <option value="default">Sort: Relevance</option>
+          <label className={styles.listSortLabel} htmlFor="list-sort">
+            Sort by
+          </label>
+          <select id="list-sort" className={styles.listSort} value={sortValue} onChange={onSortChange}>
             {sortOptions.map(option => (
               <option key={option.value} value={option.value}>
-                Sort: {option.label}
+                {option.label}
               </option>
             ))}
           </select>

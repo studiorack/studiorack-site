@@ -14,7 +14,6 @@
   max-height: 200px;
   overflow: hidden;
   padding: 1.5rem 1.5rem 0 1.5rem;
-  margin-bottom: 1rem;
   transition: background-color 0.25s ease-out;
 }
 
@@ -89,23 +88,24 @@
 }
 
 .cardList {
-  align-items: center;
+  align-items: stretch;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   max-height: none;
-  padding: 1rem 1.5rem;
+  padding: 0;
 }
 
 .cardList .cardDetails {
   flex: 1;
   margin-bottom: 0;
   min-width: 0;
+  padding: 1.25rem 1.5rem 1.25rem 0;
 }
 
 .cardList .cardImage {
-  border-radius: 0.5rem;
   flex-shrink: 0;
-  height: 4rem;
+  height: auto;
   object-fit: cover;
-  width: 4rem;
+  order: -1;
+  width: 12rem;
 }

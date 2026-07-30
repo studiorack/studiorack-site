@@ -4,9 +4,11 @@ import { siteTitle } from '../components/layout';
 
 export const ELECTRON_APP: boolean = false;
 
+export const DEFAULT_SORT = 'downloads';
+
 export const sortOptions = [
-  { value: 'downloads', label: 'Most downloads' },
-  { value: 'name', label: 'Name (A-Z)' },
+  { value: 'downloads', label: 'Downloads' },
+  { value: 'name', label: 'Name' },
   { value: 'date', label: 'Newest' },
 ];
 
@@ -21,7 +23,11 @@ export function sortPackages(items: PackageInterface[], sort: string) {
       );
     case 'downloads':
     default:
-      return sorted.sort((a, b) => (b.downloads || 0) - (a.downloads || 0));
+      return sorted.sort((a, b) => {
+        const downloadsDiff = (b.downloads || 0) - (a.downloads || 0);
+        if (downloadsDiff !== 0) return downloadsDiff;
+        return a.versions[a.version].name.localeCompare(b.versions[b.version].name);
+      });
   }
 }
 
